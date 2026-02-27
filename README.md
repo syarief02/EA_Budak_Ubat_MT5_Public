@@ -311,11 +311,9 @@ A **VPS (Virtual Private Server)** is essential for running EA Budak Ubat reliab
 
 ### VPS Recommendation
 
-🔥 **50% Lifetime Discount** on GB Network Forex VPS:
+**GB Network Forex VPS** is recommended by the author for its reliability and low latency.
 
-- **Promo Code:** `GBVPSFX50`
 - **Locations:** New York, Amsterdam, London, Malaysia
-- **Price:** From RM79/month → **RM39.50/month**
 - 🌐 [Order here](https://tinyurl.com/GBVPSFX1)
 
 [![VPS BU](./photo_6124898620416308942_y.jpg)](https://tinyurl.com/GBVPSFX1)
