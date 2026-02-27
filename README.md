@@ -316,7 +316,7 @@ A **VPS (Virtual Private Server)** is essential for running EA Budak Ubat reliab
 - **Locations:** New York, Amsterdam, London, Malaysia
 - 🌐 [Order here](https://tinyurl.com/GBVPSFX1)
 
-[![VPS BU](./photo_6124898620416308942_y.jpg)](https://tinyurl.com/GBVPSFX1)
+[![VPS BU](https://ui-avatars.com/api/?name=GB+Network+VPS&background=0D1117&color=fff&size=512&font-size=0.33&bold=true)](https://tinyurl.com/GBVPSFX1)
 
 ---
 
