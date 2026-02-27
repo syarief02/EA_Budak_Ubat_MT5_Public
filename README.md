@@ -314,9 +314,9 @@ A **VPS (Virtual Private Server)** is essential for running EA Budak Ubat reliab
 **GB Network Forex VPS** is recommended by the author for its reliability and low latency.
 
 - **Locations:** New York, Amsterdam, London, Malaysia
-- 🌐 [Order here](https://tinyurl.com/GBVPSFX1)
+- 🌐 [Order here](https://secure.gbnetwork.com/aff.php?aff=515)
 
-[![VPS BU](https://www.gbnetwork.my/wp-content/uploads/2023/07/featured-image-GB.jpg)](https://tinyurl.com/GBVPSFX1)
+[![VPS BU](https://www.gbnetwork.my/wp-content/uploads/2023/07/featured-image-GB.jpg)](https://secure.gbnetwork.com/aff.php?aff=515)
 
 ---
 

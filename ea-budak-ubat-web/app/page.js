@@ -421,7 +421,7 @@ export default function Home() {
                 <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>Recommended Forex VPS Provider</p>
                 <p className="promo-code" style={{ fontSize: "1.2rem" }}>GB Network Solutions</p>
                 <p className="price">Reliable. Low Latency. 24/7 Uptime.</p>
-                <a href="https://tinyurl.com/GBVPSFX1" className="btn btn-accent" style={{ marginTop: 16, display: "inline-flex" }} target="_blank">
+                <a href="https://secure.gbnetwork.com/aff.php?aff=515" className="btn btn-accent" style={{ marginTop: 16, display: "inline-flex" }} target="_blank">
                   Order VPS →
                 </a>
               </div>
