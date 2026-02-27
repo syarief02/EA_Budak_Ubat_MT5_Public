@@ -129,6 +129,7 @@ export default function Home() {
 
   return (
     <>
+      {/* VERIFIED DEPLOY FROM MAIN REPO */}
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="container">
