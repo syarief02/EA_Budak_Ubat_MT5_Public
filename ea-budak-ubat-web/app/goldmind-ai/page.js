@@ -67,7 +67,7 @@ export default function GoldMindAIPage() {
             {/* NAVBAR */}
             <nav className="navbar">
                 <div className="container">
-                    <Link href="/" className="nav-brand">Syarief Azman</Link>
+                    <Link href="/" className="nav-brand">EA Budak Ubat</Link>
                     <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
                         <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
                         <li><a href="#how-it-works" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>

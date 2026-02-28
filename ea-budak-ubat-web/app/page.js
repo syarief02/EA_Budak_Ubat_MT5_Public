@@ -57,7 +57,7 @@ export default function Home() {
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="container">
-          <a href="#" className="nav-brand">Syarief Azman</a>
+          <a href="#" className="nav-brand">EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
             <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
@@ -81,13 +81,11 @@ export default function Home() {
             Trading Tools & Expert Advisors
           </div>
           <h1>
-            <span className="gradient-text">Trading Tools</span>
-            <br />
-            <span style={{ fontSize: "0.5em", fontWeight: 400, color: "var(--text-secondary)" }}>by Syarief Azman</span>
+            <span className="gradient-text">EA Budak Ubat</span>
           </h1>
           <p className="hero-subtitle">
-            Professional-grade Expert Advisors and AI-powered trading systems for MetaTrader.
-            Built for performance, rigorously tested, and continuously improved.
+            Professional-grade Expert Advisors and AI-powered trading systems for MetaTrader
+            by Syarief Azman. Built for performance, rigorously tested, and continuously improved.
           </p>
           <div className="hero-actions">
             <a href="#products" className="btn btn-primary" style={{ animation: "none" }}>🔽 Explore Products</a>
@@ -167,9 +165,9 @@ export default function Home() {
           <div className="about-content animate-in">
             <div className="about-text">
               <p>
-                Hi, I am <strong>Syarief Azman</strong> — a Malaysian developer and forex trader building automated trading tools.
-                My Expert Advisors are designed with real-world trading experience, focusing on reliability, safety mechanisms,
-                and transparent open-source code.
+                Hi, I am <strong>Syarief Azman</strong>, the developer behind EA Budak Ubat — a Malaysian developer and forex trader
+                building automated trading tools. My Expert Advisors are designed with real-world trading experience, focusing on
+                reliability, safety mechanisms, and transparent open-source code.
               </p>
               <p>
                 Whether you prefer systematic grid trading with <strong>EA Budak Ubat</strong> or AI-powered signal analysis
@@ -229,9 +227,9 @@ export default function Home() {
         <div className="container">
           <div className="footer-grid">
             <div>
-              <h3 className="footer-brand">Syarief Azman</h3>
+              <h3 className="footer-brand">EA Budak Ubat</h3>
               <p className="footer-desc">
-                Professional trading tools and Expert Advisors for MetaTrader platforms. Built with passion and real-world trading experience.
+                Professional trading tools and Expert Advisors for MetaTrader platforms by Syarief Azman. Built with passion and real-world trading experience.
               </p>
               <div className="social-links">
                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
@@ -257,7 +255,7 @@ export default function Home() {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} Syarief Azman. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
             <p className="footer-disclaimer">
               Risk warning: Trading on margin carries a high level of risk. Automated trading systems can result in significant losses. Past performance is not indicative of future results. Always test on a demo account first. Not available in restricted jurisdictions.
             </p>

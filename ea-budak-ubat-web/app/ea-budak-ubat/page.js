@@ -132,7 +132,7 @@ export default function EABudakUbatPage() {
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="container">
-          <Link href="/" className="nav-brand">Syarief Azman</Link>
+          <Link href="/" className="nav-brand">EA Budak Ubat</Link>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
             <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
