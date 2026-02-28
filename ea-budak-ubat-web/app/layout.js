@@ -1,12 +1,12 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "EA Budak Ubat v1.62 | Grid Martingale Expert Advisor for MT4 & MT5",
-  description: "A powerful grid-based martingale Expert Advisor for MetaTrader 4 & MetaTrader 5. Features 4 analysis methods, AutoConfig AI, hedging support, and more. Free to download.",
-  keywords: "EA, Expert Advisor, MetaTrader, MT4, MT5, grid trading, martingale, forex, automated trading",
+  title: "Syarief Azman | Trading Tools & Expert Advisors for MetaTrader",
+  description: "Professional-grade Expert Advisors and AI-powered trading systems for MetaTrader 4 & 5. EA Budak Ubat grid martingale and GoldMind AI signal trading.",
+  keywords: "EA, Expert Advisor, MetaTrader, MT4, MT5, grid trading, martingale, forex, automated trading, AI trading, XAUUSD, gold, ChatGPT",
   openGraph: {
-    title: "EA Budak Ubat v1.62",
-    description: "Grid Martingale Expert Advisor for MT4 & MT5",
+    title: "Syarief Azman Trading Tools",
+    description: "Professional Expert Advisors & AI Trading Systems for MetaTrader",
     type: "website",
   },
 };
