@@ -526,7 +526,7 @@ export default function Home() {
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. Licensed under MIT.</p>
             <p className="footer-disclaimer">
-              Risk warning: Products traded on margin carry a high level of risk. Martingale strategies can result in total loss of capital. Past performance is not indicative of future results. EA Budak Ubat does not provide investment advice. Use at your own risk. Not available in restricted jurisdictions including USA, EU, UK, North Korea, Myanmar, and Iran.
+              Risk warning: Products traded on margin carry a high level of risk. Martingale strategies can result in total loss of capital. Past performance is not indicative of future results. EA Budak Ubat does not provide investment advice. Use at your own risk. Not available in restricted jurisdictions including Malaysia, USA, EU, UK, North Korea, Myanmar, and Iran.
             </p>
           </div>
         </div>
