@@ -232,7 +232,7 @@ export default function Home() {
             {[
               { icon: "💬", title: "Telegram", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
               { icon: "📱", title: "WhatsApp", desc: "+60194961568", url: "https://wa.me/60194961568" },
-              { icon: "🐙", title: "GitHub", desc: "@syarief02", url: "https://github.com/syarief02" },
+
               { icon: "🐦", title: "Twitter/X", desc: "@SyariefAzman", url: "https://www.twitter.com/SyariefAzman" },
               { icon: "📢", title: "Telegram Channel", desc: "t.me/EABudakUbat", url: "https://t.me/EABudakUbat" },
               { icon: "📊", title: "MQL5 Signal", desc: "Signal Channel", url: "https://www.mql5.com/en/channels/eabudakubat" },
@@ -262,7 +262,6 @@ export default function Home() {
               <div className="social-links">
                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
                 <a href="https://wa.me/60194961568" className="social-link" target="_blank" title="WhatsApp">📱</a>
-                <a href="https://github.com/syarief02" className="social-link" target="_blank" title="GitHub">🐙</a>
                 <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
               </div>
             </div>

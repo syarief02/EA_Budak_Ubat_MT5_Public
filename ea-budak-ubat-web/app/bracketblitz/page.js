@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const GITHUB_LINK = "https://github.com/syarief02/BracketBlitz-EA";
+
 const DOWNLOAD_MT4 = "/downloads/BracketBlitz v1.00 - MT4.ex4";
 const DOWNLOAD_MT5 = "/downloads/BracketBlitz v1.00 - MT5.ex5";
 
@@ -75,7 +75,7 @@ export default function BracketBlitzPage() {
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
                         <li><a href="#presets" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={GITHUB_LINK} className="nav-cta" target="_blank">⭐ GitHub</a></li>
+                        <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
                     </ul>
                     <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
                         {mobileNavOpen ? "✕" : "☰"}
@@ -103,7 +103,7 @@ export default function BracketBlitzPage() {
                     <div className="hero-actions">
                         <a href={DOWNLOAD_MT4} download className="btn btn-blitz-primary">⬇️ Download MT4</a>
                         <a href={DOWNLOAD_MT5} download className="btn btn-blitz-primary">⬇️ Download MT5</a>
-                        <a href={GITHUB_LINK} className="btn btn-secondary" target="_blank">⭐ GitHub</a>
+                        <a href="#strategy" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
                         <strong>Open Source</strong> — Free to use on any instrument in MetaTrader. Expires 2026-03-28.
@@ -356,7 +356,6 @@ export default function BracketBlitzPage() {
                             </p>
                             <div className="social-links">
                                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                                <a href={GITHUB_LINK} className="social-link" target="_blank" title="GitHub">🐙</a>
                                 <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
                             </div>
                         </div>
@@ -371,10 +370,10 @@ export default function BracketBlitzPage() {
                             </ul>
                         </div>
                         <div>
-                            <h4>Resources</h4>
+                            <h4>Contact</h4>
                             <ul className="footer-links">
-                                <li><a href={GITHUB_LINK} target="_blank">GitHub Repository</a></li>
                                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank">Twitter: @SyariefAzman</a></li>
                                 <li><Link href="/">← Back to All Products</Link></li>
                             </ul>
                         </div>

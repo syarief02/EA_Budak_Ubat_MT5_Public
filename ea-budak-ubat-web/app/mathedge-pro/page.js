@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const GITHUB_LINK = "https://github.com/syarief02/MathEdge-Pro";
 const DOWNLOAD_MT4 = "/downloads/MathEdge Pro v1.1 - MT4.ex4";
 
 const FEATURES = [
@@ -72,7 +71,7 @@ export default function MathEdgeProPage() {
                         <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={GITHUB_LINK} className="nav-cta" target="_blank">⭐ GitHub</a></li>
+                        <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
                     </ul>
                     <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
                         {mobileNavOpen ? "✕" : "☰"}
@@ -99,7 +98,7 @@ export default function MathEdgeProPage() {
                     </p>
                     <div className="hero-actions">
                         <a href={DOWNLOAD_MT4} download className="btn btn-mathedge-primary">⬇️ Download MT4</a>
-                        <a href={GITHUB_LINK} className="btn btn-secondary" target="_blank">⭐ GitHub</a>
+                        <a href="#strategy" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
                         <strong>Open Source</strong> — Free to use. Expires 2026-03-28. By Syarief Azman.
@@ -193,7 +192,7 @@ export default function MathEdgeProPage() {
                                 <strong style={{ color: "var(--accent-red)" }}>1. Download the EA</strong>
                                 <p style={{ marginTop: 8 }}>
                                     Download <code>MathEdge Pro v1.1 - MT4.ex4</code> using the button above,
-                                    or get the source from <a href={GITHUB_LINK} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-blue)" }}>GitHub</a> and compile it yourself in MetaEditor.
+                                    or compile it yourself from the source code (<code>MathEdge Pro.mq4</code>) in MetaEditor.
                                 </p>
                             </div>
                             <div>
@@ -349,7 +348,6 @@ export default function MathEdgeProPage() {
                             </p>
                             <div className="social-links">
                                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                                <a href={GITHUB_LINK} className="social-link" target="_blank" title="GitHub">🐙</a>
                                 <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
                             </div>
                         </div>
@@ -364,10 +362,10 @@ export default function MathEdgeProPage() {
                             </ul>
                         </div>
                         <div>
-                            <h4>Resources</h4>
+                            <h4>Contact</h4>
                             <ul className="footer-links">
-                                <li><a href={GITHUB_LINK} target="_blank">GitHub Repository</a></li>
                                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank">Twitter: @SyariefAzman</a></li>
                                 <li><Link href="/">← Back to All Products</Link></li>
                             </ul>
                         </div>

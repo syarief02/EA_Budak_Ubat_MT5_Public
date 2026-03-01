@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const GITHUB_LINK = "https://github.com/syarief02/goldmind-ai";
+const DOWNLOAD_MT5 = "/downloads/GoldMind AI v1.00 - MT5.ex5";
 
 const FEATURES = [
     { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI (ChatGPT) to analyze XAUUSD price charts and generate trading signals with structured JSON output." },
@@ -75,7 +75,7 @@ export default function GoldMindAIPage() {
                         <li><a href="#requirements" onClick={() => setMobileNavOpen(false)}>Requirements</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={GITHUB_LINK} className="nav-cta" target="_blank">⭐ GitHub</a></li>
+                        <li><a href={DOWNLOAD_MT5} download className="nav-cta">⬇️ Download</a></li>
                     </ul>
                     <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
                         {mobileNavOpen ? "✕" : "☰"}
@@ -101,11 +101,11 @@ export default function GoldMindAIPage() {
                         and automatically place trades in MetaTrader 5. Runs entirely on your own computer.
                     </p>
                     <div className="hero-actions">
-                        <a href={GITHUB_LINK} className="btn btn-goldmind-primary" target="_blank">⭐ View on GitHub</a>
+                        <a href={DOWNLOAD_MT5} download className="btn btn-goldmind-primary">⬇️ Download MT5 EA</a>
                         <a href="#how-it-works" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key.
+                        <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key. Expires 2026-03-31. By Syarief Azman.
                     </p>
                 </div>
             </section>
@@ -178,10 +178,31 @@ export default function GoldMindAIPage() {
                             </div>
                         ))}
                     </div>
-                    <div className="animate-in" style={{ textAlign: "center", marginTop: 40 }}>
-                        <a href={GITHUB_LINK + "#-step-1-set-up-the-python-backend-server"} className="btn btn-goldmind-primary" target="_blank">
-                            📖 Full Setup Guide on GitHub
-                        </a>
+                    <div className="animate-in" style={{ marginTop: 40, background: "var(--bg-card)", padding: 32, borderRadius: "var(--radius-lg)", border: "1px solid var(--border-glass)" }}>
+                        <h3 style={{ marginBottom: 20 }}>🚀 Quick Installation Guide</h3>
+                        <div style={{ display: "grid", gap: 24, fontSize: "0.95rem", color: "var(--text-secondary)" }}>
+                            <div>
+                                <strong style={{ color: "var(--accent-amber)" }}>1. Setup Python Backend Server</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Download the source code from the GoldMind AI repository. Navigate to the <code>backend/</code> folder and run <code>pip install -r requirements.txt</code>.
+                                    Copy <code>.env.example</code> to <code>.env</code> and add your OpenAI API Key (<code>OPENAI_API_KEY=sk-...</code>). Run the server: <code>python main.py</code> — it starts on <code>http://localhost:8000</code>.
+                                </p>
+                            </div>
+                            <div>
+                                <strong style={{ color: "var(--accent-amber)" }}>2. Setup MetaTrader 5</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Download the EA using the button above. Open MT5 → <code>File → Open Data Folder</code>. Place the <code>.ex5</code> file in <code>MQL5/Experts/</code>.
+                                    Go to <code>Tools → Options → Expert Advisors</code> and check &quot;Allow WebRequest for listed URL&quot;. Add <code>http://localhost:8000</code>.
+                                </p>
+                            </div>
+                            <div>
+                                <strong style={{ color: "var(--accent-amber)" }}>3. Attach to Chart</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Open a XAUUSD chart (any timeframe). Drag GoldMind AI onto the chart. Enable <strong>Allow Algo Trading</strong> in the Common tab.
+                                    Adjust risk settings (default 1%) and ensure Auto Trading is ON. The EA connects to your local Python server automatically.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -307,8 +328,7 @@ export default function GoldMindAIPage() {
                                 AI-powered XAUUSD trading system using ChatGPT, FastAPI, and MetaTrader 5. Open source and free to use.
                             </p>
                             <div className="social-links">
-                                <a href="https://t.me/syariefazman" className="social-link" target="_blank" title="Telegram">💬</a>
-                                <a href="https://github.com/syarief02/goldmind-ai" className="social-link" target="_blank" title="GitHub">🐙</a>
+                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
                                 <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
                             </div>
                         </div>
@@ -323,11 +343,10 @@ export default function GoldMindAIPage() {
                             </ul>
                         </div>
                         <div>
-                            <h4>Resources</h4>
+                            <h4>Contact</h4>
                             <ul className="footer-links">
-                                <li><a href={GITHUB_LINK} target="_blank">GitHub Repository</a></li>
-                                <li><a href={GITHUB_LINK + "#-step-1-set-up-the-python-backend-server"} target="_blank">Setup Guide</a></li>
-                                <li><a href="https://t.me/syariefazman" target="_blank">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank">Twitter: @SyariefAzman</a></li>
                                 <li><Link href="/">← Back to All Products</Link></li>
                             </ul>
                         </div>
