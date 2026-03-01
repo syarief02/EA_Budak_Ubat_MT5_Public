@@ -32,6 +32,20 @@ const PRODUCTS = [
     status: "New",
     category: "AI Trading",
   },
+  {
+    slug: "bracketblitz",
+    name: "BracketBlitz EA",
+    version: "v1.00",
+    tagline: "OCO Bracket Breakout Strategy",
+    description: "Rapid-fire OCO bracket orders that chase the market — Buy Stop + Sell Stop, auto-refreshed every 30 seconds. Catches breakouts without predicting direction. Works on any instrument.",
+    platforms: ["MT4", "MT5"],
+    highlights: ["OCO Orders", "Trailing Stop", "Auto Refresh", "News Trading"],
+    gradient: "linear-gradient(135deg, #10b981, #059669)",
+    accentColor: "#10b981",
+    icon: "⚡",
+    status: "New",
+    category: "Breakout",
+  },
 ];
 
 export default function Home() {
@@ -175,7 +189,7 @@ export default function Home() {
               </p>
               <div className="about-stats">
                 <div className="stat-item">
-                  <span className="stat-number">2</span>
+                  <span className="stat-number">3</span>
                   <span className="stat-label">Trading Tools</span>
                 </div>
                 <div className="stat-item">
@@ -243,6 +257,7 @@ export default function Home() {
               <ul className="footer-links">
                 <li><Link href="/ea-budak-ubat">EA Budak Ubat</Link></li>
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
+                <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
               </ul>
             </div>
             <div>
