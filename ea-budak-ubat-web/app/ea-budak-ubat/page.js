@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT4 = "/downloads/EA Budak Ubat v1.62 - MT4.ex4";
-const DOWNLOAD_MT5 = "/downloads/EA Budak Ubat v1.62 - MT5.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260328.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT5%20-%2020260328.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 

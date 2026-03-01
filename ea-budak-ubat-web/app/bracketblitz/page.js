@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 
-const DOWNLOAD_MT4 = "/downloads/BracketBlitz v1.00 - MT4.ex4";
-const DOWNLOAD_MT5 = "/downloads/BracketBlitz v1.00 - MT5.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20v1.00%20-%20MT4%20-%2020260328.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20v1.00%20-%20MT5%20-%2020260328.ex5";
 
 const FEATURES = [
     { icon: "⚡", title: "Rapid-Fire Brackets", desc: "Continuously places Buy Stop + Sell Stop pending orders around the live price, straddling the market for instant breakout capture." },

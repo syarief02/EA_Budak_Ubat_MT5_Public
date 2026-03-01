@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT4 = "/downloads/MathEdge Pro v1.1 - MT4.ex4";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/MathEdge-Pro/raw/main/MathEdge%20Pro%20v1.1%20-%20MT4%20-%2020260328.ex4";
 
 const FEATURES = [
     { icon: "📐", title: "Math-Based Strategy", desc: "Uses daily OHLC levels and net change calculations to determine directional bias — no indicators, pure math." },
