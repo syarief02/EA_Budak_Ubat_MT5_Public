@@ -1503,6 +1503,84 @@ section {
   background-clip: text;
 }
 
+/* ===== MATHEDGE PRO THEME ===== */
+.mathedge-hero {
+  background: linear-gradient(135deg, #0a0e1a 0%, #1a0a10 40%, #0a0e1a 100%);
+}
+
+.hero-glow-mathedge-1 {
+  background: #ef4444;
+  top: -200px;
+  left: -100px;
+}
+
+.hero-glow-mathedge-2 {
+  background: #dc2626;
+  bottom: -200px;
+  right: -100px;
+}
+
+.mathedge-badge {
+  color: #ef4444;
+}
+
+.mathedge-dot {
+  background: #ef4444;
+  animation: pulse-glow-mathedge 2s infinite;
+}
+
+@keyframes pulse-glow-mathedge {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+  }
+}
+
+.mathedge-gradient-text {
+  background: linear-gradient(135deg, #ef4444, #f87171, #dc2626);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.btn-mathedge-primary {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  animation: pulse-glow-mathedge 3s infinite;
+}
+
+.btn-mathedge-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+}
+
+.mathedge-label {
+  color: #ef4444 !important;
+}
+
+.mathedge-flow-number {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.mathedge-feature-icon {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.mathedge-footer-brand {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ===== ABOUT SECTION ===== */
 .about-content {
   max-width: 800px;

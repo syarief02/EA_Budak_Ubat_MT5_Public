@@ -46,6 +46,20 @@ const PRODUCTS = [
     status: "New",
     category: "Breakout",
   },
+  {
+    slug: "mathedge-pro",
+    name: "MathEdge Pro",
+    version: "v1.1",
+    tagline: "Math-Based US Index Trading",
+    description: "Automated math-based index trading for US30 and NAS100. Calculates daily levels, determines directional bias, and executes a strict 3-trade pending order sequence.",
+    platforms: ["MT4"],
+    highlights: ["US30 & NAS100", "3-Trade Sequence", "NY Session", "Dashboard"],
+    gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
+    accentColor: "#ef4444",
+    icon: "📐",
+    status: "New",
+    category: "Index Trading",
+  },
 ];
 
 export default function Home() {
@@ -189,7 +203,7 @@ export default function Home() {
               </p>
               <div className="about-stats">
                 <div className="stat-item">
-                  <span className="stat-number">3</span>
+                  <span className="stat-number">4</span>
                   <span className="stat-label">Trading Tools</span>
                 </div>
                 <div className="stat-item">
@@ -258,6 +272,7 @@ export default function Home() {
                 <li><Link href="/ea-budak-ubat">EA Budak Ubat</Link></li>
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
+                <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
               </ul>
             </div>
             <div>
