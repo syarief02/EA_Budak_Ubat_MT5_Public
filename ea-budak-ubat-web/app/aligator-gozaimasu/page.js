@@ -313,12 +313,14 @@ export default function AligatorGozaimasuPage() {
                     </div>
                     <div className="faq-list animate-in">
                         {FAQS.map((faq, i) => (
-                            <div key={i} className="faq-item" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                                <div className="faq-question">
-                                    <span>{faq.q}</span>
-                                    <span className={`faq-arrow ${openFaq === i ? "open" : ""}`}>▾</span>
+                            <div key={i} className={`faq-item ${openFaq === i ? "open" : ""}`}>
+                                <button className="faq-question" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                                    {faq.q}
+                                    <span className="faq-chevron">▼</span>
+                                </button>
+                                <div className="faq-answer">
+                                    <p>{faq.a}</p>
                                 </div>
-                                {openFaq === i && <div className="faq-answer">{faq.a}</div>}
                             </div>
                         ))}
                     </div>
