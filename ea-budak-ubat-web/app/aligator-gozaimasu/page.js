@@ -330,29 +330,41 @@ export default function AligatorGozaimasuPage() {
             {/* FOOTER */}
             <footer className="footer">
                 <div className="container">
-                    <div className="footer-content">
-                        <div className="footer-brand">
-                            <Link href="/" className="footer-logo">EA Budak Ubat</Link>
-                            <p>Professional Expert Advisors for MetaTrader by Syarief Azman.</p>
+                    <div className="footer-grid">
+                        <div>
+                            <h3 className="footer-brand aligator-footer-brand">Aligator Gozaimasu</h3>
+                            <p className="footer-desc">
+                                Multi-timeframe trend-following EA based on Bill Williams' proven indicators. Open source strategy.
+                            </p>
+                            <div className="social-links">
+                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
+                                <a href="https://wa.me/60194961568" className="social-link" target="_blank" title="WhatsApp">📱</a>
+                            </div>
                         </div>
-                        <div className="footer-links">
-                            <div className="footer-col">
-                                <h4>Products</h4>
-                                <Link href="/ea-budak-ubat">EA Budak Ubat</Link>
-                                <Link href="/goldmind-ai">GoldMind AI</Link>
-                                <Link href="/bracketblitz">BracketBlitz EA</Link>
-                                <Link href="/mathedge-pro">MathEdge Pro</Link>
-                                <Link href="/aligator-gozaimasu">Aligator Gozaimasu</Link>
-                            </div>
-                            <div className="footer-col">
-                                <h4>Contact</h4>
-                                <a href="https://t.me/SyariefAzman" target="_blank">Telegram</a>
-                                <a href="https://wa.me/60194961568" target="_blank">WhatsApp</a>
-                            </div>
+                        <div>
+                            <h4>Quick Links</h4>
+                            <ul className="footer-links">
+                                <li><a href="#strategy">Strategy</a></li>
+                                <li><a href="#features">Features</a></li>
+                                <li><a href="#installation">Setup</a></li>
+                                <li><a href="#settings">Settings</a></li>
+                                <li><a href="#faq">FAQ</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Contact</h4>
+                            <ul className="footer-links">
+                                <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://wa.me/60194961568" target="_blank">WhatsApp: +60194961568</a></li>
+                                <li><Link href="/">← Back to All Products</Link></li>
+                            </ul>
                         </div>
                     </div>
                     <div className="footer-bottom">
-                        <p>© {new Date().getFullYear()} EA Budak Ubat · Syarief Azman</p>
+                        <p>© {new Date().getFullYear()} Aligator Gozaimasu EA by Syarief Azman. Open Source.</p>
+                        <p className="footer-disclaimer">
+                            Risk warning: Trading involves significant risk. Trend-following and Martingale strategies can result in losses. Past performance is not indicative of future results. Always test on a demo account first. Use at your own risk.
+                        </p>
                     </div>
                 </div>
             </footer>
