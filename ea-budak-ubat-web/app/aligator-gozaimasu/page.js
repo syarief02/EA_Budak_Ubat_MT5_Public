@@ -94,17 +94,17 @@ export default function AligatorGozaimasuPage() {
             </nav>
 
             {/* HERO */}
-            <section className="hero blitz-hero" id="hero" style={{ "--accent": "#22c55e" }}>
+            <section className="hero aligator-hero" id="hero">
                 <div className="hero-bg-grid"></div>
-                <div className="hero-glow hero-glow-blitz-1" style={{ background: "radial-gradient(circle, rgba(34,197,94,0.15), transparent 70%)" }}></div>
-                <div className="hero-glow hero-glow-blitz-2" style={{ background: "radial-gradient(circle, rgba(16,185,129,0.1), transparent 70%)" }}></div>
+                <div className="hero-glow hero-glow-aligator-1"></div>
+                <div className="hero-glow hero-glow-aligator-2"></div>
                 <div className="hero-content">
-                    <div className="hero-badge" style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)" }}>
-                        <span className="hero-badge-dot" style={{ background: "#22c55e" }}></span>
+                    <div className="hero-badge aligator-badge">
+                        <span className="hero-badge-dot aligator-dot"></span>
                         MT4 · Trending Pairs
                     </div>
                     <h1>
-                        <span style={{ background: "linear-gradient(135deg, #22c55e, #10b981, #059669)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                        <span className="aligator-gradient-text">
                             🐊 Aligator Gozaimasu
                         </span>
                     </h1>
@@ -113,7 +113,7 @@ export default function AligatorGozaimasuPage() {
                         up to 4 timeframes. Buys in uptrends, sells in downtrends. Single-entry, trend-following EA.
                     </p>
                     <div className="hero-actions">
-                        <a href={DOWNLOAD_MT4} download className="btn btn-primary" style={{ background: "linear-gradient(135deg, #22c55e, #059669)" }}>⬇️ Download MT4</a>
+                        <a href={DOWNLOAD_MT4} download className="btn btn-aligator-primary">⬇️ Download MT4</a>
                         <a href="#installation" className="btn btn-secondary">📖 Installation Guide</a>
                     </div>
                     <p className="hero-note">
@@ -126,7 +126,7 @@ export default function AligatorGozaimasuPage() {
             <section id="strategy" style={{ background: "var(--bg-secondary)" }}>
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label" style={{ background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>Strategy</span>
+                        <span className="label aligator-label">Strategy</span>
                         <h2>How It Trades</h2>
                         <p>Four indicators across multiple timeframes must all agree before entering any trade.</p>
                     </div>
@@ -179,14 +179,14 @@ export default function AligatorGozaimasuPage() {
             <section id="features">
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label" style={{ background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>Features</span>
+                        <span className="label aligator-label">Features</span>
                         <h2>Core Features</h2>
                         <p>Everything built into the EA.</p>
                     </div>
                     <div className="features-grid">
                         {FEATURES.map((f, i) => (
                             <div key={i} className="glass-card animate-in" style={{ animationDelay: `${i * 0.08}s` }}>
-                                <div className="feature-icon" style={{ fontSize: "1.8rem", width: 56, height: 56, background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>{f.icon}</div>
+                                <div className="feature-icon aligator-feature-icon">{f.icon}</div>
                                 <h3 className="feature-title">{f.title}</h3>
                                 <p className="feature-desc">{f.desc}</p>
                             </div>
@@ -199,7 +199,7 @@ export default function AligatorGozaimasuPage() {
             <section id="installation" style={{ background: "var(--bg-secondary)" }}>
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label" style={{ background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>Setup</span>
+                        <span className="label aligator-label">Setup</span>
                         <h2>Installation Guide</h2>
                         <p>Get up and running in minutes.</p>
                     </div>
@@ -237,7 +237,7 @@ export default function AligatorGozaimasuPage() {
                         ].map((step, i) => (
                             <div key={i} className="flow-step animate-in">
                                 <div className="flow-line">
-                                    <div className="flow-number" style={{ background: "linear-gradient(135deg, #22c55e, #059669)" }}>{i + 1}</div>
+                                    <div className="flow-number aligator-flow-number">{i + 1}</div>
                                 </div>
                                 <div className="flow-content">
                                     <h3>{step.title}</h3>
@@ -253,7 +253,7 @@ export default function AligatorGozaimasuPage() {
             <section id="settings">
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label" style={{ background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>Configuration</span>
+                        <span className="label aligator-label">Configuration</span>
                         <h2>EA Settings</h2>
                         <p>Fine-tune every parameter to match your trading style.</p>
                     </div>
@@ -283,7 +283,7 @@ export default function AligatorGozaimasuPage() {
             <section style={{ background: "var(--bg-secondary)" }}>
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label" style={{ background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>Important</span>
+                        <span className="label aligator-label">Important</span>
                         <h2>Risk Warnings</h2>
                     </div>
                     <div className="animate-in" style={{ display: "grid", gap: 16 }}>
@@ -308,7 +308,7 @@ export default function AligatorGozaimasuPage() {
             <section id="faq">
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label" style={{ background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>FAQ</span>
+                        <span className="label aligator-label">FAQ</span>
                         <h2>Frequently Asked Questions</h2>
                     </div>
                     <div className="faq-list animate-in">

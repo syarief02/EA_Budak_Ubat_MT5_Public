@@ -1581,6 +1581,84 @@ section {
   background-clip: text;
 }
 
+/* ===== ALIGATOR GOZAIMASU THEME ===== */
+.aligator-hero {
+  background: linear-gradient(135deg, #0a0e1a 0%, #052614 40%, #0a0e1a 100%);
+}
+
+.hero-glow-aligator-1 {
+  background: #22c55e;
+  top: -200px;
+  left: -100px;
+}
+
+.hero-glow-aligator-2 {
+  background: #10b981;
+  bottom: -200px;
+  right: -100px;
+}
+
+.aligator-badge {
+  color: #22c55e;
+}
+
+.aligator-dot {
+  background: #22c55e;
+  animation: pulse-glow-aligator 2s infinite;
+}
+
+@keyframes pulse-glow-aligator {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+  }
+}
+
+.aligator-gradient-text {
+  background: linear-gradient(135deg, #22c55e, #10b981, #059669);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.btn-aligator-primary {
+  background: linear-gradient(135deg, #22c55e, #059669);
+  color: white;
+  animation: pulse-glow-aligator 3s infinite;
+}
+
+.btn-aligator-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.4);
+}
+
+.aligator-label {
+  color: #22c55e !important;
+}
+
+.aligator-flow-number {
+  background: linear-gradient(135deg, #22c55e, #059669);
+}
+
+.aligator-feature-icon {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.aligator-footer-brand {
+  background: linear-gradient(135deg, #22c55e, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ===== ABOUT SECTION ===== */
 .about-content {
   max-width: 800px;
