@@ -178,31 +178,128 @@ export default function GoldMindAIPage() {
                             </div>
                         ))}
                     </div>
-                    <div className="animate-in" style={{ marginTop: 40, background: "var(--bg-card)", padding: 32, borderRadius: "var(--radius-lg)", border: "1px solid var(--border-glass)" }}>
-                        <h3 style={{ marginBottom: 20 }}>🚀 Quick Installation Guide</h3>
-                        <div style={{ display: "grid", gap: 24, fontSize: "0.95rem", color: "var(--text-secondary)" }}>
-                            <div>
-                                <strong style={{ color: "var(--accent-amber)" }}>1. Setup Python Backend Server</strong>
-                                <p style={{ marginTop: 8 }}>
-                                    Download the source code from the GoldMind AI repository. Navigate to the <code>backend/</code> folder and run <code>pip install -r requirements.txt</code>.
-                                    Copy <code>.env.example</code> to <code>.env</code> and add your OpenAI API Key (<code>OPENAI_API_KEY=sk-...</code>). Run the server: <code>python main.py</code> — it starts on <code>http://localhost:8000</code>.
-                                </p>
-                            </div>
-                            <div>
-                                <strong style={{ color: "var(--accent-amber)" }}>2. Setup MetaTrader 5</strong>
-                                <p style={{ marginTop: 8 }}>
-                                    Download the EA using the button above. Open MT5 → <code>File → Open Data Folder</code>. Place the <code>.ex5</code> file in <code>MQL5/Experts/</code>.
-                                    Go to <code>Tools → Options → Expert Advisors</code> and check &quot;Allow WebRequest for listed URL&quot;. Add <code>http://localhost:8000</code>.
-                                </p>
-                            </div>
-                            <div>
-                                <strong style={{ color: "var(--accent-amber)" }}>3. Attach to Chart</strong>
-                                <p style={{ marginTop: 8 }}>
-                                    Open a XAUUSD chart (any timeframe). Drag GoldMind AI onto the chart. Enable <strong>Allow Algo Trading</strong> in the Common tab.
-                                    Adjust risk settings (default 1%) and ensure Auto Trading is ON. The EA connects to your local Python server automatically.
-                                </p>
+                    {/* COMPREHENSIVE INSTALLATION GUIDE */}
+                    <div className="animate-in" style={{ marginTop: 40 }}>
+                        <div style={{ background: "var(--bg-card)", padding: 32, borderRadius: "var(--radius-lg)", border: "1px solid var(--border-glass)" }}>
+                            <h3 style={{ marginBottom: 8 }}>📋 Before You Start — What You Need</h3>
+                            <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", marginBottom: 20 }}>
+                                GoldMind AI has two parts: a <strong>Python server</strong> (runs on your computer) and an <strong>EA in MetaTrader 5</strong>.
+                                The server receives market data from the EA and forwards it to ChatGPT for analysis.
+                            </p>
+                            <div style={{ display: "grid", gap: 12, fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: 32, padding: 20, background: "rgba(245, 158, 11, 0.05)", borderRadius: 12, border: "1px solid rgba(245, 158, 11, 0.15)" }}>
+                                <div>✅ <strong>Python 3.10+</strong> — Download from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-amber)" }}>python.org</a>. <strong>Important:</strong> During installation, check the box that says <em>&quot;Add Python to PATH&quot;</em>.</div>
+                                <div>✅ <strong>MetaTrader 5</strong> — Your broker&apos;s version, logged in and able to see XAUUSD charts.</div>
+                                <div>✅ <strong>OpenAI API Key</strong> — Get one at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-amber)" }}>platform.openai.com/api-keys</a>. Click &quot;+ Create new secret key&quot; and copy it (starts with <code>sk-</code>). You also need API credits — add $5–10 at <a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-amber)" }}>Billing</a>. Each signal costs ~$0.01–$0.05.</div>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="flow-container" style={{ marginTop: 24 }}>
+                        {[
+                            {
+                                title: "Download & Extract the Project",
+                                desc: <>Download the GoldMind AI source code and extract it to any folder on your computer (e.g. <code>C:\goldmind-ai</code>). Inside you&apos;ll find two important folders: <code>backend/</code> (the Python server) and <code>mt5/</code> (the MetaTrader files).</>
+                            },
+                            {
+                                title: "Set Up the Python Backend",
+                                desc: <>
+                                    Open a terminal: press <strong>Windows + R</strong>, type <code>cmd</code>, press Enter. Then run these commands one by one:
+                                    <br /><br />
+                                    <code style={{ display: "block", background: "rgba(0,0,0,0.3)", padding: "12px 16px", borderRadius: 8, margin: "8px 0", lineHeight: 1.8, fontSize: "0.85rem" }}>
+                                        cd &quot;C:\goldmind-ai\backend&quot;<br />
+                                        pip install -r requirements.txt
+                                    </code>
+                                    Wait until it says &quot;Successfully installed...&quot; (1–2 minutes).
+                                    <br /><br />
+                                    Next, set up your API key. Copy the example file and edit it:
+                                    <code style={{ display: "block", background: "rgba(0,0,0,0.3)", padding: "12px 16px", borderRadius: 8, margin: "8px 0", lineHeight: 1.8, fontSize: "0.85rem" }}>
+                                        copy .env.example .env<br />
+                                        notepad .env
+                                    </code>
+                                    In Notepad, replace <code>sk-your-key-here</code> with your actual OpenAI API key. Save and close.
+                                </>
+                            },
+                            {
+                                title: "Start the Server",
+                                desc: <>
+                                    In the same terminal window, run:
+                                    <code style={{ display: "block", background: "rgba(0,0,0,0.3)", padding: "12px 16px", borderRadius: 8, margin: "8px 0", fontSize: "0.85rem" }}>
+                                        python main.py
+                                    </code>
+                                    You should see: <code>Uvicorn running on http://0.0.0.0:8000</code>
+                                    <br /><br />
+                                    <strong>To verify:</strong> Open a <em>new</em> terminal and run <code>curl http://127.0.0.1:8000/health</code> — you should get <code>{`{"status":"ok"}`}</code>.
+                                    <br /><br />
+                                    ⚠️ <strong>Keep this terminal window open!</strong> If you close it, the EA stops getting signals. Minimize it, but don&apos;t close it.
+                                </>
+                            },
+                            {
+                                title: "Install EA Files in MetaTrader 5",
+                                desc: <>
+                                    Open MT5 → <code>File → Open Data Folder</code>. A Windows Explorer window opens — this is your MT5 data folder.
+                                    <br /><br />
+                                    <strong>Copy the JSON parser:</strong> From your project&apos;s <code>mt5\Include\JASONNode.mqh</code>, copy it into <code>MQL5\Include\</code>.
+                                    <br /><br />
+                                    <strong>Copy the EA:</strong> From your project&apos;s <code>mt5\Experts\GoldMind_AI.mq5</code>, copy it into <code>MQL5\Experts\</code>.
+                                    <br /><br />
+                                    <strong>Compile:</strong> In MT5, press <strong>F4</strong> to open MetaEditor. Open <code>GoldMind_AI.mq5</code>, press <strong>F7</strong> to compile. You should see <code>0 errors, 0 warnings</code>. Close MetaEditor.
+                                    <br /><br />
+                                    💡 You can also download the pre-compiled <code>.ex5</code> file using the download button above and place it directly in <code>MQL5\Experts\</code> — no compilation needed.
+                                </>
+                            },
+                            {
+                                title: "Allow WebRequest in MT5 (Critical!)",
+                                desc: <>
+                                    Without this step, the EA cannot talk to your server and you&apos;ll get <strong>error 4014</strong>.
+                                    <br /><br />
+                                    In MT5: <code>Tools → Options → Expert Advisors</code> tab.
+                                    <br />☑ Check <strong>&quot;Allow WebRequest for listed URL&quot;</strong>.
+                                    <br />Click <strong>Add</strong> and type exactly: <code>http://127.0.0.1:8000</code>
+                                    <br />Click <strong>OK</strong>.
+                                </>
+                            },
+                            {
+                                title: "Attach EA to a XAUUSD Chart",
+                                desc: <>
+                                    ⚠️ <strong>XAUUSD only!</strong> The AI is specifically trained for gold. Attaching to other symbols will produce bad signals.
+                                    <br /><br />
+                                    Open a XAUUSD chart (your broker may call it GOLD, XAUUSDm, etc.). Press <strong>Ctrl+N</strong> to open the Navigator. Expand <strong>Expert Advisors</strong>, find <strong>GoldMind_AI</strong>, and drag it onto the chart.
+                                    <br /><br />
+                                    In the dialog box:
+                                    <br />• <strong>Common tab:</strong> ☑ Check <strong>Allow Algo Trading</strong>
+                                    <br />• <strong>Inputs tab:</strong> Leave defaults or adjust: <code>RiskPercent = 1.0</code> (1% per trade), <code>MaxSpreadPoints = 50</code>
+                                    <br />Click <strong>OK</strong>.
+                                    <br /><br />
+                                    Finally, make sure the <strong>Algo Trading</strong> button in the MT5 toolbar is <strong>enabled</strong> (green icon, not red).
+                                </>
+                            },
+                            {
+                                title: "Verify It's Working",
+                                desc: <>
+                                    Check the <strong>Experts</strong> tab at the bottom of MT5. You should see messages like:
+                                    <code style={{ display: "block", background: "rgba(0,0,0,0.3)", padding: "12px 16px", borderRadius: 8, margin: "8px 0", lineHeight: 1.8, fontSize: "0.85rem" }}>
+                                        === GoldMind AI initialized ===<br />
+                                        Backend URL: http://127.0.0.1:8000/signal<br />
+                                        Requesting new signal...<br />
+                                        Signal: bias=bullish confidence=0.72<br />
+                                        Order placed successfully!
+                                    </code>
+                                    Check the <strong>Trade</strong> tab — you should see a pending order (buy stop or sell stop) for XAUUSD. The EA will automatically cancel unfilled orders after 4 hours and request a fresh signal.
+                                    <br /><br />
+                                    <strong>After PC reboot:</strong> Start the Python server first (<code>cd backend</code> → <code>python main.py</code>), then open MT5. The EA will resume automatically.
+                                </>
+                            },
+                        ].map((step, i) => (
+                            <div key={i} className="flow-step animate-in">
+                                <div className="flow-line">
+                                    <div className="flow-number goldmind-flow-number">{i + 1}</div>
+                                </div>
+                                <div className="flow-content">
+                                    <h3>{step.title}</h3>
+                                    <div style={{ color: "var(--text-secondary)", fontSize: "0.95rem", lineHeight: 1.7 }}>{step.desc}</div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
