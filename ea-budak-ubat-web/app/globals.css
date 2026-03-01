@@ -1827,3 +1827,83 @@ section {
     justify-content: center;
   }
 }
+
+/* ==============================
+   Encik Moku Product Styles (Amber/Orange)
+   ============================== */
+.moku-hero {
+  background: linear-gradient(135deg, #0a0e1a 0%, #1a0f05 40%, #0a0e1a 100%);
+}
+
+.hero-glow-moku-1 {
+  background: #f59e0b;
+  top: -200px;
+  left: -100px;
+}
+
+.hero-glow-moku-2 {
+  background: #d97706;
+  bottom: -200px;
+  right: -100px;
+}
+
+.moku-badge {
+  color: #f59e0b;
+}
+
+.moku-dot {
+  background: #f59e0b;
+  animation: pulse-glow-moku 2s infinite;
+}
+
+@keyframes pulse-glow-moku {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.6);
+  }
+}
+
+.moku-gradient-text {
+  background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.btn-moku-primary {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  animation: pulse-glow-moku 3s infinite;
+}
+
+.btn-moku-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+}
+
+.moku-label {
+  color: #f59e0b !important;
+}
+
+.moku-flow-number {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.moku-feature-icon {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.moku-footer-brand {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

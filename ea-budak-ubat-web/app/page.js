@@ -74,6 +74,20 @@ const PRODUCTS = [
     status: "New",
     category: "Trend Following",
   },
+  {
+    slug: "encik-moku",
+    name: "Encik Moku",
+    version: "v1.06",
+    tagline: "Multi-Timeframe Ichimoku Trend EA",
+    description: "Trades based on Ichimoku Kinko Hyo, RSI, and Stochastic — confirmed across up to 4 timeframes. Buys above the Kumo cloud, sells below. Includes auto-compounding and martingale recovery.",
+    platforms: ["MT4", "MT5"],
+    highlights: ["Ichimoku Cloud", "5 MTF Modes", "Auto-Compounding", "Martingale"],
+    gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
+    accentColor: "#f59e0b",
+    icon: "🏯",
+    status: "New",
+    category: "Trend Following",
+  },
 ];
 
 export default function Home() {
