@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020260328.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020260328.ex5";
 
 const FEATURES = [
     { icon: "🐊", title: "Bill Williams Alligator", desc: "Core trend detection using the Alligator indicator — Jaw, Teeth, and Lips lines must align in the correct order to confirm a trend." },
@@ -33,7 +34,7 @@ const SETTINGS = [
     { name: "HoursFrom / HoursTo", type: "int", def: "0 / 24", desc: "Trading hours filter (local time). Supports overnight ranges." },
     { name: "Monday–Sunday", type: "bool", def: "All true", desc: "Enable/disable trading on specific weekdays" },
     { name: "Email_Notification", type: "bool", def: "true", desc: "Send trade signals via email" },
-    { name: "MT4_Messages", type: "bool", def: "true", desc: "Send push notifications to MT4 mobile app" },
+    { name: "MT4/MT5_Messages", type: "bool", def: "true", desc: "Send push notifications to MT4/MT5 mobile app" },
 ];
 
 const MTF_MODES = [
@@ -51,7 +52,8 @@ const FAQS = [
     { q: "Is martingale safe?", a: "Martingale carries significant risk. The default 2.25x multiplier means after 3 consecutive losses, your lot is ~11x the base size. Always set MaxLots to a reasonable value." },
     { q: "Does the EA close trades on its own?", a: "Yes — trades are closed by TP, SL, trailing stop, or the Close on Reversal feature. The EA does not leave trades unmanaged." },
     { q: "What timeframe should my chart be on?", a: "It doesn't matter — the EA fetches data from its configured timeframes internally. Use any chart timeframe you prefer for viewing." },
-    { q: "Can I backtest this EA?", a: "Yes. Open MT4 → Strategy Tester (Ctrl+R), select the EA, choose a pair and date range, and click Start. Multi-timeframe modes require history data for all relevant timeframes." },
+    { q: "Can I backtest this EA?", a: "Yes. Open MT4/MT5 → Strategy Tester (Ctrl+R), select the EA, choose a pair and date range, and click Start. Multi-timeframe modes require history data for all relevant timeframes." },
+    { q: "Is there an MT5 version?", a: "Yes! Both MT4 (.ex4) and MT5 (.ex5) versions are available. The MT5 version uses the same strategy with CTrade class for order management and indicator handles for optimized performance." },
 ];
 
 export default function AligatorGozaimasuPage() {
@@ -101,7 +103,7 @@ export default function AligatorGozaimasuPage() {
                 <div className="hero-content">
                     <div className="hero-badge aligator-badge">
                         <span className="hero-badge-dot aligator-dot"></span>
-                        MT4 · Trending Pairs
+                        MT4 & MT5 · Trending Pairs
                     </div>
                     <h1>
                         <span className="aligator-gradient-text">
@@ -114,6 +116,7 @@ export default function AligatorGozaimasuPage() {
                     </p>
                     <div className="hero-actions">
                         <a href={DOWNLOAD_MT4} download className="btn btn-aligator-primary">⬇️ Download MT4</a>
+                        <a href={DOWNLOAD_MT5} download className="btn btn-aligator-primary">⬇️ Download MT5</a>
                         <a href="#installation" className="btn btn-secondary">📖 Installation Guide</a>
                     </div>
                     <p className="hero-note">
@@ -206,20 +209,20 @@ export default function AligatorGozaimasuPage() {
                     <div className="flow-container">
                         {[
                             {
-                                title: "Download the EA",
-                                desc: <>Click the <strong>Download MT4</strong> button above to get the compiled <code>.ex4</code> file.</>
+                                title: "Download the EA (MT4 or MT5)",
+                                desc: <>Click the <strong>Download MT4</strong> or <strong>Download MT5</strong> button above to get the compiled <code>.ex4</code> or <code>.ex5</code> file.</>
                             },
                             {
                                 title: "Open MT4 Data Folder",
-                                desc: <>Open MetaTrader 4. Click <code>File → Open Data Folder</code>. A Windows Explorer window opens. Navigate to <code>MQL4\Experts\</code>.</>
+                                desc: <>Open MetaTrader 4 or 5. Click <code>File → Open Data Folder</code>. A Windows Explorer window opens. Navigate to <code>MQL4\Experts\</code> (MT4) or <code>MQL5\Experts\</code> (MT5).</>
                             },
                             {
                                 title: "Copy the EA File",
-                                desc: <>Place the downloaded <code>.ex4</code> file into the <code>MQL4\Experts\</code> folder.</>
+                                desc: <>Place the downloaded <code>.ex4</code> or <code>.ex5</code> file into the appropriate <code>MQL4\Experts\</code> or <code>MQL5\Experts\</code> folder.</>
                             },
                             {
                                 title: "Attach to Chart",
-                                desc: <>In MT4, press <strong>Ctrl+N</strong> to open the Navigator. Right-click <strong>Expert Advisors</strong> → <strong>Refresh</strong>. Find <strong>EA Aligator Gozaimasu</strong> and drag it onto a chart of your chosen trending pair (EURUSD, GBPUSD, XAUUSD, etc.).</>
+                                desc: <>In MT4/MT5, press <strong>Ctrl+N</strong> to open the Navigator. Right-click <strong>Expert Advisors</strong> → <strong>Refresh</strong>. Find <strong>EA Aligator Gozaimasu</strong> and drag it onto a chart of your chosen trending pair (EURUSD, GBPUSD, XAUUSD, etc.).</>
                             },
                             {
                                 title: "Configure Settings",

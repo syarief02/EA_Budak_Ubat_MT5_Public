@@ -66,7 +66,7 @@ const PRODUCTS = [
     version: "v1.06",
     tagline: "Multi-Timeframe Alligator Trend EA",
     description: "Trades based on Bill Williams Alligator, Awesome Oscillator, RSI, and Stochastic — confirmed across up to 4 timeframes. Buys uptrends, sells downtrends. Includes auto-compounding and martingale recovery.",
-    platforms: ["MT4"],
+    platforms: ["MT4", "MT5"],
     highlights: ["4 Indicators", "5 MTF Modes", "Auto-Compounding", "Martingale"],
     gradient: "linear-gradient(135deg, #22c55e, #059669)",
     accentColor: "#22c55e",
