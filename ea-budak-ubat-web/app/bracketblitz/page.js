@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const GITHUB_LINK = "https://github.com/syarief02/BracketBlitz-EA";
+const DOWNLOAD_MT4 = "/downloads/BracketBlitz v1.00 - MT4.ex4";
+const DOWNLOAD_MT5 = "/downloads/BracketBlitz v1.00 - MT5.ex5";
 
 const FEATURES = [
     { icon: "⚡", title: "Rapid-Fire Brackets", desc: "Continuously places Buy Stop + Sell Stop pending orders around the live price, straddling the market for instant breakout capture." },
@@ -99,11 +101,12 @@ export default function BracketBlitzPage() {
                         auto-refreshed every 30 seconds. Catch breakouts without predicting direction.
                     </p>
                     <div className="hero-actions">
-                        <a href={GITHUB_LINK} className="btn btn-blitz-primary" target="_blank">⭐ View on GitHub</a>
-                        <a href="#strategy" className="btn btn-secondary">📖 Learn More</a>
+                        <a href={DOWNLOAD_MT4} download className="btn btn-blitz-primary">⬇️ Download MT4</a>
+                        <a href={DOWNLOAD_MT5} download className="btn btn-blitz-primary">⬇️ Download MT5</a>
+                        <a href={GITHUB_LINK} className="btn btn-secondary" target="_blank">⭐ GitHub</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use on any instrument in MetaTrader.
+                        <strong>Open Source</strong> — Free to use on any instrument in MetaTrader. Expires 2026-03-28.
                     </p>
                 </div>
             </section>
@@ -153,6 +156,51 @@ export default function BracketBlitzPage() {
                                 <p className="feature-desc">{f.desc}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* INSTALLATION */}
+            <section id="installation">
+                <div className="container">
+                    <div className="section-header animate-in">
+                        <span className="label blitz-label">Getting Started</span>
+                        <h2>Installation Guide</h2>
+                        <p>Get BracketBlitz running in minutes.</p>
+                    </div>
+                    <div className="animate-in" style={{ background: "var(--bg-card)", padding: 32, borderRadius: "var(--radius-lg)", border: "1px solid var(--border-glass)" }}>
+                        <div style={{ display: "grid", gap: 24, fontSize: "0.95rem", color: "var(--text-secondary)" }}>
+                            <div>
+                                <strong style={{ color: "var(--accent-green)" }}>1. Download the EA</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Download the compiled file for your platform using the buttons above. Choose <code>.ex4</code> for MetaTrader 4 or <code>.ex5</code> for MetaTrader 5.
+                                </p>
+                            </div>
+                            <div>
+                                <strong style={{ color: "var(--accent-green)" }}>2. Install in MetaTrader</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Open your MetaTrader terminal. Go to <code>File → Open Data Folder</code>. Place the file in <code>MQL4/Experts/</code> (MT4) or <code>MQL5/Experts/</code> (MT5). Restart MetaTrader or right-click the Navigator panel and select Refresh.
+                                </p>
+                            </div>
+                            <div>
+                                <strong style={{ color: "var(--accent-green)" }}>3. Attach to Chart</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Open any chart (works on all instruments — forex, gold, indices, crypto CFDs). Drag BracketBlitz onto the chart. In the EA properties, go to the <strong>Common</strong> tab and enable <strong>Allow live trading</strong> (MT4) or <strong>Allow Algo Trading</strong> (MT5).
+                                </p>
+                            </div>
+                            <div>
+                                <strong style={{ color: "var(--accent-green)" }}>4. Configure Parameters</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Adjust <code>GapPips</code>, <code>StopLossPips</code>, <code>TrailingStopPips</code>, and <code>OrderLifetimeSec</code> in the <strong>Inputs</strong> tab. Use the preset configurations below as starting points. Give each chart instance a unique <code>MagicNumber</code>.
+                                </p>
+                            </div>
+                            <div>
+                                <strong style={{ color: "var(--accent-green)" }}>5. Enable Auto Trading</strong>
+                                <p style={{ marginTop: 8 }}>
+                                    Make sure Auto Trading is enabled in MetaTrader (the button in the toolbar should be green). The EA will immediately place Buy Stop + Sell Stop bracket orders around the current price.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
