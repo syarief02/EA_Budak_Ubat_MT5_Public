@@ -226,12 +226,12 @@ export default function Home() {
                 reliability, safety mechanisms, and transparent open-source code.
               </p>
               <p>
-                Whether you prefer systematic grid trading with <strong>EA Budak Ubat</strong> or AI-powered signal analysis
-                with <strong>GoldMind AI</strong>, each tool is built to give you an edge while respecting risk management principles.
+                Whether you prefer systematic grid trading, AI-powered analysis, trend-following with Ichimoku or Alligator indicators,
+                or breakout strategies — each tool is built to give you an edge while respecting risk management principles.
               </p>
               <div className="about-stats">
                 <div className="stat-item">
-                  <span className="stat-number">5</span>
+                  <span className="stat-number">6</span>
                   <span className="stat-label">Trading Tools</span>
                 </div>
                 <div className="stat-item">
@@ -301,6 +301,7 @@ export default function Home() {
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
                 <li><Link href="/aligator-gozaimasu">Aligator Gozaimasu</Link></li>
+                <li><Link href="/encik-moku">Encik Moku</Link></li>
               </ul>
             </div>
             <div>
