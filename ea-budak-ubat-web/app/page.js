@@ -217,7 +217,7 @@ export default function Home() {
               </p>
               <div className="about-stats">
                 <div className="stat-item">
-                  <span className="stat-number">4</span>
+                  <span className="stat-number">5</span>
                   <span className="stat-label">Trading Tools</span>
                 </div>
                 <div className="stat-item">
