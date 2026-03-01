@@ -87,7 +87,7 @@ export default function MathEdgeProPage() {
                 <div className="hero-content">
                     <div className="hero-badge mathedge-badge">
                         <span className="hero-badge-dot mathedge-dot"></span>
-                        MT4 · US30 · NAS100
+                        MT4 · MT5 · US30 · NAS100
                     </div>
                     <h1>
                         <span className="mathedge-gradient-text">MathEdge Pro</span>
@@ -98,7 +98,7 @@ export default function MathEdgeProPage() {
                     </p>
                     <div className="hero-actions">
                         <a href={DOWNLOAD_MT4} download className="btn btn-mathedge-primary">⬇️ Download MT4</a>
-                        <a href="#strategy" className="btn btn-secondary">📖 Learn More</a>
+                        <a href="#installation" className="btn btn-secondary">📖 Installation Guide</a>
                     </div>
                     <p className="hero-note">
                         <strong>Open Source</strong> — Free to use. Expires 2026-03-28. By Syarief Azman.
@@ -191,14 +191,16 @@ export default function MathEdgeProPage() {
                             <div>
                                 <strong style={{ color: "var(--accent-red)" }}>1. Download the EA</strong>
                                 <p style={{ marginTop: 8 }}>
-                                    Download <code>MathEdge Pro v1.1 - MT4.ex4</code> using the button above,
-                                    or compile it yourself from the source code (<code>MathEdge Pro.mq4</code>) in MetaEditor.
+                                    <strong>MT4:</strong> Download <code>MathEdge Pro v1.1 - MT4.ex4</code> using the button above.
+                                    <br /><strong>MT5:</strong> The MT5 source file (<code>MathEdge Pro.mq5</code>) is available in the <code>MT5/</code> folder. Open it in MetaEditor and compile to get the <code>.ex5</code> file.
                                 </p>
                             </div>
                             <div>
-                                <strong style={{ color: "var(--accent-red)" }}>2. Install in MetaTrader 4</strong>
+                                <strong style={{ color: "var(--accent-red)" }}>2. Install in MetaTrader</strong>
                                 <p style={{ marginTop: 8 }}>
-                                    Open MT4 → <code>File → Open Data Folder</code>. Place the <code>.ex4</code> file in <code>MQL4/Experts/</code>. Restart MT4 or right-click the Navigator panel and select Refresh.
+                                    <strong>MT4:</strong> Open MT4 → <code>File → Open Data Folder</code>. Place the <code>.ex4</code> file in <code>MQL4/Experts/</code>.
+                                    <br /><strong>MT5:</strong> Open MT5 → <code>File → Open Data Folder</code>. Place the <code>.ex5</code> file in <code>MQL5/Experts/</code>.
+                                    <br />Restart the terminal or right-click the Navigator panel and select Refresh.
                                 </p>
                             </div>
                             <div>

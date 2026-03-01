@@ -52,7 +52,7 @@ const PRODUCTS = [
     version: "v1.1",
     tagline: "Math-Based US Index Trading",
     description: "Automated math-based index trading for US30 and NAS100. Calculates daily levels, determines directional bias, and executes a strict 3-trade pending order sequence.",
-    platforms: ["MT4"],
+    platforms: ["MT4", "MT5"],
     highlights: ["US30 & NAS100", "3-Trade Sequence", "NY Session", "Dashboard"],
     gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
     accentColor: "#ef4444",
