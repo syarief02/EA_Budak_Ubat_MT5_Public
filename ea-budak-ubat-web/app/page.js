@@ -60,6 +60,20 @@ const PRODUCTS = [
     status: "New",
     category: "Index Trading",
   },
+  {
+    slug: "aligator-gozaimasu",
+    name: "Aligator Gozaimasu",
+    version: "v1.06",
+    tagline: "Multi-Timeframe Alligator Trend EA",
+    description: "Trades based on Bill Williams Alligator, Awesome Oscillator, RSI, and Stochastic — confirmed across up to 4 timeframes. Buys uptrends, sells downtrends. Includes auto-compounding and martingale recovery.",
+    platforms: ["MT4"],
+    highlights: ["4 Indicators", "5 MTF Modes", "Auto-Compounding", "Martingale"],
+    gradient: "linear-gradient(135deg, #22c55e, #059669)",
+    accentColor: "#22c55e",
+    icon: "🐊",
+    status: "New",
+    category: "Trend Following",
+  },
 ];
 
 export default function Home() {
@@ -272,6 +286,7 @@ export default function Home() {
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
+                <li><Link href="/aligator-gozaimasu">Aligator Gozaimasu</Link></li>
               </ul>
             </div>
             <div>
