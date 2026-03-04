@@ -51,7 +51,7 @@ const PRODUCTS = [
     {
         name: "GoldMind AI", slug: "goldmind-ai", icon: "🤖", version: "v1.00",
         strategy: "AI-Powered Signals", platforms: "MT5", bestFor: "XAUUSD (Gold)",
-        license: "Open Source", expiry: "2026-03-31",
+        license: "Open Source", expiry: "2026-03-28",
         description: "Uses OpenAI ChatGPT to analyze gold (XAUUSD) price charts and automatically place trades in MetaTrader 5. Runs entirely on your computer with a Python FastAPI backend.",
         howItWorks: [
             { title: "EA Collects Data", desc: "Every refresh interval, sends OHLC candle data to local Python server." },
