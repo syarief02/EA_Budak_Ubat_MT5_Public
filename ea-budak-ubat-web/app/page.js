@@ -115,6 +115,7 @@ export default function Home() {
         <div className="container">
           <a href="#" className="nav-brand">EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
+            <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>📖 Guide</Link></li>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
             <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
             <li><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a></li>
