@@ -117,6 +117,7 @@ export default function Home() {
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>📖 Guide</Link></li>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
+            <li><Link href="/community" onClick={() => setMobileNavOpen(false)}>💬 Community</Link></li>
             <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
             <li><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a></li>
             <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank">💬 Telegram</a></li>
