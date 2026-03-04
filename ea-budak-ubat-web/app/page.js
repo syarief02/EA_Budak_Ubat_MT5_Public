@@ -209,7 +209,7 @@ export default function Home() {
     );
     document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [comments, filter, loading]);
 
   return (
     <>
