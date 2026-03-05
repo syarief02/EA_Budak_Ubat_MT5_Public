@@ -281,7 +281,7 @@ A: Register through a broker partner link, then send your account number to [@Sy
 
 ### Downloads
 
-- [⬇️ Download MT5 EA](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/archive/refs/heads/main.zip)
+- [⬇️ Download MT5 EA](https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.00%20-%20MT5%20-%2020260331.ex5)
 - [📂 GitHub Repository](https://github.com/syarief02/goldmind-ai)
 
 ### What It Does
