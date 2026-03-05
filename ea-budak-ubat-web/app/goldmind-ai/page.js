@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.00%20-%20MT5%20-%2020260328.ex5";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/goldmind-ai.git";
 
 const FEATURES = [
     { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI (ChatGPT) to analyze XAUUSD price charts and generate trading signals with structured JSON output." },
@@ -75,7 +75,7 @@ export default function GoldMindAIPage() {
                         <li><a href="#requirements" onClick={() => setMobileNavOpen(false)}>Requirements</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={DOWNLOAD_MT5} download className="nav-cta">⬇️ Download</a></li>
+                        <li><a href={DOWNLOAD_MT5} target="_blank" rel="noopener noreferrer" className="nav-cta">⬇️ Download Project</a></li>
                     </ul>
                     <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
                         {mobileNavOpen ? "✕" : "☰"}
@@ -101,7 +101,7 @@ export default function GoldMindAIPage() {
                         and automatically place trades in MetaTrader 5. Runs entirely on your own computer.
                     </p>
                     <div className="hero-actions">
-                        <a href={DOWNLOAD_MT5} download className="btn btn-goldmind-primary">⬇️ Download MT5 EA</a>
+                        <a href={DOWNLOAD_MT5} target="_blank" rel="noopener noreferrer" className="btn btn-goldmind-primary">⬇️ Download Project</a>
                         <a href="#how-it-works" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
