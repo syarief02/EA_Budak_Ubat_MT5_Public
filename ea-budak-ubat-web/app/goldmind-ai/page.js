@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.00%20-%20MT5%20-%2020260328.ex5";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/archive/refs/heads/main.zip";
 
 const FEATURES = [
     { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI (ChatGPT) to analyze XAUUSD price charts and generate trading signals with structured JSON output." },
