@@ -580,6 +580,7 @@ export default function GuidePage() {
                                 <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                                     <span style={{ fontWeight: 600 }}>{b.name}</span>
                                     <span style={{ fontSize: "0.75rem", opacity: 0.7 }}>ID: {b.id}</span>
+                                    <span style={{ fontSize: "0.7rem", opacity: 0.6 }}>Email: {b.support}</span>
                                 </div>
                                 <span className="arrow">→</span>
                             </a>
