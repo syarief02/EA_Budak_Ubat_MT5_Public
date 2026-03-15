@@ -879,25 +879,28 @@ A **VPS (Virtual Private Server)** is essential for running EAs reliably 24/7.
 
 ---
 
-## 11. Broker Partner Links
+## 11. Broker Partner Links & Authorization
 
-Register through a partner broker to get your EA Budak Ubat account **authorized** (permanent access with no expiry). After registering, send your trading account number to [@SyariefAzman on Telegram](https://t.me/SyariefAzman).
+To get your EA Budak Ubat account **authorized** (permanent access with no expiry), you must register through one of the following partner links. Use a **cent account**, **maximum leverage**, and a minimum deposit of **$100 USD**.
 
-| Broker | Register Link |
-|---|---|
-| **FISG** | [Register](https://my.fisg.com/u/CTt0Rd) |
-| **CXM** | [Register](https://secure.cxmys.com/links/go/5062) |
-| **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) |
-| **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) |
-| **Forex4you** | [Register](https://account.forex4you.com/en/user-registration/?affid=4hcnvz4) |
-| **OctaFx** | [Register](https://my.octafxmy.net/change-partner-request/?partner=246630) |
-| **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) |
-| **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) |
-| **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) |
-| **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) |
-| **Valetax** | [Register](https://ma.valetax.com/p/1939088) |
+Please select a broker that you have never registered with before. After registering, tell me the trading account number. I will share the EA update file, and for FBS and Forex4you clients, you will get a spread rebate of **50% of the commission** I earn from your total trade lots, paid weekly.
 
-> **Bonus:** FBS and Forex4you clients receive a **50% spread rebate** on commission earned from your total trade lots, paid weekly.
+Clients who have registered through my link can just PM the trading account number to me at [@SyariefAzman on Telegram](https://t.me/SyariefAzman).
+
+| Broker | Register Link | Partner/Affiliate ID | Support Email |
+|---|---|---|---|
+| **FISG** | [Register](https://my.fisg.com/u/CTt0Rd) | `CTt0Rd` | support@fisg.com |
+| **CXM** | [Register](https://secure.cxmys.com/links/go/5062) | `5062` | support@cxm.com |
+| **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` | support@fbs.com |
+| **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` | care@hw.site |
+| **Forex4you** | [Register](https://account.forex4you.com/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@forex4you.com |
+| **OctaFx** | [Register](https://my.octafxmy.net/change-partner-request/?partner=246630) | `246630` | support@octafx.com |
+| **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` | support@instaforex.com |
+| **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` | clients@litefinance.com |
+| **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` | info@roboforex.com |
+| **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) | Affiliate: `A1202120`, Code: `HVVR7` | XM Support |
+| **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` | contact@valetax.com |
+
 
 ---
 

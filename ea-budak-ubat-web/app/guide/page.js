@@ -256,17 +256,17 @@ const INSTALL_MT5 = [
 ];
 
 const BROKERS = [
-    { name: "FISG", url: "https://my.fisg.com/u/CTt0Rd" },
-    { name: "CXM", url: "https://secure.cxmys.com/links/go/5062" },
-    { name: "FBS", url: "https://fbs.partners?ibl=154319&ibp=588292" },
-    { name: "HeadWay", url: "https://headway.partners/user/signup?hwp=516d6b" },
-    { name: "Forex4you", url: "https://account.forex4you.com/en/user-registration/?affid=4hcnvz4" },
-    { name: "OctaFx", url: "https://my.octafxmy.net/change-partner-request/?partner=246630" },
-    { name: "InstaForex", url: "https://www.instaforex.com?x=KUSD" },
-    { name: "LiteForex", url: "https://www.litefinance.com/?uid=805161060" },
-    { name: "RoboForex", url: "https://my.roboforex.com/en/?a=mxyg" },
-    { name: "XM", url: "https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1" },
-    { name: "Valetax", url: "https://ma.valetax.com/p/1939088" },
+    { name: "FISG", url: "https://my.fisg.com/u/CTt0Rd", id: "CTt0Rd", support: "support@fisg.com" },
+    { name: "CXM", url: "https://secure.cxmys.com/links/go/5062", id: "5062", support: "support@cxm.com" },
+    { name: "FBS", url: "https://fbs.partners?ibl=154319&ibp=588292", id: "588292", support: "support@fbs.com" },
+    { name: "HeadWay", url: "https://headway.partners/user/signup?hwp=516d6b", id: "1021290", support: "care@hw.site" },
+    { name: "Forex4you", url: "https://account.forex4you.com/en/user-registration/?affid=4hcnvz4", id: "4hcnvz4", support: "info@forex4you.com" },
+    { name: "OctaFx", url: "https://my.octafxmy.net/change-partner-request/?partner=246630", id: "246630", support: "support@octafx.com" },
+    { name: "InstaForex", url: "https://www.instaforex.com?x=KUSD", id: "KUSD", support: "support@instaforex.com" },
+    { name: "LiteForex", url: "https://www.litefinance.com/?uid=805161060", id: "805161060", support: "clients@litefinance.com" },
+    { name: "RoboForex", url: "https://my.roboforex.com/en/?a=mxyg", id: "mxyg", support: "info@roboforex.com" },
+    { name: "XM", url: "https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1", id: "A1202120 / HVVR7", support: "XM Support" },
+    { name: "Valetax", url: "https://ma.valetax.com/p/1939088", id: "1939088", support: "contact@valetax.com" },
 ];
 
 export default function GuidePage() {
@@ -572,19 +572,22 @@ export default function GuidePage() {
                     <div className="section-header animate-in">
                         <span className="label">Authorization</span>
                         <h2>Broker Partner Links</h2>
-                        <p>Register through a partner broker to get permanent EA Budak Ubat authorization (no expiry).</p>
+                        <p>Register through a partner broker to get permanent EA Budak Ubat authorization (no expiry). Use a <strong>cent account</strong>, <strong>maximum leverage</strong>, and a minimum deposit of <strong>$100 USD</strong>.</p>
                     </div>
                     <div className="broker-grid animate-in">
                         {BROKERS.map((b, i) => (
                             <a key={i} href={b.url} className="broker-card" target="_blank" rel="noopener noreferrer">
-                                <span>{b.name}</span>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                                    <span style={{ fontWeight: 600 }}>{b.name}</span>
+                                    <span style={{ fontSize: "0.75rem", opacity: 0.7 }}>ID: {b.id}</span>
+                                </div>
                                 <span className="arrow">→</span>
                             </a>
                         ))}
                     </div>
-                    <p style={{ textAlign: "center", marginTop: 20, fontSize: "0.85rem", color: "var(--text-muted)" }}>
-                        After registering, send your account number to <a href="https://t.me/SyariefAzman" style={{ color: "var(--accent-cyan)" }}>@SyariefAzman on Telegram</a>.
-                        FBS and Forex4you clients receive a <strong>50% spread rebate</strong> paid weekly.
+                    <p style={{ textAlign: "center", marginTop: 20, fontSize: "0.85rem", color: "var(--text-muted)", maxWidth: 800, margin: "20px auto 0" }}>
+                        Please select a broker that you have never registered with before. After registering, send your trading account number to <a href="https://t.me/SyariefAzman" style={{ color: "var(--accent-cyan)" }}>@SyariefAzman on Telegram</a>.
+                        I will share the EA update file. <strong>FBS and Forex4you</strong> clients receive a <strong>50% spread rebate</strong> paid weekly.
                     </p>
                 </div>
             </section>
