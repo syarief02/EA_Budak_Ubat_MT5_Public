@@ -6,11 +6,11 @@ import Link from "next/link";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
 
 const FEATURES = [
-    { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI (ChatGPT) to analyze XAUUSD price charts and generate trading signals with structured JSON output." },
+    { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI GPT (default: gpt-5.2) to analyze XAUUSD price charts across multiple timeframes and generate trading signals with structured JSON output." },
     { icon: "🛡️", title: "6 Safety Filters", desc: "Every signal passes through spread, stop level, entry price, SL direction, R:R ratio, and lot size validation." },
     { icon: "📊", title: "Pending Orders", desc: "Places buy stop or sell stop pending orders, automatically cancelled after 4 hours if not triggered." },
     { icon: "💰", title: "Smart Lot Sizing", desc: "Calculates lot size based on your risk percentage and the distance between entry and stop loss." },
-    { icon: "🔄", title: "Auto Signal Refresh", desc: "Requests fresh AI signals at configurable intervals. Skips requests when a position is already open to save API costs." },
+    { icon: "🔄", title: "Auto Signal Refresh", desc: "Requests fresh AI signals at configurable intervals. Supports automatic model fallback if the primary model fails. Skips requests when a position is open to save API costs." },
     { icon: "⚡", title: "Local Processing", desc: "Runs entirely on your computer — Python FastAPI backend communicates between MT5 and OpenAI API." },
     { icon: "📈", title: "XAUUSD Specialist", desc: "AI prompt specifically designed to analyze gold price action for optimal entry, stop loss, and take profit levels." },
     { icon: "🔐", title: "Secure API Key", desc: "Your OpenAI API key stays on your machine, stored in a local .env file that never leaves your computer." },
@@ -22,7 +22,7 @@ const SETTINGS = [
     { name: "RiskPercent", def: "1.0", desc: "Percentage of account equity to risk per trade" },
     { name: "MinRR", def: "1.5", desc: "Minimum reward-to-risk ratio required to place a trade" },
     { name: "Timeframe", def: "PERIOD_M15", desc: "Candle timeframe used for price data sent to the AI" },
-    { name: "CandleCount", def: "100", desc: "Number of historical candles sent to the AI for analysis" },
+    { name: "CandleCount", def: "200", desc: "Number of historical candles sent to the AI for analysis (60 per timeframe used)" },
     { name: "RefreshHours", def: "4.0", desc: "Hours between signal refresh requests. Also the pending order expiry time" },
     { name: "MagicNumber", def: "777", desc: "Unique identifier for trades placed by this EA" },
     { name: "Timeout", def: "30000", desc: "WebRequest timeout in milliseconds for server communication" },
@@ -39,7 +39,7 @@ const FAQS = [
     { q: "How much does it cost to run?", a: "Each signal request costs about $0.01–$0.02 in OpenAI API usage. If the EA places an order or holds a position, it stops polling to save costs." },
     { q: "Can I run this on a VPS?", a: "Yes! Run the Python server and MT5 on the same VPS. Change BackendURL if they're on different machines." },
     { q: "Can I use this on other symbols besides XAUUSD?", a: "No — the AI prompt is specifically designed to analyze gold price action. Using other symbols would produce unreliable signals." },
-    { q: "Can I change the AI model?", a: "Yes! Edit OPENAI_MODEL in backend/.env. Options include gpt-4o-2024-08-06, gpt-5-mini, and gpt-5." },
+    { q: "Can I change the AI model?", a: "Yes! Edit OPENAI_MODEL in backend/.env. Default is gpt-5.2 with gpt-5 fallback. Other options include gpt-5-mini and gpt-4o-2024-08-06." },
     { q: "Is my API key safe?", a: "Yes. The key is stored only on your computer in the .env file. It's never sent to MT5 or anywhere else." },
 ];
 
@@ -97,8 +97,8 @@ export default function GoldMindAIPage() {
                         <span className="goldmind-gradient-text">GoldMind AI</span>
                     </h1>
                     <p className="hero-subtitle">
-                        An AI-powered trading system that uses ChatGPT to analyze gold (XAUUSD) price charts
-                        and automatically place trades in MetaTrader 5. Runs entirely on your own computer.
+                        An AI-powered trading system that uses OpenAI GPT to analyze gold (XAUUSD) price charts
+                        across multiple timeframes and automatically place trades in MetaTrader 5. Runs entirely on your own computer.
                     </p>
                     <div className="hero-actions">
                         <a href={DOWNLOAD_MT5} target="_blank" rel="noopener noreferrer" className="btn btn-goldmind-primary">⬇️ Download Project</a>
@@ -120,9 +120,9 @@ export default function GoldMindAIPage() {
                     </div>
                     <div className="flow-container">
                         {[
-                            { title: "EA Collects Data", desc: "Every candle timeframe (e.g. 15 minutes), the EA collects the latest candle data (OHLC prices) from the XAUUSD chart and sends it to your local Python server." },
-                            { title: "Server Forwards to AI", desc: "The FastAPI backend receives the price data and forwards it to OpenAI's ChatGPT API with a specialized gold analysis prompt." },
-                            { title: "AI Analyzes Market", desc: "ChatGPT analyzes the price action and responds with a structured JSON signal: buy stop, sell stop, or no trade — including entry, SL, and TP levels." },
+                            { title: "EA Collects Data", desc: "Every candle timeframe, the EA collects price data (OHLC) across multiple timeframes (M5, M15, M30, H1, H4) from the XAUUSD chart and sends it to your local Python server." },
+                            { title: "Server Forwards to AI", desc: "The FastAPI backend receives the multi-timeframe price data, computes market structure summaries, and forwards everything to OpenAI's GPT API with a specialized gold analysis prompt." },
+                            { title: "AI Analyzes Market", desc: "GPT analyzes price action across all timeframes and responds with a structured JSON signal: buy stop, sell stop, or no trade — including entry, SL, and TP levels." },
                             { title: "Signal Validation", desc: "The EA runs the AI signal through 6 safety filters: spread check, stop level, entry price, SL direction, R:R ratio, and lot size validation." },
                             { title: "Order Placement", desc: "If all filters pass, the EA places a pending order (buy stop or sell stop). If the order isn't triggered within 4 hours, it's cancelled." },
                             { title: "Cost Optimization", desc: "While a position is open, the EA skips signal requests entirely to save API costs. A new signal is only requested after the position is closed." },
@@ -350,7 +350,8 @@ export default function GoldMindAIPage() {
 │   ├── main.py           ← FastAPI + OpenAI integration
 │   ├── requirements.txt  ← Python dependencies
 │   ├── .env.example      ← Template for API key
-│   └── .env              ← Your actual API key (secret!)
+│   ├── .env              ← Your actual API key (secret!)
+│   └── logs/             ← Auto-generated log files
 ├── mt5/                  ← MetaTrader 5 files
 │   ├── Include/
 │   │   └── JASONNode.mqh ← JSON parser library
@@ -422,7 +423,7 @@ export default function GoldMindAIPage() {
                         <div>
                             <h3 className="footer-brand goldmind-footer-brand">GoldMind AI</h3>
                             <p className="footer-desc">
-                                AI-powered XAUUSD trading system using ChatGPT, FastAPI, and MetaTrader 5. Open source and free to use.
+                                AI-powered XAUUSD trading system using OpenAI GPT, FastAPI, and MetaTrader 5. Open source and free to use.
                             </p>
                             <div className="social-links">
                                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
