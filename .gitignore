@@ -4,3 +4,4 @@
 
 # Agent Workfiles
 /.agents/
+.env
