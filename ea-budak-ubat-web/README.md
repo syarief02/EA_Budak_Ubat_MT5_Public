@@ -883,7 +883,7 @@ A **VPS (Virtual Private Server)** is essential for running EAs reliably 24/7.
 
 To get your EA Budak Ubat account **authorized** (permanent access with no expiry), you must register through one of the following partner links. Use a **cent account**, **maximum leverage**, and a minimum deposit of **$100 USD**.
 
-Please select a broker that you have never registered with before. After registering, tell me the trading account number. I will share the EA update file, and for FBS and Markets4you clients, you will get a spread rebate of **50% of the commission** I earn from your total trade lots, paid weekly.
+Please select a broker that you have never registered with before. After registering, tell me the trading account number. I will share the EA update file.
 
 Clients who have registered through my link can just PM the trading account number to me at [@SyariefAzman on Telegram](https://t.me/SyariefAzman).
 

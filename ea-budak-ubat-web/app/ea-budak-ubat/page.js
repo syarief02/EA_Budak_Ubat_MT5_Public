@@ -403,7 +403,7 @@ export default function EABudakUbatPage() {
             </div>
             <p style={{ textAlign: "center", marginTop: 24, fontSize: "0.85rem", color: "var(--text-muted)", maxWidth: 800, margin: "24px auto 0" }}>
               After registering, tell me the trading account number to <a href="https://t.me/SyariefAzman" style={{ color: "var(--accent-cyan)" }}>@SyariefAzman on Telegram</a>.
-              I will share the EA update file. <strong>FBS and Markets4you</strong> clients receive a <strong>50% spread rebate</strong> paid weekly.
+              I will share the EA update file.
             </p>
           </div>
         </div>

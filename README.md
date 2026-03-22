@@ -253,8 +253,6 @@ Register through one of the author's broker partner links below. After registeri
 | **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) | `HVVR7` |
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` |
 
-> **Bonus:** FBS and Markets4you clients receive a **50% spread rebate** on the commission earned from your total trade lots, paid weekly.
-
 ---
 
 ## Installation Guide

@@ -588,7 +588,7 @@ export default function GuidePage() {
                     </div>
                     <p style={{ textAlign: "center", marginTop: 20, fontSize: "0.85rem", color: "var(--text-muted)", maxWidth: 800, margin: "20px auto 0" }}>
                         Please select a broker that you have never registered with before. After registering, send your trading account number to <a href="https://t.me/SyariefAzman" style={{ color: "var(--accent-cyan)" }}>@SyariefAzman on Telegram</a>.
-                        I will share the EA update file. <strong>FBS and Markets4you</strong> clients receive a <strong>50% spread rebate</strong> paid weekly.
+                        I will share the EA update file.
                     </p>
                 </div>
             </section>
