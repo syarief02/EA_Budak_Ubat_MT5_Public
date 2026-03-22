@@ -260,7 +260,7 @@ const BROKERS = [
     { name: "CXM", url: "https://secure.cxmys.com/links/go/5062", id: "5062", support: "support@cxm.com" },
     { name: "FBS", url: "https://fbs.partners?ibl=154319&ibp=588292", id: "588292", support: "support@fbs.com" },
     { name: "HeadWay", url: "https://headway.partners/user/signup?hwp=516d6b", id: "1021290", support: "care@hw.site" },
-    { name: "Forex4you", url: "https://account.forex4you.com/en/user-registration/?affid=4hcnvz4", id: "4hcnvz4", support: "info@forex4you.com" },
+    { name: "Markets4you", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", id: "4hcnvz4", support: "info@markets4you.com" },
     { name: "OctaFx", url: "https://my.octafxmy.net/change-partner-request/?partner=246630", id: "246630", support: "support@octafx.com" },
     { name: "InstaForex", url: "https://www.instaforex.com?x=KUSD", id: "KUSD", support: "support@instaforex.com" },
     { name: "LiteForex", url: "https://www.litefinance.com/?uid=805161060", id: "805161060", support: "clients@litefinance.com" },
@@ -588,7 +588,7 @@ export default function GuidePage() {
                     </div>
                     <p style={{ textAlign: "center", marginTop: 20, fontSize: "0.85rem", color: "var(--text-muted)", maxWidth: 800, margin: "20px auto 0" }}>
                         Please select a broker that you have never registered with before. After registering, send your trading account number to <a href="https://t.me/SyariefAzman" style={{ color: "var(--accent-cyan)" }}>@SyariefAzman on Telegram</a>.
-                        I will share the EA update file. <strong>FBS and Forex4you</strong> clients receive a <strong>50% spread rebate</strong> paid weekly.
+                        I will share the EA update file. <strong>FBS and Markets4you</strong> clients receive a <strong>50% spread rebate</strong> paid weekly.
                     </p>
                 </div>
             </section>

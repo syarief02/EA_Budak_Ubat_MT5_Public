@@ -883,7 +883,7 @@ A **VPS (Virtual Private Server)** is essential for running EAs reliably 24/7.
 
 To get your EA Budak Ubat account **authorized** (permanent access with no expiry), you must register through one of the following partner links. Use a **cent account**, **maximum leverage**, and a minimum deposit of **$100 USD**.
 
-Please select a broker that you have never registered with before. After registering, tell me the trading account number. I will share the EA update file, and for FBS and Forex4you clients, you will get a spread rebate of **50% of the commission** I earn from your total trade lots, paid weekly.
+Please select a broker that you have never registered with before. After registering, tell me the trading account number. I will share the EA update file, and for FBS and Markets4you clients, you will get a spread rebate of **50% of the commission** I earn from your total trade lots, paid weekly.
 
 Clients who have registered through my link can just PM the trading account number to me at [@SyariefAzman on Telegram](https://t.me/SyariefAzman).
 
@@ -893,7 +893,7 @@ Clients who have registered through my link can just PM the trading account numb
 | **CXM** | [Register](https://secure.cxmys.com/links/go/5062) | `5062` | support@cxm.com |
 | **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` | support@fbs.com |
 | **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` | care@hw.site |
-| **Forex4you** | [Register](https://account.forex4you.com/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@forex4you.com |
+| **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@markets4you.com |
 | **OctaFx** | [Register](https://my.octafxmy.net/change-partner-request/?partner=246630) | `246630` | support@octafx.com |
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` | support@instaforex.com |
 | **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` | clients@litefinance.com |
