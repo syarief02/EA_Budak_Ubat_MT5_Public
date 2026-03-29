@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%2020260328.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020260328.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%2020260428.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020260428.ex5";
 
 const FEATURES = [
     { icon: "🏯", title: "Ichimoku Kinko Hyo", desc: "Core trend detection — Tenkan-sen must be above (buy) or below (sell) both Senkou Span A, Senkou Span B, and Kijun-sen. Price above/below the Kumo cloud." },

@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260328.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT5%20-%2020260328.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260428.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT5%20-%2020260428.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
@@ -75,7 +75,7 @@ const FAQS = [
 ];
 
 const INSTALL_MT4 = [
-  <>Download <code>EA - Budak Ubat v1.62 - MT4 - 20260328.ex4</code></>,
+  <>Download <code>EA - Budak Ubat v1.62 - MT4 - 20260428.ex4</code></>,
   <>Open MT4 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL4/Experts/</code></>,
   "Copy the .ex4 file into this folder",
@@ -87,7 +87,7 @@ const INSTALL_MT4 = [
 ];
 
 const INSTALL_MT5 = [
-  <>Download <code>EA - Budak Ubat v1.62 - MT5 - 20260328.ex5</code></>,
+  <>Download <code>EA - Budak Ubat v1.62 - MT5 - 20260428.ex5</code></>,
   <>Open MT5 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL5/Experts/</code></>,
   "Copy the .ex5 file into this folder",

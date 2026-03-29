@@ -1,6 +1,6 @@
 # EA Budak Ubat v1.62
 
-### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260328.ex4) · [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT5%20-%2020260328.ex5) · [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
+### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260428.ex4) · [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT5%20-%2020260428.ex5) · [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
 
 > **Limited Time Price!** The price increases by 10 USD after every 10 purchases.
 
@@ -62,7 +62,7 @@ EA Budak Ubat is available for **both MetaTrader 4 and MetaTrader 5**. The MT5 v
 
 | Aspect | MT4 Version | MT5 Version (Beta) |
 |---|---|---|
-| **File** | `EA - Budak Ubat v1.62 - MT4 - 20260328.ex4` | `EA - Budak Ubat v1.62 - MT5 - 20260328.ex5` |
+| **File** | `EA - Budak Ubat v1.62 - MT4 - 20260428.ex4` | `EA - Budak Ubat v1.62 - MT5 - 20260428.ex5` |
 | **Order System** | `OrderSend()`, `OrderSelect()`, `OrderModify()` | `CTrade` class (`trade.Buy()`, `trade.Sell()`, `trade.PositionModify()`) |
 | **Position Counting** | `OrdersTotal()` with `OrderSelect()` loop | `PositionsTotal()` with `PositionGetTicket()` loop |
 | **Indicators** | Direct `iRSI()`, `iMA()`, `iAlligator()`, `iIchimoku()` calls | Indicator handles + `CopyBuffer()` via `GetIndicatorBuffer()` helper |
@@ -261,7 +261,7 @@ Register through one of the author's broker partner links below. After registeri
 
 [![Watch the video](https://img.youtube.com/vi/leH9PGkLc6Q/hqdefault.jpg)](https://youtu.be/leH9PGkLc6Q)
 
-1. Download `EA - Budak Ubat v1.62 - MT4 - 20260328.ex4`
+1. Download `EA - Budak Ubat v1.62 - MT4 - 20260428.ex4`
 2. Open MT4 → `File` → `Open Data Folder`
 3. Navigate to `MQL4/Experts/`
 4. Copy the `.ex4` file into this folder
@@ -273,7 +273,7 @@ Register through one of the author's broker partner links below. After registeri
 
 ### MT5 Installation
 
-1. Download `EA - Budak Ubat v1.62 - MT5 - 20260328.ex5`
+1. Download `EA - Budak Ubat v1.62 - MT5 - 20260428.ex5`
 2. Open MT5 → `File` → `Open Data Folder`
 3. Navigate to `MQL5/Experts/`
 4. Copy the `.ex5` file into this folder
@@ -434,8 +434,8 @@ Initial grid martingale EA with:
 
 | File | Description |
 |---|---|
-| `EA - Budak Ubat v1.62 - MT4 - 20260328.ex4` | MT4 compiled EA |
-| `EA - Budak Ubat v1.62 - MT5 - 20260328.ex5` | MT5 compiled EA |
+| `EA - Budak Ubat v1.62 - MT4 - 20260428.ex4` | MT4 compiled EA |
+| `EA - Budak Ubat v1.62 - MT5 - 20260428.ex5` | MT5 compiled EA |
 | `v1.62 Authorized Account List.txt` | Full authorized account list |
 | `LICENSE` | MIT License |
 | `README.md` | This file |

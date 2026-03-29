@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020260328.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020260328.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020260428.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020260428.ex5";
 
 const FEATURES = [
     { icon: "🐊", title: "Bill Williams Alligator", desc: "Core trend detection using the Alligator indicator — Jaw, Teeth, and Lips lines must align in the correct order to confirm a trend." },
