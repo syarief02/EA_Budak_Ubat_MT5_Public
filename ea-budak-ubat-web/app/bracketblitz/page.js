@@ -106,7 +106,7 @@ export default function BracketBlitzPage() {
                         <a href="#strategy" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use on any instrument in MetaTrader. Expires 2026-03-28.
+                        <strong>Open Source</strong> — Free to use on any instrument in MetaTrader. Expires 2026-04-28.
                     </p>
                 </div>
             </section>

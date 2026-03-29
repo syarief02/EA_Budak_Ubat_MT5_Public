@@ -105,7 +105,7 @@ export default function GoldMindAIPage() {
                         <a href="#how-it-works" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key. Expires 2026-03-31. By Syarief Azman.
+                        <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key. Expires 2026-04-28. By Syarief Azman.
                     </p>
                 </div>
             </section>

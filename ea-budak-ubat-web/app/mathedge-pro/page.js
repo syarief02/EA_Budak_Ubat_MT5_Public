@@ -102,7 +102,7 @@ export default function MathEdgeProPage() {
                         <a href={DOWNLOAD_MT5} download className="btn btn-mathedge-primary">⬇️ Download MT5</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use. Expires 2026-03-28. By Syarief Azman.
+                        <strong>Open Source</strong> — Free to use. Expires 2026-04-28. By Syarief Azman.
                     </p>
                 </div>
             </section>
