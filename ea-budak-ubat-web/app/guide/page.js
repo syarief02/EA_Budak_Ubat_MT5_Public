@@ -7,7 +7,7 @@ const PRODUCTS = [
     {
         name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.62",
         strategy: "Grid Martingale", platforms: "MT4, MT5", bestFor: "Ranging pairs, M5",
-        license: "MIT + Paid Full", expiry: "2026-04-28",
+        license: "MIT + Paid Full", expiry: "2026-09-30",
         description: "A grid-based martingale EA with 4 analysis methods (Classic Candle, SMA20, Alligator, Ichimoku), AutoConfig AI, hedging support, and configurable time filters. Designed for ranging currency pairs on the M5 timeframe.",
         howItWorks: [
             { title: "Tick Received", desc: "Updates chart display, checks time filter (StartTime–StopTime)." },
@@ -51,7 +51,7 @@ const PRODUCTS = [
     {
         name: "GoldMind AI", slug: "goldmind-ai", icon: "🤖", version: "v1.00",
         strategy: "AI-Powered Signals", platforms: "MT5", bestFor: "XAUUSD (Gold)",
-        license: "Open Source", expiry: "2026-04-28",
+        license: "Open Source", expiry: "2026-09-30",
         description: "Uses OpenAI ChatGPT to analyze gold (XAUUSD) price charts and automatically place trades in MetaTrader 5. Runs entirely on your computer with a Python FastAPI backend.",
         howItWorks: [
             { title: "EA Collects Data", desc: "Every refresh interval, sends OHLC candle data to local Python server." },
@@ -90,7 +90,7 @@ const PRODUCTS = [
     {
         name: "BracketBlitz EA", slug: "bracketblitz", icon: "⚡", version: "v1.00",
         strategy: "OCO Bracket Breakout", platforms: "MT4, MT5", bestFor: "All instruments, News",
-        license: "Open Source", expiry: "2026-04-28",
+        license: "Open Source", expiry: "2026-09-30",
         description: "Rapid-fire OCO bracket orders — Buy Stop + Sell Stop straddling the market, auto-refreshed every 30 seconds. Catches breakouts without predicting direction. Works on any instrument.",
         howItWorks: [
             { title: "Bracket Placement", desc: "Buy Stop at Ask + GapPips, Sell Stop at Bid − GapPips." },
@@ -124,7 +124,7 @@ const PRODUCTS = [
     {
         name: "MathEdge Pro", slug: "mathedge-pro", icon: "📐", version: "v1.1",
         strategy: "Math-Based Levels", platforms: "MT4, MT5", bestFor: "US30, NAS100",
-        license: "Open Source", expiry: "2026-04-28",
+        license: "Open Source", expiry: "2026-09-30",
         description: "Automated math-based index trading. Calculates daily OHLC levels at NY session boundaries, determines directional bias from net change, and executes a strict 3-trade pending order sequence.",
         howItWorks: [
             { title: "Lock Daily Levels", desc: "At 18:00 NY time, reads PRV (2 days ago close), CV (yesterday close), H (high), L (low)." },
@@ -163,7 +163,7 @@ const PRODUCTS = [
     {
         name: "Aligator Gozaimasu", slug: "aligator-gozaimasu", icon: "🐊", version: "v1.06",
         strategy: "MTF Alligator Trend", platforms: "MT4, MT5", bestFor: "Trending pairs",
-        license: "Open Source", expiry: "2026-04-28",
+        license: "Open Source", expiry: "2026-09-30",
         description: "Trades based on Bill Williams Alligator + Awesome Oscillator + RSI + Stochastic, confirmed across up to 4 timeframes. Buys uptrends, sells downtrends. Auto-compounding and martingale recovery.",
         howItWorks: [
             { title: "Buy Signal (all TFs)", desc: "Alligator: Lips > Teeth > Jaw · AO > 0 · Stochastic: Main < 80 & Main > Signal · RSI < 70" },
@@ -199,7 +199,7 @@ const PRODUCTS = [
     {
         name: "Encik Moku", slug: "encik-moku", icon: "🏯", version: "v1.06",
         strategy: "MTF Ichimoku Trend", platforms: "MT4, MT5", bestFor: "Trending pairs",
-        license: "Open Source", expiry: "2026-04-28",
+        license: "Open Source", expiry: "2026-09-30",
         description: "Trades based on Ichimoku Kinko Hyo + RSI + Stochastic, confirmed across up to 4 timeframes. Buys above the Kumo cloud, sells below. Sister EA to Aligator Gozaimasu with identical architecture.",
         howItWorks: [
             { title: "Buy Signal (all TFs)", desc: "Ichimoku: Tenkan > Senkou A & B & Kijun (above cloud) · Stochastic: Main < 80 & Main > Signal · RSI < 70" },

@@ -74,16 +74,16 @@ $MQ4Sources = @(
 )
 
 $MQ5Sources = @(
-    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.62 - MT5 - Beta.mq5",
-    "$MQL5_BASE\Goldmind AI\mt5\Experts\GoldMind_AI.mq5",
+    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.62 - MT5 - .mq5",
+    "$MQL5_BASE\GoldMind_AI.mq5",
     "$DESKTOP\BracketBlitz-EA\BracketBlitz.mq5",
     "$DESKTOP\MathEdge Pro\MT5\MathEdge Pro.mq5",
     "$DESKTOP\EA Aligator Gozaimasu\EA - Aligator Gozaimasu v1.06 - MT5.mq5",
     "$DESKTOP\EA Encik Moku\EA - Encik Moku v1.06 - MT5.mq5"
 )
 
-$MQ4Encodings = @("unicode", "", "utf8", "utf8", "utf8", "utf8")
-$MQ5Encodings = @("unicode", "utf8", "utf8", "utf8", "utf8", "utf8")
+$MQ4Encodings = @("utf8", "", "utf8", "utf8", "utf8", "utf8")
+$MQ5Encodings = @("utf8", "utf8", "utf8", "utf8", "utf8", "utf8")
 
 $OutputRepos = @(
     "$DESKTOP\ea bu mt5 public",
