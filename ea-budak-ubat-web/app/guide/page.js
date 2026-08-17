@@ -266,6 +266,7 @@ const BROKERS = [
     { name: "LiteForex", url: "https://www.litefinance.com/?uid=805161060", id: "805161060", support: "clients@litefinance.com" },
     { name: "RoboForex", url: "https://my.roboforex.com/en/?a=mxyg", id: "mxyg", support: "info@roboforex.com" },
     { name: "XM", url: "https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1", id: "A1202120 / HVVR7", support: "XM Support" },
+    { name: "Tickmill", url: "https://tickmill.link/46cOQ2h", id: "IB72324388", support: "support@tickmill.com" },
     { name: "Valetax", url: "https://ma.valetax.com/p/1939088", id: "1939088", support: "contact@valetax.com" },
 ];
 
