@@ -894,7 +894,6 @@ Clients who have registered through my link can just PM the trading account numb
 | **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` | support@fbs.com |
 | **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` | care@hw.site |
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@markets4you.com |
-| **OctaFx** | [Register](https://my.octafxmy.net/change-partner-request/?partner=246630) | `246630` | support@octafx.com |
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` | support@instaforex.com |
 | **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` | clients@litefinance.com |
 | **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` | info@roboforex.com |

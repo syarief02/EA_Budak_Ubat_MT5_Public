@@ -261,7 +261,6 @@ const BROKERS = [
     { name: "FBS", url: "https://fbs.partners?ibl=154319&ibp=588292", id: "588292", support: "support@fbs.com" },
     { name: "HeadWay", url: "https://headway.partners/user/signup?hwp=516d6b", id: "1021290", support: "care@hw.site" },
     { name: "Markets4you", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", id: "4hcnvz4", support: "info@markets4you.com" },
-    { name: "OctaFx", url: "https://my.octafxmy.net/change-partner-request/?partner=246630", id: "246630", support: "support@octafx.com" },
     { name: "InstaForex", url: "https://www.instaforex.com?x=KUSD", id: "KUSD", support: "support@instaforex.com" },
     { name: "LiteForex", url: "https://www.litefinance.com/?uid=805161060", id: "805161060", support: "clients@litefinance.com" },
     { name: "RoboForex", url: "https://my.roboforex.com/en/?a=mxyg", id: "mxyg", support: "info@roboforex.com" },

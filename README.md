@@ -246,7 +246,6 @@ Register through one of the author's broker partner links below. After registeri
 | **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` |
 | **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` |
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` |
-| **OctaFx** | [Register](https://my.octafxmy.net/change-partner-request/?partner=246630) | `246630` |
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` |
 | **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` |
 | **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` |
