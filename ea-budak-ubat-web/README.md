@@ -253,10 +253,10 @@ A: Yes. Identical trading logic — only the underlying API calls differ.
 A: Ranging pairs with low spread. Avoid highly trending or exotic pairs.
 
 **Q: Can I use this on XAUUSD (Gold)?**
-A: Technically yes, but gold is very volatile. Use extreme caution, a cent account, and very conservative settings.
+A: Technically yes, but gold is very volatile. Use extreme caution, conservative lot sizing (or a cent account), and very strict settings.
 
 **Q: What is the minimum capital?**
-A: $100 on a cent account with 0.01 starting lots. Higher leverage reduces margin needs.
+A: $100 on a Cent account (or larger balance on a Standard account) with 0.01 starting lots. Higher leverage reduces margin needs.
 
 **Q: How do I get authorized?**
 A: Register through a broker partner link, then send your account number to [@SyariefAzman on Telegram](https://t.me/SyariefAzman).
@@ -865,8 +865,8 @@ A **VPS (Virtual Private Server)** is essential for running EAs reliably 24/7.
 
 | Rule | Recommendation |
 |---|---|
-| **Account Type** | Use a **cent account** to limit exposure |
-| **Capital** | Minimum **$100** (cent account) for 0.01 starting lot |
+| **Account Type** | Cent account recommended for lower capital ($100+); Standard accounts also supported |
+| **Capital** | Minimum **$100** for 0.01 starting lot (Cent recommended) |
 | **Leverage** | Maximum leverage available (reduces margin per trade) |
 | **Pairs** | Choose **ranging/low-volatility pairs** for grid EAs, **trending pairs** for trend EAs |
 | **Timeframe** | M5 recommended for EA Budak Ubat; any for others |
@@ -881,7 +881,7 @@ A **VPS (Virtual Private Server)** is essential for running EAs reliably 24/7.
 
 ## 11. Broker Partner Links & Authorization
 
-To get your EA Budak Ubat account **authorized** (permanent access with no expiry), you must register through one of the following partner links. Use a **cent account**, **maximum leverage**, and a minimum deposit of **$100 USD**.
+To get your EA Budak Ubat account **authorized** (permanent access with no expiry), you must register through one of the following partner links. Any account type is eligible (Cent, Standard, Micro, etc. — Cent accounts recommended for starting balances under $1,000), with **maximum leverage**, and a minimum deposit of **$100 USD**.
 
 Please select a broker that you have never registered with before. After registering, tell me the trading account number. I will share the EA update file.
 

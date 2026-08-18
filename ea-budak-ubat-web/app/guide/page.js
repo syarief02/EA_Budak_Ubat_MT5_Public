@@ -32,7 +32,7 @@ const PRODUCTS = [
             { name: "MagicNumber", def: "123456", desc: "Unique trade identifier" },
         ],
         tips: [
-            "Use a cent account to limit exposure",
+            "Cent account recommended for low capital ($100+); Standard accounts also supported",
             "Minimum $100 capital for 0.01 starting lot",
             "Use maximum leverage to reduce margin per trade",
             "Choose ranging/low-volatility pairs",
@@ -44,7 +44,7 @@ const PRODUCTS = [
             { q: "Can I use on multiple charts?", a: "Yes — use a different MagicNumber per chart." },
             { q: "MT4 vs MT5 difference?", a: "Identical trading logic, only underlying API differs." },
             { q: "Best pairs?", a: "Ranging pairs with low spread. Avoid trending/exotic pairs." },
-            { q: "Can I use on XAUUSD?", a: "Possible but very risky. Use cent account with conservative settings." },
+            { q: "Can I use on XAUUSD?", a: "Possible but very risky. Use conservative lot sizing (or a cent account) and strict settings." },
             { q: "How to get authorized?", a: "Register through a broker partner link, send account number to @SyariefAzman on Telegram." },
         ],
     },
@@ -572,7 +572,7 @@ export default function GuidePage() {
                     <div className="section-header animate-in">
                         <span className="label">Authorization</span>
                         <h2>Broker Partner Links</h2>
-                        <p>Register through a partner broker to get permanent EA Budak Ubat authorization (no expiry). Use a <strong>cent account</strong>, <strong>maximum leverage</strong>, and a minimum deposit of <strong>$100 USD</strong>.</p>
+                        <p>Register through a partner broker to get permanent EA Budak Ubat authorization (no expiry). Any account type is eligible (Cent, Standard, Micro — Cent recommended for lower balance/risk), with <strong>maximum leverage</strong> and a minimum deposit of <strong>$100 USD</strong>.</p>
                     </div>
                     <div className="broker-grid animate-in">
                         {BROKERS.map((b, i) => (
@@ -603,8 +603,8 @@ export default function GuidePage() {
                     </div>
                     <div className="risk-grid animate-in">
                         {[
-                            { icon: "🏦", title: "Cent Account", desc: "Use a cent account to limit exposure" },
-                            { icon: "💰", title: "Min $100 Capital", desc: "Minimum $100 (cent) for 0.01 starting lot" },
+                            { icon: "🏦", title: "Account Sizing", desc: "Cent account recommended for small capital; Standard also supported" },
+                            { icon: "💰", title: "Min $100 Capital", desc: "Minimum $100 for 0.01 starting lot (Cent recommended)" },
                             { icon: "⚡", title: "Max Leverage", desc: "Reduces margin usage per trade" },
                             { icon: "📉", title: "Right Pairs", desc: "Ranging for grid EAs, trending for trend EAs" },
                             { icon: "🎯", title: "Set MaxLot", desc: "Prevent runaway lot sizes" },

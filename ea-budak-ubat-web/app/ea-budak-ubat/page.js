@@ -70,7 +70,7 @@ const FAQS = [
   { q: "Does the MT5 version trade the same as MT4?", a: "Yes. The trading logic, parameters, grid math, analysis methods, authorization, and time filtering are all identical. Only the underlying API calls differ." },
   { q: "What pairs work best?", a: "Ranging pairs with low spread work best. Avoid highly trending or exotic pairs to minimize drawdown risk." },
   { q: "Can I use this on XAUUSD (Gold)?", a: "Technically yes, but gold is very volatile. Use extreme caution, a cent account, and very conservative settings." },
-  { q: "What is the minimum capital needed?", a: "A minimum of $100 on a cent account with 0.01 starting lots is recommended. Higher leverage reduces margin requirements per position." },
+  { q: "What is the minimum capital needed?", a: "A minimum of $100 on a Cent account (or larger capital for Standard) with 0.01 starting lots is recommended. Higher leverage reduces margin requirements per position." },
   { q: "How do I get authorized?", a: "Register through one of the broker partner links on this page, then send your trading account number to @SyariefAzman on Telegram." },
 ];
 
@@ -387,7 +387,7 @@ export default function EABudakUbatPage() {
           <div className="animate-in" style={{ marginTop: 48 }}>
             <h3 style={{ textAlign: "center", marginBottom: 12 }}>Register Through Our Partner Brokers</h3>
             <p style={{ textAlign: "center", marginBottom: 24, fontSize: "0.9rem", color: "var(--text-secondary)", maxWidth: 700, margin: "0 auto 32px" }}>
-              To get authorized, use a <strong>cent account</strong>, <strong>maximum leverage</strong>, and minimum <strong>$100 USD</strong>. Select a broker you have never registered with.
+              To get authorized, register any account type (Cent, Standard, Micro, etc. — Cent accounts recommended for balances under $1,000), use <strong>maximum leverage</strong>, and deposit at least <strong>$100 USD</strong>. Select a broker you have never registered with.
             </p>
             <div className="broker-grid">
               {BROKERS.map((b, i) => (
@@ -451,8 +451,8 @@ export default function EABudakUbatPage() {
           </div>
           <div className="risk-grid animate-in">
             {[
-              { icon: "🏦", title: "Cent Account", desc: "Use a cent account to limit your exposure" },
-              { icon: "💰", title: "Min $100 Capital", desc: "Minimum $100 (cent) for 0.01 starting lot" },
+              { icon: "🏦", title: "Account Sizing", desc: "Cent account recommended for small capital; Standard also supported" },
+              { icon: "💰", title: "Min $100 Capital", desc: "Minimum $100 for 0.01 starting lot (Cent recommended)" },
               { icon: "⚡", title: "Max Leverage", desc: "Maximum leverage reduces margin usage per trade" },
               { icon: "📉", title: "Ranging Pairs", desc: "Choose low-volatility pairs, avoid trending pairs" },
               { icon: "🎯", title: "Set MaxLot", desc: "Set a reasonable cap to prevent runaway lot sizes" },
