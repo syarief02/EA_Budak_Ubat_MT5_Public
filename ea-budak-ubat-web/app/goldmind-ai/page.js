@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import AccountChecker from "@/app/components/AccountChecker";
 
 const DOWNLOAD_MT5 = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
 
@@ -74,6 +75,7 @@ export default function GoldMindAIPage() {
                         <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
                         <li><a href="#requirements" onClick={() => setMobileNavOpen(false)}>Requirements</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
+                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
                         <li><a href={DOWNLOAD_MT5} target="_blank" rel="noopener noreferrer" className="nav-cta">⬇️ Download Project</a></li>
                     </ul>
@@ -390,6 +392,19 @@ export default function GoldMindAIPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* AUTHORIZATION */}
+            <section id="authorization" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+                <div className="container">
+                    <div className="section-header animate-in">
+                        <span className="label goldmind-label">Access & Licensing</span>
+                        <h2>GoldMind AI & Expert Advisor Licensing</h2>
+                        <p>GoldMind AI is open source and unrestricted. You can also verify your account authorization for other EAs below.</p>
+                    </div>
+
+                    <AccountChecker initialEa="goldmind-ai" />
                 </div>
             </section>
 

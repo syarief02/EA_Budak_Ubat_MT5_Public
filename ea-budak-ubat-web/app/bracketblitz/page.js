@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import AccountChecker from "@/app/components/AccountChecker";
 
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020260930.ex4";
@@ -73,7 +74,7 @@ export default function BracketBlitzPage() {
                         <li><a href="#strategy" onClick={() => setMobileNavOpen(false)}>Strategy</a></li>
                         <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
-                        <li><a href="#presets" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
+                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
                         <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
                     </ul>
@@ -319,6 +320,19 @@ export default function BracketBlitzPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* AUTHORIZATION */}
+            <section id="authorization" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+                <div className="container">
+                    <div className="section-header animate-in">
+                        <span className="label blitz-label">Access & Licensing</span>
+                        <h2>BracketBlitz EA Authorization</h2>
+                        <p>Verify your MetaTrader account status and check authorization for BracketBlitz and all other EAs.</p>
+                    </div>
+
+                    <AccountChecker initialEa="bracketblitz" />
                 </div>
             </section>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import AccountChecker from "@/app/components/AccountChecker";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020260930.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020260930.ex5";
@@ -86,6 +87,7 @@ export default function AligatorGozaimasuPage() {
                         <li><a href="#strategy" onClick={() => setMobileNavOpen(false)}>Strategy</a></li>
                         <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
+                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
                         <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
                     </ul>
@@ -304,6 +306,19 @@ export default function AligatorGozaimasuPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* AUTHORIZATION */}
+            <section id="authorization" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+                <div className="container">
+                    <div className="section-header animate-in">
+                        <span className="label aligator-label">Access & Licensing</span>
+                        <h2>Aligator Gozaimasu Authorization</h2>
+                        <p>Verify your MetaTrader account status and check authorization for Aligator Gozaimasu and all other EAs.</p>
+                    </div>
+
+                    <AccountChecker initialEa="aligator-gozaimasu" />
                 </div>
             </section>
 

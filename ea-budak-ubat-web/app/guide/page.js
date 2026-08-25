@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import AccountChecker from "@/app/components/AccountChecker";
 
 const PRODUCTS = [
     {
@@ -566,30 +567,16 @@ export default function GuidePage() {
                 </div>
             </section>
 
-            {/* BROKERS */}
-            <section id="brokers">
+            {/* AUTHORIZATION & BROKERS */}
+            <section id="brokers" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
                 <div className="container">
                     <div className="section-header animate-in">
-                        <span className="label">Authorization</span>
-                        <h2>Broker Partner Links</h2>
-                        <p>Register through a partner broker to get permanent EA Budak Ubat authorization (no expiry). Any account type is eligible (Cent, Standard, Micro — Cent recommended for lower balance/risk), with <strong>maximum leverage</strong> and a minimum deposit of <strong>$100 USD</strong>.</p>
+                        <span className="label">Verification & Access</span>
+                        <h2>Multi-EA Authorization & Partner Brokers</h2>
+                        <p>Check if your live trading account is authorized across our Expert Advisors, or register through a partner broker below for instant permanent access.</p>
                     </div>
-                    <div className="broker-grid animate-in">
-                        {BROKERS.map((b, i) => (
-                            <a key={i} href={b.url} className="broker-card" target="_blank" rel="noopener noreferrer">
-                                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                                    <span style={{ fontWeight: 600 }}>{b.name}</span>
-                                    <span style={{ fontSize: "0.75rem", opacity: 0.7 }}>ID: {b.id}</span>
-                                    <span style={{ fontSize: "0.7rem", opacity: 0.6 }}>Email: {b.support}</span>
-                                </div>
-                                <span className="arrow">→</span>
-                            </a>
-                        ))}
-                    </div>
-                    <p style={{ textAlign: "center", marginTop: 20, fontSize: "0.85rem", color: "var(--text-muted)", maxWidth: 800, margin: "20px auto 0" }}>
-                        Please select a broker that you have never registered with before. After registering, send your trading account number to <a href="https://t.me/SyariefAzman" style={{ color: "var(--accent-cyan)" }}>@SyariefAzman on Telegram</a>.
-                        I will share the EA update file.
-                    </p>
+
+                    <AccountChecker initialEa="all" />
                 </div>
             </section>
 

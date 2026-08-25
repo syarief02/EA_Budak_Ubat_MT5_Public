@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import AccountChecker from "@/app/components/AccountChecker";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/MathEdge-Pro/raw/main/MathEdge%20Pro%20-%20MT4%20-%2020260930.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/MathEdge-Pro/raw/main/MT5/MathEdge%20Pro%20-%20MT5%20-%2020260930.ex5";
@@ -71,6 +72,7 @@ export default function MathEdgeProPage() {
                         <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
                         <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
+                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
                         <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
                     </ul>
@@ -314,6 +316,19 @@ export default function MathEdgeProPage() {
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* AUTHORIZATION */}
+            <section id="authorization" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+                <div className="container">
+                    <div className="section-header animate-in">
+                        <span className="label mathedge-label">Access & Licensing</span>
+                        <h2>MathEdge Pro Authorization</h2>
+                        <p>Verify your MetaTrader account status and check authorization for MathEdge Pro and all other EAs.</p>
+                    </div>
+
+                    <AccountChecker initialEa="mathedge-pro" />
                 </div>
             </section>
 

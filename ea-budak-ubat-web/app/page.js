@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { supabase } from "@/lib/supabase";
+import AccountChecker from "@/app/components/AccountChecker";
 
 const POST_TYPES = [
   { key: "idea", label: "💡 Idea", color: "#8b5cf6" },
@@ -220,6 +221,7 @@ export default function Home() {
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>📖 Guide</Link></li>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
+            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>💬 Community</a></li>
             <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
             <li><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a></li>
@@ -250,7 +252,8 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a href="#products" className="btn btn-primary" style={{ animation: "none" }}>🔽 Explore Products</a>
-            <a href="https://t.me/SyariefAzman" className="btn btn-secondary" target="_blank">💬 Contact on Telegram</a>
+            <a href="#authorization" className="btn btn-accent" style={{ animation: "none" }}>🔐 Check Account</a>
+            <a href="https://t.me/SyariefAzman" className="btn btn-secondary" target="_blank">💬 Telegram</a>
           </div>
         </div>
       </section>
@@ -313,6 +316,18 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* AUTHORIZATION VERIFICATION PORTAL */}
+      <section id="authorization" style={{ background: "var(--bg-primary)", padding: "70px 0" }}>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">License & Access</span>
+            <h2>Check Authorized Accounts for All EAs</h2>
+            <p>Verify your MetaTrader account status across any of our Expert Advisors instantly.</p>
+          </div>
+          <AccountChecker initialEa="all" />
         </div>
       </section>
 
