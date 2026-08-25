@@ -400,8 +400,8 @@ export default function GoldMindAIPage() {
                 <div className="container">
                     <div className="section-header animate-in">
                         <span className="label goldmind-label">Access & Licensing</span>
-                        <h2>GoldMind AI & Expert Advisor Licensing</h2>
-                        <p>GoldMind AI is open source and unrestricted. You can also verify your account authorization for other EAs below.</p>
+                        <h2>GoldMind AI Authorization</h2>
+                        <p>Verify your MetaTrader account status and check authorization for GoldMind AI and all other EAs.</p>
                     </div>
 
                     <AccountChecker initialEa="goldmind-ai" />
