@@ -792,7 +792,7 @@ section {
 
 .broker-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
   margin-top: 32px;
 }
@@ -1421,93 +1421,143 @@ section {
   text-align: center;
 }
 
+.broker-interactive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
 .broker-card-interactive {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 18px;
+  padding: 16px 18px;
   background: var(--bg-glass);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-sm);
   transition: var(--transition);
+  min-width: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .broker-card-interactive:hover {
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(59, 130, 246, 0.4);
   background: rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
 }
 
-.broker-details {
+.broker-card-top {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.broker-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.broker-badge-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
 .broker-name {
   font-size: 0.95rem;
+  font-weight: 700;
   color: var(--text-primary);
-  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.broker-code-row {
+.btn-broker-register {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-broker-register:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+.broker-code-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  min-width: 0;
+}
+
+.broker-code-label {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 0.8rem;
-}
-
-.broker-code {
   color: var(--text-muted);
+  min-width: 0;
+  overflow: hidden;
 }
 
-.broker-code code {
+.broker-code-val {
   color: var(--accent-cyan);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 1px 4px;
-  border-radius: 3px;
-  font-size: 0.8rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-copy-code {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--border-glass);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   border-radius: 4px;
-  padding: 1px 6px;
-  font-size: 0.7rem;
+  padding: 3px 8px;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: var(--transition);
   font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-copy-code:hover {
-  color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
   border-color: var(--accent-blue);
 }
 
-.broker-support {
+.broker-card-bottom {
+  display: flex;
+  align-items: center;
   font-size: 0.75rem;
   color: var(--text-muted);
-}
-
-.btn-broker-register {
-  padding: 8px 14px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent-blue);
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: var(--transition);
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.btn-broker-register:hover {
-  background: var(--accent-blue);
-  color: #fff;
 }
 
 .contact-callout {

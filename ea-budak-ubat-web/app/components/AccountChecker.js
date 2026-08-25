@@ -310,32 +310,42 @@ export default function AccountChecker({
 
         <div className="brokers-container">
           <h5 className="brokers-title">Partner Broker Registration Links</h5>
-          <div className="broker-grid">
+          <div className="broker-interactive-grid">
             {BROKERS.map((b, i) => (
               <div key={i} className="broker-card-interactive">
-                <div className="broker-details">
-                  <strong className="broker-name">{b.name}</strong>
-                  <div className="broker-code-row">
-                    <span className="broker-code">Partner ID: <code>{b.id}</code></span>
-                    <button
-                      type="button"
-                      className="btn-copy-code"
-                      onClick={() => handleCopyId(b.id)}
-                      title="Copy Partner ID"
-                    >
-                      {copiedBrokerId === b.id ? "✓ Copied" : "📋 Copy"}
-                    </button>
+                <div className="broker-card-top">
+                  <div className="broker-title-group">
+                    <span className="broker-badge-icon">🏛️</span>
+                    <strong className="broker-name">{b.name}</strong>
                   </div>
+                  <a
+                    href={b.url}
+                    className="btn-broker-register"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Register ↗
+                  </a>
+                </div>
+
+                <div className="broker-code-box">
+                  <div className="broker-code-label">
+                    <span>Partner ID:</span>
+                    <strong className="broker-code-val">{b.id}</strong>
+                  </div>
+                  <button
+                    type="button"
+                    className="btn-copy-code"
+                    onClick={() => handleCopyId(b.id)}
+                    title="Copy Partner ID"
+                  >
+                    {copiedBrokerId === b.id ? "✓ Copied!" : "📋 Copy"}
+                  </button>
+                </div>
+
+                <div className="broker-card-bottom">
                   <span className="broker-support">✉️ {b.support}</span>
                 </div>
-                <a
-                  href={b.url}
-                  className="btn-broker-register"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Register →
-                </a>
               </div>
             ))}
           </div>
