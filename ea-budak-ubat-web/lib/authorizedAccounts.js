@@ -2,7 +2,7 @@
 // Source: MQL4 & MQL5 expert advisors
 
 export const BROKERS = [
-  { name: "CXM Direct", id: "5062", url: "https://secure.cxmdirect.com/links/go/5062", support: "clients@cxmdirect.com" },
+  { name: "CXM Direct", id: "5062", url: "https://gocxm.co/links/go/5062", support: "clients@cxmdirect.com" },
   { name: "FBS", id: "588292", url: "https://fbs.partners?ibl=1869&ibk=BuBat", support: "support@fbs.com" },
   { name: "Markets4you", id: "4hcnvz4", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", support: "support@markets4you.com" },
   { name: "APX Prime", id: "340", url: "https://secure.apxprime.com/links/go/340", support: "support@apxprime.com" },

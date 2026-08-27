@@ -890,7 +890,7 @@ Clients who have registered through my link can just PM the trading account numb
 | Broker | Register Link | Partner/Affiliate ID | Support Email |
 |---|---|---|---|
 | **FISG** | [Register](https://my.fisg.com/u/CTt0Rd) | `CTt0Rd` | support@fisg.com |
-| **CXM** | [Register](https://secure.cxmys.com/links/go/5062) | `5062` | support@cxm.com |
+| **CXM** | [Register](https://gocxm.co/links/go/5062) | `5062` | support@cxm.com |
 | **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` | support@fbs.com |
 | **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` | care@hw.site |
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@markets4you.com |

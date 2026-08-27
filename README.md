@@ -242,7 +242,7 @@ Register through one of the author's broker partner links below. After registeri
 | Broker | Link | Partner ID |
 |---|---|---|
 | **FISG** | [Register](https://my.fisg.com/u/CTt0Rd) | `CTt0Rd` |
-| **CXM** | [Register](https://secure.cxmys.com/links/go/5062) | `5062` |
+| **CXM** | [Register](https://gocxm.co/links/go/5062) | `5062` |
 | **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` |
 | **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` |
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` |

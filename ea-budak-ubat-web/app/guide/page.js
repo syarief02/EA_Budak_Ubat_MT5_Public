@@ -258,7 +258,7 @@ const INSTALL_MT5 = [
 
 const BROKERS = [
     { name: "FISG", url: "https://my.fisg.com/u/CTt0Rd", id: "CTt0Rd", support: "support@fisg.com" },
-    { name: "CXM", url: "https://secure.cxmys.com/links/go/5062", id: "5062", support: "support@cxm.com" },
+    { name: "CXM", url: "https://gocxm.co/links/go/5062", id: "5062", support: "support@cxm.com" },
     { name: "FBS", url: "https://fbs.partners?ibl=154319&ibp=588292", id: "588292", support: "support@fbs.com" },
     { name: "HeadWay", url: "https://headway.partners/user/signup?hwp=516d6b", id: "1021290", support: "care@hw.site" },
     { name: "Markets4you", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", id: "4hcnvz4", support: "info@markets4you.com" },
