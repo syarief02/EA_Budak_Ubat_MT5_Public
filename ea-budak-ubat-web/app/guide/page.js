@@ -256,19 +256,6 @@ const INSTALL_MT5 = [
     "Make sure Algo Trading button in toolbar is green",
 ];
 
-const BROKERS = [
-    { name: "FISG", url: "https://my.fisg.com/u/CTt0Rd", id: "CTt0Rd", support: "support@fisg.com" },
-    { name: "CXM", url: "https://gocxm.co/links/go/5062", id: "5062", support: "support@cxm.com" },
-    { name: "FBS", url: "https://fbs.partners?ibl=154319&ibp=588292", id: "588292", support: "support@fbs.com" },
-    { name: "HeadWay", url: "https://headway.partners/user/signup?hwp=516d6b", id: "1021290", support: "care@hw.site" },
-    { name: "Markets4you", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", id: "4hcnvz4", support: "info@markets4you.com" },
-    { name: "InstaForex", url: "https://www.instaforex.com?x=KUSD", id: "KUSD", support: "support@instaforex.com" },
-    { name: "LiteForex", url: "https://www.litefinance.com/?uid=805161060", id: "805161060", support: "clients@litefinance.com" },
-    { name: "RoboForex", url: "https://my.roboforex.com/en/?a=mxyg", id: "mxyg", support: "info@roboforex.com" },
-    { name: "XM", url: "https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1", id: "A1202120 / HVVR7", support: "XM Support" },
-    { name: "Tickmill", url: "https://tickmill.link/46cOQ2h", id: "IB72324388", support: "support@tickmill.com" },
-    { name: "Valetax", url: "https://ma.valetax.com/p/1939088", id: "1939088", support: "contact@valetax.com" },
-];
 
 export default function GuidePage() {
     const [activeProduct, setActiveProduct] = useState(null);
