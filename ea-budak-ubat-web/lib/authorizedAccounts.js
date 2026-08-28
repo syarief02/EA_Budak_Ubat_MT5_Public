@@ -3,7 +3,7 @@
 
 export const BROKERS = [
   { name: "CXM Direct", id: "5062", url: "https://gocxm.co/links/go/5062", support: "clients@cxmdirect.com" },
-  { name: "FBS", id: "588292", url: "https://fbs.partners?ibl=1869&ibk=BuBat", support: "support@fbs.com" },
+  { name: "FBS", id: "588292", url: "https://fbs.partners?ibl=154319&ibp=588292", support: "support@fbs.com" },
   { name: "Markets4you", id: "4hcnvz4", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", support: "support@markets4you.com" },
   { name: "InstaForex", id: "KUSD", url: "https://www.instaforex.com?x=KUSD", support: "support@instaforex.com" },
   { name: "LiteFinance", id: "805161060", url: "https://www.litefinance.com/?uid=805161060", support: "clients@litefinance.com" },
