@@ -10,7 +10,7 @@ export const BROKERS = [
   { name: "LiteFinance", id: "805161060", url: "https://www.litefinance.com/?uid=805161060", support: "clients@litefinance.com" },
   { name: "RoboForex", id: "mxyg", url: "https://my.roboforex.com/en/?a=mxyg", support: "support@roboforex.com" },
   { name: "XM", id: "HVVR7", url: "https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1", support: "support@xm.com" },
-  { name: "Valetax", id: "IB1939088", url: "https://ma.valetax.com/partner/IB1939088", support: "support@valetax.com" },
+  { name: "Valetax", id: "1939088", url: "https://ma.valetax.com/p/1939088", support: "support@valetax.com" },
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },
 ];
 
