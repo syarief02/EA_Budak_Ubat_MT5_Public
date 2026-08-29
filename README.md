@@ -251,6 +251,8 @@ Register through one of the author's broker partner links below. After registeri
 | **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` |
 | **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) | `HVVR7` |
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` |
+| **Tickmill** | [Register](https://tickmill.link/46cOQ2h) | `IB72324388` |
+| **HF Markets** | [Register](https://www.hfmmalaysia.com/sv/en/?refid=30572923) | `30572923` |
 
 ---
 

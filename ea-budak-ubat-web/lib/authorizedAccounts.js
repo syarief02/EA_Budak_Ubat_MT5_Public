@@ -12,6 +12,7 @@ export const BROKERS = [
   { name: "XM", id: "HVVR7", url: "https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1", support: "support@xm.com" },
   { name: "Valetax", id: "1939088", url: "https://ma.valetax.com/p/1939088", support: "support@valetax.com" },
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },
+  { name: "HF Markets", id: "30572923", url: "https://www.hfmmalaysia.com/sv/en/?refid=30572923", support: "support@hfm.com" },
 ];
 
 export const EA_DATABASE = [

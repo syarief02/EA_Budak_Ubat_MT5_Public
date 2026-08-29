@@ -899,6 +899,8 @@ Clients who have registered through my link can just PM the trading account numb
 | **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` | info@roboforex.com |
 | **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) | `HVVR7` | XM Support |
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` | contact@valetax.com |
+| **Tickmill** | [Register](https://tickmill.link/46cOQ2h) | `IB72324388` | support@tickmill.com |
+| **HF Markets** | [Register](https://www.hfmmalaysia.com/sv/en/?refid=30572923) | `30572923` | support@hfm.com |
 
 
 ---
