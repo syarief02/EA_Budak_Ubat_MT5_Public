@@ -2368,6 +2368,53 @@ section {
 }
 
 /* ===== HEADWAY THEME & BRIDGE PAGE ===== */
+.nav-brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-partner-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(0, 198, 255, 0.12);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 198, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.btn-headway-nav {
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  color: #ffffff !important;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+  transition: var(--transition);
+}
+
+.btn-headway-nav:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 114, 255, 0.5);
+  color: #ffffff !important;
+}
+
+.btn-headway-nav::after {
+  display: none !important;
+}
+
 .headway-hero {
   background: linear-gradient(135deg, #0a0e1a 0%, #06192e 40%, #0a0e1a 100%);
   position: relative;

@@ -166,67 +166,69 @@ export default function HeadwayLandingPage() {
 
       {/* STICKY TOP NAVBAR */}
       <nav className="navbar">
-        <div className="container nav-container">
-          <Link href="/" className="nav-logo">
-            <span className="logo-icon">📊</span>
-            <span className="logo-text">EA Budak Ubat</span>
-            <span className="version-badge" style={{ background: "rgba(0, 198, 255, 0.15)", color: "#00e5ff", borderColor: "rgba(0, 198, 255, 0.4)" }}>
+        <div className="container">
+          <div className="nav-brand-wrapper">
+            <Link href="/" className="nav-brand">
+              EA Budak Ubat
+            </Link>
+            <span className="nav-partner-tag">
               Headway Partner
             </span>
-          </Link>
-
-          <div className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <Link href="/" onClick={() => setMobileNavOpen(false)}>Utama</Link>
-            <a href="#perks" onClick={() => setMobileNavOpen(false)}>Kelebihan Broker</a>
-            <a href="#unlocked-eas" onClick={() => setMobileNavOpen(false)}>Koleksi EA Percuma</a>
-            <a href="#steps" onClick={() => setMobileNavOpen(false)}>Cara Daftar</a>
-            <a href="#checker" onClick={() => setMobileNavOpen(false)}>Semak Whitelist</a>
-            <a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a>
-            <a
-              href={HEADWAY_SIGNUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary btn-headway-primary nav-cta"
-              onClick={() => setMobileNavOpen(false)}
-            >
-              Daftar Headway ➜
-            </a>
           </div>
 
+          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
+            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>Utama</Link></li>
+            <li><a href="#perks" onClick={() => setMobileNavOpen(false)}>Kelebihan Broker</a></li>
+            <li><a href="#unlocked-eas" onClick={() => setMobileNavOpen(false)}>Koleksi EA Percuma</a></li>
+            <li><a href="#steps" onClick={() => setMobileNavOpen(false)}>Cara Daftar</a></li>
+            <li><a href="#checker" onClick={() => setMobileNavOpen(false)}>Semak Whitelist</a></li>
+            <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
+            <li>
+              <a
+                href={HEADWAY_SIGNUP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-headway-nav"
+                onClick={() => setMobileNavOpen(false)}
+              >
+                Daftar Headway ➜
+              </a>
+            </li>
+          </ul>
+
           <button
-            className={`mobile-menu-btn ${mobileNavOpen ? "open" : ""}`}
+            className="nav-toggle"
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
             aria-label="Toggle menu"
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            {mobileNavOpen ? "✕" : "☰"}
           </button>
         </div>
       </nav>
 
       {/* HERO SECTION */}
-      <header className="hero headway-hero">
+      <section className="hero headway-hero" id="hero">
+        <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-headway-1"></div>
         <div className="hero-glow hero-glow-headway-2"></div>
         <div className="container hero-content">
           <div className="hero-badge headway-badge animate-in">
-            <span className="badge-dot headway-dot"></span>
+            <span className="hero-badge-dot headway-dot"></span>
             Tawaran Khas Facebook: Akses Percuma Seumur Hidup Robot Trading
           </div>
 
-          <h1 className="hero-title animate-in">
+          <h1 className="animate-in">
             Buka Akaun <span className="headway-gradient-text">Headway</span> & Dapatkan Robot Trading{" "}
             <span className="gradient-text">EA Budak Ubat</span> Secara 100% PERCUMA!
           </h1>
 
-          <p className="hero-desc animate-in" style={{ maxWidth: "780px", margin: "0 auto 24px" }}>
+          <p className="hero-subtitle animate-in" style={{ maxWidth: "780px", margin: "0 auto 28px" }}>
             Nikmati kelebihan berdagang dengan broker antarabangsa yang mesra robot trading. Akaun Cent serendah{" "}
             <strong>$10</strong>, leverage sehingga <strong>1:Unlimited</strong>, deposit/withdrawal pantas FPX & Crypto, serta pengaktifan whitelist percuma untuk kesemua Expert Advisor kami!
           </p>
 
           {/* PARTNER CODE HIGHLIGHT BOX */}
-          <div className="partner-code-box animate-in" style={{ maxWidth: "620px", margin: "0 auto 30px" }}>
+          <div className="partner-code-box animate-in" style={{ maxWidth: "620px", margin: "0 auto 32px" }}>
             <div className="code-details">
               <span className="code-title">Kod Rakan Kongsi Rasmi (Partner Code):</span>
               <span className="code-value">{PARTNER_CODE}</span>
@@ -247,7 +249,7 @@ export default function HeadwayLandingPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-lg btn-headway-primary"
-              style={{ fontSize: "1.1rem", padding: "16px 36px" }}
+              style={{ fontSize: "1.05rem", padding: "16px 36px" }}
             >
               🚀 DAFTAR AKAUN HEADWAY SEKARANG
             </a>
@@ -280,7 +282,7 @@ export default function HeadwayLandingPage() {
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* WHY HEADWAY SECTION */}
       <section id="perks">
