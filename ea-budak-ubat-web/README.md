@@ -897,7 +897,7 @@ Clients who have registered through my link can just PM the trading account numb
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` | support@instaforex.com |
 | **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` | clients@litefinance.com |
 | **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` | info@roboforex.com |
-| **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) | Affiliate: `A1202120`, Code: `HVVR7` | XM Support |
+| **XM** | [Register](https://clicks.pipaffiliates.com/c?c=862266&l=en&p=1) | `HVVR7` | XM Support |
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` | contact@valetax.com |
 
 
