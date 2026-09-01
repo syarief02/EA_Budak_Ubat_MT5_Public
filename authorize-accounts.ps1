@@ -59,7 +59,7 @@ function Prepend-To-TxtList($filePath) {
     if (-not (Test-Path $filePath)) { return $false }
     $content = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
     if ($content -match 'Authorized account list:\s*\r?\n\s*') {
-        $content = [regex]::Replace($content, '(Authorized account list:\s*\r?\n\s*)', "`$1$accString, ")
+        $content = [regex]::Replace($content, '(Authorized account list:\s*\r?\n\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
         [System.IO.File]::WriteAllText($filePath, $content, $utf8NoBom)
         Write-Host "  [OK] Updated: $(Split-Path $filePath -Leaf) at $(Split-Path (Split-Path $filePath -Parent) -Leaf)" -ForegroundColor Green
         return $true
@@ -72,7 +72,7 @@ function Prepend-To-MQSource($filePath) {
     if (-not (Test-Path $filePath)) { return $false }
     $content = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
     if ($content -match 'int allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*') {
-        $content = [regex]::Replace($content, '(int allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*)', "`$1$accString, ")
+        $content = [regex]::Replace($content, '(int allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
         [System.IO.File]::WriteAllText($filePath, $content, $utf8NoBom)
         Write-Host "  [OK] Updated source: $(Split-Path $filePath -Leaf)" -ForegroundColor Green
         return $true
@@ -98,7 +98,7 @@ $webJs = "$PUBLIC_REPO\ea-budak-ubat-web\lib\authorizedAccounts.js"
 if (Test-Path $webJs) {
     $content = [System.IO.File]::ReadAllText($webJs, [System.Text.Encoding]::UTF8)
     if ($content -match 'slug:\s*"ea-budak-ubat"[\s\S]*?accounts:\s*new Set\(\[') {
-        $content = [regex]::Replace($content, '(slug:\s*"ea-budak-ubat"[\s\S]*?accounts:\s*new Set\(\[)', "`$1$accString, ")
+        $content = [regex]::Replace($content, '(slug:\s*"ea-budak-ubat"[\s\S]*?accounts:\s*new Set\(\[)', { param($m) $m.Groups[1].Value + "$accString, " })
         [System.IO.File]::WriteAllText($webJs, $content, $utf8NoBom)
         Write-Host "  [OK] Updated Web checker: authorizedAccounts.js" -ForegroundColor Green
     }
@@ -109,7 +109,7 @@ $readme = "$PUBLIC_REPO\README.md"
 if (Test-Path $readme) {
     $content = [System.IO.File]::ReadAllText($readme, [System.Text.Encoding]::UTF8)
     if ($content -match '(### Authorized Account List\s*\r?\n\s*Use \*\*Ctrl\+F\*\* to search for your account number:\s*\r?\n\s*>\s*)') {
-        $content = [regex]::Replace($content, '(### Authorized Account List\s*\r?\n\s*Use \*\*Ctrl\+F\*\* to search for your account number:\s*\r?\n\s*>\s*)', "`$1$accString, ")
+        $content = [regex]::Replace($content, '(### Authorized Account List\s*\r?\n\s*Use \*\*Ctrl\+F\*\* to search for your account number:\s*\r?\n\s*>\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
         [System.IO.File]::WriteAllText($readme, $content, $utf8NoBom)
         Write-Host "  [OK] Updated README.md" -ForegroundColor Green
     }
@@ -167,6 +167,7 @@ function Git-Commit-Push($repoPath, $commitMsg) {
     Push-Location $repoPath
     git add -A
     git commit -m $commitMsg --quiet
+    git pull --rebase origin main --quiet
     git push origin main --quiet
     Pop-Location
     Write-Host "  [OK] Pushed: $(Split-Path $repoPath -Leaf)" -ForegroundColor Green
