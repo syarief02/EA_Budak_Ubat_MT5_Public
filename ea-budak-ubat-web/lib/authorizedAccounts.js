@@ -14,6 +14,7 @@ export const BROKERS = [
   { name: "Valetax", id: "1939088", url: "https://ma.valetax.com/p/1939088", support: "support@valetax.com" },
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },
   { name: "HF Markets", id: "30572923", url: "https://www.hfmmalaysia.com/sv/en/?refid=30572923", support: "support@hfm.com" },
+  { name: "Eightcap", id: "8660", url: "https://partners.eightcap.com/click?campaign_id=1&ref_id=8660", support: "customerservice@eightcap.com" },
 ];
 
 export const EA_DATABASE = [
