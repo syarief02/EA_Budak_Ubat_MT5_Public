@@ -15,7 +15,7 @@ export const BROKERS = [
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },
   { name: "HF Markets", id: "30572923", url: "https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923", support: "support@hfm.com" },
   { name: "Eightcap", id: "8660", url: "https://partners.eightcap.com/click?campaign_id=1&ref_id=8660", support: "customerservice@eightcap.com" },
-  { name: "JustMarkets", id: "tjrtn60m2i", url: "https://one.justmarkets.link/a/tjrtn60m2i", support: "support@justmarkets.com" },
+  { name: "JustMarkets", id: "tjrtn60m2i", url: "https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869", support: "support@justmarkets.com" },
 ];
 
 export const EA_DATABASE = [
