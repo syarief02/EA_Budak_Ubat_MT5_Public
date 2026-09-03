@@ -51,6 +51,14 @@ export default function RotatingAdBanner({ variant = "strip" }) {
   const [fadeState, setFadeState] = useState("in");
   const timeoutRef = useRef(null);
 
+  // Randomize initial starting ad on every page load (client-side to preserve SSR hydration safety)
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * ADS.length);
+    if (randomIndex !== 0) {
+      setCurrentIndex(randomIndex);
+    }
+  }, []);
+
   useEffect(() => {
     if (isPaused) return;
 
