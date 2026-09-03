@@ -13,7 +13,7 @@ export const BROKERS = [
   { name: "XM", id: "HVVR7", url: "https://clicks.pipaffiliates.com/c?m=150422&c=862266", support: "support@xm.com" },
   { name: "Valetax", id: "1939088", url: "https://ma.valetax.com/p/1939088", support: "support@valetax.com" },
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },
-  { name: "HF Markets", id: "30572923", url: "https://www.hfmmalaysia.com/sv/en/?refid=30572923", support: "support@hfm.com" },
+  { name: "HF Markets", id: "30572923", url: "https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923", support: "support@hfm.com" },
   { name: "Eightcap", id: "8660", url: "https://partners.eightcap.com/click?campaign_id=1&ref_id=8660", support: "customerservice@eightcap.com" },
   { name: "JustMarkets", id: "tjrtn60m2i", url: "https://one.justmarkets.link/a/tjrtn60m2i", support: "support@justmarkets.com" },
 ];
