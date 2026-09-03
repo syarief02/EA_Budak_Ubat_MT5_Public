@@ -3465,3 +3465,304 @@ section {
     width: 100%;
   }
 }
+
+/* ===== HEADWAY $150 BONUS ADS BANNER ===== */
+.promo-banner-strip {
+  padding: 16px 0 24px;
+  position: relative;
+  z-index: 5;
+}
+
+.promo-strip-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(17, 24, 39, 0.85) 50%, rgba(217, 119, 6, 0.1) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius);
+  padding: 14px 24px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: var(--transition);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 24px rgba(245, 158, 11, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.promo-strip-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(245, 158, 11, 0.22);
+}
+
+.promo-strip-badge {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #0a0e1a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.promo-strip-img {
+  width: 300px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.promo-strip-text {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  flex-grow: 1;
+}
+
+.promo-strip-text strong {
+  color: #fbbf24;
+}
+
+.promo-strip-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #0a0e1a;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+}
+
+.promo-strip-link:hover .promo-strip-btn {
+  filter: brightness(1.1);
+  transform: translateX(2px);
+}
+
+/* AccountChecker Promo Banner */
+.headway-bonus-banner-wrap {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(17, 24, 39, 0.9) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.headway-bonus-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.headway-bonus-tag {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.headway-bonus-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.headway-bonus-banner-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: rgba(10, 14, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  transition: var(--transition);
+}
+
+.headway-bonus-banner-link:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(10, 14, 26, 0.85);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.headway-bonus-image-box {
+  flex-shrink: 0;
+}
+
+.headway-bonus-img {
+  width: 300px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+.headway-bonus-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 16px;
+}
+
+.headway-bonus-text {
+  text-align: left;
+}
+
+.headway-bonus-headline {
+  display: block;
+  font-size: 0.95rem;
+  color: #f1f5f9;
+  margin-bottom: 3px;
+}
+
+.headway-bonus-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.headway-bonus-cta-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #0a0e1a;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+  transition: var(--transition);
+}
+
+.headway-bonus-banner-link:hover .headway-bonus-cta-btn {
+  filter: brightness(1.1);
+}
+
+/* Headway Page Bonus Banner */
+.headway-page-bonus-banner {
+  max-width: 780px;
+  margin: 0 auto 32px;
+}
+
+.headway-page-banner-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: var(--transition);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(245, 158, 11, 0.12);
+}
+
+.headway-page-banner-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 158, 11, 0.65);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55), 0 0 35px rgba(245, 158, 11, 0.25);
+}
+
+.headway-page-banner-img {
+  width: 300px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.headway-page-banner-desc {
+  text-align: left;
+  flex-grow: 1;
+}
+
+.headway-page-banner-desc strong {
+  display: block;
+  font-size: 0.98rem;
+  color: #fbbf24;
+  margin-bottom: 4px;
+}
+
+.headway-page-banner-desc p {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.headway-page-banner-cta {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #0a0e1a;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  transition: var(--transition);
+}
+
+.headway-page-banner-link:hover .headway-page-banner-cta {
+  filter: brightness(1.1);
+}
+
+/* Responsive Rules for Banners */
+@media (max-width: 900px) {
+  .promo-strip-link {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .promo-strip-text {
+    width: 100%;
+  }
+
+  .headway-bonus-banner-link,
+  .headway-page-banner-link {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .headway-bonus-details {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .headway-bonus-text,
+  .headway-page-banner-desc {
+    text-align: center;
+  }
+
+  .headway-bonus-img,
+  .promo-strip-img,
+  .headway-page-banner-img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 6 / 1;
+  }
+}

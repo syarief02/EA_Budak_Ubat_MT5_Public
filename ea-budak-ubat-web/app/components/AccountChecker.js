@@ -309,6 +309,40 @@ export default function AccountChecker({
         </div>
 
         <div className="brokers-container">
+          {/* FEATURED SPONSOR PROMO BANNER */}
+          <div className="headway-bonus-banner-wrap">
+            <div className="headway-bonus-header">
+              <span className="headway-bonus-tag">🔥 Featured Broker Deal</span>
+              <span className="headway-bonus-subtitle">No-Deposit Bonus for Testing EAs</span>
+            </div>
+            <a
+              href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="headway-bonus-banner-link"
+              title="Claim $150 Headway No-Deposit Bonus"
+            >
+              <div className="headway-bonus-image-box">
+                <img
+                  src="/headway-bonus-150.png"
+                  alt="Headway Bonus $150 - 7 Days. 5 Markets. 0 Risk"
+                  width={300}
+                  height={50}
+                  className="headway-bonus-img"
+                />
+              </div>
+              <div className="headway-bonus-details">
+                <div className="headway-bonus-text">
+                  <strong className="headway-bonus-headline">Headway $150 No-Deposit Trading Bonus</strong>
+                  <p className="headway-bonus-desc">
+                    Get $150 free credit to trade 5 markets for 7 days with zero capital risk. Whitelist your account and test our EAs!
+                  </p>
+                </div>
+                <span className="headway-bonus-cta-btn">Claim $150 Bonus ➜</span>
+              </div>
+            </a>
+          </div>
+
           <h5 className="brokers-title">Partner Broker Registration Links</h5>
           <div className="broker-interactive-grid">
             {BROKERS.map((b, i) => (

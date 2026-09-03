@@ -5,6 +5,7 @@ import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
 const HEADWAY_SIGNUP_URL = "https://headway.partners/user/signup?hwp=516d6b";
+const HEADWAY_BONUS_150_URL = "https://headway.partners/landings/en/bonus-150/?hwp=516d6b";
 const PARTNER_CODE = "516d6b";
 const TELEGRAM_ADMIN = "https://t.me/SyariefAzman";
 const WHATSAPP_LINK = "https://wa.me/60194961568";
@@ -255,6 +256,30 @@ export default function HeadwayLandingPage() {
             </a>
             <a href="#steps" className="btn btn-secondary btn-lg">
               📖 Panduan Pendaftaran
+            </a>
+          </div>
+
+          {/* HEADWAY $150 BONUS BANNER */}
+          <div className="headway-page-bonus-banner animate-in">
+            <a
+              href={HEADWAY_BONUS_150_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="headway-page-banner-link"
+              title="Tuntut Bonus Tanpa Deposit $150 daripada Headway"
+            >
+              <img
+                src="/headway-bonus-150.png"
+                alt="Headway Bonus $150 - 7 Hari, 5 Pasaran, 0 Risiko"
+                width={300}
+                height={50}
+                className="headway-page-banner-img"
+              />
+              <div className="headway-page-banner-desc">
+                <strong>🎁 Tawaran Khas: Bonus Tanpa Deposit $150 daripada Headway!</strong>
+                <p>Berdagang selama 7 hari merentasi 5 pasaran tanpa risiko modal sendiri. Uji EA Budak Ubat secara live & keluarkan keuntungan!</p>
+              </div>
+              <span className="headway-page-banner-cta">Tuntut $150 Bonus ➜</span>
             </a>
           </div>
 
