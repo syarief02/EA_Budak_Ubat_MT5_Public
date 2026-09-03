@@ -75,6 +75,7 @@ export default function RotatingAdBanner({ variant = "strip" }) {
             href={ad.url}
             target="_blank"
             rel="noopener noreferrer"
+            referrerPolicy="no-referrer-when-downgrade"
             className={`promo-strip-link ad-fade-${fadeState}`}
             style={{
               background: ad.bgGradient,
@@ -98,6 +99,7 @@ export default function RotatingAdBanner({ variant = "strip" }) {
                 height={52}
                 className={`promo-strip-img ad-img-${ad.id}`}
                 loading="eager"
+                referrerPolicy="no-referrer-when-downgrade"
                 onError={(e) => {
                   e.currentTarget.src = "/banners/default-banner.svg";
                 }}
@@ -229,6 +231,7 @@ export default function RotatingAdBanner({ variant = "strip" }) {
         href={ad.url}
         target="_blank"
         rel="noopener noreferrer"
+        referrerPolicy="no-referrer-when-downgrade"
         className={`headway-bonus-banner-link ad-fade-${fadeState}`}
         style={{
           borderColor: "rgba(255, 255, 255, 0.08)",
@@ -243,6 +246,7 @@ export default function RotatingAdBanner({ variant = "strip" }) {
             height={52}
             className={`headway-bonus-img ad-img-${ad.id}`}
             loading="eager"
+            referrerPolicy="no-referrer-when-downgrade"
             onError={(e) => {
               e.currentTarget.src = "/banners/default-banner.svg";
             }}
