@@ -94,7 +94,13 @@ export default function RotatingAdBanner({ variant = "strip" }) {
               <img
                 src={ad.image}
                 alt={ad.imageAlt}
+                width={160}
+                height={52}
                 className={`promo-strip-img ad-img-${ad.id}`}
+                loading="eager"
+                onError={(e) => {
+                  e.currentTarget.src = "/banners/default-banner.svg";
+                }}
               />
             </div>
 
@@ -233,7 +239,13 @@ export default function RotatingAdBanner({ variant = "strip" }) {
           <img
             src={ad.image}
             alt={ad.imageAlt}
+            width={160}
+            height={52}
             className={`headway-bonus-img ad-img-${ad.id}`}
+            loading="eager"
+            onError={(e) => {
+              e.currentTarget.src = "/banners/default-banner.svg";
+            }}
           />
         </div>
 
