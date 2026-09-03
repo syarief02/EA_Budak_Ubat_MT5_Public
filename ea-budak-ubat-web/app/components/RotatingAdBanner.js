@@ -1,71 +1,37 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-
-const ADS = [
-  {
-    id: "headway",
-    broker: "Headway",
-    badge: "🔥 Free $150 Bonus",
-    headline: "Claim $150 No-Deposit Trading Bonus at Headway",
-    shortHeadline: "Headway $150 No-Deposit Trading Bonus",
-    desc: "Trade 5 markets for 7 days with zero capital risk. Test EA Budak Ubat risk-free and keep your profits!",
-    shortDesc: "Get $150 free credit to trade 5 markets for 7 days with zero risk. Whitelist your account & test our EAs!",
-    cta: "Claim $150 Bonus ➜",
-    url: "https://headway.partners/landings/en/bonus-150/?hwp=516d6b",
-    image: "/headway-bonus-150.png",
-    imageAlt: "Headway Bonus $150 - 7 Days. 5 Markets. 0 Risk",
-    accentColor: "#f59e0b",
-    glowColor: "rgba(245, 158, 11, 0.22)",
-    bgGradient: "linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(17, 24, 39, 0.88) 50%, rgba(217, 119, 6, 0.08) 100%)",
-    borderColor: "rgba(245, 158, 11, 0.32)",
-    hoverBorder: "rgba(245, 158, 11, 0.65)",
-    btnGradient: "linear-gradient(135deg, #f59e0b, #d97706)",
-    btnColor: "#0a0e1a",
-  },
-  {
-    id: "fbs",
-    broker: "FBS",
-    badge: "⚡ 0.01s Execution · 1:3000 Leverage",
-    headline: "Be Smart. Trade Smart with FBS Broker",
-    shortHeadline: "FBS Broker — High-Speed EA Execution",
-    desc: "Ultra-fast execution from 0.01s, spreads from 0.7 pips & leverage up to 1:3000. Officially recommended for MT4 & MT5 EAs!",
-    shortDesc: "Ultra-fast 0.01s execution, spreads from 0.7 pips & leverage up to 1:3000. Ideal for Grid & Trend EAs!",
-    cta: "Trade with FBS ➜",
-    url: "https://fbs.partners?ibl=154319&ibp=588292",
-    image: "/fbs-banner.jpg",
-    imageAlt: "Be Smart. Trade Smart with FBS Broker",
-    accentColor: "#00be40",
-    glowColor: "rgba(0, 190, 64, 0.22)",
-    bgGradient: "linear-gradient(135deg, rgba(0, 190, 64, 0.12) 0%, rgba(17, 24, 39, 0.88) 50%, rgba(5, 150, 105, 0.08) 100%)",
-    borderColor: "rgba(0, 190, 64, 0.32)",
-    hoverBorder: "rgba(0, 190, 64, 0.65)",
-    btnGradient: "linear-gradient(135deg, #00be40, #059669)",
-    btnColor: "#ffffff",
-  },
-];
+import { useState, useEffect, useRef, useMemo } from "react";
+import { getActiveAds, BROKER_ADS } from "@/lib/adsData";
 
 export default function RotatingAdBanner({ variant = "strip" }) {
+  const ads = useMemo(() => {
+    const active = getActiveAds();
+    return active.length > 0 ? active : BROKER_ADS;
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [fadeState, setFadeState] = useState("in");
   const timeoutRef = useRef(null);
 
-  // Randomize initial starting ad on every page load (client-side to preserve SSR hydration safety)
+  // Randomize starting ad on client mount (avoids SSR hydration mismatch)
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * ADS.length);
-    if (randomIndex !== 0) {
-      setCurrentIndex(randomIndex);
+    if (ads.length > 1) {
+      const randomIndex = Math.floor(Math.random() * ads.length);
+      if (randomIndex !== 0) {
+        setCurrentIndex(randomIndex);
+      }
     }
-  }, []);
+  }, [ads.length]);
 
+  // Auto-cycle every 6 seconds
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || ads.length <= 1) return;
 
     const interval = setInterval(() => {
       setFadeState("out");
       timeoutRef.current = setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % ADS.length);
+        setCurrentIndex((prev) => (prev + 1) % ads.length);
         setFadeState("in");
       }, 250);
     }, 6000);
@@ -74,18 +40,28 @@ export default function RotatingAdBanner({ variant = "strip" }) {
       clearInterval(interval);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [isPaused]);
+  }, [isPaused, ads.length]);
 
-  const switchAd = (idx) => {
-    if (idx === currentIndex) return;
+  const switchAd = (newIndex) => {
+    if (newIndex === currentIndex) return;
     setFadeState("out");
     setTimeout(() => {
-      setCurrentIndex(idx);
+      setCurrentIndex(newIndex);
       setFadeState("in");
     }, 200);
   };
 
-  const ad = ADS[currentIndex];
+  const nextAd = (e) => {
+    if (e) e.preventDefault();
+    switchAd((currentIndex + 1) % ads.length);
+  };
+
+  const prevAd = (e) => {
+    if (e) e.preventDefault();
+    switchAd((currentIndex - 1 + ads.length) % ads.length);
+  };
+
+  const ad = ads[currentIndex] || ads[0];
 
   if (variant === "strip") {
     return (
@@ -94,63 +70,99 @@ export default function RotatingAdBanner({ variant = "strip" }) {
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        <a
-          href={ad.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`promo-strip-link ad-fade-${fadeState}`}
-          style={{
-            background: ad.bgGradient,
-            borderColor: ad.borderColor,
-            boxShadow: `0 8px 30px rgba(0, 0, 0, 0.4), 0 0 24px ${ad.glowColor}`,
-          }}
-          title={ad.headline}
-        >
-          <span
-            className="promo-strip-badge"
-            style={{ background: ad.btnGradient, color: ad.btnColor }}
+        <div className="promo-strip-wrapper">
+          <a
+            href={ad.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`promo-strip-link ad-fade-${fadeState}`}
+            style={{
+              background: ad.bgGradient,
+              borderColor: ad.borderColor,
+              boxShadow: `0 8px 30px rgba(0, 0, 0, 0.4), 0 0 24px ${ad.glowColor}`,
+            }}
+            title={ad.headline}
           >
-            {ad.badge}
-          </span>
+            <span
+              className="promo-strip-badge"
+              style={{ background: ad.btnGradient, color: ad.btnColor }}
+            >
+              {ad.badge}
+            </span>
 
-          <div className="promo-strip-media-box">
-            <img
-              src={ad.image}
-              alt={ad.imageAlt}
-              className={`promo-strip-img ad-img-${ad.id}`}
-            />
+            <div className="promo-strip-media-box">
+              <img
+                src={ad.image}
+                alt={ad.imageAlt}
+                className={`promo-strip-img ad-img-${ad.id}`}
+              />
+            </div>
+
+            <span className="promo-strip-text">
+              {ad.headline.includes(ad.broker) ? (
+                <>
+                  {ad.headline.split(ad.broker)[0]}
+                  <strong style={{ color: ad.accentColor }}>{ad.broker}</strong>
+                  {ad.headline.split(ad.broker).slice(1).join(ad.broker)}
+                </>
+              ) : (
+                <>
+                  <strong style={{ color: ad.accentColor }}>{ad.broker}</strong>: {ad.headline}
+                </>
+              )}
+              {" — "}
+              <span className="promo-strip-sub">{ad.desc}</span>
+            </span>
+
+            <span
+              className="promo-strip-btn"
+              style={{ background: ad.btnGradient, color: ad.btnColor }}
+            >
+              {ad.cta}
+            </span>
+          </a>
+        </div>
+
+        {/* CONTROLS & BROKER QUICK SWITCH */}
+        <div className="banner-nav-bar">
+          <button
+            type="button"
+            className="banner-nav-arrow"
+            onClick={prevAd}
+            title="Previous broker promo"
+            aria-label="Previous promo"
+          >
+            ‹
+          </button>
+
+          <div className="banner-nav-pills">
+            {ads.map((item, idx) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`banner-broker-pill ${idx === currentIndex ? "active" : ""}`}
+                style={{
+                  borderColor: idx === currentIndex ? item.accentColor : "transparent",
+                  color: idx === currentIndex ? item.accentColor : "#94a3b8",
+                  background: idx === currentIndex ? `${item.accentColor}15` : "rgba(255, 255, 255, 0.03)",
+                }}
+                onClick={() => switchAd(idx)}
+                title={`View ${item.broker} promotion`}
+              >
+                {item.broker}
+              </button>
+            ))}
           </div>
 
-          <span className="promo-strip-text">
-            {ad.headline.split(ad.broker)[0]}
-            <strong style={{ color: ad.accentColor }}>{ad.broker}</strong>
-            {ad.headline.split(ad.broker).slice(1).join(ad.broker)} —{" "}
-            <span className="promo-strip-sub">{ad.desc}</span>
-          </span>
-
-          <span
-            className="promo-strip-btn"
-            style={{ background: ad.btnGradient, color: ad.btnColor }}
+          <button
+            type="button"
+            className="banner-nav-arrow"
+            onClick={nextAd}
+            title="Next broker promo"
+            aria-label="Next promo"
           >
-            {ad.cta}
-          </span>
-        </a>
-
-        {/* DOT INDICATORS */}
-        <div className="banner-nav-dots">
-          {ADS.map((item, idx) => (
-            <button
-              key={item.id}
-              type="button"
-              className={`banner-dot ${idx === currentIndex ? "active" : ""}`}
-              style={{
-                backgroundColor: idx === currentIndex ? item.accentColor : "rgba(255, 255, 255, 0.2)",
-              }}
-              onClick={() => switchAd(idx)}
-              title={`Switch to ${item.broker} promotion`}
-              aria-label={`Switch to ${item.broker}`}
-            />
-          ))}
+            ›
+          </button>
         </div>
       </div>
     );
@@ -177,24 +189,32 @@ export default function RotatingAdBanner({ variant = "strip" }) {
             borderColor: `${ad.accentColor}40`,
           }}
         >
-          {ad.id === "headway" ? "🎁 Exclusive Bonus Offer" : "⚡ Recommended Partner Broker"}
+          {ad.badge || "🔥 Featured Broker Deal"}
         </span>
+
         <div className="rotating-card-meta">
-          <span className="headway-bonus-subtitle">Rotating Sponsor Deal</span>
-          <div className="card-nav-dots">
-            {ADS.map((item, idx) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`card-dot ${idx === currentIndex ? "active" : ""}`}
-                style={{
-                  backgroundColor: idx === currentIndex ? item.accentColor : "rgba(255, 255, 255, 0.25)",
-                }}
-                onClick={() => switchAd(idx)}
-                title={`Switch to ${item.broker}`}
-                aria-label={`Switch to ${item.broker}`}
-              />
-            ))}
+          <span className="headway-bonus-subtitle">
+            Partner Promo ({currentIndex + 1}/{ads.length})
+          </span>
+          <div className="card-arrow-controls">
+            <button
+              type="button"
+              className="card-arrow-btn"
+              onClick={prevAd}
+              title="Previous offer"
+              aria-label="Previous offer"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="card-arrow-btn"
+              onClick={nextAd}
+              title="Next offer"
+              aria-label="Next offer"
+            >
+              ›
+            </button>
           </div>
         </div>
       </div>
@@ -232,6 +252,26 @@ export default function RotatingAdBanner({ variant = "strip" }) {
           </span>
         </div>
       </a>
+
+      {/* QUICK BROKER PILLS IN CARD */}
+      <div className="card-broker-pills-row">
+        {ads.map((item, idx) => (
+          <button
+            key={item.id}
+            type="button"
+            className={`card-broker-mini-pill ${idx === currentIndex ? "active" : ""}`}
+            style={{
+              borderColor: idx === currentIndex ? item.accentColor : "transparent",
+              color: idx === currentIndex ? item.accentColor : "#64748b",
+              background: idx === currentIndex ? `${item.accentColor}18` : "transparent",
+            }}
+            onClick={() => switchAd(idx)}
+            title={`Switch to ${item.broker}`}
+          >
+            {item.broker}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
