@@ -3466,38 +3466,52 @@ section {
   }
 }
 
-/* ===== HEADWAY $150 BONUS ADS BANNER ===== */
+/* ===== ROTATING ADS BANNER (HEADWAY & FBS) ===== */
 .promo-banner-strip {
   padding: 16px 0 24px;
   position: relative;
   z-index: 5;
 }
 
+.rotating-banner-strip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ad-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.28s ease, transform 0.28s ease, background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ad-fade-out {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
 .promo-strip-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(17, 24, 39, 0.85) 50%, rgba(217, 119, 6, 0.1) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  gap: 18px;
   border-radius: var(--radius);
-  padding: 14px 24px;
+  border-width: 1px;
+  border-style: solid;
+  padding: 14px 22px;
   text-decoration: none;
   color: var(--text-primary);
   transition: var(--transition);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 24px rgba(245, 158, 11, 0.1);
   backdrop-filter: blur(12px);
+  min-height: 78px;
 }
 
 .promo-strip-link:hover {
   transform: translateY(-2px);
-  border-color: rgba(245, 158, 11, 0.6);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(245, 158, 11, 0.22);
 }
 
 .promo-strip-badge {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #0a0e1a;
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -3506,39 +3520,61 @@ section {
   border-radius: 20px;
   white-space: nowrap;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.promo-strip-media-box {
+  width: 130px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .promo-strip-img {
-  width: 300px;
-  height: 50px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.promo-strip-img.ad-img-headway {
+  width: 100%;
+  height: auto;
+}
+
+.promo-strip-img.ad-img-fbs {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
 }
 
 .promo-strip-text {
   font-size: 0.95rem;
   color: #e2e8f0;
   flex-grow: 1;
+  line-height: 1.4;
 }
 
-.promo-strip-text strong {
-  color: #fbbf24;
+.promo-strip-sub {
+  color: #94a3b8;
+  font-size: 0.86rem;
 }
 
 .promo-strip-btn {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #0a0e1a;
   font-weight: 700;
   font-size: 0.88rem;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: var(--radius-sm);
   white-space: nowrap;
   flex-shrink: 0;
   transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .promo-strip-link:hover .promo-strip-btn {
@@ -3546,14 +3582,36 @@ section {
   transform: translateX(2px);
 }
 
-/* AccountChecker Promo Banner */
-.headway-bonus-banner-wrap {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(17, 24, 39, 0.9) 100%);
-  border: 1px solid rgba(245, 158, 11, 0.28);
+.banner-nav-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.banner-dot {
+  width: 22px;
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.banner-dot.active {
+  width: 38px;
+}
+
+/* AccountChecker Promo Banner Card */
+.headway-bonus-banner-wrap.rotating-card-wrap {
   border-radius: var(--radius);
+  border-width: 1px;
+  border-style: solid;
   padding: 18px 20px;
   margin-bottom: 28px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .headway-bonus-header {
@@ -3564,15 +3622,39 @@ section {
 }
 
 .headway-bonus-tag {
-  background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 3px 10px;
   border-radius: 20px;
+}
+
+.rotating-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-nav-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-dot {
+  width: 16px;
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.card-dot.active {
+  width: 28px;
 }
 
 .headway-bonus-subtitle {
@@ -3591,26 +3673,44 @@ section {
   border-radius: var(--radius-sm);
   padding: 12px 16px;
   transition: var(--transition);
+  min-height: 74px;
 }
 
 .headway-bonus-banner-link:hover {
-  border-color: rgba(245, 158, 11, 0.5);
   background: rgba(10, 14, 26, 0.85);
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .headway-bonus-image-box {
+  width: 140px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .headway-bonus-img {
-  width: 300px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
+}
+
+.headway-bonus-img.ad-img-headway {
+  width: 100%;
+  height: auto;
+}
+
+.headway-bonus-img.ad-img-fbs {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .headway-bonus-details {
@@ -3640,15 +3740,13 @@ section {
 }
 
 .headway-bonus-cta-btn {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #0a0e1a;
   font-weight: 700;
   font-size: 0.82rem;
   padding: 8px 16px;
   border-radius: 6px;
   white-space: nowrap;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transition: var(--transition);
 }
 
@@ -3656,7 +3754,7 @@ section {
   filter: brightness(1.1);
 }
 
-/* Headway Page Bonus Banner */
+/* Headway Page Dedicated Banner */
 .headway-page-bonus-banner {
   max-width: 780px;
   margin: 0 auto 32px;
@@ -3758,8 +3856,13 @@ section {
     text-align: center;
   }
 
-  .headway-bonus-img,
-  .promo-strip-img,
+  .headway-bonus-image-box,
+  .promo-strip-media-box {
+    width: 100%;
+    max-width: 260px;
+    height: 60px;
+  }
+
   .headway-page-banner-img {
     max-width: 100%;
     height: auto;

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { supabase } from "@/lib/supabase";
 import AccountChecker from "@/app/components/AccountChecker";
+import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 
 const POST_TYPES = [
   { key: "idea", label: "💡 Idea", color: "#8b5cf6" },
@@ -258,29 +259,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROMO BANNER STRIP */}
+      {/* ROTATING PROMO BANNER STRIP */}
       <section className="promo-banner-strip">
         <div className="container">
-          <a
-            href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="promo-strip-link animate-in"
-            title="Claim $150 Headway No-Deposit Bonus"
-          >
-            <span className="promo-strip-badge">🔥 Free Bonus</span>
-            <img
-              src="/headway-bonus-150.png"
-              alt="Headway Bonus $150 - 7 Days. 5 Markets. 0 Risk"
-              width={300}
-              height={50}
-              className="promo-strip-img"
-            />
-            <span className="promo-strip-text">
-              Claim <strong>$150 No-Deposit Trading Bonus</strong> at Headway — Trade our EAs with 0 Capital Risk!
-            </span>
-            <span className="promo-strip-btn">Claim Bonus ➜</span>
-          </a>
+          <RotatingAdBanner variant="strip" />
         </div>
       </section>
 
