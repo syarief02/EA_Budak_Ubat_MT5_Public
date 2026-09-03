@@ -9,7 +9,7 @@ export const BROKERS = [
   { name: "Markets4you", id: "4hcnvz4", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", support: "support@markets4you.com" },
   { name: "InstaForex", id: "KUSD", url: "https://www.instaforex.com?x=KUSD", support: "support@instaforex.com" },
   { name: "LiteFinance", id: "805161060", url: "https://www.litefinance.com/?uid=805161060", support: "clients@litefinance.com" },
-  { name: "RoboForex", id: "mxyg", url: "https://my.roboforex.com/en/?a=mxyg", support: "support@roboforex.com" },
+  { name: "RoboForex", id: "mxyg", url: "https://rinfinity.com/en/welcome-bonus?a=mxyg", support: "support@roboforex.com" },
   { name: "XM", id: "HVVR7", url: "https://clicks.pipaffiliates.com/c?m=150422&c=862266", support: "support@xm.com" },
   { name: "Valetax", id: "1939088", url: "https://ma.valetax.com/p/1939088", support: "support@valetax.com" },
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },

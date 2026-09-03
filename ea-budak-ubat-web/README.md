@@ -896,7 +896,7 @@ Clients who have registered through my link can just PM the trading account numb
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@markets4you.com |
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` | support@instaforex.com |
 | **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` | clients@litefinance.com |
-| **RoboForex** | [Register](https://my.roboforex.com/en/?a=mxyg) | `mxyg` | info@roboforex.com |
+| **RoboForex** | [Register](https://rinfinity.com/en/welcome-bonus?a=mxyg) | `mxyg` | info@roboforex.com |
 | **XM** | [Register](https://clicks.pipaffiliates.com/c?m=150422&c=862266) | `HVVR7` | XM Support |
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` | contact@valetax.com |
 | **Tickmill** | [Register](https://tickmill.link/46cOQ2h) | `IB72324388` | support@tickmill.com |
