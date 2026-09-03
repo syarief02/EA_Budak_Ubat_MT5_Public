@@ -36,9 +36,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\On
 
 ### 3. Update Broker Ad Banners & Promotions
 When the user asks to **update ads banners** or change broker promotions (e.g. `update XM bonus banner`, `set promotion expiry`):
-1. **Config file**: Edit `ea-budak-ubat-web/lib/adsData.js` (`headline`, `badge`, `cta`, `expiryDate`, `active`).
-2. **Media assets**: Place new banner image/SVG in `ea-budak-ubat-web/public/banners/<broker>-banner.<ext>`.
-3. **Verify, Push & Deploy**:
+1. **Auto-Sync Engine**: `ea-budak-ubat-web/lib/adsData.js` automatically syncs with `BROKERS` in `authorizedAccounts.js`. Any broker in `BROKERS` without a custom ad entry will automatically be generated in the rotation with its partner link and default banner!
+2. **Custom Campaign**: Edit or add entries in `ea-budak-ubat-web/lib/adsData.js` (`headline`, `badge`, `cta`, `expiryDate`, `active`, `url`).
+3. **Media assets**: Place new banner image/SVG in `ea-budak-ubat-web/public/banners/<broker>-banner.<ext>`.
+4. **Verify, Push & Deploy**:
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\OneDrive\Desktop\ea bu mt5 public\ea-budak-ubat-web"; npm run build; git add .; git commit -m "Update broker promotional ads and banners"; git push origin main; npx -y vercel --prod --yes --token (Get-Content ..\.env | Select-String "VERCEL_TOKEN=(.*)").Matches.Groups[1].Value.Trim()
 ```
