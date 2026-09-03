@@ -901,7 +901,8 @@ Clients who have registered through my link can just PM the trading account numb
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` | contact@valetax.com |
 | **Tickmill** | [Register](https://tickmill.link/46cOQ2h) | `IB72324388` | support@tickmill.com |
 | **HF Markets** | [Register](https://www.hfmmalaysia.com/sv/en/?refid=30572923) | `30572923` | support@hfm.com |
-
+| **Eightcap** | [Register](https://partners.eightcap.com/click?campaign_id=1&ref_id=8660) | `8660` | customerservice@eightcap.com |
+| **JustMarkets** | [Register](https://one.justmarkets.link/a/tjrtn60m2i) | `tjrtn60m2i` | support@justmarkets.com |
 
 ---
 
