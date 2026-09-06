@@ -910,6 +910,7 @@ Clients who have registered through my link can just PM the trading account numb
 
 | Channel | Contact |
 |---|---|
+| **Email** | [support@eabudakubat.com](mailto:support@eabudakubat.com) |
 | **Telegram** | [@SyariefAzman](https://t.me/SyariefAzman) |
 | **WhatsApp** | [+60194961568](https://wa.me/60194961568) |
 | **Twitter/X** | [@SyariefAzman](https://www.twitter.com/SyariefAzman) |

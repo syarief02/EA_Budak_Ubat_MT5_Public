@@ -627,6 +627,7 @@ export default function GuidePage() {
                     </div>
                     <div className="contact-grid animate-in">
                         {[
+                            { icon: "✉️", title: "Email Support", desc: "support@eabudakubat.com", url: "mailto:support@eabudakubat.com" },
                             { icon: "💬", title: "Telegram", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
                             { icon: "📱", title: "WhatsApp", desc: "+60194961568", url: "https://wa.me/60194961568" },
                             { icon: "🐦", title: "Twitter/X", desc: "@SyariefAzman", url: "https://www.twitter.com/SyariefAzman" },
@@ -667,6 +668,7 @@ export default function GuidePage() {
                         <div>
                             <h4>Contact</h4>
                             <ul className="footer-links">
+                                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
                                 <li><a href="https://wa.me/60194961568" target="_blank">WhatsApp: +60194961568</a></li>
                                 <li><a href="https://t.me/EABudakUbat" target="_blank">Channel: t.me/EABudakUbat</a></li>

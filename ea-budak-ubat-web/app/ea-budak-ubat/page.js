@@ -433,6 +433,7 @@ export default function EABudakUbatPage() {
             <div>
               <h4>Contact</h4>
               <ul className="footer-links">
+                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
                 <li><a href="https://wa.me/60194961568" target="_blank">WhatsApp: +60194961568</a></li>
                 <li><a href="https://t.me/EABudakUbat" target="_blank">Channel: t.me/EABudakUbat</a></li>

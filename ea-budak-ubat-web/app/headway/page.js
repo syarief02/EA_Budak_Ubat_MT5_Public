@@ -594,10 +594,11 @@ export default function HeadwayLandingPage() {
             <div>
               <h4>Bantuan & Sokongan</h4>
               <ul className="footer-links">
+                <li><a href="mailto:support@eabudakubat.com">Emel EA: support@eabudakubat.com</a></li>
                 <li><a href={TELEGRAM_ADMIN} target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
                 <li><a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">WhatsApp: +60194961568</a></li>
                 <li><a href={TELEGRAM_CHANNEL} target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                <li><a href="mailto:care@hw.site">Emel Support: care@hw.site</a></li>
+                <li><a href="mailto:care@hw.site">Emel Broker: care@hw.site</a></li>
               </ul>
             </div>
           </div>

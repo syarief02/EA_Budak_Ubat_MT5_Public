@@ -386,6 +386,7 @@ export default function BracketBlitzPage() {
                         <div>
                             <h4>Contact</h4>
                             <ul className="footer-links">
+                                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
                                 <li><a href="https://www.twitter.com/SyariefAzman" target="_blank">Twitter: @SyariefAzman</a></li>
                                 <li><Link href="/">← Back to All Products</Link></li>
