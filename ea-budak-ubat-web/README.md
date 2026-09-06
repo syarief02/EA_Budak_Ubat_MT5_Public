@@ -1,7 +1,7 @@
 # EA Budak Ubat — Complete Product Guide
 
-> **By Syarief Azman** · Telegram [@SyariefAzman](https://t.me/SyariefAzman) · WhatsApp [+60194961568](https://wa.me/60194961568)  
-> Website: [ea-budak-ubat.vercel.app](https://ea-budak-ubat.vercel.app)
+> **By Syarief Azman** · Email [support@eabudakubat.com](mailto:support@eabudakubat.com) · Telegram [@SyariefAzman](https://t.me/SyariefAzman)  
+> Website: [eabudakubat.com](https://eabudakubat.com)
 
 ---
 
@@ -912,7 +912,6 @@ Clients who have registered through my link can just PM the trading account numb
 |---|---|
 | **Email** | [support@eabudakubat.com](mailto:support@eabudakubat.com) |
 | **Telegram** | [@SyariefAzman](https://t.me/SyariefAzman) |
-| **WhatsApp** | [+60194961568](https://wa.me/60194961568) |
 | **Twitter/X** | [@SyariefAzman](https://www.twitter.com/SyariefAzman) |
 | **Facebook** | [EABudakUbat](https://m.me/EABudakUbat) |
 | **Telegram Channel** | [t.me/EABudakUbat](https://t.me/EABudakUbat) |

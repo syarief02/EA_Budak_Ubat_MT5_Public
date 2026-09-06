@@ -461,7 +461,6 @@ Initial grid martingale EA with:
 | **Author** | Syarief Azman (Budak Ubat) |
 | **Email** | [support@eabudakubat.com](mailto:support@eabudakubat.com) |
 | **Telegram** | [@SyariefAzman](https://t.me/SyariefAzman) |
-| **WhatsApp** | [+60194961568](https://wa.me/60194961568) |
 | **GitHub** | [syarief02](https://github.com/syarief02) |
 | **Twitter/X** | [@SyariefAzman](https://www.twitter.com/SyariefAzman) |
 | **Facebook** | [EABudakUbat](https://m.me/EABudakUbat) |

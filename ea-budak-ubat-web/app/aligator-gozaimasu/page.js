@@ -355,8 +355,8 @@ export default function AligatorGozaimasuPage() {
                                 Multi-timeframe trend-following EA based on Bill Williams' proven indicators. Open source strategy.
                             </p>
                             <div className="social-links">
+                                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
                                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                                <a href="https://wa.me/60194961568" className="social-link" target="_blank" title="WhatsApp">📱</a>
                             </div>
                         </div>
                         <div>
@@ -374,7 +374,6 @@ export default function AligatorGozaimasuPage() {
                             <ul className="footer-links">
                                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
-                                <li><a href="https://wa.me/60194961568" target="_blank">WhatsApp: +60194961568</a></li>
                                 <li><Link href="/">← Back to All Products</Link></li>
                             </ul>
                         </div>

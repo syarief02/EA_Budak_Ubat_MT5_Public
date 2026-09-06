@@ -8,7 +8,6 @@ const HEADWAY_SIGNUP_URL = "https://headway.partners/user/signup?hwp=516d6b";
 const HEADWAY_BONUS_150_URL = "https://headway.partners/landings/en/bonus-150/?hwp=516d6b";
 const PARTNER_CODE = "516d6b";
 const TELEGRAM_ADMIN = "https://t.me/SyariefAzman";
-const WHATSAPP_LINK = "https://wa.me/60194961568";
 const TELEGRAM_CHANNEL = "https://t.me/EABudakUbat";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
@@ -574,8 +573,8 @@ export default function HeadwayLandingPage() {
                 Rakan kongsi rasmi penyedia sistem dagangan automatik (Expert Advisor) profesional untuk platform MetaTrader 4 & MetaTrader 5.
               </p>
               <div className="social-links">
+                <a href="mailto:support@eabudakubat.com" className="social-link" title="Emel Sokongan">✉️</a>
                 <a href={TELEGRAM_ADMIN} className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram Admin">💬</a>
-                <a href={WHATSAPP_LINK} className="social-link" target="_blank" rel="noopener noreferrer" title="WhatsApp Admin">📱</a>
                 <a href={TELEGRAM_CHANNEL} className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram Channel">📢</a>
               </div>
             </div>
@@ -596,7 +595,6 @@ export default function HeadwayLandingPage() {
               <ul className="footer-links">
                 <li><a href="mailto:support@eabudakubat.com">Emel EA: support@eabudakubat.com</a></li>
                 <li><a href={TELEGRAM_ADMIN} target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                <li><a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">WhatsApp: +60194961568</a></li>
                 <li><a href={TELEGRAM_CHANNEL} target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
                 <li><a href="mailto:care@hw.site">Emel Broker: care@hw.site</a></li>
               </ul>

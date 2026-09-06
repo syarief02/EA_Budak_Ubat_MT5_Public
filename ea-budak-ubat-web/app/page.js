@@ -388,7 +388,6 @@ export default function Home() {
             {[
               { icon: "✉️", title: "Email Support", desc: "support@eabudakubat.com", url: "mailto:support@eabudakubat.com" },
               { icon: "💬", title: "Telegram", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
-              { icon: "📱", title: "WhatsApp", desc: "+60194961568", url: "https://wa.me/60194961568" },
               { icon: "🐦", title: "Twitter/X", desc: "@SyariefAzman", url: "https://www.twitter.com/SyariefAzman" },
               { icon: "📢", title: "Telegram Channel", desc: "t.me/EABudakUbat", url: "https://t.me/EABudakUbat" },
               { icon: "📊", title: "MQL5 Signal", desc: "Signal Channel", url: "https://www.mql5.com/en/channels/eabudakubat" },
@@ -610,8 +609,8 @@ export default function Home() {
                 Professional trading tools and Expert Advisors for MetaTrader platforms by Syarief Azman. Built with passion and real-world trading experience.
               </p>
               <div className="social-links">
+                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
                 <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                <a href="https://wa.me/60194961568" className="social-link" target="_blank" title="WhatsApp">📱</a>
                 <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
               </div>
             </div>
@@ -631,7 +630,6 @@ export default function Home() {
               <ul className="footer-links">
                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                 <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
-                <li><a href="https://wa.me/60194961568" target="_blank">WhatsApp: +60194961568</a></li>
                 <li><a href="https://t.me/EABudakUbat" target="_blank">Channel: t.me/EABudakUbat</a></li>
               </ul>
             </div>
