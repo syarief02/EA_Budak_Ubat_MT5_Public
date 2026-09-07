@@ -143,7 +143,7 @@ export default function GridCalculator() {
   }, [symbol, accountType, leverage, balanceUSD]);
 
   return (
-    <div className="grid-calc-card glass-card animate-in" id="risk-calculator">
+    <div className="grid-calc-card glass-card animate-in">
       <div className="calc-header">
         <div className="checker-badge">
           <span className="checker-badge-icon">🧮</span>

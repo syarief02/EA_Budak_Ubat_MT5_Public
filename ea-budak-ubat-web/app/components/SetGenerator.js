@@ -194,7 +194,7 @@ export default function SetGenerator() {
   };
 
   return (
-    <div className="set-generator-card glass-card animate-in" id="preset-generator">
+    <div className="set-generator-card glass-card animate-in">
       <div className="checker-header">
         <div className="checker-badge">
           <span className="checker-badge-icon">⚙️</span>

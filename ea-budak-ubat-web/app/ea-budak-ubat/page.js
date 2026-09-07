@@ -127,16 +127,15 @@ export default function EABudakUbatPage() {
         <div className="container">
           <Link href="/" className="nav-brand">EA Budak Ubat</Link>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
+            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← Home</Link></li>
             <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
-            <li><a href="#how-it-works" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><a href="#parameters" onClick={() => setMobileNavOpen(false)}>Parameters</a></li>
-            <li><a href="#preset-generator" onClick={() => setMobileNavOpen(false)}>⚙️ Presets</a></li>
-            <li><a href="#risk-calculator" onClick={() => setMobileNavOpen(false)}>🧮 Calculator</a></li>
+            <li><a href="#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
+            <li><a href="#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
             <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
-            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>Authorization</a></li>
+            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
             <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-            <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank">Purchase (MT4)</a></li>
+            <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank">Buy MT4</a></li>
           </ul>
           <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
             {mobileNavOpen ? "✕" : "☰"}
@@ -295,14 +294,14 @@ export default function EABudakUbatPage() {
       </section>
 
       {/* PRESET GENERATOR */}
-      <section style={{ padding: "70px 0 30px" }}>
+      <section id="preset-generator" style={{ padding: "70px 0 30px" }}>
         <div className="container">
           <SetGenerator />
         </div>
       </section>
 
       {/* GRID RISK & MARGIN CALCULATOR */}
-      <section style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+      <section id="risk-calculator" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
         <div className="container">
           <GridCalculator />
         </div>
