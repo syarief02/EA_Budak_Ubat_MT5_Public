@@ -225,8 +225,8 @@ export default function Home() {
             <li><Link href="/ea-budak-ubat#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</Link></li>
             <li><Link href="/ea-budak-ubat#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</Link></li>
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
+            <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
-            <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
             <li><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a></li>
             <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank">Telegram</a></li>
           </ul>
@@ -626,6 +626,16 @@ export default function Home() {
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
                 <li><Link href="/aligator-gozaimasu">Aligator Gozaimasu</Link></li>
                 <li><Link href="/encik-moku">Encik Moku</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Resources</h4>
+              <ul className="footer-links">
+                <li><Link href="/guide">System Guide</Link></li>
+                <li><Link href="/ea-budak-ubat#preset-generator">Presets (.set)</Link></li>
+                <li><Link href="/ea-budak-ubat#risk-calculator">Margin Calculator</Link></li>
+                <li><Link href="/changelog">Version Changelog</Link></li>
+                <li><a href="#authorization">License Checker</a></li>
               </ul>
             </div>
             <div>

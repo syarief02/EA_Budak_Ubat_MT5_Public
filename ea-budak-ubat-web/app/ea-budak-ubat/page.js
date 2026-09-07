@@ -134,6 +134,7 @@ export default function EABudakUbatPage() {
             <li><a href="#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
             <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
+            <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
             <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank">Buy MT4</a></li>
           </ul>
@@ -172,6 +173,24 @@ export default function EABudakUbatPage() {
           </p>
         </div>
       </section>
+
+      {/* WHAT'S NEW IN V1.63 BANNER */}
+      <div className="container" style={{ marginTop: "-20px", marginBottom: "30px", position: "relative", zIndex: 10 }}>
+        <div className="v163-banner-card animate-in">
+          <div className="v163-banner-left">
+            <span className="v163-banner-icon">🚀</span>
+            <div>
+              <h4 className="v163-banner-title">What's New in v1.63 Release</h4>
+              <p className="v163-banner-desc">
+                Dedicated RSI Filter Toggle for Gold, Dynamic Order Filling Mode, Spread Guard, Trailing Break-Even & Risk Tools.
+              </p>
+            </div>
+          </div>
+          <Link href="/changelog" className="btn btn-secondary btn-sm" style={{ animation: "none", whiteSpace: "nowrap" }}>
+            View Full Changelog →
+          </Link>
+        </div>
+      </div>
 
       {/* FEATURES */}
       <section id="features">
@@ -462,6 +481,7 @@ export default function EABudakUbatPage() {
                 <li><a href="#parameters">Parameters</a></li>
                 <li><a href="#installation">Installation</a></li>
                 <li><a href="#authorization">Authorization</a></li>
+                <li><Link href="/changelog">Version Changelog</Link></li>
                 <li><a href="#faq">FAQ</a></li>
               </ul>
             </div>
