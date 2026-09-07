@@ -48,13 +48,27 @@ const PARAM_TABS = {
     { name: "AutoConfig", def: "false", desc: "Enable AutoConfig AI for dynamic parameters" },
     { name: "MagicNumber", def: "123456", desc: "Unique magic number for trade identification" },
   ],
+  filter: [
+    { name: "UseRSIFilter", def: "true", desc: "Toggle RSI filter ON/OFF. Set false for Gold (XAUUSD) to avoid blocking buys during macro uptrends" },
+    { name: "RSI_TF", def: "PERIOD_M15", desc: "Timeframe for RSI calculation (M1, M5, M15, M30, H1, etc.)" },
+    { name: "RSI_Period", def: "14", desc: "Averaging period for RSI momentum calculation" },
+    { name: "RSI_BuyCeiling", def: "70.0", desc: "Maximum RSI value allowed to open new Buy positions" },
+    { name: "RSI_SellFloor", def: "30.0", desc: "Minimum RSI value allowed to open new Sell positions" },
+  ],
+  risk: [
+    { name: "MaxSpread_Pips", def: "0.0", desc: "Spread filter in pips. EA pauses entries if spread exceeds this (0 = disabled)" },
+    { name: "MaxDrawdownPct", def: "0.0", desc: "Hard equity protection cutoff %. Closes all positions if drawdown reaches this % (0 = disabled)" },
+    { name: "EnableBreakEven", def: "false", desc: "Automatically lock profits by moving SL once basket exceeds trigger pips" },
+    { name: "BreakEven_Trigger", def: "15.0", desc: "Floating profit in pips required to activate Break-Even" },
+    { name: "BreakEven_Lock", def: "2.0", desc: "Guaranteed pips locked in profit above/below average entry price" },
+  ],
 };
 
 const FAQS = [
   { q: "Can I use this on multiple charts?", a: "Yes, but use a different MagicNumber for each chart to avoid conflicts between EA instances." },
-  { q: "Does the MT5 version trade the same as MT4?", a: "Yes. The trading logic, parameters, grid math, analysis methods, authorization, and time filtering are all identical. Only the underlying API calls differ." },
+  { q: "Does the MT5 version trade the same as MT4?", a: "Yes. The core trading logic, grid math, and analysis methods are identical. MT5 v1.63 adds dedicated RSI filter toggling, dynamic order filling mode negotiation, spread guard, and equity protection." },
   { q: "What pairs work best?", a: "Ranging pairs with low spread work best. Avoid highly trending or exotic pairs to minimize drawdown risk." },
-  { q: "Can I use this on XAUUSD (Gold)?", a: "Technically yes, but gold is very volatile. Use extreme caution, a cent account, and very conservative settings." },
+  { q: "Can I use this on XAUUSD (Gold)?", a: "Yes! In v1.63 you can now disable the RSI filter specifically for Gold (UseRSIFilter = false). In macro bull trends, gold often stays overbought—disabling RSI allows the bot to continue opening buys without being blocked. Always use a cent account and conservative lot sizing." },
   { q: "What is the minimum capital needed?", a: "A minimum of $100 on a Cent account (or larger capital for Standard) with 0.01 starting lots is recommended. Higher leverage reduces margin requirements per position." },
   { q: "How do I get authorized?", a: "Register through one of the broker partner links on this page, then send your trading account number to @SyariefAzman on Telegram." },
 ];
@@ -219,6 +233,8 @@ export default function EABudakUbatPage() {
                 { key: "core", label: "Core" },
                 { key: "lot", label: "Lot & Grid" },
                 { key: "distance", label: "Distance & TP/SL" },
+                { key: "filter", label: "Filter & RSI (v1.63)" },
+                { key: "risk", label: "Risk & Break-Even (v1.63)" },
                 { key: "time", label: "Time & Config" },
               ].map((t) => (
                 <button key={t.key} className={`param-tab ${activeParamTab === t.key ? "active" : ""}`} onClick={() => setActiveParamTab(t.key)}>

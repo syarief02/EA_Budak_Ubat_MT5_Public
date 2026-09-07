@@ -44,8 +44,9 @@ export default function RotatingAdBanner({ variant = "strip" }) {
 
   const switchAd = (newIndex) => {
     if (newIndex === currentIndex) return;
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setFadeState("out");
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       setCurrentIndex(newIndex);
       setFadeState("in");
     }, 200);

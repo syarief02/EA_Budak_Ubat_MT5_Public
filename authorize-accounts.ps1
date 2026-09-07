@@ -51,6 +51,8 @@ $MQL4_BASE = "C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\9D15457EC01AD10E
 $MQL5_BASE = "C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\EA Budak Ubat"
 $PUBLIC_REPO = "$DESKTOP\ea bu mt5 public"
 $DESKTOP_MT4_REPO = "$DESKTOP\EA_Budak_Ubat"
+$DESKTOP_MT5_REPO = "$DESKTOP\ea bu mt5"
+$MQL5_FORGE_REPO  = "C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5"
 
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 
@@ -84,6 +86,7 @@ function Prepend-To-MQSource($filePath) {
 Write-Host "--- STEP 1: Updating account lists & sources ---" -ForegroundColor Cyan
 Prepend-To-TxtList "$DESKTOP_MT4_REPO\v1.62 Authorized Account List.txt"
 Prepend-To-TxtList "$MQL5_BASE\v1.62 Authorized Account List.txt"
+Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.62 Authorized Account List.txt"
 
 # 2. Update MQ source files
 if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
@@ -91,6 +94,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
 }
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     Prepend-To-MQSource "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .mq5"
+    Prepend-To-MQSource "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - .mq5"
 }
 
 # 3. Update Web lib/authorizedAccounts.js
@@ -150,7 +154,12 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     $compiledEx5 = "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .ex5"
     if (Test-Path $compiledEx5) {
         Write-Host "  [OK] MT5 Compilation succeeded!" -ForegroundColor Green
+        Copy-Item -Path $compiledEx5 -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
         Copy-Item -Path $compiledEx5 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
+        Copy-Item -Path $compiledEx5 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
+        if (Test-Path $mq5Path) {
+            Copy-Item -Path $mq5Path -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - .mq5" -Force
+        }
         Write-Host "  [OK] Copied MT5 binaries to repos" -ForegroundColor Green
     } else {
         Write-Host "  [FAILED] MT5 Compilation failed. Check $logPath" -ForegroundColor Red
@@ -176,6 +185,19 @@ function Git-Commit-Push($repoPath, $commitMsg) {
 Git-Commit-Push $MQL4_BASE "feat(auth): authorize accounts $accString in MT4"
 Git-Commit-Push $DESKTOP_MT4_REPO "feat(auth): authorize accounts $accString in authorized account list"
 Git-Commit-Push $PUBLIC_REPO "feat(auth): authorize accounts $accString, update binaries and web checker"
+if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
+    Git-Commit-Push $DESKTOP_MT5_REPO "feat(auth): authorize accounts $accString in MT5"
+    if (Test-Path $MQL5_FORGE_REPO) {
+        Write-Host "  Pushing repo: MQL5 Forge..." -ForegroundColor DarkCyan
+        Push-Location $MQL5_FORGE_REPO
+        git add "Experts/EA Budak Ubat"
+        git commit -m "feat(auth): authorize accounts $accString in MQL5 Forge" --quiet
+        git pull --rebase origin main --quiet
+        git push origin main --quiet
+        Pop-Location
+        Write-Host "  [OK] Pushed: MQL5 Forge" -ForegroundColor Green
+    }
+}
 
 # 7. Deploy Website
 if (-not $SkipDeploy) {
