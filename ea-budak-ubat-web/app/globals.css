@@ -149,6 +149,14 @@ body {
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* ===== LAYOUT ===== */
 .container {
   max-width: 1200px;

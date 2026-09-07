@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const CHANGELOG_DATA = [
@@ -267,6 +267,21 @@ export default function ChangelogPage() {
     ? CHANGELOG_DATA
     : CHANGELOG_DATA.filter((log) => log.productSlug === selectedProduct);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "50px" }
+    );
+    document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [selectedProduct]);
+
   return (
     <>
       {/* NAVBAR */}
@@ -427,3 +442,4 @@ export default function ChangelogPage() {
     </>
   );
 }
+
