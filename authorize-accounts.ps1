@@ -71,8 +71,8 @@ function Prepend-To-TxtList($filePath) {
 function Prepend-To-MQSource($filePath) {
     if (-not (Test-Path $filePath)) { return $false }
     $content = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
-    if ($content -match 'int allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*') {
-        $content = [regex]::Replace($content, '(int allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
+    if ($content -match '(?:int|long|ulong)\s+allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*') {
+        $content = [regex]::Replace($content, '((?:int|long|ulong)\s+allowedAccountNumbers\[\d+\]\s*=\s*\{\s*\r?\n\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
         [System.IO.File]::WriteAllText($filePath, $content, $utf8NoBom)
         Write-Host "  [OK] Updated source: $(Split-Path $filePath -Leaf)" -ForegroundColor Green
         return $true
