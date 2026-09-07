@@ -6,7 +6,7 @@ import AccountChecker from "@/app/components/AccountChecker";
 
 const PRODUCTS = [
     {
-        name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.62",
+        name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.63",
         strategy: "Grid Martingale", platforms: "MT4, MT5", bestFor: "Ranging pairs, M5",
         license: "MIT + Paid Full", expiry: "2026-09-30",
         description: "A grid-based martingale EA with 4 analysis methods (Classic Candle, SMA20, Alligator, Ichimoku), AutoConfig AI, hedging support, and configurable time filters. Designed for ranging currency pairs on the M5 timeframe.",

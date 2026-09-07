@@ -22,7 +22,7 @@ export const EA_DATABASE = [
   {
     slug: "ea-budak-ubat",
     name: "EA Budak Ubat",
-    version: "v1.62",
+    version: "v1.63",
     platforms: ["MT4", "MT5"],
     icon: "📊",
     tagline: "Grid Martingale Expert Advisor",

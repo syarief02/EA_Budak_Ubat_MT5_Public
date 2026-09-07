@@ -5,7 +5,7 @@ import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.63%20-%20MT5%20-%2020260930.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
@@ -72,7 +72,7 @@ const INSTALL_MT4 = [
 ];
 
 const INSTALL_MT5 = [
-  <>Download <code>EA - Budak Ubat v1.62 - MT5 - 20260930.ex5</code></>,
+  <>Download <code>EA - Budak Ubat v1.63 - MT5 - 20260930.ex5</code></>,
   <>Open MT5 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL5/Experts/</code></>,
   "Copy the .ex5 file into this folder",
@@ -134,7 +134,7 @@ export default function EABudakUbatPage() {
         <div className="hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot"></span>
-            v1.62 — MT4 & MT5
+            v1.63 — MT4 & MT5
           </div>
           <h1>
             <span className="gradient-text">EA Budak Ubat</span>

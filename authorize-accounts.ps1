@@ -150,7 +150,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     $compiledEx5 = "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .ex5"
     if (Test-Path $compiledEx5) {
         Write-Host "  [OK] MT5 Compilation succeeded!" -ForegroundColor Green
-        Copy-Item -Path $compiledEx5 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.62 - MT5 - $dateSuffix.ex5" -Force
+        Copy-Item -Path $compiledEx5 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
         Write-Host "  [OK] Copied MT5 binaries to repos" -ForegroundColor Green
     } else {
         Write-Host "  [FAILED] MT5 Compilation failed. Check $logPath" -ForegroundColor Red
