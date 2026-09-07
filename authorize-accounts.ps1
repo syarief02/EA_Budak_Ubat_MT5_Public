@@ -87,6 +87,8 @@ Write-Host "--- STEP 1: Updating account lists & sources ---" -ForegroundColor C
 Prepend-To-TxtList "$DESKTOP_MT4_REPO\v1.62 Authorized Account List.txt"
 Prepend-To-TxtList "$MQL5_BASE\v1.62 Authorized Account List.txt"
 Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.62 Authorized Account List.txt"
+Prepend-To-TxtList "$MQL5_BASE\v1.63 Authorized Account List.txt"
+Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.63 Authorized Account List.txt"
 
 # 2. Update MQ source files
 if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
@@ -95,6 +97,8 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     Prepend-To-MQSource "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .mq5"
     Prepend-To-MQSource "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - .mq5"
+    Prepend-To-MQSource "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .mq5"
+    Prepend-To-MQSource "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .mq5"
 }
 
 # 3. Update Web lib/authorizedAccounts.js
@@ -157,8 +161,12 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
         Copy-Item -Path $compiledEx5 -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
         Copy-Item -Path $compiledEx5 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
         Copy-Item -Path $compiledEx5 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
+        Copy-Item -Path $compiledEx5 -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .ex5" -Force
+        Copy-Item -Path $compiledEx5 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .ex5" -Force
         if (Test-Path $mq5Path) {
             Copy-Item -Path $mq5Path -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - .mq5" -Force
+            Copy-Item -Path $mq5Path -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .mq5" -Force
+            Copy-Item -Path $mq5Path -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .mq5" -Force
         }
         Write-Host "  [OK] Copied MT5 binaries to repos" -ForegroundColor Green
     } else {
@@ -190,7 +198,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     if (Test-Path $MQL5_FORGE_REPO) {
         Write-Host "  Pushing repo: MQL5 Forge..." -ForegroundColor DarkCyan
         Push-Location $MQL5_FORGE_REPO
-        git add "Experts/EA Budak Ubat"
+        git add -A
         git commit -m "feat(auth): authorize accounts $accString in MQL5 Forge" --quiet
         git pull --rebase origin main --quiet
         git push origin main --quiet
