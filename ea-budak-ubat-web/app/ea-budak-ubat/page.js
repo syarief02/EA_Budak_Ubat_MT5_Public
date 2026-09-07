@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
+import GridCalculator from "@/app/components/GridCalculator";
+import SetGenerator from "@/app/components/SetGenerator";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.63%20-%20MT5%20-%2020260930.ex5";
@@ -129,6 +131,8 @@ export default function EABudakUbatPage() {
             <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
             <li><a href="#how-it-works" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><a href="#parameters" onClick={() => setMobileNavOpen(false)}>Parameters</a></li>
+            <li><a href="#preset-generator" onClick={() => setMobileNavOpen(false)}>⚙️ Presets</a></li>
+            <li><a href="#risk-calculator" onClick={() => setMobileNavOpen(false)}>🧮 Calculator</a></li>
             <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>Authorization</a></li>
             <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
@@ -160,6 +164,8 @@ export default function EABudakUbatPage() {
           <div className="hero-actions">
             <a href={DOWNLOAD_MT4} className="btn btn-primary">⬇️ Download MT4</a>
             <a href={DOWNLOAD_MT5} className="btn btn-secondary">⬇️ Download MT5</a>
+            <a href="#preset-generator" className="btn btn-secondary">⚙️ Presets (.set)</a>
+            <a href="#risk-calculator" className="btn btn-secondary">🧮 Risk Calculator</a>
             <a href={PURCHASE_LINK} className="btn btn-accent" target="_blank">🛒 Full Version (MT4 Only)</a>
           </div>
           <p className="hero-note">
@@ -285,6 +291,20 @@ export default function EABudakUbatPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* PRESET GENERATOR */}
+      <section style={{ padding: "70px 0 30px" }}>
+        <div className="container">
+          <SetGenerator />
+        </div>
+      </section>
+
+      {/* GRID RISK & MARGIN CALCULATOR */}
+      <section style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+        <div className="container">
+          <GridCalculator />
         </div>
       </section>
 

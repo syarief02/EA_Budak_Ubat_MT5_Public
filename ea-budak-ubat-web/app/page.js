@@ -222,6 +222,8 @@ export default function Home() {
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>📖 Guide</Link></li>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
+            <li><Link href="/ea-budak-ubat#preset-generator" onClick={() => setMobileNavOpen(false)}>⚙️ Presets</Link></li>
+            <li><Link href="/ea-budak-ubat#risk-calculator" onClick={() => setMobileNavOpen(false)}>🧮 Calculator</Link></li>
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>💬 Community</a></li>
             <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
@@ -253,8 +255,9 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <a href="#products" className="btn btn-primary" style={{ animation: "none" }}>🔽 Explore Products</a>
+            <Link href="/ea-budak-ubat#preset-generator" className="btn btn-secondary" style={{ animation: "none" }}>⚙️ Presets (.set)</Link>
+            <Link href="/ea-budak-ubat#risk-calculator" className="btn btn-secondary" style={{ animation: "none" }}>🧮 Risk Calculator</Link>
             <a href="#authorization" className="btn btn-accent" style={{ animation: "none" }}>🔐 Check Account</a>
-            <a href="https://t.me/SyariefAzman" className="btn btn-secondary" target="_blank">💬 Telegram</a>
           </div>
         </div>
       </section>
