@@ -107,6 +107,17 @@ export default function GridCalculator() {
 
   // Best Broker recommendation based on inputs
   const recommendedBroker = useMemo(() => {
+    if (accountType === "cent") {
+      // Note: FBS does not offer cent accounts (standard only). Recommend brokers with dedicated Cent/Micro accounts.
+      return (
+        BROKERS.find((b) => b.name === "Headway") ||
+        BROKERS.find((b) => b.name === "HF Markets") ||
+        BROKERS.find((b) => b.name === "Markets4you") ||
+        BROKERS[0]
+      );
+    }
+
+    // Standard Account recommendations
     if (symbol === "XAUUSD") {
       return (
         BROKERS.find((b) => b.name === "Tickmill") ||
@@ -114,15 +125,22 @@ export default function GridCalculator() {
         BROKERS[0]
       );
     }
-    if (accountType === "cent" || balanceUSD < 500) {
+
+    if (leverage >= 2000) {
+      // FBS offers high-leverage 1:3000 Standard accounts with 0.01s execution
       return (
         BROKERS.find((b) => b.name === "FBS") ||
         BROKERS.find((b) => b.name === "Headway") ||
         BROKERS[0]
       );
     }
-    return BROKERS.find((b) => b.name === "CXM Direct") || BROKERS[0];
-  }, [symbol, accountType, balanceUSD]);
+
+    return (
+      BROKERS.find((b) => b.name === "FBS") ||
+      BROKERS.find((b) => b.name === "CXM Direct") ||
+      BROKERS[0]
+    );
+  }, [symbol, accountType, leverage, balanceUSD]);
 
   return (
     <div className="grid-calc-card glass-card animate-in" id="risk-calculator">
@@ -214,7 +232,7 @@ export default function GridCalculator() {
             <option value="500">1:500 (Standard Broker)</option>
             <option value="1000">1:1000 (Recommended)</option>
             <option value="2000">1:2000 (High Leverage)</option>
-            <option value="3000">1:3000 (FBS / Headway Max)</option>
+            <option value="3000">1:3000 (FBS Standard / Headway Cent)</option>
           </select>
           <span className="calc-hint">Higher leverage drastically reduces required margin</span>
         </div>
@@ -393,8 +411,8 @@ export default function GridCalculator() {
             <h5>{recommendedBroker.name} Broker</h5>
             <p>
               {accountType === "cent"
-                ? `Provides true Micro/Cent accounts with 1:${leverage} leverage. Perfect for running EA Budak Ubat with $100 starting deposit.`
-                : `Official recommended broker for ${symbol} automated grid trading with tight raw spreads and zero slippage.`}
+                ? `${recommendedBroker.name} provides true Micro/Cent accounts with up to 1:${leverage} leverage. Perfect for running EA Budak Ubat with $100 starting capital.`
+                : `${recommendedBroker.name} offers high-performance Standard accounts with 1:${leverage} leverage, ultra-fast 0.01s execution, and tight spreads for ${symbol} automated grid trading.`}
             </p>
           </div>
           <div className="recommendation-actions">
