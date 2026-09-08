@@ -213,7 +213,7 @@ Before Expiry? ───── Yes ──► ⚠️ Trial Mode (runs until 2026-
 
 ### Account Checker
 
-Visit the [EA Budak Ubat page](https://ea-budak-ubat.vercel.app/ea-budak-ubat) on the website to search your account number and verify if it's authorized.
+Visit the [EA Budak Ubat page](https://eabudakubat.com/ea-budak-ubat) on the website to search your account number and verify if it's authorized.
 
 ### Installation
 

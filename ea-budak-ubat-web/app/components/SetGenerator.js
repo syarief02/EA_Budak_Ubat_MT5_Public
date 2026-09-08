@@ -169,7 +169,7 @@ export default function SetGenerator() {
       `; Strategy: ${selectedPreset.name}`,
       `; Recommended Asset: ${selectedPreset.symbol}`,
       `; Generated: ${new Date().toISOString().split("T")[0]}`,
-      `; Source: https://ea-budak-ubat-web.vercel.app`,
+      `; Source: https://eabudakubat.com`,
       "; ====================================================",
       "",
     ];
