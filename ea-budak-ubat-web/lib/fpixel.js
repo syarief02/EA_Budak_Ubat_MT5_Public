@@ -20,3 +20,4 @@ export const customEvent = (name, options = {}) => {
     window.fbq("trackCustom", name, options);
   }
 };
+
