@@ -271,14 +271,16 @@ Write-Host "--- STEP 3: Git Commit & Push ---" -ForegroundColor Cyan
 
 function Git-Commit-Push($repoPath, $commitMsg) {
     if (-not (Test-Path $repoPath)) { return }
-    Write-Host "  Pushing repo: $(Split-Path $repoPath -Leaf)..." -ForegroundColor DarkCyan
     Push-Location $repoPath
+    $branch = (git branch --show-current).Trim()
+    if (-not $branch) { $branch = "main" }
+    Write-Host "  Pushing repo: $(Split-Path $repoPath -Leaf) ($branch)..." -ForegroundColor DarkCyan
     git add -A
     git commit -m $commitMsg --quiet
-    git pull --rebase origin main --quiet
-    git push origin main --quiet
+    git pull --rebase origin $branch --quiet
+    git push origin $branch --quiet
     Pop-Location
-    Write-Host "  [OK] Pushed: $(Split-Path $repoPath -Leaf)" -ForegroundColor Green
+    Write-Host "  [OK] Pushed: $(Split-Path $repoPath -Leaf) ($branch)" -ForegroundColor Green
 }
 
 Git-Commit-Push $MQL4_BASE "feat(auth): authorize accounts $accString in MT4"
