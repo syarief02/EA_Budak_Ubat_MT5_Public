@@ -9,7 +9,7 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 ### 1. Authorize / Prepend Account Numbers
 When the user asks to **authorize** or **prepend** accounts (e.g. `prepend 49179852, 39217198 to EA Budak Ubat`):
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\OneDrive\Desktop\ea bu mt5 public"; .\authorize-accounts.ps1 -Accounts "49179852, 39217198" -Platform "ALL"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "."; .\authorize-accounts.ps1 -Accounts "49179852, 39217198" -Platform "ALL"
 ```
 *Options for `-Platform`: `"ALL"`, `"MT4"`, `"MT5"`.*
 
@@ -28,7 +28,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\On
 ### 2. Update Monthly Expiration Date
 When the user asks to **update expiry** (e.g. `update expiry to 2026-10-31`):
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\OneDrive\Desktop\ea bu mt5 public"; .\update-ea.ps1 -ExpiryDate "YYYY-MM-DD"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "."; .\update-ea.ps1 -ExpiryDate "YYYY-MM-DD"
 ```
 *Followed by git push and Vercel deployment.*
 
@@ -41,7 +41,7 @@ When the user asks to **update ads banners** or change broker promotions (e.g. `
 3. **Media assets**: Place new banner image/SVG in `ea-budak-ubat-web/public/banners/<broker>-banner.<ext>`.
 4. **Verify, Push & Deploy**:
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\OneDrive\Desktop\ea bu mt5 public\ea-budak-ubat-web"; npm run build; git add .; git commit -m "Update broker promotional ads and banners"; git push origin main; npx -y vercel --prod --yes --token (Get-Content ..\.env | Select-String "VERCEL_TOKEN=(.*)").Matches.Groups[1].Value.Trim()
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd ".\ea-budak-ubat-web"; npm run build; git add .; git commit -m "Update broker promotional ads and banners"; git push origin main; npx -y vercel --prod --yes --token $env:VERCEL_TOKEN
 ```
 *Full workflow instructions documented in `.agents/workflows/update-ads-banner.md`.*
 
@@ -51,11 +51,11 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "C:\Users\User\On
 
 | Key | Location |
 |---|---|
-| **Public Multi-EA & Web Hub** | `C:\Users\User\OneDrive\Desktop\ea bu mt5 public` |
-| **Next.js Web Application** | `C:\Users\User\OneDrive\Desktop\ea bu mt5 public\ea-budak-ubat-web` |
-| **MT4 Source Repository** | `C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\9D15457EC01AD10E06A932AAC616DC32\MQL4\Experts\EA-Budak-Ubat` |
-| **MT5 Source Repository** | `C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts\EA Budak Ubat` |
-| **Desktop MT4 Release Repo** | `C:\Users\User\OneDrive\Desktop\EA_Budak_Ubat` |
+| **Public Multi-EA & Web Hub** | `.` |
+| **Next.js Web Application** | `.\ea-budak-ubat-web` |
+| **MT4 Source Repository** | `%APPDATA%\MetaQuotes\Terminal\<MT4_INSTANCE_HASH>\MQL4\Experts\EA-Budak-Ubat` |
+| **MT5 Source Repository** | `%APPDATA%\MetaQuotes\Terminal\<MT5_INSTANCE_HASH>\MQL5\Experts\EA Budak Ubat` |
+| **Desktop MT4 Release Repo** | `..\EA_Budak_Ubat` |
 
 ---
 
