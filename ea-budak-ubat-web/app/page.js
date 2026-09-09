@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
+import LiveStrategySimulator from "@/app/components/LiveStrategySimulator";
+import { playTactileClick } from "@/lib/audioSynthesizer";
 
 const POST_TYPES = [
   { key: "idea", label: "💡 Idea", color: "#8b5cf6" },
@@ -227,6 +229,35 @@ export default function Home() {
   const [submitError, setSubmitError] = useState("");
   const [botTrap, setBotTrap] = useState("");
   const [formRenderedAt, setFormRenderedAt] = useState(Date.now());
+  const [reactions, setReactions] = useState({});
+
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("ea_comment_reactions") || "{}");
+      setReactions(saved);
+    } catch (e) {}
+  }, []);
+
+  const handleReaction = (commentId, type) => {
+    playTactileClick(0.09);
+    setReactions((prev) => {
+      const current = prev[commentId] || {};
+      const count = current[type] || 0;
+      const userReacted = current[`user_${type}`];
+      const updated = {
+        ...prev,
+        [commentId]: {
+          ...current,
+          [type]: userReacted ? Math.max(0, count - 1) : count + 1,
+          [`user_${type}`]: !userReacted,
+        },
+      };
+      try {
+        localStorage.setItem("ea_comment_reactions", JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+  };
 
   // Fetch comments from secure API gateway
   useEffect(() => {
@@ -337,6 +368,7 @@ export default function Home() {
         <div className="container">
           <a href="#" className="nav-brand">EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
+            <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
             <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>Guide</Link></li>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
             <li><Link href="/ea-budak-ubat#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</Link></li>
@@ -372,7 +404,8 @@ export default function Home() {
             by Syarief Azman. Built for performance, rigorously tested, and continuously improved.
           </p>
           <div className="hero-actions">
-            <a href="#products" className="btn btn-primary" style={{ animation: "none" }}>🔽 Explore Products</a>
+            <a href="#simulator" className="btn btn-primary" style={{ animation: "none" }}>⚡ Live Simulator</a>
+            <a href="#products" className="btn btn-secondary" style={{ animation: "none" }}>🔽 Explore Products</a>
             <Link href="/ea-budak-ubat#preset-generator" className="btn btn-secondary" style={{ animation: "none" }}>⚙️ Presets (.set)</Link>
             <Link href="/ea-budak-ubat#risk-calculator" className="btn btn-secondary" style={{ animation: "none" }}>🧮 Risk Calculator</Link>
             <a href="#authorization" className="btn btn-accent" style={{ animation: "none" }}>🔐 Check Account</a>
@@ -400,6 +433,23 @@ export default function Home() {
       <section className="promo-banner-strip">
         <div className="container">
           <RotatingAdBanner variant="strip" />
+        </div>
+      </section>
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
+      {/* INTERACTIVE ALGORITHMIC TRADING SIMULATOR */}
+      <section id="simulator" style={{ padding: "60px 0 20px 0" }}>
+        <div className="jp-kanji-watermark" aria-hidden="true">市場検証</div>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">VIRTUAL MARKET ENGINE // 仮想市場シミュレータ</span>
+            <h2>Interactive Algorithmic Execution Simulator</h2>
+            <p>
+              Simulate live market scenarios, test dynamic ADR grid layering, and watch the break-even Take Profit pool execute in real time.
+            </p>
+          </div>
+          <LiveStrategySimulator />
         </div>
       </section>
 
@@ -887,6 +937,45 @@ export default function Home() {
                     )}
 
                     <p className="comment-message">{comment.message}</p>
+
+                    <div className="comment-actions-bar">
+                      <button
+                        type="button"
+                        className={`comment-react-btn ${(reactions[comment.id]?.user_helpful) ? "active" : ""}`}
+                        data-cursor-label="LIKE"
+                        onClick={() => handleReaction(comment.id, "helpful")}
+                      >
+                        <span>❤️</span>
+                        <span>Helpful</span>
+                        {(reactions[comment.id]?.helpful || 0) > 0 && (
+                          <span className="react-count">{reactions[comment.id].helpful}</span>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        className={`comment-react-btn ${(reactions[comment.id]?.user_bullish) ? "active" : ""}`}
+                        data-cursor-label="BULLISH"
+                        onClick={() => handleReaction(comment.id, "bullish")}
+                      >
+                        <span>🚀</span>
+                        <span>Bullish</span>
+                        {(reactions[comment.id]?.bullish || 0) > 0 && (
+                          <span className="react-count">{reactions[comment.id].bullish}</span>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        className={`comment-react-btn ${(reactions[comment.id]?.user_insight) ? "active" : ""}`}
+                        data-cursor-label="IDEA"
+                        onClick={() => handleReaction(comment.id, "insight")}
+                      >
+                        <span>💡</span>
+                        <span>Great Idea</span>
+                        {(reactions[comment.id]?.insight || 0) > 0 && (
+                          <span className="react-count">{reactions[comment.id].insight}</span>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 );
               })}

@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useRef } from "react";
+import { playReticleLock, playTactileClick } from "@/lib/audioSynthesizer";
 
 export default function LiquidGlassEffects() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -61,6 +62,7 @@ export default function LiquidGlassEffects() {
         setCursorLocked(true);
         const label = target.getAttribute("data-cursor-label") || (target.tagName === "BUTTON" ? "EXECUTE" : target.tagName === "A" ? "OPEN" : "LOCK");
         setCursorLabel(label);
+        playReticleLock(0.04);
       }
     };
 
@@ -177,6 +179,7 @@ export default function LiquidGlassEffects() {
         ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
 
         btn.appendChild(ripple);
+        playTactileClick(0.08);
         setTimeout(() => ripple.remove(), 700);
       };
 

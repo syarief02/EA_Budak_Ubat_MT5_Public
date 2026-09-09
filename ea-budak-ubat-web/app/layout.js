@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import FacebookPixel from "@/app/components/FacebookPixel";
 import FluidCanvas from "@/app/components/FluidCanvas";
 import LiquidGlassEffects from "@/app/components/LiquidGlassEffects";
+import CommandTerminal from "@/app/components/CommandTerminal";
 
 export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
       <body>
         <FluidCanvas />
         <LiquidGlassEffects />
+        <CommandTerminal />
         <Suspense fallback={null}>
           <FacebookPixel />
         </Suspense>
