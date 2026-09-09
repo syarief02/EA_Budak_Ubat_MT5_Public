@@ -13,6 +13,7 @@ export default function AccountChecker({
   compact = false,
 }) {
   const [selectedEa, setSelectedEa] = useState(initialEa);
+  const [platformFilter, setPlatformFilter] = useState("all");
   const [accountNumber, setAccountNumber] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
   const [searchError, setSearchError] = useState("");
@@ -20,8 +21,8 @@ export default function AccountChecker({
 
   const results = useMemo(() => {
     if (!hasSearched || !accountNumber.trim()) return [];
-    return checkAccount(accountNumber, selectedEa);
-  }, [hasSearched, accountNumber, selectedEa]);
+    return checkAccount(accountNumber, selectedEa, platformFilter);
+  }, [hasSearched, accountNumber, selectedEa, platformFilter]);
 
   const handleSearch = (e) => {
     if (e) e.preventDefault();
@@ -105,6 +106,34 @@ export default function AccountChecker({
         </div>
       </div>
 
+      {/* PLATFORM SELECTOR TABS */}
+      <div className="checker-platform-selector">
+        <label className="selector-label">Platform Scope:</label>
+        <div className="platform-tab-group">
+          <button
+            type="button"
+            className={`platform-pill ${platformFilter === "all" ? "active" : ""}`}
+            onClick={() => setPlatformFilter("all")}
+          >
+            🌐 All Platforms
+          </button>
+          <button
+            type="button"
+            className={`platform-pill ${platformFilter === "mt4" ? "active" : ""}`}
+            onClick={() => setPlatformFilter("mt4")}
+          >
+            💻 MetaTrader 4 (MT4 Pool: 847)
+          </button>
+          <button
+            type="button"
+            className={`platform-pill ${platformFilter === "mt5" ? "active" : ""}`}
+            onClick={() => setPlatformFilter("mt5")}
+          >
+            ⚡ MetaTrader 5 (MT5 Pool: 863)
+          </button>
+        </div>
+      </div>
+
       {/* SEARCH FORM */}
       <form onSubmit={handleSearch} className="checker-form">
         <div className="checker-input-group">
@@ -115,7 +144,7 @@ export default function AccountChecker({
               inputMode="numeric"
               pattern="[0-9]*"
               className="checker-input"
-              placeholder="e.g. 391619624 or your MetaTrader account number..."
+              placeholder="e.g. 440204090 or your MetaTrader account number..."
               value={accountNumber}
               onChange={(e) => {
                 setAccountNumber(e.target.value.replace(/\D/g, ""));
@@ -153,23 +182,23 @@ export default function AccountChecker({
           <button
             type="button"
             className="example-pill"
-            onClick={() => handleQuickExample("391619624")}
+            onClick={() => handleQuickExample("440204090")}
           >
-            391619624 (Authorized)
+            440204090 (MT5 Whitelisted)
           </button>
           <button
             type="button"
             className="example-pill"
-            onClick={() => handleQuickExample("51379350")}
+            onClick={() => handleQuickExample("391619624")}
           >
-            51379350 (Whitelisted)
+            391619624 (MT4 & MT5)
           </button>
           <button
             type="button"
             className="example-pill"
             onClick={() => handleQuickExample("987654321")}
           >
-            987654321 (Trial)
+            987654321 (Trial Mode)
           </button>
         </div>
       </form>
@@ -227,7 +256,7 @@ export default function AccountChecker({
 
                   <div className="result-status-badge-container">
                     <span className={`result-status-badge ${res.badgeClass}`}>
-                      {res.status === "authorized" && "✅ Permanent License"}
+                      {res.status === "authorized" && `✅ ${res.platformBadge || "Permanent License"}`}
                       {res.status === "trial" && "⏳ Trial Active"}
                       {res.status === "open_source" && "🆓 Open Source"}
                     </span>
@@ -236,13 +265,25 @@ export default function AccountChecker({
 
                 <div className="result-card-body">
                   <div className="result-meta-row">
-                    <span className="result-meta-label">Platforms:</span>
+                    <span className="result-meta-label">Supported:</span>
                     <span className="result-meta-value">
                       {res.platforms.map((p) => (
                         <span key={p} className="platform-tag">{p}</span>
                       ))}
                     </span>
                   </div>
+                  {res.authorizedPlatforms && res.authorizedPlatforms.length > 0 && (
+                    <div className="result-meta-row">
+                      <span className="result-meta-label">Authorized On:</span>
+                      <span className="result-meta-value">
+                        {res.authorizedPlatforms.map((p) => (
+                          <span key={p} className="platform-tag authorized-platform-tag">
+                            ✓ {p} Whitelisted
+                          </span>
+                        ))}
+                      </span>
+                    </div>
+                  )}
                   <div className="result-meta-row">
                     <span className="result-meta-label">License Expiry:</span>
                     <span className="result-meta-value highlight-expiry">
