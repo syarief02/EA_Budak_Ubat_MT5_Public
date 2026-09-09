@@ -74,7 +74,7 @@ $MQ4Sources = @(
 )
 
 $MQ5Sources = @(
-    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.62 - MT5 - .mq5",
+    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.63 - MT5 - .mq5",
     "$MQL5_BASE\GoldMind_AI.mq5",
     "$DESKTOP\BracketBlitz-EA\BracketBlitz.mq5",
     "$DESKTOP\MathEdge Pro\MT5\MathEdge Pro.mq5",
@@ -328,20 +328,50 @@ for ($i = 0; $i -lt $EANames.Count; $i++) {
 
     if ($MQ4Sources[$i] -ne "" -and $MT4OutNames[$i] -ne "") {
         $result = Copy-CompiledFile $MQ4Sources[$i] $OutputRepos[$i] "" $MT4OutNames[$i] "MT4"
-        if ($result) { $renamedFiles++ }
+        if ($result) { 
+            $renamedFiles++ 
+            if ($EANames[$i] -eq "BracketBlitz") {
+                Copy-Item -Path (Join-Path $OutputRepos[$i] $MT4OutNames[$i]) -Destination (Join-Path $OutputRepos[$i] "BracketBlitz - MT4 - $dateCompact.ex4") -Force -ErrorAction SilentlyContinue
+            }
+            if ($EANames[$i] -eq "MathEdge Pro") {
+                Copy-Item -Path (Join-Path $OutputRepos[$i] $MT4OutNames[$i]) -Destination (Join-Path $OutputRepos[$i] "MathEdge Pro - MT4 - $dateCompact.ex4") -Force -ErrorAction SilentlyContinue
+            }
+        }
     }
 
     if ($MQ5Sources[$i] -ne "" -and $MT5OutNames[$i] -ne "") {
         $result = Copy-CompiledFile $MQ5Sources[$i] $OutputRepos[$i] $MQ5OutputSubs[$i] $MT5OutNames[$i] "MT5"
-        if ($result) { $renamedFiles++ }
+        if ($result) { 
+            $renamedFiles++ 
+            if ($EANames[$i] -eq "BracketBlitz") {
+                Copy-Item -Path (Join-Path $OutputRepos[$i] $MT5OutNames[$i]) -Destination (Join-Path $OutputRepos[$i] "BracketBlitz - MT5 - $dateCompact.ex5") -Force -ErrorAction SilentlyContinue
+            }
+            if ($EANames[$i] -eq "MathEdge Pro") {
+                $destDir = Join-Path $OutputRepos[$i] $MQ5OutputSubs[$i]
+                Copy-Item -Path (Join-Path $destDir $MT5OutNames[$i]) -Destination (Join-Path $destDir "MathEdge Pro - MT5 - $dateCompact.ex5") -Force -ErrorAction SilentlyContinue
+            }
+        }
     }
 }
 
 # ================================================================
-# STEP 4: UPDATE WEBSITE DOWNLOAD URLs
+# STEP 4: UPDATE WEBSITE DOWNLOAD URLs & DATASETS
 # ================================================================
 Write-Host ""
-Write-Host "--- STEP 4: Updating website download URLs ---" -ForegroundColor Cyan
+Write-Host "--- STEP 4: Updating website download URLs & datasets ---" -ForegroundColor Cyan
+
+# Update authorizedAccounts.js dataset
+$authJs = Join-Path $DESKTOP "ea bu mt5 public\ea-budak-ubat-web\lib\authorizedAccounts.js"
+if (Test-Path $authJs) {
+    $content = [System.IO.File]::ReadAllText($authJs, [System.Text.Encoding]::UTF8)
+    $content = [regex]::Replace($content, 'expiryDate:\s*"\d{4}-\d{2}-\d{2}"', "expiryDate: `"$dateDash`"")
+    $content = [regex]::Replace($content, 'until\s+\d{4}-\d{2}-\d{2}', "until $dateDash")
+    $content = [regex]::Replace($content, 'Expires\s+\d{4}-\d{2}-\d{2}', "Expires $dateDash")
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($authJs, $content, $utf8NoBom)
+    Write-Host "  [OK] Updated: authorizedAccounts.js (dataset expiry)" -ForegroundColor Green
+    $webUpdates++
+}
 
 for ($i = 0; $i -lt $EANames.Count; $i++) {
     $webPage = Join-Path $WEB_APP ($WebSlugs[$i] + "\page.js")
