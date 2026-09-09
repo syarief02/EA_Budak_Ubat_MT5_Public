@@ -52,9 +52,9 @@ if (-not (Test-Path $MT5_COMPILER)) {
 }
 
 # Base paths
-$DESKTOP   = "C:\Users\User\OneDrive\Desktop"
-$MQL4_BASE = "C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\9D15457EC01AD10E06A932AAC616DC32\MQL4\Experts\EA-Budak-Ubat"
-$MQL5_BASE = "C:\Users\User\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts"
+$DESKTOP   = "$env:USERPROFILE\OneDrive\Desktop"
+$MQL4_BASE = "$env:APPDATA\MetaQuotes\Terminal\9D15457EC01AD10E06A932AAC616DC32\MQL4\Experts\EA-Budak-Ubat"
+$MQL5_BASE = "$env:APPDATA\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Experts"
 $WEB_APP   = "$DESKTOP\ea bu mt5 public\ea-budak-ubat-web\app"
 
 # EA Source File Registry
