@@ -30,9 +30,18 @@ const MODES = [
   },
 ];
 
+const TIMEFRAMES = [
+  { id: "M1", label: "M1", name: "1 Minute", ticksPerCandle: 8, rangeMult: 0.7 },
+  { id: "M5", label: "M5", name: "5 Minutes (Recommended)", ticksPerCandle: 18, rangeMult: 1.0, isRec: true },
+  { id: "M15", label: "M15", name: "15 Minutes", ticksPerCandle: 32, rangeMult: 1.4 },
+  { id: "M30", label: "M30", name: "30 Minutes", ticksPerCandle: 48, rangeMult: 1.9 },
+  { id: "H1", label: "H1", name: "1 Hour", ticksPerCandle: 70, rangeMult: 2.6 },
+];
+
 export default function LiveStrategySimulator() {
   const [activeMode, setActiveMode] = useState("ea-budak-ubat");
   const [chartType, setChartType] = useState("candlestick"); // "candlestick" or "line"
+  const [timeframe, setTimeframe] = useState("M5"); // "M1", "M5", "M15", "M30", "H1"
   const [simSpeed, setSimSpeed] = useState(1); // 0 = pause, 1 = normal, 2 = fast, 5 = ultra
   const [startLot, setStartLot] = useState(0.01);
   const [multiplier, setMultiplier] = useState(1.3);
@@ -58,6 +67,7 @@ export default function LiveStrategySimulator() {
     currentCandle: null,
     candleTicks: 0,
     chartType: "candlestick",
+    timeframe: "M5",
     trendBias: 0,
     volatility: 0.8,
     targetPrice: 1.085,
@@ -82,12 +92,39 @@ export default function LiveStrategySimulator() {
   useEffect(() => {
     stateRef.current.simSpeed = simSpeed;
     stateRef.current.chartType = chartType;
+    stateRef.current.timeframe = timeframe;
     stateRef.current.startLot = startLot;
     stateRef.current.multiplier = multiplier;
     stateRef.current.gridStep = gridStep;
     stateRef.current.tpDistance = tpDistance;
     stateRef.current.mode = activeMode;
-  }, [simSpeed, chartType, startLot, multiplier, gridStep, tpDistance, activeMode]);
+  }, [simSpeed, chartType, timeframe, startLot, multiplier, gridStep, tpDistance, activeMode]);
+
+  // Handle Timeframe Change
+  const handleTimeframeChange = (newTf) => {
+    playTactileClick();
+    setTimeframe(newTf);
+    const s = stateRef.current;
+    s.timeframe = newTf;
+    const tfCfg = TIMEFRAMES.find((t) => t.id === newTf) || TIMEFRAMES[1];
+
+    // Smoothly reconstruct candle history matching new timeframe perspective
+    const pip = s.pipSize;
+    const newCandles = [];
+    let p = s.price - (36 * pip * 2.8 * tfCfg.rangeMult * 0.35);
+    for (let c = 0; c < 36; c++) {
+      const open = p;
+      const change = (Math.random() - 0.492) * pip * 6 * tfCfg.rangeMult * s.volatility;
+      const close = open + change;
+      const high = Math.max(open, close) + Math.random() * pip * 3.5 * tfCfg.rangeMult;
+      const low = Math.min(open, close) - Math.random() * pip * 3.5 * tfCfg.rangeMult;
+      newCandles.push({ open, high, low, close });
+      p = close;
+    }
+    s.candles = newCandles;
+    s.currentCandle = { open: s.price, high: s.price, low: s.price, close: s.price };
+    s.candleTicks = 0;
+  };
 
   // Trigger celebration particle effect
   const triggerCelebration = useCallback((profit, tpPrice) => {
@@ -139,13 +176,14 @@ export default function LiveStrategySimulator() {
 
     // Prefill price history & procedural initial candlesticks
     if (s.candles.length === 0) {
-      let p = s.price;
+      const tfCfg = TIMEFRAMES.find((t) => t.id === s.timeframe) || TIMEFRAMES[1];
+      let p = s.price - (36 * pip * 2.8 * tfCfg.rangeMult * 0.35);
       for (let c = 0; c < 36; c++) {
         const open = p;
-        const change = (Math.random() - 0.492) * pip * 6 * s.volatility;
+        const change = (Math.random() - 0.492) * pip * 6 * tfCfg.rangeMult * s.volatility;
         const close = open + change;
-        const high = Math.max(open, close) + Math.random() * pip * 3.5;
-        const low = Math.min(open, close) - Math.random() * pip * 3.5;
+        const high = Math.max(open, close) + Math.random() * pip * 3.5 * tfCfg.rangeMult;
+        const low = Math.min(open, close) - Math.random() * pip * 3.5 * tfCfg.rangeMult;
         s.candles.push({ open, high, low, close });
         s.history.push(close);
         p = close;
@@ -210,8 +248,9 @@ export default function LiveStrategySimulator() {
             s.candleTicks++;
           }
 
-          // Complete candle bar every 12 ticks
-          if (s.candleTicks >= 12) {
+          // Complete candle bar based on timeframe configuration
+          const tfCfg = TIMEFRAMES.find((item) => item.id === s.timeframe) || TIMEFRAMES[1];
+          if (s.candleTicks >= tfCfg.ticksPerCandle) {
             s.candles.push({ ...s.currentCandle });
             if (s.candles.length > 40) s.candles.shift();
             s.currentCandle = { open: s.price, high: s.price, low: s.price, close: s.price };
@@ -321,10 +360,10 @@ export default function LiveStrategySimulator() {
             if (Date.now() - s.lastAiTick > 3500) {
               s.lastAiTick = Date.now();
               const aiSignals = [
-                `[Neural M15] Bullish Liquidity Sweep at ${(s.price - 0.0012).toFixed(4)} → Entry Confirmed (Conf: 94%)`,
-                `[Vision Engine] Fair Value Gap filled. Auto-hedging enabled. Target: +${s.tpDistance} pips.`,
+                `[Neural ${s.timeframe}] Bullish Liquidity Sweep at ${(s.price - 0.0012).toFixed(4)} → Entry Confirmed (Conf: 94%)`,
+                `[Vision Engine] Fair Value Gap filled on ${s.timeframe}. Auto-hedging enabled. Target: +${s.tpDistance} pips.`,
                 `[Risk Guard] Volatility index optimal. Trailing Break-Even armed.`,
-                `[ChatGPT 4o-mini] Re-evaluating macro order flow. Bias: ACCUMULATION.`,
+                `[ChatGPT 4o-mini] Re-evaluating ${s.timeframe} order flow. Bias: ACCUMULATION.`,
               ];
               const logMsg = aiSignals[Math.floor(Math.random() * aiSignals.length)];
               setAiTelemetryLog(logMsg);
@@ -704,35 +743,55 @@ export default function LiveStrategySimulator() {
           <p className="sim-subtitle">{currentModeInfo.desc}</p>
         </div>
 
-        {/* CONTROLS HEADER RIGHT: CHART TYPE & MODE SELECTORS */}
+        {/* CONTROLS HEADER RIGHT: TOOLBARS (CHART TYPE, TIMEFRAME, MODE) */}
         <div className="sim-header-actions">
-          {/* Chart Type Tabs (Candlestick / Line) */}
-          <div className="sim-chart-type-tabs">
-            <button
-              type="button"
-              className={`sim-chart-type-btn ${chartType === "candlestick" ? "active" : ""}`}
-              data-cursor-label="CANDLE"
-              onClick={() => {
-                playTactileClick();
-                setChartType("candlestick");
-              }}
-            >
-              🕯️ Candlesticks (OHLC)
-            </button>
-            <button
-              type="button"
-              className={`sim-chart-type-btn ${chartType === "line" ? "active" : ""}`}
-              data-cursor-label="LINE"
-              onClick={() => {
-                playTactileClick();
-                setChartType("line");
-              }}
-            >
-              📈 Line
-            </button>
+          {/* Row 1: Chart View & Timeframe Tabs */}
+          <div className="sim-chart-toolbar">
+            {/* Chart Type (Candlestick / Line) */}
+            <div className="sim-chart-type-tabs">
+              <button
+                type="button"
+                className={`sim-chart-type-btn ${chartType === "candlestick" ? "active" : ""}`}
+                data-cursor-label="CANDLE"
+                onClick={() => {
+                  playTactileClick();
+                  setChartType("candlestick");
+                }}
+              >
+                🕯️ Candlesticks
+              </button>
+              <button
+                type="button"
+                className={`sim-chart-type-btn ${chartType === "line" ? "active" : ""}`}
+                data-cursor-label="LINE"
+                onClick={() => {
+                  playTactileClick();
+                  setChartType("line");
+                }}
+              >
+                📈 Line
+              </button>
+            </div>
+
+            {/* Timeframe Selector Tabs (M1, M5, M15, M30, H1) */}
+            <div className="sim-timeframe-tabs">
+              {TIMEFRAMES.map((tf) => (
+                <button
+                  key={tf.id}
+                  type="button"
+                  className={`sim-timeframe-btn ${timeframe === tf.id ? "active" : ""}`}
+                  data-cursor-label={tf.id}
+                  onClick={() => handleTimeframeChange(tf.id)}
+                  title={`${tf.name} Timeframe`}
+                >
+                  <span>{tf.label}</span>
+                  {tf.isRec && <span className="sim-tf-rec-dot" title="Recommended for EA Budak Ubat"></span>}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Mode Selector Pills */}
+          {/* Row 2: Strategy Mode Selector Pills */}
           <div className="sim-mode-tabs">
             {MODES.map((m) => (
               <button
@@ -804,11 +863,11 @@ export default function LiveStrategySimulator() {
       <div className="sim-canvas-wrapper">
         <canvas ref={canvasRef} className="sim-canvas" />
 
-        {/* CANDLESTICK WATERMARK BADGE */}
+        {/* CANDLESTICK & TIMEFRAME WATERMARK BADGE */}
         <div className="sim-canvas-overlay-badge" aria-hidden="true">
-          <span>EURUSD // M1 LIVE SIM</span>
+          <span>EURUSD // {timeframe} LIVE SIM</span>
           <span style={{ color: chartType === "candlestick" ? "#10b981" : "#00f0ff" }}>
-            {chartType === "candlestick" ? "CANDLESTICK OHLC" : "LINE STREAM"}
+            {chartType === "candlestick" ? `${timeframe} CANDLESTICK OHLC` : `${timeframe} LINE STREAM`}
           </span>
         </div>
 
@@ -826,7 +885,7 @@ export default function LiveStrategySimulator() {
         {/* AI TELEMETRY TICKER (FOR GOLDMIND AI) */}
         {activeMode === "goldmind-ai" && (
           <div className="sim-ai-terminal-bar">
-            <span className="sim-ai-tag">AI // LOG:</span>
+            <span className="sim-ai-tag">AI // {timeframe} LOG:</span>
             <span className="sim-ai-msg">{aiTelemetryLog}</span>
           </div>
         )}
