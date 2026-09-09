@@ -32,6 +32,7 @@ const MODES = [
 
 export default function LiveStrategySimulator() {
   const [activeMode, setActiveMode] = useState("ea-budak-ubat");
+  const [chartType, setChartType] = useState("candlestick"); // "candlestick" or "line"
   const [simSpeed, setSimSpeed] = useState(1); // 0 = pause, 1 = normal, 2 = fast, 5 = ultra
   const [startLot, setStartLot] = useState(0.01);
   const [multiplier, setMultiplier] = useState(1.3);
@@ -53,6 +54,10 @@ export default function LiveStrategySimulator() {
     basePrice: 1.085,
     pipSize: 0.0001,
     history: [],
+    candles: [],
+    currentCandle: null,
+    candleTicks: 0,
+    chartType: "candlestick",
     trendBias: 0,
     volatility: 0.8,
     targetPrice: 1.085,
@@ -76,12 +81,13 @@ export default function LiveStrategySimulator() {
   // Keep stateRef synced with React state for high-frequency RAF loop
   useEffect(() => {
     stateRef.current.simSpeed = simSpeed;
+    stateRef.current.chartType = chartType;
     stateRef.current.startLot = startLot;
     stateRef.current.multiplier = multiplier;
     stateRef.current.gridStep = gridStep;
     stateRef.current.tpDistance = tpDistance;
     stateRef.current.mode = activeMode;
-  }, [simSpeed, startLot, multiplier, gridStep, tpDistance, activeMode]);
+  }, [simSpeed, chartType, startLot, multiplier, gridStep, tpDistance, activeMode]);
 
   // Trigger celebration particle effect
   const triggerCelebration = useCallback((profit, tpPrice) => {
@@ -131,15 +137,23 @@ export default function LiveStrategySimulator() {
     const s = stateRef.current;
     const pip = s.pipSize;
 
-    // Prefill price history
-    if (s.history.length === 0) {
+    // Prefill price history & procedural initial candlesticks
+    if (s.candles.length === 0) {
       let p = s.price;
-      for (let i = 0; i < 80; i++) {
-        p += (Math.random() - 0.5) * pip * 1.5;
-        s.history.push(p);
+      for (let c = 0; c < 36; c++) {
+        const open = p;
+        const change = (Math.random() - 0.492) * pip * 6 * s.volatility;
+        const close = open + change;
+        const high = Math.max(open, close) + Math.random() * pip * 3.5;
+        const low = Math.min(open, close) - Math.random() * pip * 3.5;
+        s.candles.push({ open, high, low, close });
+        s.history.push(close);
+        p = close;
       }
       s.price = p;
       s.targetPrice = p;
+      s.currentCandle = { open: p, high: p, low: p, close: p };
+      s.candleTicks = 0;
 
       // Open initial position for EA Budak Ubat
       openInitialGridPosition();
@@ -184,6 +198,25 @@ export default function LiveStrategySimulator() {
 
           s.history.push(s.price);
           if (s.history.length > 85) s.history.shift();
+
+          // Candlestick formation logic
+          if (!s.currentCandle) {
+            s.currentCandle = { open: s.price, high: s.price, low: s.price, close: s.price };
+            s.candleTicks = 0;
+          } else {
+            s.currentCandle.high = Math.max(s.currentCandle.high, s.price);
+            s.currentCandle.low = Math.min(s.currentCandle.low, s.price);
+            s.currentCandle.close = s.price;
+            s.candleTicks++;
+          }
+
+          // Complete candle bar every 12 ticks
+          if (s.candleTicks >= 12) {
+            s.candles.push({ ...s.currentCandle });
+            if (s.candles.length > 40) s.candles.shift();
+            s.currentCandle = { open: s.price, high: s.price, low: s.price, close: s.price };
+            s.candleTicks = 0;
+          }
 
           // ----------------------------------------------------
           // ALGORITHM LOGIC: EA BUDAK UBAT (Grid Martingale + ADR Pooling)
@@ -333,15 +366,32 @@ export default function LiveStrategySimulator() {
       }
 
       // ----------------------------------------------------
-      // DRAW CHART CANVAS
+      // DRAW CHART CANVAS (CANDLESTICKS / LINE)
       // ----------------------------------------------------
-      const prices = s.history;
-      const minP = Math.min(...prices, s.takeProfitPrice || 9999, ...s.positions.map((p) => p.openPrice)) - pip * 6;
-      const maxP = Math.max(...prices, s.takeProfitPrice || -9999, ...s.positions.map((p) => p.openPrice)) + pip * 6;
+      const activeCandles = [...s.candles];
+      if (s.currentCandle) activeCandles.push(s.currentCandle);
+
+      let minP, maxP;
+      if (s.chartType === "candlestick" && activeCandles.length > 0) {
+        minP = Math.min(
+          ...activeCandles.map((c) => c.low),
+          s.takeProfitPrice || 9999,
+          ...s.positions.map((p) => p.openPrice)
+        ) - pip * 4;
+        maxP = Math.max(
+          ...activeCandles.map((c) => c.high),
+          s.takeProfitPrice || -9999,
+          ...s.positions.map((p) => p.openPrice)
+        ) + pip * 4;
+      } else {
+        const prices = s.history;
+        minP = Math.min(...prices, s.takeProfitPrice || 9999, ...s.positions.map((p) => p.openPrice)) - pip * 6;
+        maxP = Math.max(...prices, s.takeProfitPrice || -9999, ...s.positions.map((p) => p.openPrice)) + pip * 6;
+      }
       const pRange = maxP - minP || 1;
 
       const getY = (price) => height - ((price - minP) / pRange) * (height - 60) - 30;
-      const getX = (idx) => (idx / (prices.length - 1)) * (width - 70) + 15;
+      const getX = (idx) => (idx / (s.history.length - 1)) * (width - 75) + 15;
 
       // Background Subtle Tech Grid
       ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
@@ -355,56 +405,135 @@ export default function LiveStrategySimulator() {
 
         // Pip price label
         const priceAtY = minP + ((height - 30 - y) / (height - 60)) * pRange;
-        ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.28)";
         ctx.font = "9px 'JetBrains Mono', monospace";
         ctx.fillText(priceAtY.toFixed(4), width - 60, y + 3);
       }
 
-      // Fill Gradient under Price Curve
-      const grad = ctx.createLinearGradient(0, 0, 0, height);
-      grad.addColorStop(0, "rgba(0, 240, 255, 0.22)");
-      grad.addColorStop(1, "rgba(0, 240, 255, 0.0)");
+      // ==========================================
+      // RENDER CANDLESTICKS (OHLC)
+      // ==========================================
+      if (s.chartType === "candlestick") {
+        const totalCandles = activeCandles.length;
+        const candleSpacing = (width - 85) / Math.max(1, totalCandles);
+        const candleWidth = Math.max(4, Math.min(13, candleSpacing * 0.72));
 
-      ctx.beginPath();
-      ctx.moveTo(getX(0), height);
-      prices.forEach((p, i) => {
-        ctx.lineTo(getX(i), getY(p));
-      });
-      ctx.lineTo(getX(prices.length - 1), height);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
+        activeCandles.forEach((candle, idx) => {
+          const candleX = 20 + idx * candleSpacing + candleWidth / 2;
+          const isBullish = candle.close >= candle.open;
+          const wickColor = isBullish ? "#10b981" : "#ef4444";
+          const bodyFill = isBullish ? "rgba(16, 185, 129, 0.85)" : "rgba(239, 68, 68, 0.85)";
 
-      // Main Neon Price Line
-      ctx.beginPath();
-      prices.forEach((p, i) => {
-        const x = getX(i);
-        const y = getY(p);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      });
-      ctx.strokeStyle = "#00f0ff";
-      ctx.lineWidth = 2.4;
-      ctx.lineJoin = "round";
-      ctx.stroke();
+          // 1. Draw Candle Wick (High to Low)
+          ctx.beginPath();
+          ctx.strokeStyle = wickColor;
+          ctx.lineWidth = 1.4;
+          ctx.moveTo(candleX, getY(candle.high));
+          ctx.lineTo(candleX, getY(candle.low));
+          ctx.stroke();
 
-      // Current Price Pulse Head
-      const currentX = getX(prices.length - 1);
-      const currentY = getY(s.price);
+          // 2. Draw Candle Body (Open to Close)
+          const topY = getY(Math.max(candle.open, candle.close));
+          const bottomY = getY(Math.min(candle.open, candle.close));
+          const bodyHeight = Math.max(2.5, bottomY - topY);
 
-      ctx.beginPath();
-      ctx.arc(currentX, currentY, 6, 0, Math.PI * 2);
-      ctx.fillStyle = "#00f0ff";
-      ctx.fill();
+          ctx.fillStyle = bodyFill;
+          ctx.strokeStyle = wickColor;
+          ctx.lineWidth = 1.2;
 
-      ctx.beginPath();
-      ctx.arc(currentX, currentY, 13, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.4)";
-      ctx.lineWidth = 2;
-      ctx.stroke();
+          ctx.beginPath();
+          ctx.rect(candleX - candleWidth / 2, topY, candleWidth, bodyHeight);
+          ctx.fill();
+          ctx.stroke();
 
-      // Draw Active Grid Positions Lines (Green Buy Layers)
-      s.positions.forEach((pos, idx) => {
+          // 3. Rightmost Active Candle Telemetry & Glowing Price Tag
+          if (idx === totalCandles - 1) {
+            // Price Tag Dot
+            ctx.beginPath();
+            ctx.arc(candleX, getY(candle.close), 4, 0, Math.PI * 2);
+            ctx.fillStyle = wickColor;
+            ctx.fill();
+
+            // Horizontal dashed guide to axis
+            ctx.beginPath();
+            ctx.setLineDash([3, 3]);
+            ctx.strokeStyle = wickColor;
+            ctx.lineWidth = 1;
+            ctx.moveTo(candleX, getY(candle.close));
+            ctx.lineTo(width - 68, getY(candle.close));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Price pill on axis
+            const tagY = getY(candle.close);
+            ctx.fillStyle = wickColor;
+            ctx.beginPath();
+            if (ctx.roundRect) {
+              ctx.roundRect(width - 64, tagY - 9, 58, 18, 4);
+            } else {
+              ctx.rect(width - 64, tagY - 9, 58, 18);
+            }
+            ctx.fill();
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 9px 'JetBrains Mono', monospace";
+            ctx.fillText(candle.close.toFixed(4), width - 60, tagY + 3.5);
+          }
+        });
+      }
+
+      // ==========================================
+      // RENDER LINE CHART (ALTERNATIVE VIEW)
+      // ==========================================
+      else {
+        const prices = s.history;
+        const grad = ctx.createLinearGradient(0, 0, 0, height);
+        grad.addColorStop(0, "rgba(0, 240, 255, 0.22)");
+        grad.addColorStop(1, "rgba(0, 240, 255, 0.0)");
+
+        ctx.beginPath();
+        ctx.moveTo(getX(0), height);
+        prices.forEach((p, i) => {
+          ctx.lineTo(getX(i), getY(p));
+        });
+        ctx.lineTo(getX(prices.length - 1), height);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // Main Neon Price Line
+        ctx.beginPath();
+        prices.forEach((p, i) => {
+          const x = getX(i);
+          const y = getY(p);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = "#00f0ff";
+        ctx.lineWidth = 2.4;
+        ctx.lineJoin = "round";
+        ctx.stroke();
+
+        // Current Price Pulse Head
+        const currentX = getX(prices.length - 1);
+        const currentY = getY(s.price);
+
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, 6, 0, Math.PI * 2);
+        ctx.fillStyle = "#00f0ff";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, 13, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(0, 240, 255, 0.4)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      // ==========================================
+      // DRAW ACTIVE GRID LAYERS (BUY LINES)
+      // ==========================================
+      s.positions.forEach((pos) => {
         const posY = getY(pos.openPrice);
         ctx.beginPath();
         ctx.setLineDash([4, 4]);
@@ -421,7 +550,9 @@ export default function LiveStrategySimulator() {
         ctx.fillText(`BUY #${pos.id} [${pos.lot.toFixed(2)}]`, 20, posY - 4);
       });
 
-      // Draw Dynamic TP Pooling Line (Cyan Glowing Dashed)
+      // ==========================================
+      // DRAW DYNAMIC TAKE PROFIT POOL LINE
+      // ==========================================
       if (s.takeProfitPrice) {
         const tpY = getY(s.takeProfitPrice);
         ctx.beginPath();
@@ -438,13 +569,18 @@ export default function LiveStrategySimulator() {
         ctx.fillText(`🎯 DYNAMIC TP POOL (+${s.tpDistance} PIPS)`, 20, tpY - 5);
       }
 
-      // Draw BracketBlitz OCO Lines
+      // ==========================================
+      // DRAW BRACKETBLITZ OCO LINES
+      // ==========================================
       if (s.mode === "bracketblitz") {
         if (s.ocoBuyStop) {
           const buyStopY = getY(s.ocoBuyStop);
           ctx.setLineDash([5, 3]);
           ctx.strokeStyle = "#10b981";
-          ctx.strokeRect(15, buyStopY, width - 85, 0);
+          ctx.beginPath();
+          ctx.moveTo(15, buyStopY);
+          ctx.lineTo(width - 70, buyStopY);
+          ctx.stroke();
           ctx.fillStyle = "#10b981";
           ctx.font = "bold 9px 'JetBrains Mono', monospace";
           ctx.fillText("⚡ BUY STOP (OCO PENDING)", 20, buyStopY - 4);
@@ -453,7 +589,10 @@ export default function LiveStrategySimulator() {
           const sellStopY = getY(s.ocoSellStop);
           ctx.setLineDash([5, 3]);
           ctx.strokeStyle = "#ef4444";
-          ctx.strokeRect(15, sellStopY, width - 85, 0);
+          ctx.beginPath();
+          ctx.moveTo(15, sellStopY);
+          ctx.lineTo(width - 70, sellStopY);
+          ctx.stroke();
           ctx.fillStyle = "#ef4444";
           ctx.font = "bold 9px 'JetBrains Mono', monospace";
           ctx.fillText("⚡ SELL STOP (OCO PENDING)", 20, sellStopY + 12);
@@ -461,7 +600,9 @@ export default function LiveStrategySimulator() {
         ctx.setLineDash([]);
       }
 
-      // Draw Particles on Celebration
+      // ==========================================
+      // DRAW CELEBRATION PARTICLES
+      // ==========================================
       for (let i = s.particles.length - 1; i >= 0; i--) {
         const pt = s.particles[i];
         pt.x += pt.vx;
@@ -502,7 +643,7 @@ export default function LiveStrategySimulator() {
       s.trendBias = 4.5;
       s.volatility = 1.2;
     } else if (eventType === "flash_dip") {
-      // Create sudden downward shock to trigger layers, then sharp rebound!
+      // Sudden downward shock to build layers, then sharp rebound!
       s.trendBias = -6.0;
       s.volatility = 1.6;
       setTimeout(() => {
@@ -530,6 +671,9 @@ export default function LiveStrategySimulator() {
     const s = stateRef.current;
     s.price = 1.085;
     s.history = [];
+    s.candles = [];
+    s.currentCandle = null;
+    s.candleTicks = 0;
     s.positions = [];
     s.takeProfitPrice = null;
     s.particles = [];
@@ -560,29 +704,58 @@ export default function LiveStrategySimulator() {
           <p className="sim-subtitle">{currentModeInfo.desc}</p>
         </div>
 
-        {/* MODE SELECTOR PILLS */}
-        <div className="sim-mode-tabs">
-          {MODES.map((m) => (
+        {/* CONTROLS HEADER RIGHT: CHART TYPE & MODE SELECTORS */}
+        <div className="sim-header-actions">
+          {/* Chart Type Tabs (Candlestick / Line) */}
+          <div className="sim-chart-type-tabs">
             <button
-              key={m.id}
               type="button"
-              data-cursor-label="ENGAGE"
-              className={`sim-mode-btn ${activeMode === m.id ? "active" : ""}`}
-              style={{
-                borderColor: activeMode === m.id ? m.color : undefined,
-                color: activeMode === m.id ? m.color : undefined,
-                background: activeMode === m.id ? `${m.color}18` : undefined,
-              }}
+              className={`sim-chart-type-btn ${chartType === "candlestick" ? "active" : ""}`}
+              data-cursor-label="CANDLE"
               onClick={() => {
                 playTactileClick();
-                setActiveMode(m.id);
-                stateRef.current.positions = [];
-                stateRef.current.takeProfitPrice = null;
+                setChartType("candlestick");
               }}
             >
-              <span>{m.name}</span>
+              🕯️ Candlesticks (OHLC)
             </button>
-          ))}
+            <button
+              type="button"
+              className={`sim-chart-type-btn ${chartType === "line" ? "active" : ""}`}
+              data-cursor-label="LINE"
+              onClick={() => {
+                playTactileClick();
+                setChartType("line");
+              }}
+            >
+              📈 Line
+            </button>
+          </div>
+
+          {/* Mode Selector Pills */}
+          <div className="sim-mode-tabs">
+            {MODES.map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                data-cursor-label="ENGAGE"
+                className={`sim-mode-btn ${activeMode === m.id ? "active" : ""}`}
+                style={{
+                  borderColor: activeMode === m.id ? m.color : undefined,
+                  color: activeMode === m.id ? m.color : undefined,
+                  background: activeMode === m.id ? `${m.color}18` : undefined,
+                }}
+                onClick={() => {
+                  playTactileClick();
+                  setActiveMode(m.id);
+                  stateRef.current.positions = [];
+                  stateRef.current.takeProfitPrice = null;
+                }}
+              >
+                <span>{m.name}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -630,6 +803,14 @@ export default function LiveStrategySimulator() {
       {/* MAIN CHART CANVAS VIEWPORT */}
       <div className="sim-canvas-wrapper">
         <canvas ref={canvasRef} className="sim-canvas" />
+
+        {/* CANDLESTICK WATERMARK BADGE */}
+        <div className="sim-canvas-overlay-badge" aria-hidden="true">
+          <span>EURUSD // M1 LIVE SIM</span>
+          <span style={{ color: chartType === "candlestick" ? "#10b981" : "#00f0ff" }}>
+            {chartType === "candlestick" ? "CANDLESTICK OHLC" : "LINE STREAM"}
+          </span>
+        </div>
 
         {/* TAKE PROFIT CELEBRATION OVERLAY */}
         {tpCelebration && (
