@@ -42,6 +42,8 @@ const PRODUCTS = [
     icon: "📊",
     status: "Live",
     category: "Grid Trading",
+    kanjiCategory: "グリッド取引",
+    systemCode: "SYS.01",
   },
   {
     slug: "goldmind-ai",
@@ -56,6 +58,8 @@ const PRODUCTS = [
     icon: "🤖",
     status: "New",
     category: "AI Trading",
+    kanjiCategory: "AI信号分析",
+    systemCode: "SYS.02",
   },
   {
     slug: "bracketblitz",
@@ -70,6 +74,8 @@ const PRODUCTS = [
     icon: "⚡",
     status: "New",
     category: "Breakout",
+    kanjiCategory: "ブレイクアウト",
+    systemCode: "SYS.03",
   },
   {
     slug: "mathedge-pro",
@@ -84,6 +90,8 @@ const PRODUCTS = [
     icon: "📐",
     status: "New",
     category: "Index Trading",
+    kanjiCategory: "指数計算",
+    systemCode: "SYS.04",
   },
   {
     slug: "aligator-gozaimasu",
@@ -98,6 +106,8 @@ const PRODUCTS = [
     icon: "🐊",
     status: "New",
     category: "Trend Following",
+    kanjiCategory: "トレンドフォロー",
+    systemCode: "SYS.05",
   },
   {
     slug: "encik-moku",
@@ -112,8 +122,11 @@ const PRODUCTS = [
     icon: "🏯",
     status: "New",
     category: "Trend Following",
+    kanjiCategory: "雲追跡トレンド",
+    systemCode: "SYS.06",
   },
 ];
+
 
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -238,13 +251,14 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero catalog-hero" id="hero">
+        <div className="jp-kanji-watermark" aria-hidden="true">自動売買</div>
         <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
         <div className="hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot"></span>
-            Trading Tools & Expert Advisors
+            <span>系統稼働中 // ALGORITHMIC TRADING SYSTEMS</span>
           </div>
           <h1>
             <span className="gradient-text">EA Budak Ubat</span>
@@ -259,6 +273,22 @@ export default function Home() {
             <Link href="/ea-budak-ubat#risk-calculator" className="btn btn-secondary" style={{ animation: "none" }}>🧮 Risk Calculator</Link>
             <a href="#authorization" className="btn btn-accent" style={{ animation: "none" }}>🔐 Check Account</a>
           </div>
+
+          <div className="jp-telemetry-strip animate-in">
+            <div className="jp-telemetry-item">
+              <span className="jp-telemetry-dot"></span>
+              <span>SESSIONS: <span className="jp-telemetry-val">TOKYO / LONDON / NY</span></span>
+            </div>
+            <div className="jp-telemetry-item">
+              <span>STATUS: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>ONLINE 99.9%</span></span>
+            </div>
+            <div className="jp-telemetry-item">
+              <span>ENGINES: <span className="jp-telemetry-val">MT4 + MT5 COMPATIBLE</span></span>
+            </div>
+            <div className="jp-telemetry-item">
+              <span>ACCOUNTS: <span className="jp-telemetry-val">300+ VERIFIED</span></span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -269,13 +299,16 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
       {/* PRODUCTS */}
       <section id="products">
+        <div className="jp-kanji-watermark" aria-hidden="true">製品一覧</div>
         <div className="container">
           <div className="section-header animate-in">
-            <span className="label">Products</span>
+            <span className="label">ALGORITHMIC SUITE // 製品一覧</span>
             <h2>Expert Advisors & Trading Systems</h2>
-            <p>Choose the right tool for your trading strategy.</p>
+            <p>Precision-engineered mathematical algorithms tailored for MetaTrader.</p>
           </div>
           <div className="product-catalog">
             {PRODUCTS.map((product, i) => (
@@ -292,10 +325,16 @@ export default function Home() {
                       <span className="product-icon">{product.icon}</span>
                     </div>
                     <div className="product-meta">
-                      <span className={`product-status ${product.status === 'New' ? 'status-new' : 'status-live'}`}>
-                        {product.status}
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span className="jp-badge">{product.systemCode}</span>
+                        <span className={`product-status ${product.status === 'New' ? 'status-new' : 'status-live'}`}>
+                          {product.status}
+                        </span>
+                      </div>
+                      <span className="product-category">
+                        {product.category}
+                        <span className="jp-category-kanji">{product.kanjiCategory}</span>
                       </span>
-                      <span className="product-category">{product.category}</span>
                     </div>
                   </div>
 
@@ -329,6 +368,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* AUTHORIZATION VERIFICATION PORTAL */}
       <section id="authorization" style={{ background: "var(--bg-primary)", padding: "70px 0" }}>

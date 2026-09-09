@@ -2,6 +2,8 @@ import "./globals.css";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import FacebookPixel from "@/app/components/FacebookPixel";
+import FluidCanvas from "@/app/components/FluidCanvas";
+import LiquidGlassEffects from "@/app/components/LiquidGlassEffects";
 
 export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
@@ -47,12 +49,17 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body>
+        <FluidCanvas />
+        <LiquidGlassEffects />
         <Suspense fallback={null}>
           <FacebookPixel />
         </Suspense>
-        {children}
+        <div className="relative-content-wrapper">
+          {children}
+        </div>
         <Analytics />
       </body>
     </html>
   );
 }
+
