@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { supabase } from "@/lib/supabase";
 import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 
@@ -144,21 +143,24 @@ export default function Home() {
   });
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [botTrap, setBotTrap] = useState("");
+  const [formRenderedAt, setFormRenderedAt] = useState(Date.now());
 
-  // Fetch comments
+  // Fetch comments from secure API gateway
   useEffect(() => {
     fetchComments();
   }, []);
 
   async function fetchComments() {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("comments")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (!error && data) {
-      setComments(data);
+    try {
+      const res = await fetch("/api/comments");
+      const json = await res.json();
+      if (json.success && json.comments) {
+        setComments(json.comments);
+      }
+    } catch (err) {
+      console.error("Fetch comments error:", err);
     }
     setLoading(false);
   }
@@ -180,26 +182,40 @@ export default function Home() {
 
     setSubmitting(true);
 
-    const payload = {
-      name: formData.name.trim(),
-      type: formData.type,
-      message: formData.message.trim(),
-    };
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        type: formData.type,
+        message: formData.message.trim(),
+        bot_catch: botTrap,
+        form_rendered_at: formRenderedAt,
+      };
 
-    if (formData.type === "ea_request" && formData.ea_name.trim()) {
-      payload.ea_name = formData.ea_name.trim();
-    }
+      if (formData.type === "ea_request" && formData.ea_name.trim()) {
+        payload.ea_name = formData.ea_name.trim();
+      }
 
-    const { error } = await supabase.from("comments").insert([payload]);
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    if (error) {
-      setSubmitError("Something went wrong. Please try again.");
-      console.error("Submit error:", error);
-    } else {
-      setSubmitSuccess(true);
-      setFormData({ name: "", type: "feedback", ea_name: "", message: "" });
-      fetchComments();
-      setTimeout(() => setSubmitSuccess(false), 4000);
+      const json = await res.json();
+
+      if (!res.ok || !json.success) {
+        setSubmitError(json.error || "Something went wrong. Please try again.");
+      } else {
+        setSubmitSuccess(true);
+        setFormData({ name: "", type: "feedback", ea_name: "", message: "" });
+        setBotTrap("");
+        setFormRenderedAt(Date.now());
+        fetchComments();
+        setTimeout(() => setSubmitSuccess(false), 4000);
+      }
+    } catch (err) {
+      setSubmitError("Network error. Please try again.");
+      console.error("Submit error:", err);
     }
 
     setSubmitting(false);
@@ -241,7 +257,7 @@ export default function Home() {
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
             <li><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a></li>
-            <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank">Telegram</a></li>
+            <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank" rel="noopener noreferrer">Telegram</a></li>
           </ul>
           <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
             {mobileNavOpen ? "✕" : "☰"}
@@ -459,6 +475,20 @@ export default function Home() {
 
           {/* Post Form */}
           <form className="community-form glass-card animate-in" onSubmit={handleSubmit} style={{ marginBottom: "60px" }}>
+            {/* Honeypot Bot Trap (Hidden from real users) */}
+            <div style={{ display: "none", opacity: 0, position: "absolute", left: "-9999px" }} aria-hidden="true">
+              <label htmlFor="bot_catch">Leave this field blank</label>
+              <input
+                id="bot_catch"
+                type="text"
+                name="bot_catch"
+                value={botTrap}
+                onChange={(e) => setBotTrap(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="form-group">
               <label className="form-label" htmlFor="community-name">Your Name</label>
               <input
@@ -653,8 +683,8 @@ export default function Home() {
               </p>
               <div className="social-links">
                 <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
+                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
+                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
               </div>
             </div>
             <div>
@@ -682,8 +712,8 @@ export default function Home() {
               <h4>Contact</h4>
               <ul className="footer-links">
                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
-                <li><a href="https://t.me/EABudakUbat" target="_blank">Channel: t.me/EABudakUbat</a></li>
+                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
+                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
               </ul>
             </div>
           </div>

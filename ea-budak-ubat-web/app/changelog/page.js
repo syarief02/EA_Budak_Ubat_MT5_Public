@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -296,7 +296,7 @@ export default function ChangelogPage() {
             <li><Link href="/ea-budak-ubat#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</Link></li>
             <li><Link href="/#authorization" onClick={() => setMobileNavOpen(false)}>License</Link></li>
             <li><Link href="/changelog" className="nav-link-active" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank">Telegram</a></li>
+            <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank" rel="noopener noreferrer">Telegram</a></li>
           </ul>
           <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
             {mobileNavOpen ? "✕" : "☰"}
@@ -407,8 +407,8 @@ export default function ChangelogPage() {
               </p>
               <div className="social-links" style={{ marginTop: 16 }}>
                 <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
+                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
+                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
               </div>
             </div>
             <div>
@@ -430,7 +430,7 @@ export default function ChangelogPage() {
                 <li><Link href="/ea-budak-ubat#risk-calculator">Margin Calculator</Link></li>
                 <li><Link href="/changelog">Version Changelog</Link></li>
                 <li><Link href="/#authorization">License Checker</Link></li>
-                <li><a href="https://t.me/EABudakUbat" target="_blank">Telegram Channel</a></li>
+                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Telegram Channel</a></li>
               </ul>
             </div>
           </div>

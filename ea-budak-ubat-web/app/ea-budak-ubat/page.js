@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -136,7 +136,7 @@ export default function EABudakUbatPage() {
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-            <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank">Buy MT4</a></li>
+            <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank" rel="noopener noreferrer">Buy MT4</a></li>
           </ul>
           <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
             {mobileNavOpen ? "✕" : "☰"}
@@ -166,7 +166,7 @@ export default function EABudakUbatPage() {
             <a href={DOWNLOAD_MT5} className="btn btn-secondary">⬇️ Download MT5</a>
             <a href="#preset-generator" className="btn btn-secondary">⚙️ Presets (.set)</a>
             <a href="#risk-calculator" className="btn btn-secondary">🧮 Risk Calculator</a>
-            <a href={PURCHASE_LINK} className="btn btn-accent" target="_blank">🛒 Full Version (MT4 Only)</a>
+            <a href={PURCHASE_LINK} className="btn btn-accent" target="_blank" rel="noopener noreferrer">🛒 Full Version (MT4 Only)</a>
           </div>
           <p className="hero-note">
             <strong>Limited Time Price!</strong> The price increases by 10 USD after every 10 purchases.
@@ -393,7 +393,7 @@ export default function EABudakUbatPage() {
                 <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>Recommended Forex VPS Provider</p>
                 <p className="promo-code" style={{ fontSize: "1.2rem" }}>GB Network Solutions</p>
                 <p className="price">Reliable. Low Latency. 24/7 Uptime.</p>
-                <a href="https://secure.gbnetwork.com/aff.php?aff=515" className="btn btn-accent" style={{ marginTop: 16, display: "inline-flex" }} target="_blank">
+                <a href="https://secure.gbnetwork.com/aff.php?aff=515" className="btn btn-accent" style={{ marginTop: 16, display: "inline-flex" }} target="_blank" rel="noopener noreferrer">
                   Order VPS →
                 </a>
               </div>
@@ -470,8 +470,8 @@ export default function EABudakUbatPage() {
               </p>
               <div className="social-links">
                 <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
+                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
+                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
               </div>
             </div>
             <div>
@@ -489,9 +489,9 @@ export default function EABudakUbatPage() {
               <h4>Contact</h4>
               <ul className="footer-links">
                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
-                <li><a href="https://t.me/EABudakUbat" target="_blank">Channel: t.me/EABudakUbat</a></li>
-                <li><a href={SIGNAL_LINK} target="_blank">MQL5 Signal Channel</a></li>
+                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
+                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
+                <li><a href={SIGNAL_LINK} target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
               </ul>
             </div>
           </div>

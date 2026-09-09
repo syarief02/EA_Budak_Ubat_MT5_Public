@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -298,7 +298,7 @@ export default function GuidePage() {
                         <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
                         <li><a href="#brokers" onClick={() => setMobileNavOpen(false)}>Brokers</a></li>
                         <li><a href="#risk" onClick={() => setMobileNavOpen(false)}>Risk</a></li>
-                        <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank">💬 Telegram</a></li>
+                        <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank" rel="noopener noreferrer">💬 Telegram</a></li>
                     </ul>
                     <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
                         {mobileNavOpen ? "✕" : "☰"}
@@ -550,7 +550,7 @@ export default function GuidePage() {
                                     </div>
                                 ))}
                             </div>
-                            <a href="https://secure.gbnetwork.com/aff.php?aff=515" className="btn btn-accent" style={{ display: "inline-flex" }} target="_blank">
+                            <a href="https://secure.gbnetwork.com/aff.php?aff=515" className="btn btn-accent" style={{ display: "inline-flex" }} target="_blank" rel="noopener noreferrer">
                                 Order VPS from GB Network →
                             </a>
                         </div>
@@ -672,8 +672,8 @@ export default function GuidePage() {
                             <h4>Contact</h4>
                             <ul className="footer-links">
                                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                                <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
-                                <li><a href="https://t.me/EABudakUbat" target="_blank">Channel: t.me/EABudakUbat</a></li>
+                                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
                             </ul>
                         </div>
                     </div>

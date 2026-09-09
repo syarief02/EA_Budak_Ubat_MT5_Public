@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { checkAccount, EA_DATABASE, BROKERS } from "@/lib/authorizedAccounts";
+import { checkAccount, EA_DATABASE, BROKERS, MT4_AUTHORIZED_ACCOUNTS, MT5_AUTHORIZED_ACCOUNTS } from "@/lib/authorizedAccounts";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 
 export default function AccountChecker({
@@ -122,14 +122,14 @@ export default function AccountChecker({
             className={`platform-pill ${platformFilter === "mt4" ? "active" : ""}`}
             onClick={() => setPlatformFilter("mt4")}
           >
-            💻 MetaTrader 4 (MT4 Pool: 847)
+            💻 MetaTrader 4 (MT4 Pool: {MT4_AUTHORIZED_ACCOUNTS.size})
           </button>
           <button
             type="button"
             className={`platform-pill ${platformFilter === "mt5" ? "active" : ""}`}
             onClick={() => setPlatformFilter("mt5")}
           >
-            ⚡ MetaTrader 5 (MT5 Pool: 863)
+            ⚡ MetaTrader 5 (MT5 Pool: {MT5_AUTHORIZED_ACCOUNTS.size})
           </button>
         </div>
       </div>
@@ -143,6 +143,7 @@ export default function AccountChecker({
               type="text"
               inputMode="numeric"
               pattern="[0-9]*"
+              maxLength={15}
               className="checker-input"
               placeholder="e.g. 440204090 or your MetaTrader account number..."
               value={accountNumber}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -369,8 +369,8 @@ export default function BracketBlitzPage() {
                                 Rapid-fire OCO bracket order EA for MetaTrader 4 & 5. Open source breakout-capture strategy.
                             </p>
                             <div className="social-links">
-                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" title="Telegram">💬</a>
-                                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" title="Twitter/X">🐦</a>
+                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
+                                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
                             </div>
                         </div>
                         <div>
@@ -387,8 +387,8 @@ export default function BracketBlitzPage() {
                             <h4>Contact</h4>
                             <ul className="footer-links">
                                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                                <li><a href="https://t.me/SyariefAzman" target="_blank">Telegram: @SyariefAzman</a></li>
-                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank">Twitter: @SyariefAzman</a></li>
+                                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
+                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank" rel="noopener noreferrer">Twitter: @SyariefAzman</a></li>
                                 <li><Link href="/">← Back to All Products</Link></li>
                             </ul>
                         </div>
