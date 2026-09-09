@@ -151,28 +151,44 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
 }
 
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
-    $mq5Path = "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .mq5"
-    $logPath = "$MQL5_BASE\compilemql5.log"
-    Write-Host "  Compiling MT5: $mq5Path ..." -ForegroundColor DarkCyan
-    $proc = Start-Process -FilePath $MT5_COMPILER -ArgumentList "/compile:`"$mq5Path`" /log:`"$logPath`"" -PassThru -Wait -NoNewWindow
-    $compiledEx5 = "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .ex5"
-    if (Test-Path $compiledEx5) {
-        Write-Host "  [OK] MT5 Compilation succeeded!" -ForegroundColor Green
-        Copy-Item -Path $compiledEx5 -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
-        Copy-Item -Path $compiledEx5 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
-        Copy-Item -Path $compiledEx5 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
-        Copy-Item -Path $compiledEx5 -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .ex5" -Force
-        Copy-Item -Path $compiledEx5 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .ex5" -Force
-        if (Test-Path $mq5Path) {
-            Copy-Item -Path $mq5Path -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - .mq5" -Force
-            Copy-Item -Path $mq5Path -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .mq5" -Force
-            Copy-Item -Path $mq5Path -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .mq5" -Force
+    # Compile MT5 v1.63
+    $mq5_163 = "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .mq5"
+    if (Test-Path $mq5_163) {
+        $logPath163 = "$MQL5_BASE\compile_v163.log"
+        Write-Host "  Compiling MT5 v1.63: $mq5_163 ..." -ForegroundColor DarkCyan
+        $proc = Start-Process -FilePath $MT5_COMPILER -ArgumentList "/compile:`"$mq5_163`" /log:`"$logPath163`"" -PassThru -Wait -NoNewWindow
+        $compiledEx5_163 = "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - .ex5"
+        if (Test-Path $compiledEx5_163) {
+            Write-Host "  [OK] MT5 v1.63 Compilation succeeded!" -ForegroundColor Green
+            Copy-Item -Path $compiledEx5_163 -Destination "$MQL5_BASE\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item -Path $compiledEx5_163 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item -Path $compiledEx5_163 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item -Path $compiledEx5_163 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .ex5" -Force
+            Copy-Item -Path $mq5_163 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.63 - MT5 - .mq5" -Force
+            Write-Host "  [OK] Copied MT5 v1.63 binaries and source to repos" -ForegroundColor Green
+        } else {
+            Write-Host "  [FAILED] MT5 v1.63 Compilation failed. Check $logPath163" -ForegroundColor Red
         }
-        Write-Host "  [OK] Copied MT5 binaries to repos" -ForegroundColor Green
-    } else {
-        Write-Host "  [FAILED] MT5 Compilation failed. Check $logPath" -ForegroundColor Red
+    }
+
+    # Also compile MT5 v1.62 if present
+    $mq5_162 = "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .mq5"
+    if (Test-Path $mq5_162) {
+        $logPath162 = "$MQL5_BASE\compile_v162.log"
+        Write-Host "  Compiling MT5 v1.62: $mq5_162 ..." -ForegroundColor DarkCyan
+        $proc = Start-Process -FilePath $MT5_COMPILER -ArgumentList "/compile:`"$mq5_162`" /log:`"$logPath162`"" -PassThru -Wait -NoNewWindow
+        $compiledEx5_162 = "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - .ex5"
+        if (Test-Path $compiledEx5_162) {
+            Write-Host "  [OK] MT5 v1.62 Compilation succeeded!" -ForegroundColor Green
+            Copy-Item -Path $compiledEx5_162 -Destination "$MQL5_BASE\EA - Budak Ubat v1.62 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item -Path $compiledEx5_162 -Destination "$PUBLIC_REPO\EA - Budak Ubat v1.62 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item -Path $compiledEx5_162 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item -Path $mq5_162 -Destination "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.62 - MT5 - .mq5" -Force
+            Write-Host "  [OK] Copied MT5 v1.62 binaries to repos" -ForegroundColor Green
+        }
     }
 }
+
 
 # 6. Git Push Repos
 Write-Host ""
