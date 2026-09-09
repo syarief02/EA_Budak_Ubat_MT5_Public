@@ -126,9 +126,91 @@ const PRODUCTS = [
   },
 ];
 
+const STRATEGY_DATA = {
+  "ea-budak-ubat": {
+    name: "EA Budak Ubat",
+    version: "v1.63",
+    tagline: "Autonomous Grid Martingale Engine (ADR Dynamic Optimization)",
+    desc: "Autonomous dynamic grid with break-even TP pooling, 4 technical entry modes (SMA20, Candle, Alligator, Ichimoku), and adaptive spread protection for ranging markets.",
+    winRate: "84.2%",
+    drawdown: "< 12.8%",
+    timeframe: "M5 Recommended",
+    instruments: "Ranging FX Pairs",
+    sparkline: "M0,110 Q50,90 100,98 T200,75 T300,60 T400,38 T500,20",
+    color: "#00f0ff",
+    code: "SYS.01",
+  },
+  "goldmind-ai": {
+    name: "GoldMind AI",
+    version: "Open Source",
+    tagline: "Neural Signal Engine (ChatGPT 4o-mini + MQL5 Bridge)",
+    desc: "Computer vision & LLM chart reasoning algorithm designed exclusively for XAUUSD gold breakouts with strict news and volatility gating.",
+    winRate: "91.0%",
+    drawdown: "< 8.5%",
+    timeframe: "M15 / H1 Analysis",
+    instruments: "XAUUSD (Gold)",
+    sparkline: "M0,120 Q60,110 120,80 T240,65 T360,40 T440,25 T500,12",
+    color: "#f59e0b",
+    code: "SYS.02",
+  },
+  "bracketblitz": {
+    name: "BracketBlitz EA",
+    version: "v1.00",
+    tagline: "Dual OCO Rapid-Fire Momentum Engine",
+    desc: "Perpetually refreshes Buy Stop + Sell Stop brackets surrounding active price every 30s. Designed for high-impact CPI, NFP, and FOMC catalysts.",
+    winRate: "78.5%",
+    drawdown: "< 14.0%",
+    timeframe: "M1 / M5 Catalyst",
+    instruments: "All Major FX & Metals",
+    sparkline: "M0,105 Q70,95 140,82 T260,70 T380,45 T450,30 T500,18",
+    color: "#10b981",
+    code: "SYS.03",
+  },
+  "mathedge-pro": {
+    name: "MathEdge Pro",
+    version: "v1.1",
+    tagline: "Statistical Quantitative Sequence Model",
+    desc: "Engineered specifically for US30 Dow Jones and NAS100 tech indices during high-liquidity New York session openings.",
+    winRate: "82.0%",
+    drawdown: "< 11.2%",
+    timeframe: "M15 NY Session",
+    instruments: "US30 / NAS100",
+    sparkline: "M0,115 Q80,100 150,78 T270,55 T390,35 T460,22 T500,14",
+    color: "#ef4444",
+    code: "SYS.04",
+  },
+  "aligator-gozaimasu": {
+    name: "Aligator Gozaimasu",
+    version: "v1.06",
+    tagline: "Multi-Timeframe Trend Confirmation Suite",
+    desc: "Synchronizes Bill Williams Alligator lips/teeth/jaws across up to 4 simultaneous timeframes with auto-compounding lot scaling.",
+    winRate: "86.5%",
+    drawdown: "< 13.5%",
+    timeframe: "M15 / H1 Confirmation",
+    instruments: "EURUSD, GBPUSD, USDJPY",
+    sparkline: "M0,112 Q65,92 135,74 T255,58 T375,38 T445,24 T500,15",
+    color: "#22c55e",
+    code: "SYS.05",
+  },
+  "encik-moku": {
+    name: "Encik Moku",
+    version: "v1.06",
+    tagline: "Cloud Kumo Equilibrium & Trend Following",
+    desc: "Automated Ichimoku Kinko Hyo strategy executing entries above bullish Kumo clouds with RSI & Stochastic confirmation filters.",
+    winRate: "85.0%",
+    drawdown: "< 12.0%",
+    timeframe: "M30 / H1 Trend",
+    instruments: "Trend-Dominant FX",
+    sparkline: "M0,118 Q75,102 145,80 T265,60 T385,40 T455,26 T500,16",
+    color: "#f59e0b",
+    code: "SYS.06",
+  },
+};
 
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
+  const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
 
   // Community State
   const [comments, setComments] = useState([]);
@@ -332,6 +414,141 @@ export default function Home() {
             <h2>Expert Advisors & Trading Systems</h2>
             <p>Precision-engineered mathematical algorithms tailored for MetaTrader.</p>
           </div>
+
+          {/* INTERACTIVE STRATEGY MATRIX DECK */}
+          <div className="strategy-matrix-container border-beam-card animate-in">
+            <div className="sparkline-header">
+              <span className="sparkline-title">⚡ REALTIME STRATEGY TELEMETRY // {currentStrat.code}</span>
+              <span className="sparkline-val-badge">LIVE SIMULATION ACTIVE</span>
+            </div>
+
+            {/* Strategy Selectors */}
+            <div className="strategy-tabs-bar">
+              {PRODUCTS.map((ea) => (
+                <button
+                  key={ea.slug}
+                  type="button"
+                  data-cursor-label="SWITCH"
+                  className={`strategy-selector-btn ${activeStrategy === ea.slug ? "active" : ""}`}
+                  onClick={() => setActiveStrategy(ea.slug)}
+                >
+                  <span>{ea.icon}</span>
+                  <span>{ea.name}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Strategy Display Grid */}
+            <div className="strategy-display-grid">
+              <div className="strategy-info-block">
+                <h3>
+                  <span>{currentStrat.name}</span>
+                  <span className="jp-badge">{currentStrat.version}</span>
+                </h3>
+                <p className="strategy-tagline">{currentStrat.tagline}</p>
+                <p className="strategy-desc">{currentStrat.desc}</p>
+
+                <div className="strategy-telemetry-panel">
+                  <div className="telemetry-cell">
+                    <div className="telemetry-cell-label">Model Win Rate</div>
+                    <div className="telemetry-cell-value" style={{ color: currentStrat.color }}>
+                      {currentStrat.winRate}
+                    </div>
+                  </div>
+                  <div className="telemetry-cell">
+                    <div className="telemetry-cell-label">Drawdown Threshold</div>
+                    <div className="telemetry-cell-value" style={{ color: "var(--liquid-emerald)" }}>
+                      {currentStrat.drawdown}
+                    </div>
+                  </div>
+                  <div className="telemetry-cell">
+                    <div className="telemetry-cell-label">Optimal Timeframe</div>
+                    <div className="telemetry-cell-value" style={{ fontSize: "1rem" }}>
+                      {currentStrat.timeframe}
+                    </div>
+                  </div>
+                  <div className="telemetry-cell">
+                    <div className="telemetry-cell-label">Target Asset Class</div>
+                    <div className="telemetry-cell-value" style={{ fontSize: "1rem" }}>
+                      {currentStrat.instruments}
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                  <Link
+                    href={`/${activeStrategy}`}
+                    className="btn btn-primary btn-sm"
+                    data-cursor-label="EXPLORE"
+                    style={{ animation: "none" }}
+                  >
+                    🚀 Deep Dive & Specs
+                  </Link>
+                  <a
+                    href="#authorization"
+                    className="btn btn-secondary btn-sm"
+                    data-cursor-label="CHECK"
+                    style={{ animation: "none" }}
+                  >
+                    🔐 Verify Licensing
+                  </a>
+                </div>
+              </div>
+
+              {/* Animated Interactive SVG Equity Curve */}
+              <div className="sparkline-canvas-box">
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--text-muted)" }}>
+                    EQUITY ACCELERATION CURVE
+                  </span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: currentStrat.color, fontWeight: 700 }}>
+                    MAX GAIN
+                  </span>
+                </div>
+                <svg className="sparkline-svg" viewBox="0 0 500 130">
+                  <defs>
+                    <linearGradient id={`grad-${activeStrategy}`} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor={currentStrat.color} stopOpacity="0.4" />
+                      <stop offset="100%" stopColor={currentStrat.color} stopOpacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  {/* Grid guidelines */}
+                  <line x1="0" y1="30" x2="500" y2="30" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+                  <line x1="0" y1="65" x2="500" y2="65" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+                  <line x1="0" y1="100" x2="500" y2="100" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+
+                  {/* Gradient Area Fill */}
+                  <path
+                    d={`${currentStrat.sparkline} L500,130 L0,130 Z`}
+                    fill={`url(#grad-${activeStrategy})`}
+                  />
+
+                  {/* Animated Stroke Line */}
+                  <path
+                    d={currentStrat.sparkline}
+                    fill="none"
+                    stroke={currentStrat.color}
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                    style={{
+                      strokeDasharray: 700,
+                      strokeDashoffset: 0,
+                      animation: "dash 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+                    }}
+                  />
+                  {/* Peak Target Glow Circle */}
+                  <circle cx="500" cy="20" r="5" fill={currentStrat.color} />
+                  <circle cx="500" cy="20" r="10" fill={currentStrat.color} opacity="0.35" />
+                </svg>
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "12px", fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--text-muted)" }}>
+                  <span>ENTRY: FIXED RISK</span>
+                  <span>MARTINGALE: DYNAMIC</span>
+                  <span>TARGET: COMPOUNDED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="product-catalog">
             {PRODUCTS.map((product, i) => (
               <Link

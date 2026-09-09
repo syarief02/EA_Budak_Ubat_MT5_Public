@@ -5117,3 +5117,338 @@ section {
   position: relative;
   z-index: 1;
 }
+
+/* ============================================================
+   KINETIC ANIME & LIQUID GLASS INTERACTIVE SUITE
+   ============================================================ */
+
+/* --- Magnetic Anime Targeting Reticle --- */
+.anime-cursor-reticle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  margin-left: -16px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.reticle-ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(0, 240, 255, 0.45);
+  border-radius: 50%;
+  transition: all 0.22s ease;
+}
+
+.anime-cursor-reticle.locked {
+  width: 54px;
+  height: 54px;
+  margin-top: -27px;
+  margin-left: -27px;
+}
+
+.anime-cursor-reticle.locked .reticle-ring {
+  border-color: rgba(255, 42, 133, 0.75);
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.45), inset 0 0 14px rgba(0, 240, 255, 0.3);
+  animation: reticle-spin 8s linear infinite;
+}
+
+@keyframes reticle-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reticle-corner {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-color: #00f0ff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.anime-cursor-reticle.locked .reticle-corner {
+  opacity: 1;
+  border-color: #ff2a85;
+}
+
+.reticle-tl { top: -2px; left: -2px; border-top: 2px solid; border-left: 2px solid; }
+.reticle-tr { top: -2px; right: -2px; border-top: 2px solid; border-right: 2px solid; }
+.reticle-bl { bottom: -2px; left: -2px; border-bottom: 2px solid; border-left: 2px solid; }
+.reticle-br { bottom: -2px; right: -2px; border-bottom: 2px solid; border-right: 2px solid; }
+
+.reticle-label {
+  position: absolute;
+  bottom: -24px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ff2a85;
+  background: rgba(8, 12, 24, 0.88);
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 42, 133, 0.45);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.anime-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  margin-top: -2px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+  pointer-events: none;
+  z-index: 10001;
+  will-change: transform;
+}
+
+/* --- Rotating Laser Border Beam --- */
+.border-beam-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.border-beam-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 240, 255, 0.8) 50%,
+    rgba(255, 42, 133, 0.8) 65%,
+    transparent 80%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: border-beam-flow 4.5s linear infinite;
+  background-size: 300% 100%;
+}
+
+@keyframes border-beam-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 300% 0%; }
+}
+
+/* --- Dynamic Specular Optical Glass Reflection --- */
+.glass-card::before,
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    650px circle at var(--specular-x, 50%) var(--specular-y, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 45%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.glass-card:hover::before,
+.product-card:hover::before {
+  opacity: 1;
+}
+
+/* --- Tactile Button Squish Physics --- */
+.btn, .nav-cta, .platform-pill {
+  transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.btn:active, .nav-cta:active, .platform-pill:active {
+  transform: scale(0.955) !important;
+}
+
+/* --- Interactive Strategy Deck / Matrix --- */
+.strategy-matrix-container {
+  margin: 40px 0 60px;
+  background: rgba(10, 14, 26, 0.72);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.strategy-tabs-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  scrollbar-width: none;
+}
+
+.strategy-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.strategy-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.strategy-selector-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.strategy-selector-btn.active {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: rgba(0, 240, 255, 0.45);
+  color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.strategy-display-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  margin-top: 28px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .strategy-display-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.strategy-info-block h3 {
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.strategy-info-block .strategy-tagline {
+  color: var(--liquid-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.strategy-info-block .strategy-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.strategy-telemetry-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.telemetry-cell {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.telemetry-cell-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.telemetry-cell-value {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sparkline-canvas-box {
+  background: rgba(5, 8, 16, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+.sparkline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sparkline-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.sparkline-val-badge {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--liquid-emerald);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.sparkline-svg {
+  width: 100%;
+  height: 140px;
+  overflow: visible;
+}
