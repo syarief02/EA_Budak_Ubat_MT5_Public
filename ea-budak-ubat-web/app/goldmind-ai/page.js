@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
-const DOWNLOAD_MT5 = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
+const DOWNLOAD_EX5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.00%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_ZIP = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
+const DOWNLOAD_MT5 = DOWNLOAD_EX5;
 
 const FEATURES = [
     { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI GPT (default: gpt-5.2) to analyze XAUUSD price charts across multiple timeframes and generate trading signals with structured JSON output." },
@@ -77,7 +79,7 @@ export default function GoldMindAIPage() {
                         <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
                         <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
                         <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={DOWNLOAD_MT5} target="_blank" rel="noopener noreferrer" className="nav-cta">⬇️ Download Project</a></li>
+                        <li><a href={DOWNLOAD_EX5} target="_blank" rel="noopener noreferrer" className="nav-cta">⬇️ Download MT5</a></li>
                     </ul>
                     <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
                         {mobileNavOpen ? "✕" : "☰"}
@@ -103,8 +105,8 @@ export default function GoldMindAIPage() {
                         across multiple timeframes and automatically place trades in MetaTrader 5. Runs entirely on your own computer.
                     </p>
                     <div className="hero-actions">
-                        <a href={DOWNLOAD_MT5} target="_blank" rel="noopener noreferrer" className="btn btn-goldmind-primary">⬇️ Download Project</a>
-                        <a href="#how-it-works" className="btn btn-secondary">📖 Learn More</a>
+                        <a href={DOWNLOAD_EX5} target="_blank" rel="noopener noreferrer" className="btn btn-goldmind-primary">⚡ Download MT5 (.ex5)</a>
+                        <a href={DOWNLOAD_ZIP} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">📦 Download Project (.zip)</a>
                     </div>
                     <p className="hero-note">
                         <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key. Expires 2026-09-30. By Syarief Azman.
