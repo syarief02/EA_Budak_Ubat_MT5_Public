@@ -221,8 +221,14 @@ export default function Home() {
     setSubmitting(false);
   }
 
-  const filteredComments =
-    filter === "all" ? comments : comments.filter((c) => c.type === filter);
+  const filteredComments = (
+    filter === "all" ? comments : comments.filter((c) => c.type === filter)
+  ).filter((c) => {
+    const ea = (c.ea_name || "").toLowerCase();
+    const msg = (c.message || "").toLowerCase();
+    const nm = (c.name || "").toLowerCase();
+    return !ea.includes("daltus") && !msg.includes("daltus") && !nm.includes("daltus");
+  });
 
   const getTypeInfo = (type) =>
     POST_TYPES.find((t) => t.key === type) || POST_TYPES[1];

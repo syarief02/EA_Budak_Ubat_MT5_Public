@@ -1,4 +1,4 @@
-﻿import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 
 // In-memory sliding-window rate limiter per IP
@@ -66,9 +66,22 @@ export async function GET() {
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 
-    // Filter out diagnostic and test probe rows from public feed
+    // Filter out diagnostic rows, test probes, and non-EA Budak Ubat EAs (e.g. Daltus EA)
     const sanitizedComments = (data || []).filter((item) => {
       const lowerName = (item.name || '').toLowerCase();
+      const lowerEaName = (item.ea_name || '').toLowerCase();
+      const lowerMsg = (item.message || '').toLowerCase();
+
+      // Exclude Daltus EA (not part of EA Budak Ubat)
+      if (
+        lowerEaName.includes('daltus') ||
+        lowerMsg.includes('daltus') ||
+        lowerName.includes('daltus') ||
+        item.id === 'ce6c932e-70a2-4397-9fc6-f2342cc3cf2e'
+      ) {
+        return false;
+      }
+
       return !EXCLUDED_PROBE_NAMES.includes(lowerName);
     });
 
@@ -169,6 +182,17 @@ export async function POST(request) {
     if (rawType === 'ea_request' && !cleanEaName) {
       return NextResponse.json(
         { success: false, error: 'EA Name is required for EA requests.' },
+        { status: 400 }
+      );
+    }
+
+    // Disallow Daltus EA (not part of EA Budak Ubat project)
+    const lowerEaName = cleanEaName.toLowerCase();
+    const lowerMsg = cleanMessage.toLowerCase();
+    const lowerNameCheck = cleanName.toLowerCase();
+    if (lowerEaName.includes('daltus') || lowerMsg.includes('daltus') || lowerNameCheck.includes('daltus')) {
+      return NextResponse.json(
+        { success: false, error: 'Daltus EA is a separate project and is not part of EA Budak Ubat.' },
         { status: 400 }
       );
     }
