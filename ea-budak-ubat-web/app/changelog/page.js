@@ -37,6 +37,12 @@ const CHANGELOG_DATA = [
         title: "100% Preserved ADR Mathematical Scaling Workflow",
         desc: "Retained the exact 365-day EURUSD ADR ratio formula for TakeProfit, minDistance, distanceIncrement, and maxDistance across all tradable assets (Forex pairs, Gold, and Commodities).",
       },
+      {
+        type: "clarification",
+        tag: "AutoConfig Modes",
+        title: "Manual (AutoConfig = false) vs AI Dynamic Mode (AutoConfig = true)",
+        desc: "Clarified operational modes: In default Manual Mode (AutoConfig = false), calcParam() is never called and the EA runs 100% on your manual inputs. When enabled (AutoConfig = true), calcParam() dynamically adapts grid step and take profit using the 365-day EURUSD ADR ratio with zero execution delays.",
+      },
     ],
     downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5",
     downloadLabel: "Download MT5 v1.64 .ex5",

@@ -382,7 +382,10 @@ What's new:
 2. Non-Blocking Execution Architecture:
    - Resolved AutoConfig execution stall in Main(): EA reliably continues order management even if terminal history cache is downloading.
 3. 100% Preserved Mathematical Workflow:
-   - Preserves the exact 365-day EURUSD ADR dynamic scaling ratio for TakeProfit, minDistance, and maxDistance across all tradable instruments.
+   - Preserves the exact 365-day EURUSD ADR dynamic scaling ratio for TakeProfit, minDistance, distanceIncrement, and maxDistance across all tradable instruments.
+4. AutoConfig AI Modes Clarification:
+   - Manual Mode (AutoConfig = false): calcParam() is never called; runs 100% on user-configured input settings.
+   - AI Dynamic Mode (AutoConfig = true): calcParam() dynamically adapts grid step and take profit using 365-day EURUSD ADR with zero execution delay.
 ```
 
 ### EA Budak Ubat v1.63
