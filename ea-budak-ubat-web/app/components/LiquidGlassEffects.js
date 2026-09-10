@@ -244,7 +244,7 @@ export default function LiquidGlassEffects() {
         <span className="jp-reticle-label">TYO // 35.6762°N</span>
       </div>
       <div className="jp-hud-reticle jp-hud-tr" aria-hidden="true">
-        <span className="jp-reticle-label">SYS.STABLE // v1.63</span>
+        <span className="jp-reticle-label">SYS.STABLE // v1.64</span>
         <span className="jp-reticle-cross">+</span>
       </div>
       <div className="jp-hud-reticle jp-hud-bl" aria-hidden="true">

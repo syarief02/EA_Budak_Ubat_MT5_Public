@@ -1,9 +1,46 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const CHANGELOG_DATA = [
+  {
+    version: "v1.64",
+    product: "EA Budak Ubat (MT5)",
+    productSlug: "ea-budak-ubat",
+    date: "September 10, 2026",
+    badge: "Engine Fix & Optimization",
+    badgeType: "major",
+    summary: "Multi-symbol EURUSD ADR data engine overhaul with zero-latency direct price rates fallback, smart broker variety candidate matching, and non-blocking execution architecture.",
+    highlights: [
+      {
+        type: "fix",
+        tag: "Critical Fix",
+        title: "Multi-Symbol EURUSD ADR Calculation Overhaul",
+        desc: "Resolved the 'AutoConfig: EURUSD ADR data not ready' issue in MetaTrader 5. Implemented a zero-latency direct price rates fallback via CopyRates so EURUSD ADR is computed immediately even when MT5 asynchronous indicator buffers are delayed or waiting on history.",
+      },
+      {
+        type: "improvement",
+        tag: "Reliability",
+        title: "Intelligent Account Variety & Suffix Matching",
+        desc: "Upgraded FindEURUSDVariety() to detect matching broker prefixes and suffixes directly from the current chart symbol (e.g. XAUUSD.pro automatically selects EURUSD.pro, XAUUSD.c maps to EURUSD.c), guaranteeing seamless multi-symbol synchronization across Pro, Cent, Standard, and ECN account types.",
+      },
+      {
+        type: "fix",
+        tag: "Architecture",
+        title: "Non-Blocking Trade Execution Architecture",
+        desc: "Restructured Main() execution loop so that AutoConfig never halts trading or traps the EA in waiting loops. The bot continues active order management and dynamically recalculates ADR parameters as market data streams in.",
+      },
+      {
+        type: "feature",
+        tag: "Compatibility",
+        title: "100% Preserved ADR Mathematical Scaling Workflow",
+        desc: "Retained the exact 365-day EURUSD ADR ratio formula for TakeProfit, minDistance, distanceIncrement, and maxDistance across all tradable assets (Forex pairs, Gold, and Commodities).",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5",
+    downloadLabel: "Download MT5 v1.64 .ex5",
+  },
   {
     version: "v1.63",
     product: "EA Budak Ubat (MT5)",
@@ -414,7 +451,7 @@ export default function ChangelogPage() {
             <div>
               <h4 className="footer-title">Products</h4>
               <ul className="footer-links">
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.63)</Link></li>
+                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.64)</Link></li>
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>

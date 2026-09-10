@@ -74,7 +74,7 @@ $MQ4Sources = @(
 )
 
 $MQ5Sources = @(
-    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.63 - MT5 - .mq5",
+    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.64 - MT5 - .mq5",
     "$MQL5_BASE\GoldMind_AI.mq5",
     "$DESKTOP\BracketBlitz-EA\BracketBlitz.mq5",
     "$DESKTOP\MathEdge Pro\MT5\MathEdge Pro.mq5",
@@ -106,7 +106,7 @@ $MT4OutNames = @(
 )
 
 $MT5OutNames = @(
-    "EA - Budak Ubat v1.63 - MT5 - $dateCompact.ex5",
+    "EA - Budak Ubat v1.64 - MT5 - $dateCompact.ex5",
     "GoldMind AI v1.00 - MT5 - $dateCompact.ex5",
     "BracketBlitz v1.00 - MT5 - $dateCompact.ex5",
     "MathEdge Pro v1.1 - MT5 - $dateCompact.ex5",

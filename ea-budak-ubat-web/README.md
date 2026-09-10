@@ -29,7 +29,7 @@ EA Budak Ubat offers **6 professional trading tools** for MetaTrader 4 & MetaTra
 
 | # | Product | Strategy | Platform | Best For | Version | License |
 |---|---|---|---|---|---|---|
-| 1 | **EA Budak Ubat** | Grid Martingale | MT4, MT5 | Ranging pairs, M5 | v1.63 | MIT + Paid Full |
+| 1 | **EA Budak Ubat** | Grid Martingale | MT4, MT5 | Ranging pairs, M5 | v1.64 | MIT + Paid Full |
 | 2 | **GoldMind AI** | AI-Powered Signals | MT5 | XAUUSD (Gold) | v1.00 | Open Source |
 | 3 | **BracketBlitz EA** | OCO Bracket Breakout | MT4, MT5 | All instruments, News | v1.00 | Open Source |
 | 4 | **MathEdge Pro** | Math-Based Levels | MT4, MT5 | US30, NAS100 | v1.1 | Open Source |
@@ -74,12 +74,12 @@ Are you trading trending pairs?
 
 ## 2. EA Budak Ubat
 
-**Grid Martingale Expert Advisor** · v1.63 · MT4 & MT5
+**Grid Martingale Expert Advisor** · v1.64 · MT4 & MT5
 
 ### Downloads
 
 - [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4)
-- [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.63%20-%20MT5%20-%2020260930.ex5)
+- [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5)
 - [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy)
 - [📡 MQL5 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
 
@@ -229,7 +229,7 @@ Visit the [EA Budak Ubat page](https://eabudakubat.com/ea-budak-ubat) on the web
 9. Click **OK**
 
 **MT5:**
-1. Download `EA - Budak Ubat v1.63 - MT5 - 20260930.ex5`
+1. Download `EA - Budak Ubat v1.64 - MT5 - 20260930.ex5`
 2. Open MT5 → `File` → `Open Data Folder`
 3. Navigate to `MQL5/Experts/`
 4. Copy the `.ex5` file into this folder
