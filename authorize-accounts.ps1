@@ -418,4 +418,5 @@ if (-not $SkipDeploy) {
 Write-Host ""
 Write-Host "================================================================" -ForegroundColor Green
 Write-Host "  ALL STEPS COMPLETED SUCCESSFULLY FOR ALL 6 EAS!" -ForegroundColor Green
+Write-Host "  Official Live Portal: https://eabudakubat.com" -ForegroundColor Cyan
 Write-Host "================================================================" -ForegroundColor Green

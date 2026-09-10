@@ -4,6 +4,15 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 
 ---
 
+## 🌐 CRITICAL BRANDING & OFFICIAL DOMAIN RULE
+> **MANDATORY FOR ALL AI AGENTS:**
+> - **Always use the official custom domain:** `https://eabudakubat.com` (e.g. `https://eabudakubat.com`, `https://eabudakubat.com/changelog`, `https://eabudakubat.com/ea-budak-ubat`).
+> - **NEVER mention or output `*.vercel.app`** in any user messages, public announcements, Telegram channel posts, changelogs, or documentation.
+> - Vercel is strictly an underlying infrastructure build provider (traffic is routed via Cloudflare to `eabudakubat.com`). The official public face of this project is ALWAYS **`eabudakubat.com`**.
+> - When reporting deployment completion to the user, always report: `https://eabudakubat.com` — NEVER the `.vercel.app` preview/alias domain.
+
+---
+
 ## ⚡ Quick Actions Cheatsheet
 
 ### 1. Authorize / Prepend Account Numbers
