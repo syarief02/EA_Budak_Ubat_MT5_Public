@@ -108,6 +108,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     Prepend-To-TxtList "$MQL5_BASE\v1.64 Authorized Account List.txt"
     Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.64 Authorized Account List.txt"
+    Prepend-To-TxtList "$PUBLIC_REPO\v1.64 Authorized Account List.txt"
     Prepend-To-TxtList "$MQL5_BASE\v1.63 Authorized Account List.txt"
     Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.63 Authorized Account List.txt"
 }
@@ -144,10 +145,20 @@ if (Test-Path $webJs) {
         if ($content -match 'MT4_AUTHORIZED_ACCOUNTS\s*=\s*new Set\(\[\s*\r?\n\s*') {
             $content = [regex]::Replace($content, '(MT4_AUTHORIZED_ACCOUNTS\s*=\s*new Set\(\[\s*\r?\n\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
         }
+        if ($content -match 'MT4 \((\d+) accounts\)') {
+            $oldCount = [int]$Matches[1]
+            $newCount = $oldCount + $accList.Count
+            $content = $content -replace "MT4 \($oldCount accounts\)", "MT4 ($newCount accounts)"
+        }
     }
     if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
         if ($content -match 'MT5_AUTHORIZED_ACCOUNTS\s*=\s*new Set\(\[\s*\r?\n\s*') {
             $content = [regex]::Replace($content, '(MT5_AUTHORIZED_ACCOUNTS\s*=\s*new Set\(\[\s*\r?\n\s*)', { param($m) $m.Groups[1].Value + "$accString, " })
+        }
+        if ($content -match 'MT5 \((\d+) accounts\)') {
+            $oldCount = [int]$Matches[1]
+            $newCount = $oldCount + $accList.Count
+            $content = $content -replace "MT5 \($oldCount accounts\)", "MT5 ($newCount accounts)"
         }
     }
     [System.IO.File]::WriteAllText($webJs, $content, $utf8NoBom)
@@ -322,6 +333,8 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
         $binGM = "$MQL5_ROOT\Experts\GoldMind_AI.ex5"
         if (Test-Path $binGM) {
             Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind AI v1.00 - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
+            Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind AI - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
+            Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind_AI.ex5" -Force -ErrorAction SilentlyContinue
             Copy-Item $binGM "$DESKTOP\mt5 xauusd\mt5\Experts\GoldMind AI v1.00 - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
             Copy-Item $binGM "$DESKTOP\mt5 xauusd\mt5\Experts\GoldMind_AI.ex5" -Force -ErrorAction SilentlyContinue
             Write-Host "  [OK] GoldMind AI MT5 compiled!" -ForegroundColor Green
@@ -364,17 +377,24 @@ function Git-Commit-Push($repoPath, $commitMsg) {
     Push-Location $repoPath
     $branch = (git branch --show-current).Trim()
     if (-not $branch) { $branch = "main" }
-    Write-Host "  Pushing repo: $(Split-Path $repoPath -Leaf) ($branch)..." -ForegroundColor DarkCyan
-    git add -A
-    git commit -m $commitMsg --quiet
-    git pull --rebase origin $branch --quiet
-    git push origin $branch --quiet
+    $changes = (git status --porcelain)
+    if ($changes) {
+        Write-Host "  Pushing repo: $(Split-Path $repoPath -Leaf) ($branch)..." -ForegroundColor DarkCyan
+        git add -A
+        git commit -m $commitMsg --quiet
+        git pull --rebase origin $branch --quiet
+        git push origin $branch --quiet
+        Write-Host "  [OK] Pushed: $(Split-Path $repoPath -Leaf) ($branch)" -ForegroundColor Green
+    } else {
+        Write-Host "  [-] No changes in $(Split-Path $repoPath -Leaf)" -ForegroundColor Gray
+    }
     Pop-Location
-    Write-Host "  [OK] Pushed: $(Split-Path $repoPath -Leaf) ($branch)" -ForegroundColor Green
 }
 
-Git-Commit-Push $MQL4_BASE "feat(auth): authorize accounts $accString in MT4"
-Git-Commit-Push $DESKTOP_MT4_REPO "feat(auth): authorize accounts $accString in authorized account list"
+if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
+    Git-Commit-Push $MQL4_BASE "feat(auth): authorize accounts $accString in MT4"
+    Git-Commit-Push $DESKTOP_MT4_REPO "feat(auth): authorize accounts $accString in authorized account list"
+}
 Git-Commit-Push $PUBLIC_REPO "feat(auth): authorize accounts $accString, update binaries and web checker"
 Git-Commit-Push $ALIGATOR_REPO "feat(auth): authorize accounts $accString in Aligator Gozaimasu"
 Git-Commit-Push $ENCIK_MOKU_REPO "feat(auth): authorize accounts $accString in Encik Moku"
@@ -385,14 +405,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     Git-Commit-Push $DESKTOP_MT5_REPO "feat(auth): authorize accounts $accString in MT5"
     Git-Commit-Push $GOLDMIND_REPO "feat(auth): authorize accounts $accString in GoldMind AI"
     if (Test-Path $MQL5_FORGE_REPO) {
-        Write-Host "  Pushing repo: MQL5 Forge..." -ForegroundColor DarkCyan
-        Push-Location $MQL5_FORGE_REPO
-        git add -A
-        git commit -m "feat(auth): authorize accounts $accString in MQL5 Forge" --quiet
-        git pull --rebase origin main --quiet
-        git push origin main --quiet
-        Pop-Location
-        Write-Host "  [OK] Pushed: MQL5 Forge" -ForegroundColor Green
+        Git-Commit-Push $MQL5_FORGE_REPO "feat(auth): authorize accounts $accString in MQL5 Forge"
     }
 }
 
