@@ -176,7 +176,7 @@ export default function EABudakUbatPage() {
                   Instant activation via MetaQuotes MQL5 Market. No broker lock, no account number restriction, and zero monthly expiration.
                 </p>
                 <ul className="track-checklist">
-                  <li><span className="check-icon">✓</span> 10 MetaTrader 5 Terminal Activations</li>
+                  <li><span className="check-icon">✓</span> 20 MetaTrader 5 Terminal Activations</li>
                   <li><span className="check-icon">✓</span> Native MetaQuotes DRM & Cloud Delivery</li>
                   <li><span className="check-icon">✓</span> Free Lifetime Automatic Updates in MT5</li>
                   <li><span className="check-icon">✓</span> Hedging & Netting Account Certified</li>
@@ -192,8 +192,8 @@ export default function EABudakUbatPage() {
                 >
                   <span className="btn-icon">🛒</span>
                   <span className="btn-text">
-                    <strong>Buy on MQL5 Market ($40 USD)</strong>
-                    <small>Tier 1 Price · Instant Cloud Delivery</small>
+                    <strong>Buy on MQL5 Market ($149 USD)</strong>
+                    <small>Lifetime License or Rent from $30/mo · Free Demo</small>
                   </span>
                   <span className="btn-arrow">→</span>
                 </a>
@@ -232,8 +232,8 @@ export default function EABudakUbatPage() {
 
           {/* DYNAMIC PRICE TIER URGENCY PROGRESS */}
           <PriceTierUrgency
-            currentPrice={40}
-            nextPrice={50}
+            currentPrice={149}
+            nextPrice={159}
             soldInTier={7}
             tierLimit={10}
             marketUrl={MQL5_MARKET_LINK}

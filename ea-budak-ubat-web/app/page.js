@@ -618,8 +618,8 @@ export default function Home() {
             <div className="container" style={{ margin: "20px auto 35px", padding: 0 }}>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px" }}>
                 <PriceTierUrgency
-                  currentPrice={40}
-                  nextPrice={50}
+                  currentPrice={149}
+                  nextPrice={159}
                   soldInTier={7}
                   tierLimit={10}
                   marketUrl="https://www.mql5.com/en/market/product/195399"

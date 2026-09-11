@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { playTactileClick } from "@/lib/audioSynthesizer";
 
@@ -63,7 +63,7 @@ export default function MQL5TrustBadge({
           <span className="cert-check">✓</span>
           <div>
             <strong>Instant Hardware-Bound DRM</strong>
-            <p>Automatic download and 10 terminal activations right in MetaTrader 5</p>
+            <p>Automatic download and 20 terminal activations right in MetaTrader 5</p>
           </div>
         </div>
       </div>
