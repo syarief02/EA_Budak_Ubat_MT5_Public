@@ -6,6 +6,8 @@ import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import LiveStrategySimulator from "@/app/components/LiveStrategySimulator";
+import PriceTierUrgency from "@/app/components/PriceTierUrgency";
+import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import { playTactileClick } from "@/lib/audioSynthesizer";
 
 const POST_TYPES = [
@@ -611,6 +613,26 @@ export default function Home() {
             </div>
           </div>
 
+          {/* MQL5 MARKET TIER ENGINE & TRUST BADGE PROMOTION */}
+          {activeStrategy === "ea-budak-ubat" && (
+            <div className="container" style={{ margin: "20px auto 35px", padding: 0 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px" }}>
+                <PriceTierUrgency
+                  currentPrice={40}
+                  nextPrice={50}
+                  soldInTier={7}
+                  tierLimit={10}
+                  marketUrl="https://www.mql5.com/en/market/product/195399"
+                  compact={true}
+                />
+                <MQL5TrustBadge
+                  productUrl="https://www.mql5.com/en/market/product/195399"
+                  compact={true}
+                />
+              </div>
+            </div>
+          )}
+
           <div className="product-catalog">
             {PRODUCTS.map((product, i) => (
               <Link
@@ -927,7 +949,14 @@ export default function Home() {
                           {comment.name.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                          <span className="comment-author">{comment.name}</span>
+                          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                            <span className="comment-author">{comment.name}</span>
+                            {(comment.name.toLowerCase().includes("syarief") || comment.name.toLowerCase().includes("creator")) && (
+                              <span className="jp-badge" style={{ background: "rgba(59, 130, 246, 0.2)", color: "#60a5fa", borderColor: "rgba(59, 130, 246, 0.4)", fontSize: "0.68rem" }}>
+                                ⭐ Creator
+                              </span>
+                            )}
+                          </div>
                           <span className="comment-time">{timeAgo(comment.created_at)}</span>
                         </div>
                       </div>

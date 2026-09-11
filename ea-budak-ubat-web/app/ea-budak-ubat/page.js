@@ -5,6 +5,8 @@ import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 import GridCalculator from "@/app/components/GridCalculator";
 import SetGenerator from "@/app/components/SetGenerator";
+import PriceTierUrgency from "@/app/components/PriceTierUrgency";
+import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5";
@@ -163,17 +165,82 @@ export default function EABudakUbatPage() {
             A powerful grid-based martingale Expert Advisor for MetaTrader 4 & MetaTrader 5.
             Designed for ranging pairs on the M5 timeframe with 4 analysis methods and AutoConfig AI.
           </p>
-          <div className="hero-actions">
-            <a href={DOWNLOAD_MT4} className="btn btn-primary">⬇️ Download MT4</a>
-            <a href={DOWNLOAD_MT5} className="btn btn-secondary">⬇️ Download MT5 (v1.64)</a>
-            <a href={MQL5_MARKET_LINK} className="btn btn-accent" target="_blank" rel="noopener noreferrer">🛒 Buy MT5 (MQL5 Market)</a>
-            <a href={PURCHASE_LINK} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">🛒 Buy MT4 Full Version</a>
-            <a href="#preset-generator" className="btn btn-secondary">⚙️ Presets (.set)</a>
-            <a href="#risk-calculator" className="btn btn-secondary">🧮 Risk Calculator</a>
+          {/* DUAL-TRACK ACQUISITION MATRIX */}
+          <div className="dual-track-container animate-in">
+            {/* Track 1: Official MQL5 Market Edition */}
+            <div className="track-card featured">
+              <div>
+                <span className="track-tag mql5">★ Recommended · Standalone</span>
+                <h3 className="track-title">Official MQL5 Market Edition</h3>
+                <p className="track-desc">
+                  Instant activation via MetaQuotes MQL5 Market. No broker lock, no account number restriction, and zero monthly expiration.
+                </p>
+                <ul className="track-checklist">
+                  <li><span className="check-icon">✓</span> 10 MetaTrader 5 Terminal Activations</li>
+                  <li><span className="check-icon">✓</span> Native MetaQuotes DRM & Cloud Delivery</li>
+                  <li><span className="check-icon">✓</span> Free Lifetime Automatic Updates in MT5</li>
+                  <li><span className="check-icon">✓</span> Hedging & Netting Account Certified</li>
+                </ul>
+              </div>
+
+              <div className="track-actions">
+                <a
+                  href={MQL5_MARKET_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-mql5-primary"
+                >
+                  <span className="btn-icon">🛒</span>
+                  <span className="btn-text">
+                    <strong>Buy on MQL5 Market ($40 USD)</strong>
+                    <small>Tier 1 Price · Instant Cloud Delivery</small>
+                  </span>
+                  <span className="btn-arrow">→</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Track 2: Free Community Edition */}
+            <div className="track-card">
+              <div>
+                <span className="track-tag community">Free / Partner Whitelist</span>
+                <h3 className="track-title">Community Whitelist Edition</h3>
+                <p className="track-desc">
+                  Run 100% free on unlimited Demo accounts or register a Live account under our broker partner link for permanent authorization.
+                </p>
+                <ul className="track-checklist">
+                  <li><span className="check-icon">✓</span> MetaTrader 4 & MetaTrader 5 (.ex4 / .ex5)</li>
+                  <li><span className="check-icon">✓</span> 100% Unlimited Free Demo Account Trading</li>
+                  <li><span className="check-icon">✓</span> Whitelist Registration via Partner Brokers</li>
+                  <li><span className="check-icon">✓</span> Full Access to Presets & Risk Calculator</li>
+                </ul>
+              </div>
+
+              <div className="track-actions">
+                <div className="track-buttons-row">
+                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.64)</a>
+                  <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4</a>
+                </div>
+                <div className="track-buttons-row" style={{ marginTop: "4px" }}>
+                  <a href="#preset-generator" className="btn btn-secondary btn-sm">⚙️ Presets (.set)</a>
+                  <a href="#risk-calculator" className="btn btn-secondary btn-sm">🧮 Risk Calculator</a>
+                  <a href={PURCHASE_LINK} className="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">🛒 Buy MT4</a>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="hero-note">
-            <strong>Limited Time Price!</strong> The price increases by 10 USD after every 10 purchases. MT5 Market Edition includes instant activation with native MetaQuotes protection and lifetime updates.
-          </p>
+
+          {/* DYNAMIC PRICE TIER URGENCY PROGRESS */}
+          <PriceTierUrgency
+            currentPrice={40}
+            nextPrice={50}
+            soldInTier={7}
+            tierLimit={10}
+            marketUrl={MQL5_MARKET_LINK}
+          />
+
+          {/* MQL5 OFFICIAL TRUST BADGE */}
+          <MQL5TrustBadge productUrl={MQL5_MARKET_LINK} />
         </div>
       </section>
 
