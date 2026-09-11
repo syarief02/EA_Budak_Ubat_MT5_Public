@@ -1,4 +1,4 @@
-﻿# MQL5 Market Product Listing Package — EA Budak Ubat v1.64
+# MQL5 Market Product Listing Package — EA Budak Ubat v1.64
 
 This document contains the exact product listing text, parameter reference, and step-by-step submission instructions to publish **EA Budak Ubat v1.64 (MT5)** on the official **MQL5 Market** showcase.
 
@@ -14,9 +14,9 @@ This document contains the exact product listing text, parameter reference, and 
 | **Language** | `English` |
 | **Minimum Version** | `5.00 build 4000+` |
 | **Product File** | `EA - Budak Ubat v1.64 - MT5 - Market Edition.ex5` |
-| **Free Activations** | `10` (MQL5 default is 5; 10 gives high buyer satisfaction) |
-| **Price** | `$49` to `$99` (User defined; MQL5 Market minimum is $30) |
-| **Rental Options** | 1 Month: `$30`, 3 Months: `$45`, 1 Year: `$75` (Optional) |
+| **Free Activations** | `20` (Generous allowance, double the standard 10) |
+| **Price** | `$149 USD` (Lifetime Purchase) |
+| **Rental Options** | 1 Month: `$30`, 3 Months: `$50` (Save 44%), 1 Year: `$75` (Save 79%) |
 | **Icon** | 200 × 200 px PNG |
 
 ---
