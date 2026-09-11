@@ -32,3 +32,4 @@ if (Test-Path $ex5) {
 
     Write-Host "Binaries successfully synchronized across package and distribution folders!" -ForegroundColor Green
 }
+

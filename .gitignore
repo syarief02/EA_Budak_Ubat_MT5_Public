@@ -5,3 +5,10 @@
 # Agent Workfiles
 /.agents/
 .env
+
+# Market Edition Binaries (Unlocked - MQL5 Market DRM only, never publish on Git)
+*Market Edition*.ex4
+*Market Edition*.ex5
+mql5-market-package/*.ex4
+mql5-market-package/*.ex5
+
