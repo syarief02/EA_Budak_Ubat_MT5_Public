@@ -12,6 +12,8 @@ import {
 const COMMANDS = [
   // Products
   { id: "ea-bu", title: "EA Budak Ubat", subtitle: "Grid Martingale EA (MT4 & MT5)", icon: "📊", action: "/ea-budak-ubat", cat: "Products" },
+  { id: "mql5-market", title: "Buy EA Budak Ubat on MQL5 Market", subtitle: "Official MT5 Market Edition (Instant Activation & Native DRM)", icon: "🛒", action: "https://www.mql5.com/en/market/product/195399", external: true, cat: "Products" },
+  { id: "buy-mt4", title: "Buy EA Budak Ubat (MT4 Full Version)", subtitle: "Instant Full Unlocked License for MetaTrader 4", icon: "🛒", action: "https://tinyurl.com/eabubuy", external: true, cat: "Products" },
   { id: "goldmind", title: "GoldMind AI", subtitle: "Neural ChatGPT 4o-mini Signal Engine (MT5)", icon: "🤖", action: "/goldmind-ai", cat: "Products" },
   { id: "bracket", title: "BracketBlitz EA", subtitle: "OCO Dual Breakout Pending Orders (MT4 & MT5)", icon: "⚡", action: "/bracketblitz", cat: "Products" },
   { id: "mathedge", title: "MathEdge Pro", subtitle: "Mathematical Index Engine for US30 & NAS100", icon: "📐", action: "/mathedge-pro", cat: "Products" },

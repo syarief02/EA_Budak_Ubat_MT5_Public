@@ -299,12 +299,25 @@ export default function AccountChecker({
                     View EA Details →
                   </Link>
                   {res.status === "trial" && (
-                    <a
-                      href="#partner-brokers"
-                      className="btn-get-authorized"
-                    >
-                      🔓 Get Permanent Authorization
-                    </a>
+                    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                      <a
+                        href="#partner-brokers"
+                        className="btn-get-authorized"
+                      >
+                        🔓 Get Permanent Authorization
+                      </a>
+                      {res.marketUrl && (
+                        <a
+                          href={res.marketUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-get-authorized"
+                          style={{ background: "linear-gradient(135deg, #10b981, #059669)", borderColor: "transparent", color: "#ffffff" }}
+                        >
+                          🛒 Buy on MQL5 Market
+                        </a>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>

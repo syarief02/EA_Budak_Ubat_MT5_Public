@@ -46,6 +46,8 @@ const CHANGELOG_DATA = [
     ],
     downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5",
     downloadLabel: "Download MT5 v1.64 .ex5",
+    marketUrl: "https://www.mql5.com/en/market/product/195399",
+    marketLabel: "Buy on MQL5 Market",
   },
   {
     version: "v1.63",
@@ -430,6 +432,17 @@ export default function ChangelogPage() {
                       style={{ animation: "none" }}
                     >
                       ⬇️ {item.downloadLabel}
+                    </a>
+                  )}
+                  {item.marketUrl && (
+                    <a
+                      href={item.marketUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-accent btn-sm"
+                      style={{ animation: "none" }}
+                    >
+                      🛒 {item.marketLabel || "Buy on MQL5 Market"}
                     </a>
                   )}
                 </div>

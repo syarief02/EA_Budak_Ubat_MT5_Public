@@ -80,6 +80,7 @@ Are you trading trending pairs?
 
 - [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4)
 - [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5)
+- [🛒 Buy on MQL5 Market (MT5)](https://www.mql5.com/en/market/product/195399)
 - [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy)
 - [📡 MQL5 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
 
@@ -915,6 +916,7 @@ Clients who have registered through my link can just PM the trading account numb
 | **Twitter/X** | [@SyariefAzman](https://www.twitter.com/SyariefAzman) |
 | **Facebook** | [EABudakUbat](https://m.me/EABudakUbat) |
 | **Telegram Channel** | [t.me/EABudakUbat](https://t.me/EABudakUbat) |
+| **MQL5 Market** | [Official Product (MT5)](https://www.mql5.com/en/market/product/195399) |
 | **MQL5 Signal** | [Signal Channel](https://www.mql5.com/en/channels/eabudakubat) |
 | **GitHub** | [syarief02](https://github.com/syarief02) |
 

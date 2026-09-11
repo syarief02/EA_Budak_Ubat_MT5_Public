@@ -9,6 +9,7 @@ import SetGenerator from "@/app/components/SetGenerator";
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
+const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
 const FEATURES = [
@@ -136,6 +137,7 @@ export default function EABudakUbatPage() {
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
+            <li><a href={MQL5_MARKET_LINK} className="nav-cta" target="_blank" rel="noopener noreferrer" style={{ background: "linear-gradient(135deg, #10b981, #059669)", marginRight: "6px" }}>Buy MT5</a></li>
             <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank" rel="noopener noreferrer">Buy MT4</a></li>
           </ul>
           <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
@@ -164,12 +166,13 @@ export default function EABudakUbatPage() {
           <div className="hero-actions">
             <a href={DOWNLOAD_MT4} className="btn btn-primary">⬇️ Download MT4</a>
             <a href={DOWNLOAD_MT5} className="btn btn-secondary">⬇️ Download MT5 (v1.64)</a>
+            <a href={MQL5_MARKET_LINK} className="btn btn-accent" target="_blank" rel="noopener noreferrer">🛒 Buy MT5 (MQL5 Market)</a>
+            <a href={PURCHASE_LINK} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">🛒 Buy MT4 Full Version</a>
             <a href="#preset-generator" className="btn btn-secondary">⚙️ Presets (.set)</a>
             <a href="#risk-calculator" className="btn btn-secondary">🧮 Risk Calculator</a>
-            <a href={PURCHASE_LINK} className="btn btn-accent" target="_blank" rel="noopener noreferrer">🛒 Full Version (MT4 Only)</a>
           </div>
           <p className="hero-note">
-            <strong>Limited Time Price!</strong> The price increases by 10 USD after every 10 purchases.
+            <strong>Limited Time Price!</strong> The price increases by 10 USD after every 10 purchases. MT5 Market Edition includes instant activation with native MetaQuotes protection and lifetime updates.
           </p>
         </div>
       </section>
@@ -491,6 +494,7 @@ export default function EABudakUbatPage() {
                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                 <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
                 <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
+                <li><a href={MQL5_MARKET_LINK} target="_blank" rel="noopener noreferrer">🛒 Buy MT5 (MQL5 Market)</a></li>
                 <li><a href={SIGNAL_LINK} target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
               </ul>
             </div>

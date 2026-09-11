@@ -8,7 +8,7 @@ const PRODUCTS = [
     {
         name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.64",
         strategy: "Grid Martingale", platforms: "MT4, MT5", bestFor: "Ranging pairs, M5",
-        license: "MIT + Paid Full", expiry: "2026-09-30",
+        license: "MIT + MQL5 Market (MT5)", expiry: "2026-09-30",
         description: "A grid-based martingale EA with 4 analysis methods (Classic Candle, SMA20, Alligator, Ichimoku), AutoConfig AI, hedging support, and configurable time filters. Designed for ranging currency pairs on the M5 timeframe.",
         howItWorks: [
             { title: "Tick Received", desc: "Updates chart display, checks time filter (StartTime–StopTime)." },
@@ -635,6 +635,7 @@ export default function GuidePage() {
                             { icon: "💬", title: "Telegram", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
                             { icon: "🐦", title: "Twitter/X", desc: "@SyariefAzman", url: "https://www.twitter.com/SyariefAzman" },
                             { icon: "📢", title: "Telegram Channel", desc: "t.me/EABudakUbat", url: "https://t.me/EABudakUbat" },
+                            { icon: "🛒", title: "MQL5 Market", desc: "Official MT5 Product", url: "https://www.mql5.com/en/market/product/195399" },
                             { icon: "📊", title: "MQL5 Signal", desc: "Signal Channel", url: "https://www.mql5.com/en/channels/eabudakubat" },
                         ].map((c, i) => (
                             <a key={i} href={c.url} className="contact-card" target="_blank" rel="noopener noreferrer">
@@ -674,6 +675,8 @@ export default function GuidePage() {
                                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                                 <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
                                 <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
+                                <li><a href="https://www.mql5.com/en/market/product/195399" target="_blank" rel="noopener noreferrer">MQL5 Market (MT5)</a></li>
+                                <li><a href="https://www.mql5.com/en/channels/eabudakubat" target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
                             </ul>
                         </div>
                     </div>

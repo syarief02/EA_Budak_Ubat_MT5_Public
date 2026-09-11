@@ -1,6 +1,6 @@
 # EA Budak Ubat v1.64
 
-### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4) · [⬇️ Download MT5 (v1.64)](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5) · [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
+### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4) · [⬇️ Download MT5 (v1.64)](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5) · [🛒 Buy MT5 on MQL5 Market](https://www.mql5.com/en/market/product/195399) · [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
 
 > **Limited Time Price!** The price increases by 10 USD after every 10 purchases.
 
@@ -494,6 +494,8 @@ Initial grid martingale EA with:
 | **Twitter/X** | [@SyariefAzman](https://www.twitter.com/SyariefAzman) |
 | **Facebook** | [EABudakUbat](https://m.me/EABudakUbat) |
 | **Telegram Channel** | [t.me/EABudakUbat](https://t.me/EABudakUbat) |
+| **MQL5 Market** | [Official Product (MT5)](https://www.mql5.com/en/market/product/195399) |
+| **MQL5 Signal** | [Signal Channel](https://www.mql5.com/en/channels/eabudakubat) |
 
 ---
 
