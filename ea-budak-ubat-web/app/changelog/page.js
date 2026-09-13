@@ -68,6 +68,12 @@ const CHANGELOG_DATA = [
         title: "Manual (AutoConfig = false) vs AI Dynamic Mode (AutoConfig = true)",
         desc: "Clarified operational modes: In default Manual Mode (AutoConfig = false), calcParam() is never called and the EA runs 100% on your manual inputs. When enabled (AutoConfig = true), calcParam() dynamically adapts grid step and take profit using the 365-day EURUSD ADR ratio with zero execution delays.",
       },
+      {
+        type: "improvement",
+        tag: "Protection Default",
+        title: "Spread Filter Default Optimization (MaxSpread_Pips = 0.0)",
+        desc: "Set the default maximum allowed spread to 0.0 (off) so the EA operates without unexpected trade rejections on brokers with wide floating spreads or gold/indices volatility.",
+      },
     ],
     downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5",
     downloadLabel: "Download MT5 v1.64 .ex5",
