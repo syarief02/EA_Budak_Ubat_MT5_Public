@@ -131,6 +131,7 @@ export default function EABudakUbatPage() {
           <Link href="/" className="nav-brand">EA Budak Ubat</Link>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← Home</Link></li>
+            <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
             <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
             <li><a href="#parameters" onClick={() => setMobileNavOpen(false)}>Parameters</a></li>
             <li><a href="#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</a></li>

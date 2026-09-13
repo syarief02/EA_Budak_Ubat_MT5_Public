@@ -293,6 +293,7 @@ export default function GuidePage() {
                     <Link href="/" className="nav-brand">EA Budak Ubat</Link>
                     <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
                         <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
+                        <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
                         <li><a href="#overview" onClick={() => setMobileNavOpen(false)}>Overview</a></li>
                         <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
                         <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>

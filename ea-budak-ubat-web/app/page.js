@@ -370,6 +370,7 @@ export default function Home() {
         <div className="container">
           <a href="#" className="nav-brand">EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
+            <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Learn 🎮</Link></li>
             <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
             <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>Guide</Link></li>
             <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
@@ -406,7 +407,8 @@ export default function Home() {
             by Syarief Azman. Built for performance, rigorously tested, and continuously improved.
           </p>
           <div className="hero-actions">
-            <a href="#simulator" className="btn btn-primary" style={{ animation: "none" }}>⚡ Live Simulator</a>
+            <Link href="/learn" className="btn btn-primary" style={{ animation: "none", background: "linear-gradient(135deg, #38bdf8, #8b5cf6)", border: "none", boxShadow: "0 0 24px rgba(56, 189, 248, 0.4)" }}>🎮 Play Forex Quest</Link>
+            <a href="#simulator" className="btn btn-secondary" style={{ animation: "none" }}>⚡ Live Simulator</a>
             <a href="#products" className="btn btn-secondary" style={{ animation: "none" }}>🔽 Explore Products</a>
             <Link href="/ea-budak-ubat#preset-generator" className="btn btn-secondary" style={{ animation: "none" }}>⚙️ Presets (.set)</Link>
             <Link href="/ea-budak-ubat#risk-calculator" className="btn btn-secondary" style={{ animation: "none" }}>🧮 Risk Calculator</Link>
@@ -689,9 +691,71 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          {/* FOREX QUEST ACADEMY GAMIFIED SHOWCASE */}
+          <div style={{ marginTop: "40px" }}>
+            <div
+              className="border-beam-card animate-in"
+              style={{
+                background: "linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)",
+                border: "1px solid rgba(56, 189, 248, 0.25)",
+                borderRadius: "24px",
+                padding: "36px 32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "24px",
+                boxShadow: "0 16px 48px rgba(0, 0, 0, 0.4)",
+              }}
+            >
+              <div style={{ maxWidth: "620px" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(56, 189, 248, 0.15)", padding: "4px 12px", borderRadius: "999px", fontSize: "0.72rem", fontWeight: 800, color: "#38bdf8", marginBottom: "12px", letterSpacing: "0.08em" }}>
+                  🎮 NEW INTERACTIVE GAMIFIED ACADEMY
+                </div>
+                <h2 style={{ fontSize: "1.8rem", fontWeight: 900, color: "#ffffff", marginBottom: "10px", lineHeight: 1.25 }}>
+                  Master Forex & Algo Trading Like a Game
+                </h2>
+                <p style={{ color: "#94a3b8", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "20px" }}>
+                  Test your knowledge through 5 progressive worlds, build consecutive combo multipliers, level up your Trader Rank from Novice Pip Hunter to Institutional Quant Sovereign, and challenge the 60-Second Speedrun Blitz!
+                </p>
+                <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                  <Link
+                    href="/learn"
+                    className="btn btn-primary"
+                    style={{
+                      background: "linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%)",
+                      border: "none",
+                      padding: "12px 28px",
+                      fontWeight: 800,
+                    }}
+                  >
+                    ▶ Launch Forex Quest Game
+                  </Link>
+                  <Link href="/learn" className="btn btn-secondary" style={{ padding: "12px 22px" }}>
+                    ⚡ 60s Speedrun Blitz
+                  </Link>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: "16px", padding: "18px 24px", textAlign: "center", minWidth: "120px" }}>
+                  <div style={{ fontSize: "1.8rem", marginBottom: "4px", color: "#38bdf8", fontWeight: 900 }}>5</div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "#64748b", letterSpacing: "0.08em" }}>WORLDS</div>
+                </div>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: "16px", padding: "18px 24px", textAlign: "center", minWidth: "120px" }}>
+                  <div style={{ fontSize: "1.8rem", marginBottom: "4px", color: "#f59e0b", fontWeight: 900 }}>6</div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "#64748b", letterSpacing: "0.08em" }}>TRADER RANKS</div>
+                </div>
+                <div style={{ background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: "16px", padding: "18px 24px", textAlign: "center", minWidth: "120px" }}>
+                  <div style={{ fontSize: "1.8rem", marginBottom: "4px", color: "#ec4899", fontWeight: 900 }}>3.0x</div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "#64748b", letterSpacing: "0.08em" }}>MAX STREAK</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-
 
       {/* AUTHORIZATION VERIFICATION PORTAL */}
       <section id="authorization" style={{ background: "var(--bg-primary)", padding: "70px 0" }}>

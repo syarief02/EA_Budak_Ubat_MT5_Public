@@ -163,3 +163,133 @@ export function playAlertPing(volume = 0.09) {
   } catch (e) {}
 }
 
+// 5. Quiz Correct Answer Chime (Harmonic pitch shifts with streak combo)
+export function playQuizCorrect(streak = 1, volume = 0.1) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const baseFreq = streak >= 5 ? 1318.5 : streak >= 3 ? 1046.5 : 880; // E6, C6, or A5
+    const notes = [
+      { freq: baseFreq, delay: 0.0, dur: 0.12 },
+      { freq: baseFreq * 1.25, delay: 0.06, dur: 0.14 },
+      { freq: baseFreq * 1.5, delay: 0.12, dur: 0.22 },
+    ];
+
+    notes.forEach(({ freq, delay, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, now + delay);
+
+      gain.gain.setValueAtTime(0.0001, now + delay);
+      gain.gain.linearRampToValueAtTime(volume, now + delay + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + dur);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now + delay);
+      osc.stop(now + delay + dur + 0.01);
+    });
+  } catch (e) {}
+}
+
+// 6. Quiz Wrong Answer Feedback (Subtle low tone, non-jarring)
+export function playQuizWrong(volume = 0.09) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(260, now);
+    osc.frequency.exponentialRampToValueAtTime(140, now + 0.22);
+
+    gain.gain.setValueAtTime(volume, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.24);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.25);
+  } catch (e) {}
+}
+
+// 7. Level Up Fanfare (Ascending triumphant arcade fanfare)
+export function playLevelUpFanfare(volume = 0.14) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const fanfare = [
+      { freq: 523.25, delay: 0.00, dur: 0.12 }, // C5
+      { freq: 659.25, delay: 0.10, dur: 0.12 }, // E5
+      { freq: 783.99, delay: 0.20, dur: 0.14 }, // G5
+      { freq: 1046.50, delay: 0.32, dur: 0.45 }, // C6
+    ];
+
+    fanfare.forEach(({ freq, delay, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(freq, now + delay);
+
+      gain.gain.setValueAtTime(0.0001, now + delay);
+      gain.gain.linearRampToValueAtTime(volume, now + delay + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + dur);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now + delay);
+      osc.stop(now + delay + dur + 0.01);
+    });
+  } catch (e) {}
+}
+
+// 8. Streak Multiplier Combo Chime
+export function playComboBonus(volume = 0.12) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    const notes = [
+      { freq: 1479.98, delay: 0.0, dur: 0.08 }, // F#6
+      { freq: 1760.00, delay: 0.06, dur: 0.08 }, // A6
+      { freq: 2217.46, delay: 0.12, dur: 0.25 }, // C#7
+    ];
+
+    notes.forEach(({ freq, delay, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, now + delay);
+
+      gain.gain.setValueAtTime(0.0001, now + delay);
+      gain.gain.linearRampToValueAtTime(volume, now + delay + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + dur);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now + delay);
+      osc.stop(now + delay + dur + 0.01);
+    });
+  } catch (e) {}
+}
+
