@@ -13,6 +13,30 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 
 ---
 
+## 🔄 CRITICAL MQL5 FORGE GIT SYNC RULE
+> **MANDATORY FOR ALL AI AGENTS:**
+> - **ALWAYS sync MQL5 Forge Git immediately after EVERY GitHub sync / push.**
+> - Whenever any EA code, binaries, configuration, or documentation are committed and pushed to GitHub (e.g. `EA_Budak_Ubat_MT5_Public`, `goldmind-ai`, `EA-Budak-Ubat`, or any EA repository), you MUST ALWAYS stage, commit, and push to MQL5 Forge Git right after.
+> - **MQL5 Forge Repository Location:**
+>   `%APPDATA%\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5`
+> - **Remote & Branch:** `origin https://forge.mql5.io/syarief.azman/mql5.git` on branch `main`
+> - **PowerShell Sync Command:**
+>   ```powershell
+>   $mql5Path = "$env:APPDATA\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5"
+>   if (Test-Path $mql5Path) {
+>       Push-Location $mql5Path
+>       git add -A
+>       if (git status --porcelain) {
+>           git commit --no-gpg-sign -m "sync: update EAs and binaries to MQL5 Forge"
+>           git push origin main
+>       }
+>       Pop-Location
+>   }
+>   ```
+> - Authentication for `forge.mql5.io` is already configured in git/Windows Credential Manager — no extra token needed.
+
+---
+
 ## ⚡ Quick Actions Cheatsheet
 
 ### 1. Authorize / Prepend Account Numbers
@@ -64,6 +88,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd ".\ea-budak-ubat-
 | **Next.js Web Application** | `.\ea-budak-ubat-web` |
 | **MT4 Source Repository** | `%APPDATA%\MetaQuotes\Terminal\<MT4_INSTANCE_HASH>\MQL4\Experts\EA-Budak-Ubat` |
 | **MT5 Source Repository** | `%APPDATA%\MetaQuotes\Terminal\<MT5_INSTANCE_HASH>\MQL5\Experts\EA Budak Ubat` |
+| **MQL5 Forge Git Repository** | `%APPDATA%\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5` |
 | **Desktop MT4 Release Repo** | `..\EA_Budak_Ubat` |
 
 ---
