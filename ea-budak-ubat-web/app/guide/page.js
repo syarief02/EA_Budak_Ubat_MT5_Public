@@ -54,7 +54,7 @@ const PRODUCTS = [
         ],
     },
     {
-        name: "GoldMind AI", slug: "goldmind-ai", icon: "🤖", version: "v1.00",
+        name: "GoldMind AI", slug: "goldmind-ai", icon: "🤖", version: "v1.01",
         strategy: "AI-Powered Signals", platforms: "MT5", bestFor: "XAUUSD (Gold)",
         license: "Open Source", expiry: "2026-09-30",
         description: "Uses OpenAI ChatGPT to analyze gold (XAUUSD) price charts and automatically place trades in MetaTrader 5. Runs entirely on your computer with a Python FastAPI backend.",
@@ -63,7 +63,7 @@ const PRODUCTS = [
             { title: "Server Forwards to AI", desc: "FastAPI backend sends price data to OpenAI ChatGPT with gold analysis prompt." },
             { title: "AI Analyzes Market", desc: "ChatGPT responds with JSON: buy stop / sell stop / no trade + entry, SL, TP." },
             { title: "Signal Validation", desc: "6 safety filters: spread, stop level, entry price, SL direction, R:R ratio, lot size." },
-            { title: "Order Placement", desc: "Pending order placed. Cancelled after 4 hours if unfilled." },
+            { title: "Order Placement", desc: "Pending order placed. Automatically cancelled/refreshed after configured interval (e.g. 15 mins) if unfilled." },
             { title: "Cost Optimization", desc: "While position is open, skips signal requests to save API costs." },
         ],
         params: [
@@ -72,9 +72,10 @@ const PRODUCTS = [
             { name: "RiskPercent", def: "1.0", desc: "% of equity risked per trade" },
             { name: "MinRR", def: "1.5", desc: "Min reward-to-risk ratio" },
             { name: "Timeframe", def: "PERIOD_M15", desc: "Candle timeframe for AI data" },
-            { name: "CandleCount", def: "100", desc: "Historical candles sent to AI" },
-            { name: "RefreshHours", def: "4.0", desc: "Hours between signal requests" },
-            { name: "MagicNumber", def: "777", desc: "Unique trade identifier" },
+            { name: "CandleCount", def: "200", desc: "Historical candles sent to AI" },
+            { name: "RefreshMinutes", def: "15", desc: "Minutes between signal requests and pending order expiry" },
+            { name: "MagicNumber", def: "20250226", desc: "Unique trade identifier" },
+            { name: "Timeout", def: "10000", desc: "WebRequest timeout in milliseconds" },
         ],
         tips: [
             "Requires Python 3.10+, MetaTrader 5, and OpenAI API Key",

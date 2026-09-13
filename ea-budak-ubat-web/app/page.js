@@ -51,7 +51,7 @@ const PRODUCTS = [
   {
     slug: "goldmind-ai",
     name: "GoldMind AI",
-    version: "Open Source",
+    version: "v1.01",
     tagline: "AI-Powered XAUUSD Signal Trading",
     description: "An AI-powered trading system that uses ChatGPT to analyze gold (XAUUSD) price charts and automatically place trades in MetaTrader 5. Runs entirely on your computer with FastAPI + OpenAI + MQL5.",
     platforms: ["MT5"],
@@ -146,7 +146,7 @@ const STRATEGY_DATA = {
   },
   "goldmind-ai": {
     name: "GoldMind AI",
-    version: "Open Source",
+    version: "v1.01",
     tagline: "Neural Signal Engine (ChatGPT 4o-mini + MQL5 Bridge)",
     desc: "Computer vision & LLM chart reasoning algorithm designed exclusively for XAUUSD gold breakouts with strict news and volatility gating.",
     winRate: "91.0%",

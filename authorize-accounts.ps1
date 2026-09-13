@@ -332,10 +332,10 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
         Start-Process -FilePath $MT5_COMPILER -ArgumentList "/compile:`"$mq5GM`" /log:`"$MQL5_ROOT\Experts\compile_gm.log`"" -PassThru -Wait -NoNewWindow
         $binGM = "$MQL5_ROOT\Experts\GoldMind_AI.ex5"
         if (Test-Path $binGM) {
-            Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind AI v1.00 - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
+            Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind AI v1.01 - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
             Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind AI - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
             Copy-Item $binGM "$GOLDMIND_REPO\mt5\Experts\GoldMind_AI.ex5" -Force -ErrorAction SilentlyContinue
-            Copy-Item $binGM "$DESKTOP\mt5 xauusd\mt5\Experts\GoldMind AI v1.00 - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
+            Copy-Item $binGM "$DESKTOP\mt5 xauusd\mt5\Experts\GoldMind AI v1.01 - MT5 - $dateSuffix.ex5" -Force -ErrorAction SilentlyContinue
             Copy-Item $binGM "$DESKTOP\mt5 xauusd\mt5\Experts\GoldMind_AI.ex5" -Force -ErrorAction SilentlyContinue
             Write-Host "  [OK] GoldMind AI MT5 compiled!" -ForegroundColor Green
         }

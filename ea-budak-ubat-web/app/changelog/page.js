@@ -5,6 +5,31 @@ import Link from "next/link";
 
 const CHANGELOG_DATA = [
   {
+    version: "v1.01",
+    product: "GoldMind AI (MT5)",
+    productSlug: "goldmind-ai",
+    date: "September 14, 2026",
+    badge: "Minor Update",
+    badgeType: "minor",
+    summary: "Upgraded signal refresh interval from hours to minutes (InpRefreshMinutes), enabling fast-paced 15-minute signal cycles and automated pending order expiry.",
+    highlights: [
+      {
+        type: "improvement",
+        tag: "Usability & Precision",
+        title: "Minute-Level Signal Refresh (InpRefreshMinutes = 15)",
+        desc: "Converted the input parameter from whole hours to minutes. Traders can now directly input 15 for 15-minute signal cycles instead of attempting invalid fractional hour decimals.",
+      },
+      {
+        type: "improvement",
+        tag: "Order Management",
+        title: "Synchronized Pending Order Expiry",
+        desc: "Aligned pending order expiry and cancel-and-replace routines with the new minute-based interval, ensuring stale breakout orders are cancelled and re-analyzed by OpenAI ChatGPT promptly.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020260930.ex5",
+    downloadLabel: "Download MT5 v1.01 .ex5",
+  },
+  {
     version: "v1.64",
     product: "EA Budak Ubat (MT5)",
     productSlug: "ea-budak-ubat",

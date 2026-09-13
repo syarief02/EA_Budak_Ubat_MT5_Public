@@ -1,19 +1,19 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
-const DOWNLOAD_EX5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.00%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_EX5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020260930.ex5";
 const DOWNLOAD_ZIP = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
 const DOWNLOAD_MT5 = DOWNLOAD_EX5;
 
 const FEATURES = [
     { icon: "🤖", title: "AI-Powered Analysis", desc: "Uses OpenAI GPT (default: gpt-5.2) to analyze XAUUSD price charts across multiple timeframes and generate trading signals with structured JSON output." },
     { icon: "🛡️", title: "6 Safety Filters", desc: "Every signal passes through spread, stop level, entry price, SL direction, R:R ratio, and lot size validation." },
-    { icon: "📊", title: "Pending Orders", desc: "Places buy stop or sell stop pending orders, automatically cancelled after 4 hours if not triggered." },
+    { icon: "📊", title: "Pending Orders", desc: "Places buy stop or sell stop pending orders, automatically cancelled after your configured refresh interval (e.g. 15 minutes) if not triggered." },
     { icon: "💰", title: "Smart Lot Sizing", desc: "Calculates lot size based on your risk percentage and the distance between entry and stop loss." },
-    { icon: "🔄", title: "Auto Signal Refresh", desc: "Requests fresh AI signals at configurable intervals. Supports automatic model fallback if the primary model fails. Skips requests when a position is open to save API costs." },
+    { icon: "🔄", title: "Auto Signal Refresh", desc: "Requests fresh AI signals at configurable minute intervals (default: 15 mins). Supports automatic model fallback if the primary model fails. Skips requests when a position is open to save API costs." },
     { icon: "⚡", title: "Local Processing", desc: "Runs entirely on your computer — Python FastAPI backend communicates between MT5 and OpenAI API." },
     { icon: "📈", title: "XAUUSD Specialist", desc: "AI prompt specifically designed to analyze gold price action for optimal entry, stop loss, and take profit levels." },
     { icon: "🔐", title: "Secure API Key", desc: "Your OpenAI API key stays on your machine, stored in a local .env file that never leaves your computer." },
@@ -26,9 +26,9 @@ const SETTINGS = [
     { name: "MinRR", def: "1.5", desc: "Minimum reward-to-risk ratio required to place a trade" },
     { name: "Timeframe", def: "PERIOD_M15", desc: "Candle timeframe used for price data sent to the AI" },
     { name: "CandleCount", def: "200", desc: "Number of historical candles sent to the AI for analysis (60 per timeframe used)" },
-    { name: "RefreshHours", def: "4.0", desc: "Hours between signal refresh requests. Also the pending order expiry time" },
-    { name: "MagicNumber", def: "777", desc: "Unique identifier for trades placed by this EA" },
-    { name: "Timeout", def: "30000", desc: "WebRequest timeout in milliseconds for server communication" },
+    { name: "RefreshMinutes", def: "15", desc: "Minutes between signal refresh requests. Also the pending order expiry time (e.g. 15 = 15 minutes)" },
+    { name: "MagicNumber", def: "20250226", desc: "Unique identifier for trades placed by this EA" },
+    { name: "Timeout", def: "10000", desc: "WebRequest timeout in milliseconds for server communication" },
 ];
 
 const REQUIREMENTS = [
@@ -95,7 +95,7 @@ export default function GoldMindAIPage() {
                 <div className="hero-content">
                     <div className="hero-badge goldmind-badge">
                         <span className="hero-badge-dot goldmind-dot"></span>
-                        MT5 · XAUUSD · AI-Powered
+                        v1.01 · MT5 · XAUUSD · AI-Powered
                     </div>
                     <h1>
                         <span className="goldmind-gradient-text">GoldMind AI</span>

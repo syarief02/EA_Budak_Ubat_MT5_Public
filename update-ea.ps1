@@ -107,7 +107,7 @@ $MT4OutNames = @(
 
 $MT5OutNames = @(
     "EA - Budak Ubat v1.64 - MT5 - $dateCompact.ex5",
-    "GoldMind AI v1.00 - MT5 - $dateCompact.ex5",
+    "GoldMind AI v1.01 - MT5 - $dateCompact.ex5",
     "BracketBlitz v1.00 - MT5 - $dateCompact.ex5",
     "MathEdge Pro v1.1 - MT5 - $dateCompact.ex5",
     "EA - Aligator Gozaimasu v1.06 - MT5 - $dateCompact.ex5",
