@@ -11,12 +11,12 @@ const TELEGRAM_ADMIN = "https://t.me/SyariefAzman";
 const TELEGRAM_CHANNEL = "https://t.me/EABudakUbat";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.64%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.65%20-%20MT5%20-%2020260930.ex5";
 
 const UNLOCKED_EAS = [
   {
     icon: "📊",
-    name: "EA Budak Ubat v1.64",
+    name: "EA Budak Ubat v1.65",
     platforms: ["MT4", "MT5"],
     desc: "Robot grid martingale terunggul dengan 4 kaedah analisis (Ichimoku, Alligator, Candle & SMA20) serta AutoConfig AI.",
     badge: "Most Popular",

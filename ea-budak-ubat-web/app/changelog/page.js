@@ -5,6 +5,51 @@ import Link from "next/link";
 
 const CHANGELOG_DATA = [
   {
+    version: "v1.65",
+    product: "EA Budak Ubat (MT5)",
+    productSlug: "ea-budak-ubat",
+    date: "September 15, 2026",
+    badge: "Chart Info Fixes",
+    badgeType: "major",
+    summary: "Comprehensive chart comment overhaul — five display bugs fixed for accurate, real-time on-chart information including dynamic RSI timeframe, live spread, clamped drawdown, account currency symbol, and AutoConfig status.",
+    highlights: [
+      {
+        type: "fix",
+        tag: "Critical Fix",
+        title: "Dynamic RSI Timeframe Display",
+        desc: "RSI Filter status now displays the actual configured timeframe (e.g. M15, H4) instead of always showing hardcoded '(H1)'. Uses EnumToString(RSI_TF) for real-time accuracy.",
+      },
+      {
+        type: "fix",
+        tag: "Display Fix",
+        title: "Drawdown Clamped to 0% During Floating Profit",
+        desc: "When equity exceeds balance (floating profit), Current DD now correctly shows 0.00% instead of a misleading negative value like -4.14%.",
+      },
+      {
+        type: "fix",
+        tag: "Accuracy",
+        title: "Live Spread Refresh on Every Tick",
+        desc: "Spread value on the chart comment is now recalculated on every tick instead of only once per new bar, ensuring traders always see the current real-time spread.",
+      },
+      {
+        type: "fix",
+        tag: "Multi-Currency",
+        title: "Account Currency Symbol (Dynamic)",
+        desc: "Equity display now uses the actual account currency (e.g. USD, EUR, MYR) via AccountInfoString(ACCOUNT_CURRENCY) instead of a hardcoded '$' sign.",
+      },
+      {
+        type: "feature",
+        tag: "New Info",
+        title: "AutoConfig Status on Chart",
+        desc: "Chart comment now shows 'AutoConfig: Active (AI)' when AutoConfig is enabled or 'AutoConfig: Manual' when using manual parameters, giving traders instant visibility into their configuration mode.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.65%20-%20MT5%20-%2020260930.ex5",
+    downloadLabel: "Download MT5 v1.65 .ex5",
+    marketUrl: "https://www.mql5.com/en/market/product/195399",
+    marketLabel: "Buy on MQL5 Market",
+  },
+  {
     version: "v1.01",
     product: "GoldMind AI (MT5)",
     productSlug: "goldmind-ai",
@@ -501,7 +546,7 @@ export default function ChangelogPage() {
             <div>
               <h4 className="footer-title">Products</h4>
               <ul className="footer-links">
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.64)</Link></li>
+                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.65)</Link></li>
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
