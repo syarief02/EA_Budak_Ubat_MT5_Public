@@ -166,3 +166,4 @@ Sürüm 1.66 Güncelleme Notları (v1.64'ten bu yana kümülatif güncellemeler)
 • Dinamik Hesap Para Birimi: Varlık göstergesi, sabit bir '$' işareti yerine hesabınızın gerçek baz para birimini (USD, EUR, TRY vb.) otomatik olarak algılar ve gösterir.
 • AutoConfig Durum Bilgisi: AutoConfig AI modunun devrede mi yoksa manuel modda mı olduğunu gösteren canlı grafik göstergesi eklendi.
 ```
+

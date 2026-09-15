@@ -159,7 +159,7 @@ export default function EABudakUbatPage() {
         <div className="hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot"></span>
-            v1.65 — MT4 & MT5
+            v1.66 — MT4 & MT5
           </div>
           <h1>
             <span className="gradient-text">EA Budak Ubat</span>
@@ -221,7 +221,7 @@ export default function EABudakUbatPage() {
 
               <div className="track-actions">
                 <div className="track-buttons-row">
-                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.65)</a>
+                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.66)</a>
                   <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4</a>
                 </div>
                 <div className="track-buttons-row" style={{ marginTop: "4px" }}>
@@ -247,15 +247,15 @@ export default function EABudakUbatPage() {
         </div>
       </section>
 
-      {/* WHAT'S NEW IN V1.65 BANNER */}
+      {/* WHAT'S NEW IN V1.66 BANNER */}
       <div className="container" style={{ marginTop: "-20px", marginBottom: "30px", position: "relative", zIndex: 10 }}>
         <div className="v163-banner-card animate-in">
           <div className="v163-banner-left">
             <span className="v163-banner-icon">🚀</span>
             <div>
-              <h4 className="v163-banner-title">What's New in v1.65 Release</h4>
+              <h4 className="v163-banner-title">What's New in v1.66 Release</h4>
               <p className="v163-banner-desc">
-                Chart Comment Overhaul: Dynamic RSI Timeframe, Tick-by-Tick Spread, Clamped Drawdown, Account Currency & AutoConfig Status.
+                Parameter Alignment, Configurable Margin Safeguards, Universal Netting Engine & Real-Time Chart Telemetry.
               </p>
             </div>
           </div>

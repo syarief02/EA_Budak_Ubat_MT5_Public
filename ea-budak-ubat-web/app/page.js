@@ -35,7 +35,7 @@ const PRODUCTS = [
   {
     slug: "ea-budak-ubat",
     name: "EA Budak Ubat",
-    version: "v1.65",
+    version: "v1.66",
     tagline: "Grid Martingale Expert Advisor",
     description: "A powerful grid-based martingale EA for MetaTrader 4 & MetaTrader 5. Features 4 analysis methods (Candle, SMA20, Alligator, Ichimoku), AutoConfig AI, hedging support, and configurable time filters.",
     platforms: ["MT4", "MT5"],
