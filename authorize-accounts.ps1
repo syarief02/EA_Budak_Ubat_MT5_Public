@@ -381,7 +381,8 @@ function Git-Commit-Push($repoPath, $commitMsg) {
     if ($changes) {
         Write-Host "  Pushing repo: $(Split-Path $repoPath -Leaf) ($branch)..." -ForegroundColor DarkCyan
         git add -A
-        git commit -m $commitMsg --quiet
+        git commit --no-gpg-sign -m $commitMsg --quiet
+        $env:GIT_TERMINAL_PROMPT = "0"
         git pull --rebase origin $branch --quiet
         git push origin $branch --quiet
         Write-Host "  [OK] Pushed: $(Split-Path $repoPath -Leaf) ($branch)" -ForegroundColor Green

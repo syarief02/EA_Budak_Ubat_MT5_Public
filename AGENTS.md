@@ -33,7 +33,7 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 >       Pop-Location
 >   }
 >   ```
-> - Authentication for `forge.mql5.io` is already configured in git/Windows Credential Manager — no extra token needed.
+> - Authentication for `forge.mql5.io` is permanently configured via Personal Access Token in Windows Credential Manager and `.env` (`MQL5_FORGE_TOKEN` / `MQL5_FORGE_USERNAME`).
 
 ---
 
