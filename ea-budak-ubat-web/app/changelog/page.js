@@ -5,6 +5,45 @@ import Link from "next/link";
 
 const CHANGELOG_DATA = [
   {
+    version: "v1.66",
+    product: "EA Budak Ubat (MT5)",
+    productSlug: "ea-budak-ubat",
+    date: "September 16, 2026",
+    badge: "Parameter Alignment & Margin Guards",
+    badgeType: "major",
+    summary: "Unified parameter structure across both Market Edition and Non-Market Edition with full .set file interoperability. Introduces configurable Margin Safeguards and universal Netting/Hedging position layer tracking.",
+    highlights: [
+      {
+        type: "feature",
+        tag: "Parameter Alignment",
+        title: "Identical Parameter Schema (.set File Interoperability)",
+        desc: "Market Edition and Non-Market Community Edition now share the exact same parameter names, order, and data types. Any custom .set file can be loaded interchangeably across both editions.",
+      },
+      {
+        type: "feature",
+        tag: "New Risk Feature",
+        title: "User-Configurable Margin Safeguards",
+        desc: "Introduced MinMarginLevelToTrade (pauses adding grid layers if margin level dips below threshold) and EmergencyMarginLevel (emergency basket closure before broker stop-out). Defaulted to 0.0 (off) in the non-market edition for maximum flexibility, and preset to 200% / 60% in Market Edition for automated backtest validation.",
+      },
+      {
+        type: "fix",
+        tag: "Core Engine",
+        title: "Universal Netting & Hedging Position Tracking",
+        desc: "High-precision layer counter and price memory ensure accurate grid distancing, lot multiplier scaling, and MaxTrade enforcement regardless of whether the broker account is configured in Netting or Hedging mode.",
+      },
+      {
+        type: "feature",
+        tag: "Distribution",
+        title: "v1.66 Flagship MT5 Release",
+        desc: "New compiled v1.66 binaries deployed to public downloads, client repositories, and MQL5 Market validation package.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.66%20-%20MT5%20-%2020260930.ex5",
+    downloadLabel: "Download MT5 v1.66 .ex5",
+    marketUrl: "https://www.mql5.com/en/market/product/195399",
+    marketLabel: "Buy on MQL5 Market",
+  },
+  {
     version: "v1.65",
     product: "EA Budak Ubat (MT5)",
     productSlug: "ea-budak-ubat",

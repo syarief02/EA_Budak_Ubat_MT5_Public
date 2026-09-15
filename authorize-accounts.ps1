@@ -106,6 +106,9 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
     Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.62 Authorized Account List.txt"
 }
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
+    Prepend-To-TxtList "$MQL5_BASE\v1.66 Authorized Account List.txt"
+    Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.66 Authorized Account List.txt"
+    Prepend-To-TxtList "$PUBLIC_REPO\v1.66 Authorized Account List.txt"
     Prepend-To-TxtList "$MQL5_BASE\v1.65 Authorized Account List.txt"
     Prepend-To-TxtList "$DESKTOP_MT5_REPO\v1.65 Authorized Account List.txt"
     Prepend-To-TxtList "$PUBLIC_REPO\v1.65 Authorized Account List.txt"
@@ -127,6 +130,8 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
     Prepend-To-MQSource "$MATHEDGE_REPO\MathEdge Pro.mq4"
 }
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
+    Prepend-To-MQSource "$MQL5_BASE\EA - Budak Ubat v1.66 - MT5 - .mq5"
+    Prepend-To-MQSource "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.66 - MT5 - .mq5"
     Prepend-To-MQSource "$MQL5_BASE\EA - Budak Ubat v1.65 - MT5 - .mq5"
     Prepend-To-MQSource "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.65 - MT5 - .mq5"
     Prepend-To-MQSource "$MQL5_BASE\EA - Budak Ubat v1.64 - MT5 - .mq5"
@@ -256,7 +261,24 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
 }
 
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
-    # 0. EA Budak Ubat MT5 v1.65 (Latest Flagship)
+    # 0. EA Budak Ubat MT5 v1.66 (Latest Flagship)
+    $mq5_166 = "$MQL5_BASE\EA - Budak Ubat v1.66 - MT5 - .mq5"
+    if (Test-Path $mq5_166) {
+        Write-Host "  Compiling MT5: EA Budak Ubat v1.66..." -ForegroundColor DarkCyan
+        Start-Process -FilePath $MT5_COMPILER -ArgumentList "/compile:`"$mq5_166`" /log:`"$MQL5_BASE\compile_v166.log`"" -PassThru -Wait -NoNewWindow
+        $bin166 = "$MQL5_BASE\EA - Budak Ubat v1.66 - MT5 - .ex5"
+        if (Test-Path $bin166) {
+            Copy-Item $bin166 "$MQL5_BASE\EA - Budak Ubat v1.66 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item $bin166 "$PUBLIC_REPO\EA - Budak Ubat v1.66 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item $bin166 "$PUBLIC_REPO\EA - Budak Ubat v1.66 - MT5 - .ex5" -Force
+            Copy-Item $bin166 "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.66 - MT5 - $dateSuffix.ex5" -Force
+            Copy-Item $bin166 "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.66 - MT5 - .ex5" -Force
+            Copy-Item $mq5_166 "$DESKTOP_MT5_REPO\EA - Budak Ubat v1.66 - MT5 - .mq5" -Force
+            Write-Host "  [OK] EA Budak Ubat MT5 v1.66 compiled!" -ForegroundColor Green
+        }
+    }
+
+    # 0.1. EA Budak Ubat MT5 v1.65
     $mq5_165 = "$MQL5_BASE\EA - Budak Ubat v1.65 - MT5 - .mq5"
     if (Test-Path $mq5_165) {
         Write-Host "  Compiling MT5: EA Budak Ubat v1.65..." -ForegroundColor DarkCyan

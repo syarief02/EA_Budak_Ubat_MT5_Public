@@ -9,7 +9,7 @@ import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.65%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.66%20-%20MT5%20-%2020260930.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
@@ -66,6 +66,8 @@ const PARAM_TABS = {
     { name: "EnableBreakEven", def: "false", desc: "Automatically lock profits by moving SL once basket exceeds trigger pips" },
     { name: "BreakEven_Trigger", def: "15.0", desc: "Floating profit in pips required to activate Break-Even" },
     { name: "BreakEven_Lock", def: "2.0", desc: "Guaranteed pips locked in profit above/below average entry price" },
+    { name: "MinMarginLevelToTrade", def: "0.0", desc: "Pauses adding new grid orders if margin level drops below this % (0 = off, 200% in Market Edition)" },
+    { name: "EmergencyMarginLevel", def: "0.0", desc: "Emergency basket stop-out protection %. Closes trades cleanly if margin level drops below this % (0 = off, 60% in Market Edition)" },
   ],
 };
 
@@ -91,7 +93,7 @@ const INSTALL_MT4 = [
 ];
 
 const INSTALL_MT5 = [
-  <>Download <code>EA - Budak Ubat v1.65 - MT5 - 20260930.ex5</code></>,
+  <>Download <code>EA - Budak Ubat v1.66 - MT5 - 20260930.ex5</code></>,
   <>Open MT5 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL5/Experts/</code></>,
   "Copy the .ex5 file into this folder",
