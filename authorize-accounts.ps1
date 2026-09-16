@@ -480,7 +480,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
 if (-not $SkipDeploy) {
     Write-Host ""
     Write-Host "--- STEP 4: Deploying Website ---" -ForegroundColor Cyan
-    Push-Location "$PUBLIC_REPO"
+    Push-Location "$PUBLIC_REPO\ea-budak-ubat-web"
     $envFile = "$PUBLIC_REPO\.env"
     $token = ""
     if (Test-Path $envFile) {
