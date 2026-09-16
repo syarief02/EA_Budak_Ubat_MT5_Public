@@ -9,7 +9,7 @@ import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.66%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
@@ -93,7 +93,7 @@ const INSTALL_MT4 = [
 ];
 
 const INSTALL_MT5 = [
-  <>Download <code>EA - Budak Ubat v1.66 - MT5 - 20260930.ex5</code></>,
+  <>Download <code>EA - Budak Ubat v1.67 - MT5 - 20260930.ex5</code></>,
   <>Open MT5 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL5/Experts/</code></>,
   "Copy the .ex5 file into this folder",
@@ -159,7 +159,7 @@ export default function EABudakUbatPage() {
         <div className="hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot"></span>
-            v1.66 — MT4 & MT5
+            v1.67 — MT4 & MT5
           </div>
           <h1>
             <span className="gradient-text">EA Budak Ubat</span>
@@ -221,7 +221,7 @@ export default function EABudakUbatPage() {
 
               <div className="track-actions">
                 <div className="track-buttons-row">
-                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.66)</a>
+                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.67)</a>
                   <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4</a>
                 </div>
                 <div className="track-buttons-row" style={{ marginTop: "4px" }}>
@@ -247,15 +247,15 @@ export default function EABudakUbatPage() {
         </div>
       </section>
 
-      {/* WHAT'S NEW IN V1.66 BANNER */}
+      {/* WHAT'S NEW IN V1.67 BANNER */}
       <div className="container" style={{ marginTop: "-20px", marginBottom: "30px", position: "relative", zIndex: 10 }}>
         <div className="v163-banner-card animate-in">
           <div className="v163-banner-left">
             <span className="v163-banner-icon">🚀</span>
             <div>
-              <h4 className="v163-banner-title">What's New in v1.66 Release</h4>
+              <h4 className="v163-banner-title">What's New in v1.67 Release</h4>
               <p className="v163-banner-desc">
-                Parameter Alignment, Configurable Margin Safeguards, Universal Netting Engine & Real-Time Chart Telemetry.
+                Basket Break-Even StopLoss Conflict Fix, Real-Time Intra-Candle Tick Guard in OnTick(), Parameter Clamp Guard & Core Latency Optimization.
               </p>
             </div>
           </div>

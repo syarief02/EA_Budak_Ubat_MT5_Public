@@ -1,6 +1,6 @@
-# EA Budak Ubat v1.66
+# EA Budak Ubat v1.67
 
-### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4) · [⬇️ Download MT5 (v1.66)](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.66%20-%20MT5%20-%2020260930.ex5) · [🛒 Buy MT5 on MQL5 Market](https://www.mql5.com/en/market/product/195399) · [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
+### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4) · [⬇️ Download MT5 (v1.67)](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5) · [🛒 Buy MT5 on MQL5 Market](https://www.mql5.com/en/market/product/195399) · [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
 
 > **Limited Time Price!** The price increases by 10 USD after every 10 purchases.
 
@@ -62,7 +62,7 @@ EA Budak Ubat is available for **both MetaTrader 4 and MetaTrader 5**. The MT5 v
 
 | Aspect | MT4 Version | MT5 Version (Beta) |
 |---|---|---|
-| **File** | `EA - Budak Ubat v1.62 - MT4 - 20260930.ex4` | `EA - Budak Ubat v1.66 - MT5 - 20260930.ex5` |
+| **File** | `EA - Budak Ubat v1.62 - MT4 - 20260930.ex4` | `EA - Budak Ubat v1.67 - MT5 - 20260930.ex5` |
 | **Order System** | `OrderSend()`, `OrderSelect()`, `OrderModify()` | `CTrade` class (`trade.Buy()`, `trade.Sell()`, `trade.PositionModify()`) |
 | **Position Counting** | `OrdersTotal()` with `OrderSelect()` loop | `PositionsTotal()` with `PositionGetTicket()` loop |
 | **Indicators** | Direct `iRSI()`, `iMA()`, `iAlligator()`, `iIchimoku()` calls | Indicator handles + `CopyBuffer()` via `GetIndicatorBuffer()` helper |
@@ -276,7 +276,7 @@ Register through one of the author's broker partner links below. After registeri
 
 ### MT5 Installation
 
-1. Download `EA - Budak Ubat v1.66 - MT5 - 20260930.ex5`
+1. Download `EA - Budak Ubat v1.67 - MT5 - 20260930.ex5`
 2. Open MT5 → `File` → `Open Data Folder`
 3. Navigate to `MQL5/Experts/`
 4. Copy the `.ex5` file into this folder
@@ -371,6 +371,20 @@ A: Technically yes, but gold is very volatile. Use extreme caution, a cent accou
 ---
 
 ## Update Logs
+
+### EA Budak Ubat v1.67
+
+```
+What's new:
+1. Basket Break-Even StopLoss Conflict Resolution:
+   - Fixed critical conflict inside ModifyTakeProfit() where an active StopLoss would continuously overwrite and cancel the Break-Even StopLoss on every tick/bar. Positions now safely retain their profitable locked Break-Even stop price.
+2. Real-Time Tick Guard Execution:
+   - Relocated CheckBasketBreakEven() execution directly into OnTick(). Baskets now dynamically lock in profits during real-time intra-candle spikes rather than waiting for bar closes (Mode B).
+3. Parameter Sanity & Clamp Guard:
+   - Added automatic clamp guard ensuring BreakEven_Lock remains strictly less than BreakEven_Trigger (with clear terminal warning), preventing broker error 10016 (Invalid Stops).
+4. Core Engine Performance:
+   - Atomic tick price sampling using SymbolInfoTick and zero-position bypass for optimal tick processing latency.
+```
 
 ### EA Budak Ubat v1.66
 
@@ -495,10 +509,12 @@ Initial grid martingale EA with:
 | File | Description |
 |---|---|
 | `EA - Budak Ubat v1.62 - MT4 - 20260930.ex4` | MT4 compiled EA |
-| `EA - Budak Ubat v1.66 - MT5 - 20260930.ex5` | MT5 compiled EA (v1.66 Flagship) |
+| `EA - Budak Ubat v1.67 - MT5 - 20260930.ex5` | MT5 compiled EA (v1.67 Flagship) |
+| `EA - Budak Ubat v1.66 - MT5 - 20260930.ex5` | MT5 compiled EA (v1.66 Stable) |
 | `EA - Budak Ubat v1.65 - MT5 - 20260930.ex5` | MT5 compiled EA (v1.65 Stable) |
 | `EA - Budak Ubat v1.64 - MT5 - 20260930.ex5` | MT5 compiled EA (v1.64 Stable) |
 | `EA - Budak Ubat v1.63 - MT5 - 20260930.ex5` | MT5 compiled EA (v1.63 Stable) |
+| `v1.67 Authorized Account List.txt` | Full authorized account list (v1.67) |
 | `v1.66 Authorized Account List.txt` | Full authorized account list (v1.66) |
 | `v1.65 Authorized Account List.txt` | Full authorized account list (v1.65) |
 | `v1.64 Authorized Account List.txt` | Full authorized account list (v1.64) |

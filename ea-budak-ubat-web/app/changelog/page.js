@@ -5,6 +5,45 @@ import Link from "next/link";
 
 const CHANGELOG_DATA = [
   {
+    version: "v1.67",
+    product: "EA Budak Ubat (MT5)",
+    productSlug: "ea-budak-ubat",
+    date: "September 16, 2026",
+    badge: "Basket Break-Even Fix & Real-Time Tick Guard",
+    badgeType: "major",
+    summary: "Fixed critical StopLoss overwrite conflict in basket management, promoted Break-Even execution to real-time tick monitoring in OnTick(), and added auto-clamp protection for break-even lock parameters.",
+    highlights: [
+      {
+        type: "fix",
+        tag: "Critical Fix",
+        title: "StopLoss Tug-of-War Conflict Resolved",
+        desc: "Fixed an issue where ModifyTakeProfit() would continuously reset and downgrade an active Break-Even StopLoss back to the initial order stop loss. Open positions now safely maintain their profitable locked Break-Even stop price.",
+      },
+      {
+        type: "feature",
+        tag: "Execution Engine",
+        title: "Real-Time Intra-Candle Tick Break-Even",
+        desc: "Relocated CheckBasketBreakEven() execution directly into OnTick(). Baskets now dynamically lock in profits during sudden intra-bar price spikes instead of waiting for bar closes (Mode B).",
+      },
+      {
+        type: "fix",
+        tag: "Safety Guard",
+        title: "Automatic Parameter Clamping & Broker Stop Guard",
+        desc: "Added safety clamping ensuring BreakEven_Lock remains strictly less than BreakEven_Trigger (with console warning), preventing broker rejection error 10016 (TRADE_RETCODE_INVALID_STOPS).",
+      },
+      {
+        type: "feature",
+        tag: "Distribution",
+        title: "v1.67 Flagship MT5 Release",
+        desc: "Compiled v1.67 binaries distributed across website, public repositories, and MQL5 Forge.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5",
+    downloadLabel: "Download MT5 v1.67 .ex5",
+    marketUrl: "https://www.mql5.com/en/market/product/195399",
+    marketLabel: "Buy on MQL5 Market",
+  },
+  {
     version: "v1.66",
     product: "EA Budak Ubat (MT5)",
     productSlug: "ea-budak-ubat",
