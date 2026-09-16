@@ -466,9 +466,9 @@ if (-not $SkipDeploy) {
         if ($match) { $token = $match.Matches.Groups[1].Value.Trim() }
     }
     if ($token) {
-        npx -y vercel --prod --yes --token $token
+        npx -y vercel --prod --yes --token $token --no-wait
     } else {
-        npx -y vercel --prod --yes
+        npx -y vercel --prod --yes --no-wait
     }
     Pop-Location
 }
