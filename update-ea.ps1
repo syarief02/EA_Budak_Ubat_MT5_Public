@@ -62,7 +62,7 @@ $WEB_APP   = "$DESKTOP\ea bu mt5 public\ea-budak-ubat-web\app"
 #          output repo, MQ5 sub-dir, MT4 output name, MT5 output name, web slug
 
 $EANames    = @("EA Budak Ubat",     "GoldMind AI",       "BracketBlitz",       "MathEdge Pro",       "Aligator Gozaimasu",       "Encik Moku")
-$EAVersions = @("v1.62",             "v1.00",             "v1.00",              "v1.1",               "v1.06",                     "v1.06")
+$EAVersions = @("v1.67",             "v1.00",             "v1.00",              "v1.1",               "v1.06",                     "v1.06")
 
 $MQ4Sources = @(
     "$MQL4_BASE\EA - Budak Ubat v1.62 - .mq4",
@@ -210,7 +210,7 @@ function Update-ExpiryInFile($FilePath, $FileEncoding, $NewDateDot) {
 
 for ($i = 0; $i -lt $EANames.Count; $i++) {
     Write-Host ""
-    Write-Host "  [$($EANames[$i])]" -ForegroundColor White
+    Write-Host "  [$($EANames[$i]) $($EAVersions[$i])]" -ForegroundColor White
 
     $result = Update-ExpiryInFile $MQ4Sources[$i] $MQ4Encodings[$i] $dateDot
     if ($result) { $updatedFiles++ }
@@ -225,7 +225,7 @@ for ($i = 0; $i -lt $EANames.Count; $i++) {
 Write-Host ""
 Write-Host "--- STEP 2: Compiling source files ---" -ForegroundColor Cyan
 
-function Compile-MQFile($SourcePath, $Compiler, $Platform) {
+function Invoke-CompileMQFile($SourcePath, $Compiler, $Platform) {
     if (-not $SourcePath -or $SourcePath -eq "") { return $false }
     if (-not (Test-Path $SourcePath)) {
         Write-Host "  SKIP: Source not found" -ForegroundColor Yellow
@@ -242,7 +242,7 @@ function Compile-MQFile($SourcePath, $Compiler, $Platform) {
     $logFile = [System.IO.Path]::ChangeExtension($SourcePath, ".log")
 
     $argString = "/compile:""$SourcePath"" /log:""$logFile"""
-    $proc = Start-Process -FilePath $Compiler -ArgumentList $argString -PassThru -Wait -NoNewWindow
+    $null = Start-Process -FilePath $Compiler -ArgumentList $argString -Wait -NoNewWindow
 
     # Determine compiled extension
     $ext = ".ex5"
@@ -269,16 +269,16 @@ function Compile-MQFile($SourcePath, $Compiler, $Platform) {
 
 for ($i = 0; $i -lt $EANames.Count; $i++) {
     Write-Host ""
-    Write-Host "  [$($EANames[$i])]" -ForegroundColor White
+    Write-Host "  [$($EANames[$i]) $($EAVersions[$i])]" -ForegroundColor White
 
     if ($MQ4Sources[$i] -ne "") {
-        $result = Compile-MQFile $MQ4Sources[$i] $MT4_COMPILER "MT4"
+        $result = Invoke-CompileMQFile $MQ4Sources[$i] $MT4_COMPILER "MT4"
         if ($result) { $compiledFiles++ }
         else { $errorList += "$($EANames[$i]) MT4 compile failed" }
     }
 
     if ($MQ5Sources[$i] -ne "") {
-        $result = Compile-MQFile $MQ5Sources[$i] $MT5_COMPILER "MT5"
+        $result = Invoke-CompileMQFile $MQ5Sources[$i] $MT5_COMPILER "MT5"
         if ($result) { $compiledFiles++ }
         else { $errorList += "$($EANames[$i]) MT5 compile failed" }
     }
