@@ -83,6 +83,12 @@ export async function GET() {
       }
 
       return !EXCLUDED_PROBE_NAMES.includes(lowerName);
+    }).map((item) => {
+      // Only explicit EA Request posts should have an ea_name badge
+      if (item.type !== 'ea_request') {
+        return { ...item, ea_name: null };
+      }
+      return item;
     });
 
     return NextResponse.json(

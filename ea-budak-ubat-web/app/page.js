@@ -1036,7 +1036,7 @@ export default function Home() {
                       </span>
                     </div>
 
-                    {comment.ea_name && (
+                    {comment.type === "ea_request" && comment.ea_name && (
                       <div className="comment-ea-tag">
                         🤖 Requested: <strong>{comment.ea_name}</strong>
                       </div>
