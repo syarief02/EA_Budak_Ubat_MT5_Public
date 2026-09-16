@@ -13,5 +13,7 @@ mql5-market-package/*.ex4
 mql5-market-package/*.ex5
 
 .vercel/
+mql5-market-package/*.pdf
+*.pdf
 
 
