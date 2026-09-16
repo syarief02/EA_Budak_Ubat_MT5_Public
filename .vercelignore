@@ -1,0 +1,7 @@
+mql5-market-package/
+*.pdf
+*.log
+.agents/
+*.mq4
+*.mq5
+
