@@ -267,3 +267,4 @@ export async function POST(request) {
     return NextResponse.json({ success: false, error: 'Failed to process product publish request.' }, { status: 500 });
   }
 }
+

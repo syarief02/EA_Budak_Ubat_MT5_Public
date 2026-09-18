@@ -75,9 +75,8 @@ export default function MQLProductsShowcase() {
             {filteredProducts.map((p, idx) => (
               <div
                 key={p.slug || idx}
-                className="partner-broker-card animate-in"
+                className="mql-product-card visible"
                 style={{
-                  animationDelay: `${idx * 0.08}s`,
                   borderColor: p.color ? `${p.color}35` : "var(--border-glass)",
                   background: "linear-gradient(180deg, rgba(17, 24, 39, 0.92) 0%, rgba(10, 14, 26, 0.96) 100%)",
                 }}
@@ -216,7 +215,7 @@ export default function MQLProductsShowcase() {
 
         {/* MQL5 SELLER BANNER CALLOUT */}
         <div
-          className="mql5-seller-card glass-card animate-in"
+          className="mql5-seller-card glass-card visible"
           style={{
             marginTop: "50px",
             padding: "28px",
@@ -256,3 +255,4 @@ export default function MQLProductsShowcase() {
     </section>
   );
 }
+

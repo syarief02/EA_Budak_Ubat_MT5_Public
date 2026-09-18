@@ -8551,12 +8551,39 @@ section {
   transition: all 0.3s ease;
   overflow: hidden;
   text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .partner-broker-card:hover {
   border-color: rgba(56, 189, 248, 0.5) !important;
   transform: translateY(-4px);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55), 0 0 30px rgba(56, 189, 248, 0.15);
+}
+
+.mql-product-card {
+  position: relative;
+  background: rgba(17, 24, 39, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 22px !important;
+  padding: 26px !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+.mql-product-card:hover {
+  border-color: rgba(0, 240, 255, 0.5) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.2) !important;
 }
 
 .partner-broker-content {

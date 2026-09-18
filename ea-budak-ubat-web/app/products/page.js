@@ -12,10 +12,6 @@ export default function ProductsPage() {
   const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   async function fetchProducts() {
     try {
       const res = await fetch("/api/products");
@@ -29,6 +25,10 @@ export default function ProductsPage() {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const categories = useMemo(() => {
     return ["all", ...new Set(products.map((p) => p.category).filter(Boolean))];
@@ -61,6 +61,22 @@ export default function ProductsPage() {
       return true;
     });
   }, [products, selectedCategory, selectedPlatform, searchQuery]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [products, filteredProducts, loading]);
 
   return (
     <>
@@ -221,7 +237,7 @@ export default function ProductsPage() {
             {filteredProducts.map((p, idx) => (
               <div
                 key={p.slug || idx}
-                className="partner-broker-card animate-in"
+                className="mql-product-card visible"
                 style={{
                   borderColor: p.color ? `${p.color}35` : "var(--border-glass)",
                   background: "linear-gradient(180deg, rgba(17, 24, 39, 0.94) 0%, rgba(10, 14, 26, 0.98) 100%)",
@@ -359,7 +375,7 @@ export default function ProductsPage() {
 
         {/* VERIFIED MQL5 SELLER BANNER */}
         <div
-          className="glass-card"
+          className="glass-card visible"
           style={{
             marginTop: "60px",
             padding: "32px",
@@ -447,3 +463,4 @@ export default function ProductsPage() {
     </>
   );
 }
+

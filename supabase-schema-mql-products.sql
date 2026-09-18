@@ -208,3 +208,4 @@ ON CONFLICT (slug) DO UPDATE SET
     active = EXCLUDED.active,
     display_order = EXCLUDED.display_order,
     updated_at = now();
+
