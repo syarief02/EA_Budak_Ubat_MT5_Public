@@ -123,6 +123,84 @@ const PARTNER_BROKERS = [
     btnBg: "linear-gradient(135deg, #06b6d4, #0891b2)",
     btnColor: "#ffffff",
   },
+  {
+    name: "RoboForex",
+    badge: "🪙 $30 Welcome Bonus · ProCent Accounts",
+    headline: "Maximum Drawdown Protection & Cent Resilience",
+    desc: "Receive a 30 USD non-withdrawable Welcome Bonus that stays in your account during drawdowns. ProCent accounts offer micro lots perfect for grid martingale systems.",
+    id: "mxyg",
+    url: "https://rinfinity.com/en/welcome-bonus?a=mxyg",
+    features: ["$30 Welcome Bonus", "ProCent Accounts Available", "Drawdown-Proof Bonus Funds", "Tight Gold & FX Spreads"],
+    minDeposit: "$10 (Cent Account)",
+    color: "#2563eb",
+    btnBg: "linear-gradient(135deg, #2563eb, #1d4ed8)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "LiteFinance",
+    badge: "🎉 100% Deposit Match · Cent & ECN",
+    headline: "Double Your Margin Power with 100% Bonus",
+    desc: "Double your margin cushioning with a 100% deposit bonus. Offers low-entry Cent accounts starting from just $10 with automated copy-trading support.",
+    id: "805161060",
+    url: "https://www.litefinance.com/?uid=805161060",
+    features: ["100% Deposit Bonus", "Cent Accounts from $10", "Integrated Social Trading", "Zero Hidden Fees"],
+    minDeposit: "$10 (Cent / Classic)",
+    color: "#14b8a6",
+    btnBg: "linear-gradient(135deg, #14b8a6, #0d9488)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "InstaForex",
+    badge: "🛡️ 100% First Deposit Bonus",
+    headline: "Established Global Broker with 300+ Trading Assets",
+    desc: "Claim 100% bonus credit on your first deposit. Trade Gold, major FX pairs, and global indices with fixed or floating spreads and dedicated client support.",
+    id: "KUSD",
+    url: "https://www.instaforex.com?x=KUSD",
+    features: ["100% First Deposit Bonus", "Fixed & Floating Spreads", "Cent Account Support", "300+ Tradeable Assets"],
+    minDeposit: "$1 (Cent / Standard)",
+    color: "#e11d48",
+    btnBg: "linear-gradient(135deg, #e11d48, #be123c)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "Valetax",
+    badge: "📱 Top Trading App · 1:2000 Leverage",
+    headline: "Next-Gen Mobile Trading with Deep Liquidity",
+    desc: "Award-winning mobile trading experience with high leverage up to 1:2000, ultra-fast chart execution, and seamless local payment gateways.",
+    id: "1939088",
+    url: "https://ma.valetax.com/p/1939088",
+    features: ["1:2000 High Leverage", "Top-Rated Mobile App", "Cent & Standard Modes", "Fast Deposit & Withdrawal"],
+    minDeposit: "$10 (Cent / Standard)",
+    color: "#d97706",
+    btnBg: "linear-gradient(135deg, #d97706, #b45309)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "Eightcap",
+    badge: "🏆 24/7 Gold Trading · Raw 0.0 Pips",
+    headline: "Award-Winning Regulated Broker for Algorithmic Quants",
+    desc: "Trade Gold (XAUUSD) 24 hours a day, 7 days a week with GOLD247. Enjoy true raw ECN spreads from 0.0 pips with ultra-fast London/NY fiber optic cross-connects.",
+    id: "8660",
+    url: "https://partners.eightcap.com/click?campaign_id=1&ref_id=8660",
+    features: ["24/7 Gold Trading (GOLD247)", "Raw Spreads from 0.0", "Tier-1 ASIC/FCA Regulated", "Ultra-Low Latency VPS"],
+    minDeposit: "$100 (Raw ECN / Standard)",
+    color: "#059669",
+    btnBg: "linear-gradient(135deg, #059669, #047857)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "FISG",
+    badge: "⭐ Tier-1 ECN · Iniesta Brand Ambassador",
+    headline: "Master the Moment with Direct Institutional ECN Liquidity",
+    desc: "Direct Tier-1 bank liquidity with ultra-fast order execution, deep market depth, and zero hidden markups. Officially endorsed by football icon Andrés Iniesta.",
+    id: "CTt0Rd",
+    url: "https://my.fisg.com/u/CTt0Rd",
+    features: ["Direct Institutional ECN", "Raw 0.0 Pips Spreads", "Zero Hidden Markups", "Fast STP Execution"],
+    minDeposit: "$50 (ECN / Standard)",
+    color: "#f59e0b",
+    btnBg: "linear-gradient(135deg, #f59e0b, #d97706)",
+    btnColor: "#0a0e1a",
+  },
 ];
 
 const AFFILIATE_PERKS = [
@@ -760,11 +838,11 @@ export default function Home() {
         <div className="container">
           <div className="section-header animate-in">
             <span className="label" style={{ color: "#00f0ff", borderColor: "rgba(0, 240, 255, 0.3)" }}>
-              ⭐ OFFICIAL BROKER PARTNERS // 提携ブローカー一覧
+              ⭐ ALL 14 OFFICIAL BROKER PARTNERS // 提携ブローカー14社一覧
             </span>
             <h2>Select Your Broker &amp; Unlock EA Free</h2>
             <p>
-              Register your trading account under any of our official partner links below to receive free permanent whitelist licensing for EA Budak Ubat.
+              Register your trading account under any of our 14 official partner brokers below to receive free permanent whitelist licensing for EA Budak Ubat.
             </p>
           </div>
 
