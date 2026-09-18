@@ -1376,11 +1376,11 @@ Uji kefahaman & skill forex anda sekarang secara interaktif di:
               <h3>Apply Your Knowledge with Automated Precision</h3>
               <p>
                 Now that you grasp the mechanics of dynamic grids, RSI momentum filters, and trailing break-even pooling,
-                test the flagship <strong>EA Budak Ubat v1.66</strong> directly on your MetaTrader 5 terminal.
+                test the flagship <strong>EA Budak Ubat v1.67</strong> directly on your MetaTrader 5 terminal.
               </p>
               <div className="ea-callout-buttons">
                 <Link href="/ea-budak-ubat" className="btn btn-primary">
-                  Explore EA Budak Ubat (v1.66)
+                  Explore EA Budak Ubat (v1.67)
                 </Link>
                 <a
                   href="https://www.mql5.com/en/market/product/195399"

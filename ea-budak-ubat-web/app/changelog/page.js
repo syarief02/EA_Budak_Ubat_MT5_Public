@@ -624,7 +624,7 @@ export default function ChangelogPage() {
             <div>
               <h4 className="footer-title">Products</h4>
               <ul className="footer-links">
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.66)</Link></li>
+                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.67)</Link></li>
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>

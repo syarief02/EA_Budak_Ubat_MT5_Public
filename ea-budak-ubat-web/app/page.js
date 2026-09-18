@@ -374,6 +374,7 @@ export default function Home() {
     type: "feedback",
     ea_name: "",
     message: "",
+    admin_token: "",
   });
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -458,6 +459,10 @@ export default function Home() {
         payload.ea_name = formData.ea_name.trim();
       }
 
+      if (formData.admin_token && formData.admin_token.trim()) {
+        payload.admin_token = formData.admin_token.trim();
+      }
+
       const res = await fetch("/api/comments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -470,7 +475,7 @@ export default function Home() {
         setSubmitError(json.error || "Something went wrong. Please try again.");
       } else {
         setSubmitSuccess(true);
-        setFormData({ name: "", type: "feedback", ea_name: "", message: "" });
+        setFormData({ name: "", type: "feedback", ea_name: "", message: "", admin_token: "" });
         setBotTrap("");
         setFormRenderedAt(Date.now());
         fetchComments();
@@ -1478,6 +1483,37 @@ export default function Home() {
                 maxLength={50}
               />
             </div>
+
+            {(() => {
+              const n = (formData.name || "").toLowerCase();
+              const isProtected =
+                n.includes("syarief") ||
+                n.includes("creator") ||
+                n.includes("admin") ||
+                n.includes("moderator") ||
+                n.includes("official") ||
+                n.includes("budak ubat team");
+              return isProtected ? (
+                <div className="form-group form-group-slide" style={{ animation: "fadeIn 0.25s ease-out" }}>
+                  <label className="form-label" htmlFor="admin-token" style={{ color: "#60a5fa" }}>
+                    🔐 Creator / Admin Passkey
+                  </label>
+                  <input
+                    id="admin-token"
+                    type="password"
+                    className="form-input"
+                    placeholder="Enter official passkey to verify Creator badge..."
+                    value={formData.admin_token}
+                    onChange={(e) => setFormData({ ...formData, admin_token: e.target.value })}
+                    maxLength={100}
+                    style={{ borderColor: "rgba(59, 130, 246, 0.4)", background: "rgba(59, 130, 246, 0.05)" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#93c5fd", marginTop: "4px", display: "block" }}>
+                    Required when posting official announcements under Creator/Admin identities.
+                  </span>
+                </div>
+              ) : null;
+            })()}
 
             <div className="form-group">
               <label className="form-label">Post Type</label>
