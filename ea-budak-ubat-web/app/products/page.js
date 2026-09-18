@@ -320,43 +320,67 @@ export default function ProductsPage() {
                     </div>
                   )}
 
-                  {/* PRICE BAR */}
+                  {/* PRICE / ACCESS BAR */}
                   <div className="partner-broker-meta-bar" style={{ marginTop: "20px", paddingTop: "14px", borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
-                    <span>PRICE: <strong className="partner-broker-code-highlight" style={{ color: "#10b981", fontSize: "0.95rem" }}>{p.price}</strong></span>
-                    {p.reviews_count > 0 ? (
-                      <span style={{ color: "#f59e0b", fontSize: "0.8rem" }}>
-                        ⭐ {Number(p.rating).toFixed(1)} ({p.reviews_count} reviews)
-                      </span>
+                    <span>{p.is_mql5 ? "PRICE:" : "ACCESS:"} <strong className="partner-broker-code-highlight" style={{ color: "#10b981", fontSize: "0.92rem" }}>{p.price}</strong></span>
+                    {p.is_mql5 ? (
+                      <span style={{ color: "#38bdf8", fontSize: "0.8rem" }}>🛒 MQL5 Market</span>
                     ) : (
-                      <span style={{ color: "#60a5fa", fontSize: "0.8rem" }}>✓ MetaQuotes Certified</span>
+                      <span style={{ color: "#10b981", fontSize: "0.8rem" }}>🤝 Partner Whitelist</span>
                     )}
                   </div>
                 </div>
 
                 {/* ACTION BUTTONS */}
                 <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "18px" }}>
-                  <a
-                    href={p.market_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="partner-broker-cta-button"
-                    style={{
-                      background: p.color ? `linear-gradient(135deg, ${p.color}, #1e3a8a)` : "linear-gradient(135deg, #00f0ff, #0070f3)",
-                      color: "#ffffff",
-                    }}
-                  >
-                    <span>🛒 Buy on MQL5 Market</span>
-                    <span>↗</span>
-                  </a>
+                  {p.market_url ? (
+                    <a
+                      href={p.market_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="partner-broker-cta-button"
+                      style={{
+                        background: p.color ? `linear-gradient(135deg, ${p.color}, #1e3a8a)` : "linear-gradient(135deg, #00f0ff, #0070f3)",
+                        color: "#ffffff",
+                      }}
+                    >
+                      <span>🛒 Buy / Rent on MQL5 Market</span>
+                      <span>↗</span>
+                    </a>
+                  ) : (
+                    <Link
+                      href="/#authorization"
+                      className="partner-broker-cta-button"
+                      style={{
+                        background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                        color: "#ffffff",
+                      }}
+                    >
+                      <span>⚡ Free via Partner Broker</span>
+                      <span>➜</span>
+                    </Link>
+                  )}
 
                   <div style={{ display: "flex", gap: "8px" }}>
-                    <Link
-                      href={`/${p.slug}`}
-                      className="btn btn-secondary btn-sm"
-                      style={{ flex: 1, textAlign: "center", fontSize: "0.82rem", padding: "8px 12px" }}
-                    >
-                      📖 Strategy Specs
-                    </Link>
+                    {p.has_page ? (
+                      <Link
+                        href={`/${p.slug}`}
+                        className="btn btn-secondary btn-sm"
+                        style={{ flex: 1, textAlign: "center", fontSize: "0.82rem", padding: "8px 12px" }}
+                      >
+                        📖 Strategy Specs
+                      </Link>
+                    ) : (
+                      <a
+                        href={p.market_url || "https://www.mql5.com/en/users/syarief.azman/seller"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-secondary btn-sm"
+                        style={{ flex: 1, textAlign: "center", fontSize: "0.82rem", padding: "8px 12px" }}
+                      >
+                        🛡️ Verified MQL5 Listing
+                      </a>
+                    )}
                     {p.download_url && (
                       <a
                         href={p.download_url}
