@@ -612,7 +612,7 @@ export default function Home() {
             <li><a href="#calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
             <li><a href="#ecosystem" onClick={() => setMobileNavOpen(false)}>Ecosystem</a></li>
             <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
-            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
+            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)} style={{ color: "#10b981", fontWeight: 700 }}>⚡ Whitelist / Download EA</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
             <li>
@@ -657,7 +657,7 @@ export default function Home() {
           </p>
 
           {/* HIGH-CONVERTING HERO ACTION BUTTONS */}
-          <div className="hero-actions" style={{ marginBottom: "28px" }}>
+          <div className="hero-actions" style={{ marginBottom: "20px" }}>
             <a
               href="#broker-partners"
               className="btn btn-primary"
@@ -675,12 +675,20 @@ export default function Home() {
               🎁 Choose a Broker &amp; Unlock EA Free ➜
             </a>
             <a
-              href="#how-to-get-free"
+              href="#authorization"
               className="btn btn-secondary"
               onClick={() => playTactileClick(0.08)}
-              style={{ padding: "14px 24px", fontWeight: 700 }}
+              style={{
+                background: "linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(0, 240, 255, 0.18))",
+                border: "1px solid rgba(16, 185, 129, 0.55)",
+                color: "#10b981",
+                padding: "14px 24px",
+                fontWeight: 800,
+                fontSize: "0.95rem",
+                boxShadow: "0 0 20px rgba(16, 185, 129, 0.25)",
+              }}
             >
-              🚀 3-Step Setup Guide
+              ⚡ Already Whitelisted? Download Latest EA ↓
             </a>
             <a
               href={DOWNLOAD_MT5}
@@ -688,7 +696,7 @@ export default function Home() {
               onClick={() => playTactileClick(0.08)}
               style={{ padding: "14px 20px" }}
             >
-              ⬇️ Free MT5 Demo (.ex5)
+              ⬇️ Latest MT5 (.ex5)
             </a>
             <a
               href={DOWNLOAD_MT4}
@@ -696,7 +704,60 @@ export default function Home() {
               onClick={() => playTactileClick(0.08)}
               style={{ padding: "14px 20px" }}
             >
-              ⬇️ Free MT4 Demo (.ex4)
+              ⬇️ Latest MT4 (.ex4)
+            </a>
+            <a
+              href="#how-to-get-free"
+              className="btn btn-secondary"
+              onClick={() => playTactileClick(0.08)}
+              style={{ padding: "14px 20px", fontWeight: 700 }}
+            >
+              🚀 3-Step Setup Guide
+            </a>
+          </div>
+
+          {/* RETURNING WHITELISTED CLIENT FAST-PASS CALLOUT */}
+          <div className="whitelisted-fast-pass animate-in" style={{
+            maxWidth: "800px",
+            margin: "0 auto 28px",
+            background: "linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, rgba(0, 240, 255, 0.08) 100%)",
+            border: "1px solid rgba(16, 185, 129, 0.35)",
+            borderRadius: "14px",
+            padding: "14px 22px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "14px",
+            boxShadow: "0 4px 24px rgba(0, 0, 0, 0.3)",
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", textAlign: "left" }}>
+              <span style={{ fontSize: "1.5rem" }}>⚡</span>
+              <div>
+                <span style={{ color: "#10b981", fontWeight: 800, fontSize: "0.85rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                  Returning Traders / Whitelisted Accounts
+                </span>
+                <p style={{ margin: 0, fontSize: "0.88rem", color: "#e2e8f0" }}>
+                  Told to download the updated EA? Verify your account &amp; grab <strong>v1.67 MT5</strong> or <strong>v1.62 MT4</strong> directly.
+                </p>
+              </div>
+            </div>
+            <a
+              href="#authorization"
+              className="btn btn-sm"
+              onClick={() => playTactileClick(0.08)}
+              style={{
+                background: "#10b981",
+                color: "#0a0e1a",
+                fontWeight: 900,
+                padding: "9px 20px",
+                borderRadius: "8px",
+                whiteSpace: "nowrap",
+                border: "none",
+                boxShadow: "0 0 15px rgba(16, 185, 129, 0.4)",
+              }}
+            >
+              📥 Go to Downloads &amp; Checker ➜
             </a>
           </div>
 
@@ -806,8 +867,8 @@ export default function Home() {
                 Fund your live trading account ($10 Cent or $100 Standard recommended). Then submit your account number via our online license checker or Telegram to get whitelisted.
               </p>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                <a href="#tools" className="btn btn-secondary btn-sm" onClick={() => { setActiveTool("license"); playTactileClick(0.08); }}>
-                  🔐 Check Whitelist
+                <a href="#authorization" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
+                  🔐 Check Whitelist &amp; Download
                 </a>
                 <a href="https://t.me/SyariefAzman" className="btn btn-accent btn-sm" target="_blank" rel="noopener noreferrer" onClick={() => playTactileClick(0.08)}>
                   💬 Telegram @SyariefAzman
@@ -826,7 +887,7 @@ export default function Home() {
                 <a href={DOWNLOAD_MT5} className="btn btn-primary btn-sm" onClick={() => playTactileClick(0.08)}>
                   ⬇️ MT5 (.ex5)
                 </a>
-                <a href="#tools" className="btn btn-secondary btn-sm" onClick={() => { setActiveTool("presets"); playTactileClick(0.08); }}>
+                <a href="#presets" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
                   ⚙️ Load .set Presets
                 </a>
               </div>
@@ -1277,11 +1338,10 @@ export default function Home() {
                     🎁 Get Free via Partner Broker
                   </a>
                   <a
-                    href="#tools"
+                    href="#authorization"
                     className="btn btn-secondary btn-sm"
                     data-cursor-label="CHECK"
                     style={{ animation: "none" }}
-                    onClick={() => setActiveTool("license")}
                   >
                     🔐 Verify Whitelist
                   </a>
@@ -1847,10 +1907,10 @@ export default function Home() {
               <h4>Flagship Tools</h4>
               <ul className="footer-links">
                 <li><a href="#broker-partners">Get EA Free</a></li>
-                <li><a href="#tools" onClick={() => setActiveTool("simulator")}>Strategy Simulator</a></li>
-                <li><a href="#tools" onClick={() => setActiveTool("presets")}>Preset Studio (.set)</a></li>
-                <li><a href="#tools" onClick={() => setActiveTool("calculator")}>Margin Calculator</a></li>
-                <li><a href="#tools" onClick={() => setActiveTool("license")}>Whitelist Checker</a></li>
+                <li><a href="#simulator">Strategy Simulator</a></li>
+                <li><a href="#presets">Preset Studio (.set)</a></li>
+                <li><a href="#calculator">Margin Calculator</a></li>
+                <li><a href="#authorization">Whitelist Checker</a></li>
                 <li><Link href="/changelog">Version Changelog</Link></li>
               </ul>
             </div>

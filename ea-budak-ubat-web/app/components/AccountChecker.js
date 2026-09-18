@@ -72,6 +72,50 @@ export default function AccountChecker({
         {subtitle && <p className="checker-subtitle">{subtitle}</p>}
       </div>
 
+      {/* QUICK DOWNLOAD CALLOUT FOR ALREADY WHITELISTED TRADERS */}
+      <div className="checker-whitelisted-quickbar" style={{
+        background: "linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(16, 185, 129, 0.08))",
+        border: "1px solid rgba(0, 240, 255, 0.25)",
+        borderRadius: "14px",
+        padding: "16px 20px",
+        marginBottom: "20px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: "14px",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{ fontSize: "1.8rem" }}>⚡</span>
+          <div>
+            <div style={{ fontWeight: 800, color: "#ffffff", fontSize: "0.95rem" }}>
+              Already Whitelisted by Syarief? Download Your Updated Files:
+            </div>
+            <div style={{ color: "#94a3b8", fontSize: "0.82rem" }}>
+              Permanent authorization active · Latest v1.67 (MT5) &amp; v1.62 (MT4) builds
+            </div>
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <a
+            href="https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5"
+            download
+            className="btn btn-primary btn-sm"
+            style={{ fontWeight: 800, padding: "8px 16px" }}
+          >
+            ⬇️ MT5 (.ex5 v1.67)
+          </a>
+          <a
+            href="https://github.com/syarief02/EA_Budak_Ubat/raw/master/EA%20-%20Budak%20Ubat%20v1.62%20-%2020260930.ex4"
+            download
+            className="btn btn-secondary btn-sm"
+            style={{ fontWeight: 700, padding: "8px 16px" }}
+          >
+            ⬇️ MT4 (.ex4 v1.62)
+          </a>
+        </div>
+      </div>
+
       {/* EA SELECTOR TABS */}
       <div className="checker-ea-selector">
         <label className="selector-label">Select EA / Strategy:</label>
@@ -298,8 +342,65 @@ export default function AccountChecker({
                   <Link href={`/${res.slug}`} className="result-link">
                     View EA Details →
                   </Link>
+
+                  {res.status === "authorized" && (
+                    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                      {res.downloadMt5 && (
+                        <a
+                          href={res.downloadMt5}
+                          download
+                          className="btn-get-authorized"
+                          style={{
+                            background: "linear-gradient(135deg, #00f0ff, #0070f3)",
+                            color: "#0a0e1a",
+                            fontWeight: 800,
+                            border: "none",
+                            boxShadow: "0 0 15px rgba(0, 240, 255, 0.35)",
+                          }}
+                        >
+                          ⬇️ Download MT5 (.ex5)
+                        </a>
+                      )}
+                      {res.downloadMt4 && (
+                        <a
+                          href={res.downloadMt4}
+                          download
+                          className="btn-get-authorized"
+                          style={{
+                            background: "rgba(255, 255, 255, 0.1)",
+                            color: "#ffffff",
+                            borderColor: "rgba(255, 255, 255, 0.3)",
+                            fontWeight: 700,
+                          }}
+                        >
+                          ⬇️ Download MT4 (.ex4)
+                        </a>
+                      )}
+                    </div>
+                  )}
+
                   {res.status === "trial" && (
                     <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                      {res.downloadMt5 && (
+                        <a
+                          href={res.downloadMt5}
+                          download
+                          className="btn-get-authorized"
+                          style={{ background: "rgba(0, 240, 255, 0.12)", color: "#00f0ff", borderColor: "rgba(0, 240, 255, 0.3)" }}
+                        >
+                          ⬇️ Download MT5
+                        </a>
+                      )}
+                      {res.downloadMt4 && (
+                        <a
+                          href={res.downloadMt4}
+                          download
+                          className="btn-get-authorized"
+                          style={{ background: "rgba(255, 255, 255, 0.08)", color: "#e2e8f0", borderColor: "rgba(255, 255, 255, 0.2)" }}
+                        >
+                          ⬇️ Download MT4
+                        </a>
+                      )}
                       <a
                         href="#partner-brokers"
                         className="btn-get-authorized"
@@ -315,6 +416,31 @@ export default function AccountChecker({
                           style={{ background: "linear-gradient(135deg, #10b981, #059669)", borderColor: "transparent", color: "#ffffff" }}
                         >
                           🛒 Buy on MQL5 Market
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {res.status === "open_source" && (
+                    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                      {res.downloadMt5 && (
+                        <a
+                          href={res.downloadMt5}
+                          download
+                          className="btn-get-authorized"
+                          style={{ background: "linear-gradient(135deg, #10b981, #059669)", borderColor: "transparent", color: "#ffffff" }}
+                        >
+                          ⬇️ Download MT5 (.ex5)
+                        </a>
+                      )}
+                      {res.downloadMt4 && (
+                        <a
+                          href={res.downloadMt4}
+                          download
+                          className="btn-get-authorized"
+                          style={{ background: "rgba(255, 255, 255, 0.1)", color: "#ffffff", borderColor: "rgba(255, 255, 255, 0.3)" }}
+                        >
+                          ⬇️ Download MT4 (.ex4)
                         </a>
                       )}
                     </div>
