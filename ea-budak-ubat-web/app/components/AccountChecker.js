@@ -62,7 +62,7 @@ export default function AccountChecker({
   }, [results]);
 
   return (
-    <div className="account-checker-card glass-card animate-in">
+    <div className="account-checker-card glass-card visible">
       <div className="checker-header">
         <div className="checker-badge">
           <span className="checker-badge-icon">🔐</span>

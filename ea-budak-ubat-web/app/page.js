@@ -362,7 +362,6 @@ const STRATEGY_DATA = {
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
-  const [activeTool, setActiveTool] = useState("simulator"); // simulator, presets, calculator, license
   const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
 
   // Community State
@@ -522,12 +521,12 @@ export default function Home() {
             <li><a href="#broker-partners" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 800 }}>🎁 Get EA Free</a></li>
             <li><a href="#how-to-get-free" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Engines</a></li>
-            <li><a href="#tools" onClick={() => { setActiveTool("simulator"); setMobileNavOpen(false); }}>Simulator</a></li>
-            <li><a href="#tools" onClick={() => { setActiveTool("presets"); setMobileNavOpen(false); }}>Presets</a></li>
-            <li><a href="#tools" onClick={() => { setActiveTool("calculator"); setMobileNavOpen(false); }}>Calculator</a></li>
+            <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
+            <li><a href="#presets" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
+            <li><a href="#calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
             <li><a href="#ecosystem" onClick={() => setMobileNavOpen(false)}>Ecosystem</a></li>
             <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
-            <li><a href="#tools" onClick={() => { setActiveTool("license"); setMobileNavOpen(false); }}>License</a></li>
+            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
             <li>
@@ -764,35 +763,33 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="broker-showcase-grid">
+          <div className="partner-broker-grid">
             {PARTNER_BROKERS.map((b, idx) => (
-              <div key={b.name} className="broker-card animate-in" style={{ animationDelay: `${idx * 0.08}s` }}>
-                <div className="broker-card-top">
-                  <div className="broker-card-header">
-                    <span className="broker-name">
-                      <span>{b.name}</span>
-                    </span>
+              <div key={b.name} className="partner-broker-card animate-in" style={{ animationDelay: `${idx * 0.08}s` }}>
+                <div className="partner-broker-content">
+                  <div className="partner-broker-top-bar">
+                    <h3 className="partner-broker-title">{b.name}</h3>
                     <span
-                      className="broker-promo-badge"
+                      className="partner-broker-badge"
                       style={{ background: `${b.color}20`, color: b.color, border: `1px solid ${b.color}45` }}
                     >
                       {b.badge}
                     </span>
                   </div>
 
-                  <h4 className="broker-headline">{b.headline}</h4>
-                  <p className="broker-desc">{b.desc}</p>
+                  <h4 className="partner-broker-headline">{b.headline}</h4>
+                  <p className="partner-broker-desc">{b.desc}</p>
 
-                  <div className="broker-feature-tags">
+                  <div className="partner-broker-tags">
                     {b.features.map((feat, fIdx) => (
-                      <span key={fIdx} className="broker-feature-tag">
+                      <span key={fIdx} className="partner-broker-tag">
                         ✓ {feat}
                       </span>
                     ))}
                   </div>
 
-                  <div className="broker-id-strip">
-                    <span>PARTNER CODE: <strong className="broker-id-val">{b.id}</strong></span>
+                  <div className="partner-broker-meta-bar">
+                    <span>PARTNER CODE: <strong className="partner-broker-code-highlight">{b.id}</strong></span>
                     <span>MIN: {b.minDeposit}</span>
                   </div>
                 </div>
@@ -801,7 +798,7 @@ export default function Home() {
                   href={b.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="broker-cta-btn"
+                  className="partner-broker-cta-button"
                   style={{ background: b.btnBg, color: b.btnColor }}
                   onClick={() => playTactileClick(0.12)}
                 >
@@ -937,8 +934,8 @@ export default function Home() {
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
-      {/* INTERACTIVE FLAGSHIP TOOLING HUB */}
-      <section id="tools" style={{ padding: "70px 0 30px" }}>
+      {/* QUICK JUMP TOOLS NAVIGATION */}
+      <section id="tools" style={{ padding: "60px 0 20px 0" }}>
         <div className="jp-kanji-watermark" aria-hidden="true">対話型ツール</div>
         <div className="container">
           <div className="section-header animate-in">
@@ -949,89 +946,86 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Tools Navigation Bar */}
-          <div className="tools-nav-bar animate-in">
-            <button
-              type="button"
-              className={`tool-nav-btn ${activeTool === "simulator" ? "active" : ""}`}
-              onClick={() => { setActiveTool("simulator"); playTactileClick(0.08); }}
-            >
+          <div className="tools-nav-bar animate-in" style={{ justifyContent: "center" }}>
+            <a href="#simulator" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
               <span>⚡</span>
               <span>Market Simulator</span>
-            </button>
-            <button
-              type="button"
-              className={`tool-nav-btn ${activeTool === "presets" ? "active" : ""}`}
-              onClick={() => { setActiveTool("presets"); playTactileClick(0.08); }}
-            >
+            </a>
+            <a href="#presets" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
               <span>⚙️</span>
               <span>Preset Studio (.set)</span>
-            </button>
-            <button
-              type="button"
-              className={`tool-nav-btn ${activeTool === "calculator" ? "active" : ""}`}
-              onClick={() => { setActiveTool("calculator"); playTactileClick(0.08); }}
-            >
+            </a>
+            <a href="#calculator" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
               <span>🧮</span>
               <span>Margin &amp; Risk Calculator</span>
-            </button>
-            <button
-              type="button"
-              className={`tool-nav-btn ${activeTool === "license" ? "active" : ""}`}
-              onClick={() => { setActiveTool("license"); playTactileClick(0.08); }}
-            >
+            </a>
+            <a href="#authorization" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
               <span>🔐</span>
               <span>Account License Checker</span>
-            </button>
+            </a>
           </div>
+        </div>
+      </section>
 
-          {/* Tool 1: Simulator */}
-          {activeTool === "simulator" && (
-            <div className="animate-in" id="simulator">
-              <div style={{ marginBottom: "20px" }}>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
-                  Interactive Virtual Market Engine: Simulate dynamic ADR grid layering, test volatility spikes, and watch the break-even Take Profit pool trigger in real time.
-                </p>
-              </div>
-              <LiveStrategySimulator />
-            </div>
-          )}
+      {/* TOOL 1: SIMULATOR */}
+      <section id="simulator" style={{ padding: "40px 0" }}>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">TOOL 01 // 仮想市場シミュレータ</span>
+            <h2>Interactive Algorithmic Execution Simulator</h2>
+            <p>
+              Simulate live market scenarios, test dynamic ADR grid layering, and watch the break-even Take Profit pool execute in real time.
+            </p>
+          </div>
+          <LiveStrategySimulator />
+        </div>
+      </section>
 
-          {/* Tool 2: Presets Generator */}
-          {activeTool === "presets" && (
-            <div className="animate-in" id="presets">
-              <div style={{ marginBottom: "20px" }}>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
-                  Custom Preset Studio: Choose a risk profile (Conservative, Balanced, Aggressive, Cent Scalper, Gold Volatility) or adjust parameters and download customized .set files ready to load directly into MT4 or MT5.
-                </p>
-              </div>
-              <SetGenerator />
-            </div>
-          )}
+      <div className="jp-architectural-line" aria-hidden="true"></div>
 
-          {/* Tool 3: Risk Calculator */}
-          {activeTool === "calculator" && (
-            <div className="animate-in" id="calculator">
-              <div style={{ marginBottom: "20px" }}>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
-                  Grid Risk &amp; Margin Calculator: Plan your capital allocation. Calculate cumulative lot sizes, pip drawdown distances, margin requirements, and margin call safety cushions across Cent and Standard accounts.
-                </p>
-              </div>
-              <GridCalculator />
-            </div>
-          )}
+      {/* TOOL 2: PRESET GENERATOR */}
+      <section id="presets" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">TOOL 02 // パラメータ設定生成器</span>
+            <h2>EA Parameter Preset Studio (.set)</h2>
+            <p>
+              Download pre-calibrated parameter files or customize grid multiplier, ADR auto-config, and take profit targets ready to load directly into MetaTrader.
+            </p>
+          </div>
+          <SetGenerator />
+        </div>
+      </section>
 
-          {/* Tool 4: License Verification */}
-          {activeTool === "license" && (
-            <div className="animate-in" id="authorization">
-              <div style={{ marginBottom: "20px" }}>
-                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
-                  Official Account Authorization Portal: Verify your MetaTrader account status across any partner broker or download the latest authorized binaries instantly.
-                </p>
-              </div>
-              <AccountChecker initialEa="ea-budak-ubat" />
-            </div>
-          )}
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
+      {/* TOOL 3: RISK & MARGIN CALCULATOR */}
+      <section id="calculator" style={{ padding: "70px 0" }}>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">TOOL 03 // 証拠金計算機</span>
+            <h2>Grid Risk &amp; Margin Calculator</h2>
+            <p>
+              Plan your capital requirements. Calculate cumulative lots, drawdown distance, and liquidation safety cushions across Cent and Standard accounts.
+            </p>
+          </div>
+          <GridCalculator />
+        </div>
+      </section>
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
+      {/* TOOL 4: ACCOUNT LICENSE CHECKER */}
+      <section id="authorization" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">TOOL 04 // 口座認証ポータル</span>
+            <h2>Account License &amp; Whitelist Verification</h2>
+            <p>
+              Verify your MetaTrader account status across any partner broker or download the latest authorized binaries instantly.
+            </p>
+          </div>
+          <AccountChecker initialEa="ea-budak-ubat" />
         </div>
       </section>
 
