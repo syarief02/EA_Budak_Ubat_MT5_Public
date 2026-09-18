@@ -10,6 +10,7 @@ import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import SetGenerator from "@/app/components/SetGenerator";
 import GridCalculator from "@/app/components/GridCalculator";
+import MQLProductsShowcase from "@/app/components/MQLProductsShowcase";
 import { playTactileClick } from "@/lib/audioSynthesizer";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
@@ -602,8 +603,10 @@ export default function Home() {
           <a href="#" className="nav-brand">👑 EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><a href="#broker-partners" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 800 }}>🎁 Get EA Free</a></li>
+            <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 MQL5 Store</Link></li>
             <li><a href="#how-to-get-free" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Engines</a></li>
+            <li><a href="#mql-products" onClick={() => setMobileNavOpen(false)}>MQL5 Suite</a></li>
             <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
             <li><a href="#presets" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
             <li><a href="#calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
@@ -1176,6 +1179,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
+      {/* DYNAMIC SUPABASE-POWERED MQL5 PRODUCTS SHOWCASE */}
+      <MQLProductsShowcase />
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
