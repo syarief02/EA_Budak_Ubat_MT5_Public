@@ -18,6 +18,146 @@ const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
+const PARTNER_BROKERS = [
+  {
+    name: "XM",
+    badge: "🎁 100% Deposit Bonus",
+    headline: "Ultra-Low Spreads & Micro/Standard Accounts",
+    desc: "Globally regulated broker offering an instant 100% deposit bonus on trading capital. Zero requotes and institutional pricing on Gold, Indices & FX.",
+    id: "HVVR7",
+    url: "https://clicks.pipaffiliates.com/c?m=150422&c=862266",
+    features: ["100% Deposit Bonus", "Ultra-Low Spreads", "Micro & Standard", "Instant Local Withdrawals"],
+    minDeposit: "$10 (Micro / Standard)",
+    color: "#ef4444",
+    btnBg: "linear-gradient(135deg, #ef4444, #dc2626)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "FBS",
+    badge: "⚡ 1:3000 Leverage · Cent Accounts",
+    headline: "Maximum Margin Resilience for Grid EAs",
+    desc: "The gold standard for martingale systems. Cent accounts turn a $10 deposit into 1,000 cents, providing massive margin depth to comfortably withstand market pullbacks.",
+    id: "588292",
+    url: "https://fbs.partners?ibl=154319&ibp=588292",
+    features: ["Cent Accounts from $10", "1:3000 Extreme Leverage", "0.01s Execution Speed", "Ideal for Grid Martingale"],
+    minDeposit: "$10 (Cent Account)",
+    color: "#00be40",
+    btnBg: "linear-gradient(135deg, #00be40, #059669)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "JustMarkets",
+    badge: "💎 Zero Spreads · Instant Payouts",
+    headline: "Precision Execution for Algorithmic Trading",
+    desc: "Zero spreads on major currency pairs, competitive Gold trading spreads, leverage up to 1:3000, and rapid local payment processing.",
+    id: "tjrtn60m2i",
+    url: "https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869",
+    features: ["Zero Raw Spreads", "1:3000 Leverage", "Cent & Standard Modes", "Fast FPX & DuitNow"],
+    minDeposit: "$10 (Cent / Standard)",
+    color: "#0284c7",
+    btnBg: "linear-gradient(135deg, #0284c7, #0369a1)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "Tickmill",
+    badge: "🪙 Lowest Raw Spreads on Gold",
+    headline: "Institutional ECN Liquidity for Automated EAs",
+    desc: "Institutional ECN liquidity with raw spreads starting from 0.0 pips and ultra-low commission structures. Perfect for high-frequency algorithmic scalping.",
+    id: "IB72324388",
+    url: "https://tickmill.link/46cOQ2h",
+    features: ["Raw Spreads from 0.0", "True ECN Execution", "Lowest Gold Commission", "VIP Fast Trade Servers"],
+    minDeposit: "$100 (Classic / Pro)",
+    color: "#e11d48",
+    btnBg: "linear-gradient(135deg, #e11d48, #be123c)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "Headway",
+    badge: "🔥 $150 No-Deposit Bonus",
+    headline: "Trade 5 Markets with Zero Risk for 7 Days",
+    desc: "Claim a free $150 no-deposit trading bonus. Test EA Budak Ubat with zero personal capital risk and keep all your generated trading profits!",
+    id: "516d6b",
+    url: "https://headway.partners/landings/en/bonus-150/?hwp=516d6b",
+    features: ["$150 Free Trading Credit", "Cent Accounts Supported", "Unlimited Leverage", "100% Zero Risk Trial"],
+    minDeposit: "$0 (Free $150 Bonus)",
+    color: "#f59e0b",
+    btnBg: "linear-gradient(135deg, #f59e0b, #d97706)",
+    btnColor: "#0a0e1a",
+  },
+  {
+    name: "HF Markets",
+    badge: "🪙 Cent Accounts · Global Regulation",
+    headline: "Trusted Tier-1 Regulated Multi-Asset Broker",
+    desc: "Dedicated Cent accounts for small balance traders, flexible leverage, tight spreads, and multi-jurisdictional regulation for complete peace of mind.",
+    id: "30572923",
+    url: "https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923",
+    features: ["Cent Accounts Available", "Tier-1 Regulated Broker", "Swap-Free Trading", "24/5 Customer Support"],
+    minDeposit: "$10 (Cent Account)",
+    color: "#dc2626",
+    btnBg: "linear-gradient(135deg, #dc2626, #991b1b)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "CXM Direct",
+    badge: "🚀 High Leverage · Institutional Bridge",
+    headline: "Ultra-Fast Execution for Expert Advisors",
+    desc: "Proprietary liquidity bridge connecting MT4 & MT5 directly to Tier-1 international banks, delivering near-zero slippage for algorithmic trading.",
+    id: "5062",
+    url: "https://gocxm.co/links/go/5062",
+    features: ["1:Unlimited Leverage", "Cent Accounts", "No Requotes", "Institutional Bridge"],
+    minDeposit: "$10 (Cent / Standard)",
+    color: "#8b5cf6",
+    btnBg: "linear-gradient(135deg, #8b5cf6, #6d28d9)",
+    btnColor: "#ffffff",
+  },
+  {
+    name: "Markets4you",
+    badge: "📈 Multi-Asset Cent Engine",
+    headline: "Pioneers of Cent Account Trading for EAs",
+    desc: "Over 15 years of industry excellence. Offers micro-lot execution on Forex, Metals, and Indices with transparent trading conditions.",
+    id: "4hcnvz4",
+    url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4",
+    features: ["Classic & Cent Accounts", "Instant Order Execution", "Loyalty Cashback", "Segregated Funds"],
+    minDeposit: "$10 (Cent Account)",
+    color: "#06b6d4",
+    btnBg: "linear-gradient(135deg, #06b6d4, #0891b2)",
+    btnColor: "#ffffff",
+  },
+];
+
+const AFFILIATE_PERKS = [
+  {
+    icon: "💎",
+    title: "100% Free Lifetime License",
+    desc: "Save $149 USD upfront. Your trading account is whitelisted permanently for both MT4 and MT5 with zero recurring subscription fees.",
+  },
+  {
+    icon: "🔄",
+    title: "Continuous Free Updates",
+    desc: "Gain automatic access to all future algorithm enhancements—including our latest v1.67 real-time intra-candle tick break-even engine.",
+  },
+  {
+    icon: "⚙️",
+    title: "Broker-Calibrated Presets",
+    desc: "Receive pre-configured .set parameter files tailored specifically to your chosen partner broker's spreads, stop-levels, and execution speeds.",
+  },
+  {
+    icon: "🪙",
+    title: "Cent Account Capital Resilience",
+    desc: "Start with as little as $10 to $50. Cent accounts transform your capital into 1,000 to 5,000 units, letting grid martingale breathe safely.",
+  },
+  {
+    icon: "💬",
+    title: "VIP Support with Developer",
+    desc: "Direct 1-on-1 setup assistance and troubleshooting with creator Syarief Azman on Telegram to ensure optimal bot configuration.",
+  },
+  {
+    icon: "🌐",
+    title: "Companion EA Suite Access",
+    desc: "Whitelisted clients also unlock our companion trading systems (GoldMind AI, BracketBlitz, MathEdge Pro, and more).",
+  },
+];
+
 const POST_TYPES = [
   { key: "idea", label: "💡 Idea", color: "#8b5cf6" },
   { key: "feedback", label: "💬 Feedback", color: "#3b82f6" },
@@ -47,7 +187,7 @@ const PRODUCTS = [
     tagline: "Autonomous Quantitative Grid Martingale Engine",
     description: "The flagship automated trading system for MetaTrader 5 & 4. Features 4 quantitative analysis engines (Candle, SMA20, Alligator, Ichimoku), dynamic 20-day ADR AutoConfig AI, intra-candle tick basket break-even trailing, and multi-tier margin safeguards.",
     platforms: ["MT4", "MT5"],
-    highlights: ["4 Entry Engines", "AutoConfig AI", "Tick Break-Even Trailing", "Dual-Track Licensing"],
+    highlights: ["4 Entry Engines", "AutoConfig AI", "Tick Break-Even Trailing", "100% Free via Partners"],
     gradient: "linear-gradient(135deg, #00f0ff, #3b82f6)",
     accentColor: "#00f0ff",
     icon: "👑",
@@ -379,7 +519,8 @@ export default function Home() {
         <div className="container">
           <a href="#" className="nav-brand">👑 EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><a href="#flagship" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 700 }}>Flagship</a></li>
+            <li><a href="#broker-partners" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 800 }}>🎁 Get EA Free</a></li>
+            <li><a href="#how-to-get-free" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Engines</a></li>
             <li><a href="#tools" onClick={() => { setActiveTool("simulator"); setMobileNavOpen(false); }}>Simulator</a></li>
             <li><a href="#tools" onClick={() => { setActiveTool("presets"); setMobileNavOpen(false); }}>Presets</a></li>
@@ -391,13 +532,12 @@ export default function Home() {
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
             <li>
               <a
-                href={MQL5_MARKET_LINK}
+                href="#broker-partners"
                 className="nav-cta"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ background: "linear-gradient(135deg, #10b981, #059669)", fontWeight: 700 }}
+                onClick={() => { playTactileClick(0.1); setMobileNavOpen(false); }}
+                style={{ background: "linear-gradient(135deg, #00f0ff, #3b82f6)", color: "#0a0e1a", fontWeight: 900 }}
               >
-                Buy MT5 ($149)
+                🔥 Get EA Free
               </a>
             </li>
           </ul>
@@ -407,9 +547,9 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* FLAGSHIP HERO */}
+      {/* FLAGSHIP HERO — AFFILIATE CLIENT CONVERSION ENGINE */}
       <section className="hero catalog-hero" id="flagship">
-        <div className="jp-kanji-watermark" aria-hidden="true">旗艦自動売買</div>
+        <div className="jp-kanji-watermark" aria-hidden="true">無料自動売買</div>
         <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -417,132 +557,78 @@ export default function Home() {
           <div className="hero-badge" style={{ borderColor: "rgba(0, 240, 255, 0.4)", background: "rgba(0, 240, 255, 0.08)" }}>
             <span className="hero-badge-dot" style={{ background: "#00f0ff", boxShadow: "0 0 10px #00f0ff" }}></span>
             <span style={{ color: "#00f0ff", letterSpacing: "0.08em", fontWeight: 800 }}>
-              👑 FLAGSHIP ALGORITHMIC GRID SYSTEM · v1.67 LIVE
+              👑 FLAGSHIP ALGORITHMIC SYSTEM · 100% FREE VIA PARTNER BROKERS
             </span>
           </div>
 
           <h1>
-            <span className="gradient-text">EA Budak Ubat</span>
+            <span className="gradient-text">Trade with EA Budak Ubat</span>
+            <br />
+            <span style={{ fontSize: "0.75em", color: "#ffffff", fontWeight: 800 }}>100% Free Lifetime License</span>
           </h1>
-          <p className="hero-subtitle" style={{ maxWidth: "860px", margin: "0 auto 24px" }}>
-            The premier autonomous grid martingale engine engineered for MetaTrader 5 & MetaTrader 4.
-            Harnesses 4 quantitative entry engines, 20-day ADR AutoConfig AI, and real-time intra-candle tick
-            basket break-even trailing to turn ranging market volatility into systematic returns.
+
+          <p className="hero-subtitle" style={{ maxWidth: "880px", margin: "0 auto 28px" }}>
+            Why pay $149? Unlock the full, unrestricted power of <strong>EA Budak Ubat (v1.67 MT5 &amp; v1.62 MT4)</strong> at <strong>$0 upfront software cost</strong> simply by opening and funding a live trading account under our official regulated partner brokers.
           </p>
 
-          {/* DUAL-TRACK ACQUISITION MATRIX */}
-          <div className="dual-track-container animate-in">
-            {/* Track 1: Official MQL5 Market Edition */}
-            <div className="track-card featured">
-              <div>
-                <span className="track-tag mql5">★ Recommended · Standalone</span>
-                <h3 className="track-title">Official MQL5 Market Edition (MT5)</h3>
-                <p className="track-desc">
-                  Instant activation via MetaQuotes MQL5 Market. No broker lock, no account number restrictions, and zero monthly expiration.
-                </p>
-                <ul className="track-checklist">
-                  <li><span className="check-icon">✓</span> 20 MetaTrader 5 Terminal Activations</li>
-                  <li><span className="check-icon">✓</span> Native MetaQuotes DRM & Automatic Cloud Delivery</li>
-                  <li><span className="check-icon">✓</span> Free Lifetime Updates Directly in MT5 Terminal</li>
-                  <li><span className="check-icon">✓</span> Hedging & Netting Account Certified</li>
-                </ul>
-              </div>
-
-              <div className="track-actions">
-                <a
-                  href={MQL5_MARKET_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-mql5-primary"
-                  onClick={() => playTactileClick(0.12)}
-                >
-                  <span className="btn-icon">🛒</span>
-                  <span className="btn-text">
-                    <strong>Buy on MQL5 Market ($149 USD)</strong>
-                    <small>Lifetime License or Rent from $30/mo · Free Demo</small>
-                  </span>
-                  <span className="btn-arrow">→</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Track 2: Free Community Whitelist Edition */}
-            <div className="track-card">
-              <div>
-                <span className="track-tag community">Free / Partner Whitelist</span>
-                <h3 className="track-title">Community Whitelist Edition (MT4 & MT5)</h3>
-                <p className="track-desc">
-                  Run 100% free on unlimited Demo accounts or register a Live account under our broker partner link for permanent whitelist authorization.
-                </p>
-                <ul className="track-checklist">
-                  <li><span className="check-icon">✓</span> MetaTrader 4 & MetaTrader 5 Binaries (.ex4 / .ex5)</li>
-                  <li><span className="check-icon">✓</span> 100% Unlimited Free Demo Account Testing</li>
-                  <li><span className="check-icon">✓</span> Free Whitelist via Partner Brokers (XM, FBS, JustMarkets)</li>
-                  <li><span className="check-icon">✓</span> Full Access to Preset Studio & Margin Calculator</li>
-                </ul>
-              </div>
-
-              <div className="track-actions">
-                <div className="track-buttons-row">
-                  <a
-                    href={DOWNLOAD_MT5}
-                    className="btn btn-primary"
-                    onClick={() => playTactileClick(0.1)}
-                  >
-                    ⬇️ Download MT5 (v1.67)
-                  </a>
-                  <a
-                    href={DOWNLOAD_MT4}
-                    className="btn btn-secondary"
-                    onClick={() => playTactileClick(0.1)}
-                  >
-                    ⬇️ Download MT4 (v1.62)
-                  </a>
-                </div>
-                <div className="track-buttons-row" style={{ marginTop: "6px" }}>
-                  <a
-                    href="#tools"
-                    className="btn btn-secondary btn-sm"
-                    onClick={() => { setActiveTool("presets"); playTactileClick(0.08); }}
-                  >
-                    ⚙️ Presets (.set)
-                  </a>
-                  <a
-                    href="#tools"
-                    className="btn btn-secondary btn-sm"
-                    onClick={() => { setActiveTool("calculator"); playTactileClick(0.08); }}
-                  >
-                    🧮 Risk Calculator
-                  </a>
-                  <a
-                    href={PURCHASE_LINK}
-                    className="btn btn-secondary btn-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => playTactileClick(0.08)}
-                  >
-                    🛒 Buy MT4
-                  </a>
-                </div>
-              </div>
-            </div>
+          {/* HIGH-CONVERTING HERO ACTION BUTTONS */}
+          <div className="hero-actions" style={{ marginBottom: "28px" }}>
+            <a
+              href="#broker-partners"
+              className="btn btn-primary"
+              onClick={() => playTactileClick(0.12)}
+              style={{
+                background: "linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%)",
+                color: "#0a0e1a",
+                fontWeight: 900,
+                fontSize: "1.05rem",
+                padding: "14px 32px",
+                border: "none",
+                boxShadow: "0 0 30px rgba(0, 240, 255, 0.4)",
+              }}
+            >
+              🎁 Choose a Broker &amp; Unlock EA Free ➜
+            </a>
+            <a
+              href="#how-to-get-free"
+              className="btn btn-secondary"
+              onClick={() => playTactileClick(0.08)}
+              style={{ padding: "14px 24px", fontWeight: 700 }}
+            >
+              🚀 3-Step Setup Guide
+            </a>
+            <a
+              href={DOWNLOAD_MT5}
+              className="btn btn-secondary"
+              onClick={() => playTactileClick(0.08)}
+              style={{ padding: "14px 20px" }}
+            >
+              ⬇️ Free MT5 Demo (.ex5)
+            </a>
+            <a
+              href={DOWNLOAD_MT4}
+              className="btn btn-secondary"
+              onClick={() => playTactileClick(0.08)}
+              style={{ padding: "14px 20px" }}
+            >
+              ⬇️ Free MT4 Demo (.ex4)
+            </a>
           </div>
 
-          {/* DYNAMIC PRICE TIER URGENCY PROGRESS & TRUST BADGE */}
-          <div style={{ margin: "20px auto 10px", maxWidth: "1000px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px" }}>
-              <PriceTierUrgency
-                currentPrice={149}
-                nextPrice={159}
-                soldInTier={7}
-                tierLimit={10}
-                marketUrl={MQL5_MARKET_LINK}
-                compact={true}
-              />
-              <MQL5TrustBadge
-                productUrl={MQL5_MARKET_LINK}
-                compact={true}
-              />
+          {/* TELEMETRY STRIP */}
+          <div className="jp-telemetry-strip animate-in">
+            <div className="jp-telemetry-item">
+              <span className="jp-telemetry-dot"></span>
+              <span>MODEL WIN RATE: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>84.2%</span></span>
+            </div>
+            <div className="jp-telemetry-item">
+              <span>MAX DRAWDOWN: <span className="jp-telemetry-val" style={{ color: "var(--liquid-emerald)" }}>&lt; 12.8%</span></span>
+            </div>
+            <div className="jp-telemetry-item">
+              <span>SOFTWARE COST: <span className="jp-telemetry-val" style={{ color: "#00f0ff" }}>$0 (100% FREE)</span></span>
+            </div>
+            <div className="jp-telemetry-item">
+              <span>AUTHORIZED ACCOUNTS: <span className="jp-telemetry-val">900+ VERIFIED</span></span>
             </div>
           </div>
 
@@ -566,7 +652,7 @@ export default function Home() {
             <div className="flagship-hud-body">
               <div className="flagship-hud-grid">
                 <div className="flagship-hud-cell">
-                  <div className="flagship-hud-label">Asset & Timeframe</div>
+                  <div className="flagship-hud-label">Asset &amp; Timeframe</div>
                   <div className="flagship-hud-val" style={{ color: "#38bdf8" }}>EURUSD · M5 (Dynamic ADR)</div>
                 </div>
                 <div className="flagship-hud-cell">
@@ -592,23 +678,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* TELEMETRY STRIP */}
-          <div className="jp-telemetry-strip animate-in" style={{ marginTop: "24px" }}>
-            <div className="jp-telemetry-item">
-              <span className="jp-telemetry-dot"></span>
-              <span>MODEL WIN RATE: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>84.2%</span></span>
-            </div>
-            <div className="jp-telemetry-item">
-              <span>MAX DRAWDOWN: <span className="jp-telemetry-val" style={{ color: "var(--liquid-emerald)" }}>&lt; 12.8%</span></span>
-            </div>
-            <div className="jp-telemetry-item">
-              <span>SUPPORT: <span className="jp-telemetry-val">MT4 &amp; MT5 COMPATIBLE</span></span>
-            </div>
-            <div className="jp-telemetry-item">
-              <span>ACCOUNTS: <span className="jp-telemetry-val">900+ AUTHORIZED</span></span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -619,13 +688,160 @@ export default function Home() {
         </div>
       </section>
 
+      {/* THE 3-STEP AFFILIATE ONBOARDING JOURNEY */}
+      <section id="how-to-get-free" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+        <div className="jp-kanji-watermark" aria-hidden="true">参加手順</div>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">INSTANT ACTIVATION // 登録手順</span>
+            <h2>How to Get EA Budak Ubat 100% Free</h2>
+            <p>
+              Follow these 3 simple steps to unlock permanent whitelist authorization on your live trading account.
+            </p>
+          </div>
+
+          <div className="affiliate-steps-grid">
+            <div className="affiliate-step-card animate-in">
+              <span className="affiliate-step-badge">STEP 01</span>
+              <div className="affiliate-step-num">1</div>
+              <h3 className="affiliate-step-title">Register Broker Account</h3>
+              <p className="affiliate-step-desc">
+                Select one of our official authorized brokers below (XM, FBS, JustMarkets, Tickmill, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
+              </p>
+              <a href="#broker-partners" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
+                View Recommended Brokers ↓
+              </a>
+            </div>
+
+            <div className="affiliate-step-card animate-in">
+              <span className="affiliate-step-badge">STEP 02</span>
+              <div className="affiliate-step-num">2</div>
+              <h3 className="affiliate-step-title">Fund &amp; Submit Account ID</h3>
+              <p className="affiliate-step-desc">
+                Fund your live trading account ($10 Cent or $100 Standard recommended). Then submit your account number via our online license checker or Telegram to get whitelisted.
+              </p>
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                <a href="#tools" className="btn btn-secondary btn-sm" onClick={() => { setActiveTool("license"); playTactileClick(0.08); }}>
+                  🔐 Check Whitelist
+                </a>
+                <a href="https://t.me/SyariefAzman" className="btn btn-accent btn-sm" target="_blank" rel="noopener noreferrer" onClick={() => playTactileClick(0.08)}>
+                  💬 Telegram @SyariefAzman
+                </a>
+              </div>
+            </div>
+
+            <div className="affiliate-step-card animate-in">
+              <span className="affiliate-step-badge">STEP 03</span>
+              <div className="affiliate-step-num">3</div>
+              <h3 className="affiliate-step-title">Run EA &amp; Calibrated Presets</h3>
+              <p className="affiliate-step-desc">
+                Download EA Budak Ubat, drag it onto your MT4 or MT5 chart (EURUSD M5), load our pre-calibrated broker .set presets, and enjoy 24/7 automated algorithmic trading!
+              </p>
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                <a href={DOWNLOAD_MT5} className="btn btn-primary btn-sm" onClick={() => playTactileClick(0.08)}>
+                  ⬇️ MT5 (.ex5)
+                </a>
+                <a href="#tools" className="btn btn-secondary btn-sm" onClick={() => { setActiveTool("presets"); playTactileClick(0.08); }}>
+                  ⚙️ Load .set Presets
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED PARTNER BROKER SHOWCASE (THE CORE AFFILIATE HUB) */}
+      <section id="broker-partners" style={{ padding: "80px 0" }}>
+        <div className="jp-kanji-watermark" aria-hidden="true">提携証券会社</div>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label" style={{ color: "#00f0ff", borderColor: "rgba(0, 240, 255, 0.3)" }}>
+              ⭐ OFFICIAL BROKER PARTNERS // 提携ブローカー一覧
+            </span>
+            <h2>Select Your Broker &amp; Unlock EA Free</h2>
+            <p>
+              Register your trading account under any of our official partner links below to receive free permanent whitelist licensing for EA Budak Ubat.
+            </p>
+          </div>
+
+          <div className="broker-showcase-grid">
+            {PARTNER_BROKERS.map((b, idx) => (
+              <div key={b.name} className="broker-card animate-in" style={{ animationDelay: `${idx * 0.08}s` }}>
+                <div className="broker-card-top">
+                  <div className="broker-card-header">
+                    <span className="broker-name">
+                      <span>{b.name}</span>
+                    </span>
+                    <span
+                      className="broker-promo-badge"
+                      style={{ background: `${b.color}20`, color: b.color, border: `1px solid ${b.color}45` }}
+                    >
+                      {b.badge}
+                    </span>
+                  </div>
+
+                  <h4 className="broker-headline">{b.headline}</h4>
+                  <p className="broker-desc">{b.desc}</p>
+
+                  <div className="broker-feature-tags">
+                    {b.features.map((feat, fIdx) => (
+                      <span key={fIdx} className="broker-feature-tag">
+                        ✓ {feat}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="broker-id-strip">
+                    <span>PARTNER CODE: <strong className="broker-id-val">{b.id}</strong></span>
+                    <span>MIN: {b.minDeposit}</span>
+                  </div>
+                </div>
+
+                <a
+                  href={b.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="broker-cta-btn"
+                  style={{ background: b.btnBg, color: b.btnColor }}
+                  onClick={() => playTactileClick(0.12)}
+                >
+                  <span>Open Account &amp; Unlock EA Free</span>
+                  <span>➜</span>
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* AFFILIATE PERKS SHOWCASE */}
+          <div style={{ marginTop: "70px" }}>
+            <div className="section-header animate-in">
+              <span className="label">CLIENT ADVANTAGES // 特典</span>
+              <h2>Why Trade as an Official EA Budak Ubat Client?</h2>
+              <p>
+                When you trade through our broker partner links, you unlock exclusive institutional-grade trading benefits at zero additional expense.
+              </p>
+            </div>
+
+            <div className="affiliate-perks-grid">
+              {AFFILIATE_PERKS.map((perk, pIdx) => (
+                <div key={perk.title} className="affiliate-perk-card animate-in" style={{ animationDelay: `${pIdx * 0.06}s` }}>
+                  <span className="perk-icon">{perk.icon}</span>
+                  <h4 className="perk-title">{perk.title}</h4>
+                  <p className="perk-desc">{perk.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WHAT'S NEW IN V1.67 BANNER */}
-      <div className="container" style={{ marginTop: "30px", marginBottom: "30px", position: "relative", zIndex: 10 }}>
+      <div className="container" style={{ marginBottom: "30px", position: "relative", zIndex: 10 }}>
         <div className="v163-banner-card animate-in">
           <div className="v163-banner-left">
             <span className="v163-banner-icon">🚀</span>
             <div>
-              <h4 className="v163-banner-title">What's New in v1.67 Release: Real-Time Intra-Candle Tick Guard</h4>
+              <h4 className="v163-banner-title">What's New in v1.67: Real-Time Intra-Candle Tick Guard</h4>
               <p className="v163-banner-desc">
                 Resolved the basket break-even StopLoss conflict, promoted profit lock evaluation directly to OnTick() execution for instantaneous intra-candle spikes, added parameter clamp safeguards, and eliminated core calculation latency.
               </p>
@@ -821,6 +1037,71 @@ export default function Home() {
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
+      {/* STANDALONE MQL5 MARKET ALTERNATIVE (FOR TRADERS UNABLE TO SWITCH BROKERS) */}
+      <section style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">STANDALONE ALTERNATIVE // スタンドアロン版</span>
+            <h2>Prefer to Keep Your Existing Broker?</h2>
+            <p>
+              If you trade with an unsupported broker, proprietary firm, or institutional desk that you cannot switch, you can acquire the official standalone MT5 license on MQL5 Market.
+            </p>
+          </div>
+
+          <div className="track-card featured animate-in" style={{ maxWidth: "800px", margin: "0 auto" }}>
+            <div>
+              <span className="track-tag mql5">★ Standalone · No Broker Lock</span>
+              <h3 className="track-title">Official MQL5 Market Edition (MT5)</h3>
+              <p className="track-desc">
+                Instant activation via MetaQuotes MQL5 Market. Works on any MT5 broker globally with zero broker affiliation required and zero monthly expiration.
+              </p>
+              <ul className="track-checklist">
+                <li><span className="check-icon">✓</span> 20 MetaTrader 5 Terminal Activations</li>
+                <li><span className="check-icon">✓</span> Native MetaQuotes DRM &amp; Cloud Delivery</li>
+                <li><span className="check-icon">✓</span> Free Lifetime Automatic Updates in MT5</li>
+                <li><span className="check-icon">✓</span> Hedging &amp; Netting Account Certified</li>
+              </ul>
+            </div>
+
+            <div className="track-actions">
+              <a
+                href={MQL5_MARKET_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-mql5-primary"
+                onClick={() => playTactileClick(0.12)}
+              >
+                <span className="btn-icon">🛒</span>
+                <span className="btn-text">
+                  <strong>Buy on MQL5 Market ($149 USD)</strong>
+                  <small>Lifetime License or Rent from $30/mo · Free Demo</small>
+                </span>
+                <span className="btn-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div style={{ margin: "24px auto 0", maxWidth: "800px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px" }}>
+              <PriceTierUrgency
+                currentPrice={149}
+                nextPrice={159}
+                soldInTier={7}
+                tierLimit={10}
+                marketUrl={MQL5_MARKET_LINK}
+                compact={true}
+              />
+              <MQL5TrustBadge
+                productUrl={MQL5_MARKET_LINK}
+                compact={true}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
       {/* COMPANION ALGORITHMIC SUITE */}
       <section id="ecosystem">
         <div className="jp-kanji-watermark" aria-hidden="true">製品群</div>
@@ -902,18 +1183,14 @@ export default function Home() {
                   >
                     🚀 Deep Dive &amp; Specs
                   </Link>
-                  {activeStrategy === "ea-budak-ubat" && (
-                    <a
-                      href={MQL5_MARKET_LINK}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-accent btn-sm"
-                      data-cursor-label="BUY"
-                      style={{ animation: "none" }}
-                    >
-                      🛒 Buy MT5 (MQL5 Market)
-                    </a>
-                  )}
+                  <a
+                    href="#broker-partners"
+                    className="btn btn-accent btn-sm"
+                    data-cursor-label="FREE"
+                    style={{ animation: "none" }}
+                  >
+                    🎁 Get Free via Partner Broker
+                  </a>
                   <a
                     href="#tools"
                     className="btn btn-secondary btn-sm"
@@ -921,7 +1198,7 @@ export default function Home() {
                     style={{ animation: "none" }}
                     onClick={() => setActiveTool("license")}
                   >
-                    🔐 Verify Licensing
+                    🔐 Verify Whitelist
                   </a>
                 </div>
               </div>
@@ -1151,7 +1428,7 @@ export default function Home() {
           <div className="contact-grid animate-in">
             {[
               { icon: "✉️", title: "Email Support", desc: "support@eabudakubat.com", url: "mailto:support@eabudakubat.com" },
-              { icon: "💬", title: "Telegram", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
+              { icon: "💬", title: "Telegram Support", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
               { icon: "🐦", title: "Twitter/X", desc: "@SyariefAzman", url: "https://www.twitter.com/SyariefAzman" },
               { icon: "📢", title: "Telegram Channel", desc: "t.me/EABudakUbat", url: "https://t.me/EABudakUbat" },
               { icon: "🛒", title: "MQL5 Market", desc: "Official MT5 Product", url: MQL5_MARKET_LINK },
@@ -1440,24 +1717,24 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h4>Trading Systems</h4>
+              <h4>Authorized Brokers</h4>
               <ul className="footer-links">
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat (Flagship)</Link></li>
-                <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
-                <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
-                <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
-                <li><Link href="/aligator-gozaimasu">Aligator Gozaimasu</Link></li>
-                <li><Link href="/encik-moku">Encik Moku</Link></li>
+                <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
+                <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (Cent Account)</a></li>
+                <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>
+                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN)</a></li>
+                <li><a href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b" target="_blank" rel="noopener noreferrer">Headway ($150 Bonus)</a></li>
+                <li><a href="https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923" target="_blank" rel="noopener noreferrer">HF Markets (Cent Account)</a></li>
               </ul>
             </div>
             <div>
               <h4>Flagship Tools</h4>
               <ul className="footer-links">
+                <li><a href="#broker-partners">Get EA Free</a></li>
                 <li><a href="#tools" onClick={() => setActiveTool("simulator")}>Strategy Simulator</a></li>
                 <li><a href="#tools" onClick={() => setActiveTool("presets")}>Preset Studio (.set)</a></li>
                 <li><a href="#tools" onClick={() => setActiveTool("calculator")}>Margin Calculator</a></li>
-                <li><a href="#tools" onClick={() => setActiveTool("license")}>License Checker</a></li>
-                <li><Link href="/guide">System Guide</Link></li>
+                <li><a href="#tools" onClick={() => setActiveTool("license")}>Whitelist Checker</a></li>
                 <li><Link href="/changelog">Version Changelog</Link></li>
               </ul>
             </div>
