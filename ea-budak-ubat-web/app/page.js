@@ -606,11 +606,11 @@ export default function Home() {
             <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 MQL5 Store</Link></li>
             <li><a href="#how-to-get-free" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Engines</a></li>
-            <li><a href="#mql-products" onClick={() => setMobileNavOpen(false)}>MQL5 Suite</a></li>
             <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
             <li><a href="#presets" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
             <li><a href="#calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
             <li><a href="#ecosystem" onClick={() => setMobileNavOpen(false)}>Ecosystem</a></li>
+            <li><a href="#mql-products" onClick={() => setMobileNavOpen(false)}>MQL5 Suite</a></li>
             <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)} style={{ color: "#10b981", fontWeight: 700 }}>⚡ Whitelist / Download EA</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
@@ -1243,11 +1243,6 @@ export default function Home() {
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
-      {/* DYNAMIC SUPABASE-POWERED MQL5 PRODUCTS SHOWCASE */}
-      <MQLProductsShowcase />
-
-      <div className="jp-architectural-line" aria-hidden="true"></div>
-
       {/* COMPANION ALGORITHMIC SUITE */}
       <section id="ecosystem">
         <div className="jp-kanji-watermark" aria-hidden="true">製品群</div>
@@ -1524,6 +1519,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
+      {/* DYNAMIC SUPABASE-POWERED MQL5 PRODUCTS SHOWCASE */}
+      <MQLProductsShowcase />
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
 
       {/* ABOUT */}
       <section id="about" style={{ background: "var(--bg-secondary)" }}>
