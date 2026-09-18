@@ -8,7 +8,15 @@ import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import LiveStrategySimulator from "@/app/components/LiveStrategySimulator";
 import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
+import SetGenerator from "@/app/components/SetGenerator";
+import GridCalculator from "@/app/components/GridCalculator";
 import { playTactileClick } from "@/lib/audioSynthesizer";
+
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5";
+const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
+const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
+const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
 const POST_TYPES = [
   { key: "idea", label: "💡 Idea", color: "#8b5cf6" },
@@ -22,7 +30,7 @@ function timeAgo(dateStr) {
   const seconds = Math.floor((now - date) / 1000);
   if (seconds < 60) return "just now";
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (seconds < 60) return `${minutes}m ago`;
   const hours = Math.floor(minutes / 60);
   if (hours < 24) return `${hours}h ago`;
   const days = Math.floor(hours / 24);
@@ -35,17 +43,17 @@ const PRODUCTS = [
   {
     slug: "ea-budak-ubat",
     name: "EA Budak Ubat",
-    version: "v1.66",
-    tagline: "Grid Martingale Expert Advisor",
-    description: "A powerful grid-based martingale EA for MetaTrader 4 & MetaTrader 5. Features 4 analysis methods (Candle, SMA20, Alligator, Ichimoku), AutoConfig AI, hedging support, and configurable time filters.",
+    version: "v1.67",
+    tagline: "Autonomous Quantitative Grid Martingale Engine",
+    description: "The flagship automated trading system for MetaTrader 5 & 4. Features 4 quantitative analysis engines (Candle, SMA20, Alligator, Ichimoku), dynamic 20-day ADR AutoConfig AI, intra-candle tick basket break-even trailing, and multi-tier margin safeguards.",
     platforms: ["MT4", "MT5"],
-    highlights: ["4 Analysis Methods", "AutoConfig AI", "Grid Martingale", "Hedging Support"],
-    gradient: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
-    accentColor: "#3b82f6",
-    icon: "📊",
-    status: "Live",
-    category: "Grid Trading",
-    kanjiCategory: "グリッド取引",
+    highlights: ["4 Entry Engines", "AutoConfig AI", "Tick Break-Even Trailing", "Dual-Track Licensing"],
+    gradient: "linear-gradient(135deg, #00f0ff, #3b82f6)",
+    accentColor: "#00f0ff",
+    icon: "👑",
+    status: "Flagship",
+    category: "Quantitative Grid",
+    kanjiCategory: "旗艦グリッド取引",
     systemCode: "SYS.01",
   },
   {
@@ -59,7 +67,7 @@ const PRODUCTS = [
     gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
     accentColor: "#f59e0b",
     icon: "🤖",
-    status: "New",
+    status: "Live",
     category: "AI Trading",
     kanjiCategory: "AI信号分析",
     systemCode: "SYS.02",
@@ -75,7 +83,7 @@ const PRODUCTS = [
     gradient: "linear-gradient(135deg, #10b981, #059669)",
     accentColor: "#10b981",
     icon: "⚡",
-    status: "New",
+    status: "Live",
     category: "Breakout",
     kanjiCategory: "ブレイクアウト",
     systemCode: "SYS.03",
@@ -91,7 +99,7 @@ const PRODUCTS = [
     gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
     accentColor: "#ef4444",
     icon: "📐",
-    status: "New",
+    status: "Live",
     category: "Index Trading",
     kanjiCategory: "指数計算",
     systemCode: "SYS.04",
@@ -107,7 +115,7 @@ const PRODUCTS = [
     gradient: "linear-gradient(135deg, #22c55e, #059669)",
     accentColor: "#22c55e",
     icon: "🐊",
-    status: "New",
+    status: "Live",
     category: "Trend Following",
     kanjiCategory: "トレンドフォロー",
     systemCode: "SYS.05",
@@ -123,7 +131,7 @@ const PRODUCTS = [
     gradient: "linear-gradient(135deg, #f59e0b, #d97706)",
     accentColor: "#f59e0b",
     icon: "🏯",
-    status: "New",
+    status: "Live",
     category: "Trend Following",
     kanjiCategory: "雲追跡トレンド",
     systemCode: "SYS.06",
@@ -133,13 +141,13 @@ const PRODUCTS = [
 const STRATEGY_DATA = {
   "ea-budak-ubat": {
     name: "EA Budak Ubat",
-    version: "v1.64",
-    tagline: "Autonomous Grid Martingale Engine (ADR Dynamic Optimization)",
-    desc: "Autonomous dynamic grid with break-even TP pooling, 4 technical entry modes (SMA20, Candle, Alligator, Ichimoku), and adaptive spread protection for ranging markets.",
+    version: "v1.67",
+    tagline: "Flagship Autonomous Grid Martingale Engine (Real-Time Tick Trailing)",
+    desc: "Autonomous dynamic grid with break-even TP pooling, 4 technical entry modes (SMA20, Candle, Alligator, Ichimoku), 20-day ADR AutoConfig AI, and real-time tick basket break-even trailing for ranging markets.",
     winRate: "84.2%",
     drawdown: "< 12.8%",
     timeframe: "M5 Recommended",
-    instruments: "Ranging FX Pairs",
+    instruments: "Ranging FX Pairs (EURUSD, GBPUSD, AUDUSD, Cent Gold)",
     sparkline: "M0,110 Q50,90 100,98 T200,75 T300,60 T400,38 T500,20",
     color: "#00f0ff",
     code: "SYS.01",
@@ -214,6 +222,7 @@ const STRATEGY_DATA = {
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
+  const [activeTool, setActiveTool] = useState("simulator"); // simulator, presets, calculator, license
   const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
 
   // Community State
@@ -368,19 +377,29 @@ export default function Home() {
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="container">
-          <a href="#" className="nav-brand">EA Budak Ubat</a>
+          <a href="#" className="nav-brand">👑 EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Learn 🎮</Link></li>
-            <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
-            <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>Guide</Link></li>
-            <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
-            <li><Link href="/ea-budak-ubat#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</Link></li>
-            <li><Link href="/ea-budak-ubat#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</Link></li>
-            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
+            <li><a href="#flagship" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 700 }}>Flagship</a></li>
+            <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Engines</a></li>
+            <li><a href="#tools" onClick={() => { setActiveTool("simulator"); setMobileNavOpen(false); }}>Simulator</a></li>
+            <li><a href="#tools" onClick={() => { setActiveTool("presets"); setMobileNavOpen(false); }}>Presets</a></li>
+            <li><a href="#tools" onClick={() => { setActiveTool("calculator"); setMobileNavOpen(false); }}>Calculator</a></li>
+            <li><a href="#ecosystem" onClick={() => setMobileNavOpen(false)}>Ecosystem</a></li>
+            <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
+            <li><a href="#tools" onClick={() => { setActiveTool("license"); setMobileNavOpen(false); }}>License</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
-            <li><a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a></li>
-            <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+            <li>
+              <a
+                href={MQL5_MARKET_LINK}
+                className="nav-cta"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ background: "linear-gradient(135deg, #10b981, #059669)", fontWeight: 700 }}
+              >
+                Buy MT5 ($149)
+              </a>
+            </li>
           </ul>
           <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
             {mobileNavOpen ? "✕" : "☰"}
@@ -388,46 +407,206 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="hero catalog-hero" id="hero">
-        <div className="jp-kanji-watermark" aria-hidden="true">自動売買</div>
+      {/* FLAGSHIP HERO */}
+      <section className="hero catalog-hero" id="flagship">
+        <div className="jp-kanji-watermark" aria-hidden="true">旗艦自動売買</div>
         <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
         <div className="hero-content">
-          <div className="hero-badge">
-            <span className="hero-badge-dot"></span>
-            <span>系統稼働中 // ALGORITHMIC TRADING SYSTEMS</span>
+          <div className="hero-badge" style={{ borderColor: "rgba(0, 240, 255, 0.4)", background: "rgba(0, 240, 255, 0.08)" }}>
+            <span className="hero-badge-dot" style={{ background: "#00f0ff", boxShadow: "0 0 10px #00f0ff" }}></span>
+            <span style={{ color: "#00f0ff", letterSpacing: "0.08em", fontWeight: 800 }}>
+              👑 FLAGSHIP ALGORITHMIC GRID SYSTEM · v1.67 LIVE
+            </span>
           </div>
+
           <h1>
             <span className="gradient-text">EA Budak Ubat</span>
           </h1>
-          <p className="hero-subtitle">
-            Professional-grade Expert Advisors and AI-powered trading systems for MetaTrader
-            by Syarief Azman. Built for performance, rigorously tested, and continuously improved.
+          <p className="hero-subtitle" style={{ maxWidth: "860px", margin: "0 auto 24px" }}>
+            The premier autonomous grid martingale engine engineered for MetaTrader 5 & MetaTrader 4.
+            Harnesses 4 quantitative entry engines, 20-day ADR AutoConfig AI, and real-time intra-candle tick
+            basket break-even trailing to turn ranging market volatility into systematic returns.
           </p>
-          <div className="hero-actions">
-            <Link href="/learn" className="btn btn-primary" style={{ animation: "none", background: "linear-gradient(135deg, #38bdf8, #8b5cf6)", border: "none", boxShadow: "0 0 24px rgba(56, 189, 248, 0.4)" }}>🎮 Play Forex Quest</Link>
-            <a href="#simulator" className="btn btn-secondary" style={{ animation: "none" }}>⚡ Live Simulator</a>
-            <a href="#products" className="btn btn-secondary" style={{ animation: "none" }}>🔽 Explore Products</a>
-            <Link href="/ea-budak-ubat#preset-generator" className="btn btn-secondary" style={{ animation: "none" }}>⚙️ Presets (.set)</Link>
-            <Link href="/ea-budak-ubat#risk-calculator" className="btn btn-secondary" style={{ animation: "none" }}>🧮 Risk Calculator</Link>
-            <a href="#authorization" className="btn btn-accent" style={{ animation: "none" }}>🔐 Check Account</a>
+
+          {/* DUAL-TRACK ACQUISITION MATRIX */}
+          <div className="dual-track-container animate-in">
+            {/* Track 1: Official MQL5 Market Edition */}
+            <div className="track-card featured">
+              <div>
+                <span className="track-tag mql5">★ Recommended · Standalone</span>
+                <h3 className="track-title">Official MQL5 Market Edition (MT5)</h3>
+                <p className="track-desc">
+                  Instant activation via MetaQuotes MQL5 Market. No broker lock, no account number restrictions, and zero monthly expiration.
+                </p>
+                <ul className="track-checklist">
+                  <li><span className="check-icon">✓</span> 20 MetaTrader 5 Terminal Activations</li>
+                  <li><span className="check-icon">✓</span> Native MetaQuotes DRM & Automatic Cloud Delivery</li>
+                  <li><span className="check-icon">✓</span> Free Lifetime Updates Directly in MT5 Terminal</li>
+                  <li><span className="check-icon">✓</span> Hedging & Netting Account Certified</li>
+                </ul>
+              </div>
+
+              <div className="track-actions">
+                <a
+                  href={MQL5_MARKET_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-mql5-primary"
+                  onClick={() => playTactileClick(0.12)}
+                >
+                  <span className="btn-icon">🛒</span>
+                  <span className="btn-text">
+                    <strong>Buy on MQL5 Market ($149 USD)</strong>
+                    <small>Lifetime License or Rent from $30/mo · Free Demo</small>
+                  </span>
+                  <span className="btn-arrow">→</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Track 2: Free Community Whitelist Edition */}
+            <div className="track-card">
+              <div>
+                <span className="track-tag community">Free / Partner Whitelist</span>
+                <h3 className="track-title">Community Whitelist Edition (MT4 & MT5)</h3>
+                <p className="track-desc">
+                  Run 100% free on unlimited Demo accounts or register a Live account under our broker partner link for permanent whitelist authorization.
+                </p>
+                <ul className="track-checklist">
+                  <li><span className="check-icon">✓</span> MetaTrader 4 & MetaTrader 5 Binaries (.ex4 / .ex5)</li>
+                  <li><span className="check-icon">✓</span> 100% Unlimited Free Demo Account Testing</li>
+                  <li><span className="check-icon">✓</span> Free Whitelist via Partner Brokers (XM, FBS, JustMarkets)</li>
+                  <li><span className="check-icon">✓</span> Full Access to Preset Studio & Margin Calculator</li>
+                </ul>
+              </div>
+
+              <div className="track-actions">
+                <div className="track-buttons-row">
+                  <a
+                    href={DOWNLOAD_MT5}
+                    className="btn btn-primary"
+                    onClick={() => playTactileClick(0.1)}
+                  >
+                    ⬇️ Download MT5 (v1.67)
+                  </a>
+                  <a
+                    href={DOWNLOAD_MT4}
+                    className="btn btn-secondary"
+                    onClick={() => playTactileClick(0.1)}
+                  >
+                    ⬇️ Download MT4 (v1.62)
+                  </a>
+                </div>
+                <div className="track-buttons-row" style={{ marginTop: "6px" }}>
+                  <a
+                    href="#tools"
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => { setActiveTool("presets"); playTactileClick(0.08); }}
+                  >
+                    ⚙️ Presets (.set)
+                  </a>
+                  <a
+                    href="#tools"
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => { setActiveTool("calculator"); playTactileClick(0.08); }}
+                  >
+                    🧮 Risk Calculator
+                  </a>
+                  <a
+                    href={PURCHASE_LINK}
+                    className="btn btn-secondary btn-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => playTactileClick(0.08)}
+                  >
+                    🛒 Buy MT4
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="jp-telemetry-strip animate-in">
+          {/* DYNAMIC PRICE TIER URGENCY PROGRESS & TRUST BADGE */}
+          <div style={{ margin: "20px auto 10px", maxWidth: "1000px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "16px" }}>
+              <PriceTierUrgency
+                currentPrice={149}
+                nextPrice={159}
+                soldInTier={7}
+                tierLimit={10}
+                marketUrl={MQL5_MARKET_LINK}
+                compact={true}
+              />
+              <MQL5TrustBadge
+                productUrl={MQL5_MARKET_LINK}
+                compact={true}
+              />
+            </div>
+          </div>
+
+          {/* FLAGSHIP COCKPIT TERMINAL HUD */}
+          <div className="flagship-terminal-hud animate-in">
+            <div className="flagship-hud-header">
+              <div className="flagship-hud-dots">
+                <span className="flagship-hud-dot red"></span>
+                <span className="flagship-hud-dot amber"></span>
+                <span className="flagship-hud-dot green"></span>
+                <span style={{ marginLeft: "6px", fontWeight: 700, color: "#e2e8f0" }}>
+                  EA BUDAK UBAT v1.67 // LIVE RUNTIME TELEMETRY
+                </span>
+              </div>
+              <div className="flagship-hud-live-tag">
+                <span className="pulse-dot-green"></span>
+                <span>REALTIME TICK MONITOR ACTIVE</span>
+              </div>
+            </div>
+
+            <div className="flagship-hud-body">
+              <div className="flagship-hud-grid">
+                <div className="flagship-hud-cell">
+                  <div className="flagship-hud-label">Asset & Timeframe</div>
+                  <div className="flagship-hud-val" style={{ color: "#38bdf8" }}>EURUSD · M5 (Dynamic ADR)</div>
+                </div>
+                <div className="flagship-hud-cell">
+                  <div className="flagship-hud-label">Entry Engine Mode</div>
+                  <div className="flagship-hud-val" style={{ color: "#a855f7" }}>ICHIMOKU CLOUD (AutoConfig)</div>
+                </div>
+                <div className="flagship-hud-cell">
+                  <div className="flagship-hud-label">Basket Position Layering</div>
+                  <div className="flagship-hud-val" style={{ color: "#10b981" }}>3 BUY ORDERS (0.07 Lots)</div>
+                </div>
+                <div className="flagship-hud-cell">
+                  <div className="flagship-hud-label">Weighted Break-Even Lock</div>
+                  <div className="flagship-hud-val" style={{ color: "#00f0ff" }}>1.08420 (+2.0 Pips Guaranteed)</div>
+                </div>
+                <div className="flagship-hud-cell">
+                  <div className="flagship-hud-label">Intra-Candle Tick Guard</div>
+                  <div className="flagship-hud-val" style={{ color: "#34d399" }}>ACTIVE (0.0ms Latency in OnTick)</div>
+                </div>
+                <div className="flagship-hud-cell">
+                  <div className="flagship-hud-label">Emergency Margin Cushion</div>
+                  <div className="flagship-hud-val" style={{ color: "#f59e0b" }}>4,850% (Protected &gt; 200%)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* TELEMETRY STRIP */}
+          <div className="jp-telemetry-strip animate-in" style={{ marginTop: "24px" }}>
             <div className="jp-telemetry-item">
               <span className="jp-telemetry-dot"></span>
-              <span>SESSIONS: <span className="jp-telemetry-val">TOKYO / LONDON / NY</span></span>
+              <span>MODEL WIN RATE: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>84.2%</span></span>
             </div>
             <div className="jp-telemetry-item">
-              <span>STATUS: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>ONLINE 99.9%</span></span>
+              <span>MAX DRAWDOWN: <span className="jp-telemetry-val" style={{ color: "var(--liquid-emerald)" }}>&lt; 12.8%</span></span>
             </div>
             <div className="jp-telemetry-item">
-              <span>ENGINES: <span className="jp-telemetry-val">MT4 + MT5 COMPATIBLE</span></span>
+              <span>SUPPORT: <span className="jp-telemetry-val">MT4 &amp; MT5 COMPATIBLE</span></span>
             </div>
             <div className="jp-telemetry-item">
-              <span>ACCOUNTS: <span className="jp-telemetry-val">300+ VERIFIED</span></span>
+              <span>ACCOUNTS: <span className="jp-telemetry-val">900+ AUTHORIZED</span></span>
             </div>
           </div>
         </div>
@@ -440,33 +619,218 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHAT'S NEW IN V1.67 BANNER */}
+      <div className="container" style={{ marginTop: "30px", marginBottom: "30px", position: "relative", zIndex: 10 }}>
+        <div className="v163-banner-card animate-in">
+          <div className="v163-banner-left">
+            <span className="v163-banner-icon">🚀</span>
+            <div>
+              <h4 className="v163-banner-title">What's New in v1.67 Release: Real-Time Intra-Candle Tick Guard</h4>
+              <p className="v163-banner-desc">
+                Resolved the basket break-even StopLoss conflict, promoted profit lock evaluation directly to OnTick() execution for instantaneous intra-candle spikes, added parameter clamp safeguards, and eliminated core calculation latency.
+              </p>
+            </div>
+          </div>
+          <Link href="/changelog" className="btn btn-secondary btn-sm" style={{ animation: "none", whiteSpace: "nowrap" }}>
+            View v1.67 Changelog →
+          </Link>
+        </div>
+      </div>
+
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
-      {/* INTERACTIVE ALGORITHMIC TRADING SIMULATOR */}
-      <section id="simulator" style={{ padding: "60px 0 20px 0" }}>
-        <div className="jp-kanji-watermark" aria-hidden="true">市場検証</div>
+      {/* CORE QUANTITATIVE ARCHITECTURE */}
+      <section id="architecture">
+        <div className="jp-kanji-watermark" aria-hidden="true">中核設計</div>
         <div className="container">
           <div className="section-header animate-in">
-            <span className="label">VIRTUAL MARKET ENGINE // 仮想市場シミュレータ</span>
-            <h2>Interactive Algorithmic Execution Simulator</h2>
+            <span className="label">SYSTEM ARCHITECTURE // 技術的特徴</span>
+            <h2>The Four Quantitative Analysis Engines</h2>
             <p>
-              Simulate live market scenarios, test dynamic ADR grid layering, and watch the break-even Take Profit pool execute in real time.
+              EA Budak Ubat features 4 algorithmic entry models tailored to diverse market conditions, supported by dynamic AutoConfig AI and multi-tiered capital protection.
             </p>
           </div>
-          <LiveStrategySimulator />
+
+          <div className="architecture-grid">
+            <div className="arch-card animate-in">
+              <span className="arch-icon">🕯️</span>
+              <h3 className="arch-title">1. Classic Candle Momentum</h3>
+              <p className="arch-desc">
+                High-probability price action engine reading consecutive candlestick closures, wick rejection ratios, and impulse body thresholds to initiate directional positioning with tight spread gating.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">📈</span>
+              <h3 className="arch-title">2. Dynamic SMA20 Channel</h3>
+              <p className="arch-desc">
+                Calculates the 20-period simple moving average equilibrium channel. Executes mean-reversion counter-trend entries when price extends beyond channel bands, capturing high-frequency pullbacks.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">🐊</span>
+              <h3 className="arch-title">3. Alligator Momentum Trio</h3>
+              <p className="arch-desc">
+                Incorporates Bill Williams Jaw (13), Teeth (8), and Lips (5) smoothed moving averages. Filters false breakouts by demanding synchronized jaw-alignment before committing grid capital.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">🏯</span>
+              <h3 className="arch-title">4. Ichimoku Cloud Equilibrium</h3>
+              <p className="arch-desc">
+                Evaluates Tenkan-sen, Kijun-sen, Senkou Span A &amp; B Kumo clouds. Identifies macro trend regimes to ensure grid accumulation aligns with institutional cloud equilibrium zones.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">🤖</span>
+              <h3 className="arch-title">AutoConfig AI Volatility Engine</h3>
+              <p className="arch-desc">
+                Analyzes the 365-day EURUSD ADR baseline and continuously computes the 20-day ADR of the active trading symbol. Dynamically derives optimal Take Profit pips, grid step distances, and multiplier ratios on the fly.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">⚡</span>
+              <h3 className="arch-title">0.0ms Tick Basket Break-Even</h3>
+              <p className="arch-desc">
+                The breakthrough v1.67 upgrade: monitors real-time price spikes across open baskets in OnTick(), locking in guaranteed positive pips the microsecond profit targets are touched—regardless of candle close timings.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">🛡️</span>
+              <h3 className="arch-title">Multi-Tier Margin Safeguards</h3>
+              <p className="arch-desc">
+                Active spread filtration pauses entries during rollover or news spikes. Emergency margin level guards freeze grid expansions at 200% margin and execute orderly basket stop-outs if margin reaches 60%.
+              </p>
+            </div>
+
+            <div className="arch-card animate-in">
+              <span className="arch-icon">🔄</span>
+              <h3 className="arch-title">Adaptive Hedging &amp; Time Filters</h3>
+              <p className="arch-desc">
+                Allows simultaneous independent Buy and Sell baskets with individual magic numbers, coupled with millisecond server-time session schedules (e.g. Tokyo, London, or NY high liquidity windows).
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
-      {/* PRODUCTS */}
-      <section id="products">
-        <div className="jp-kanji-watermark" aria-hidden="true">製品一覧</div>
+      {/* INTERACTIVE FLAGSHIP TOOLING HUB */}
+      <section id="tools" style={{ padding: "70px 0 30px" }}>
+        <div className="jp-kanji-watermark" aria-hidden="true">対話型ツール</div>
         <div className="container">
           <div className="section-header animate-in">
-            <span className="label">ALGORITHMIC SUITE // 製品一覧</span>
-            <h2>Expert Advisors & Trading Systems</h2>
-            <p>Precision-engineered mathematical algorithms tailored for MetaTrader.</p>
+            <span className="label">INTERACTIVE WORKBENCH // ツール群</span>
+            <h2>EA Budak Ubat Flagship Tooling Suite</h2>
+            <p>
+              Simulate market moves, generate customized .set parameter presets, calculate grid margin cushions, and verify authorized accounts in real time.
+            </p>
+          </div>
+
+          {/* Tools Navigation Bar */}
+          <div className="tools-nav-bar animate-in">
+            <button
+              type="button"
+              className={`tool-nav-btn ${activeTool === "simulator" ? "active" : ""}`}
+              onClick={() => { setActiveTool("simulator"); playTactileClick(0.08); }}
+            >
+              <span>⚡</span>
+              <span>Market Simulator</span>
+            </button>
+            <button
+              type="button"
+              className={`tool-nav-btn ${activeTool === "presets" ? "active" : ""}`}
+              onClick={() => { setActiveTool("presets"); playTactileClick(0.08); }}
+            >
+              <span>⚙️</span>
+              <span>Preset Studio (.set)</span>
+            </button>
+            <button
+              type="button"
+              className={`tool-nav-btn ${activeTool === "calculator" ? "active" : ""}`}
+              onClick={() => { setActiveTool("calculator"); playTactileClick(0.08); }}
+            >
+              <span>🧮</span>
+              <span>Margin &amp; Risk Calculator</span>
+            </button>
+            <button
+              type="button"
+              className={`tool-nav-btn ${activeTool === "license" ? "active" : ""}`}
+              onClick={() => { setActiveTool("license"); playTactileClick(0.08); }}
+            >
+              <span>🔐</span>
+              <span>Account License Checker</span>
+            </button>
+          </div>
+
+          {/* Tool 1: Simulator */}
+          {activeTool === "simulator" && (
+            <div className="animate-in" id="simulator">
+              <div style={{ marginBottom: "20px" }}>
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+                  Interactive Virtual Market Engine: Simulate dynamic ADR grid layering, test volatility spikes, and watch the break-even Take Profit pool trigger in real time.
+                </p>
+              </div>
+              <LiveStrategySimulator />
+            </div>
+          )}
+
+          {/* Tool 2: Presets Generator */}
+          {activeTool === "presets" && (
+            <div className="animate-in" id="presets">
+              <div style={{ marginBottom: "20px" }}>
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+                  Custom Preset Studio: Choose a risk profile (Conservative, Balanced, Aggressive, Cent Scalper, Gold Volatility) or adjust parameters and download customized .set files ready to load directly into MT4 or MT5.
+                </p>
+              </div>
+              <SetGenerator />
+            </div>
+          )}
+
+          {/* Tool 3: Risk Calculator */}
+          {activeTool === "calculator" && (
+            <div className="animate-in" id="calculator">
+              <div style={{ marginBottom: "20px" }}>
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+                  Grid Risk &amp; Margin Calculator: Plan your capital allocation. Calculate cumulative lot sizes, pip drawdown distances, margin requirements, and margin call safety cushions across Cent and Standard accounts.
+                </p>
+              </div>
+              <GridCalculator />
+            </div>
+          )}
+
+          {/* Tool 4: License Verification */}
+          {activeTool === "license" && (
+            <div className="animate-in" id="authorization">
+              <div style={{ marginBottom: "20px" }}>
+                <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+                  Official Account Authorization Portal: Verify your MetaTrader account status across any partner broker or download the latest authorized binaries instantly.
+                </p>
+              </div>
+              <AccountChecker initialEa="ea-budak-ubat" />
+            </div>
+          )}
+        </div>
+      </section>
+
+      <div className="jp-architectural-line" aria-hidden="true"></div>
+
+      {/* COMPANION ALGORITHMIC SUITE */}
+      <section id="ecosystem">
+        <div className="jp-kanji-watermark" aria-hidden="true">製品群</div>
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">COMPANION SYSTEMS // エコシステム</span>
+            <h2>The Extended Algorithmic Suite</h2>
+            <p>
+              Complement your portfolio with specialized trading systems developed by Syarief Azman to trade gold, market breakouts, US indices, and multi-timeframe trends alongside EA Budak Ubat.
+            </p>
           </div>
 
           {/* INTERACTIVE STRATEGY MATRIX DECK */}
@@ -484,7 +848,7 @@ export default function Home() {
                   type="button"
                   data-cursor-label="SWITCH"
                   className={`strategy-selector-btn ${activeStrategy === ea.slug ? "active" : ""}`}
-                  onClick={() => setActiveStrategy(ea.slug)}
+                  onClick={() => { setActiveStrategy(ea.slug); playTactileClick(0.08); }}
                 >
                   <span>{ea.icon}</span>
                   <span>{ea.name}</span>
@@ -536,11 +900,11 @@ export default function Home() {
                     data-cursor-label="EXPLORE"
                     style={{ animation: "none" }}
                   >
-                    🚀 Deep Dive & Specs
+                    🚀 Deep Dive &amp; Specs
                   </Link>
                   {activeStrategy === "ea-budak-ubat" && (
                     <a
-                      href="https://www.mql5.com/en/market/product/195399"
+                      href={MQL5_MARKET_LINK}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-accent btn-sm"
@@ -551,10 +915,11 @@ export default function Home() {
                     </a>
                   )}
                   <a
-                    href="#authorization"
+                    href="#tools"
                     className="btn btn-secondary btn-sm"
                     data-cursor-label="CHECK"
                     style={{ animation: "none" }}
+                    onClick={() => setActiveTool("license")}
                   >
                     🔐 Verify Licensing
                   </a>
@@ -615,33 +980,14 @@ export default function Home() {
             </div>
           </div>
 
-          {/* MQL5 MARKET TIER ENGINE & TRUST BADGE PROMOTION */}
-          {activeStrategy === "ea-budak-ubat" && (
-            <div className="container" style={{ margin: "20px auto 35px", padding: 0 }}>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px" }}>
-                <PriceTierUrgency
-                  currentPrice={149}
-                  nextPrice={159}
-                  soldInTier={7}
-                  tierLimit={10}
-                  marketUrl="https://www.mql5.com/en/market/product/195399"
-                  compact={true}
-                />
-                <MQL5TrustBadge
-                  productUrl="https://www.mql5.com/en/market/product/195399"
-                  compact={true}
-                />
-              </div>
-            </div>
-          )}
-
-          <div className="product-catalog">
+          {/* CATALOG CARDS */}
+          <div className="product-catalog" style={{ marginTop: "40px" }}>
             {PRODUCTS.map((product, i) => (
               <Link
                 key={product.slug}
                 href={`/${product.slug}`}
                 className="product-card animate-in"
-                style={{ animationDelay: `${i * 0.15}s` }}
+                style={{ animationDelay: `${i * 0.1}s` }}
               >
                 <div className="product-card-glow" style={{ background: product.gradient }}></div>
                 <div className="product-card-content">
@@ -652,7 +998,7 @@ export default function Home() {
                     <div className="product-meta">
                       <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                         <span className="jp-badge">{product.systemCode}</span>
-                        <span className={`product-status ${product.status === 'New' ? 'status-new' : 'status-live'}`}>
+                        <span className={`product-status ${product.status === 'Flagship' ? 'status-live' : product.status === 'New' ? 'status-new' : 'status-live'}`} style={product.status === 'Flagship' ? { background: 'rgba(0, 240, 255, 0.2)', color: '#00f0ff', borderColor: 'rgba(0, 240, 255, 0.4)' } : undefined}>
                           {product.status}
                         </span>
                       </div>
@@ -684,7 +1030,7 @@ export default function Home() {
 
                   <div className="product-card-footer">
                     <span className="product-cta" style={{ color: product.accentColor }}>
-                      Learn More →
+                      {product.slug === 'ea-budak-ubat' ? 'Explore Flagship →' : 'Learn More →'}
                     </span>
                   </div>
                 </div>
@@ -714,7 +1060,7 @@ export default function Home() {
                   🎮 NEW INTERACTIVE GAMIFIED ACADEMY
                 </div>
                 <h2 style={{ fontSize: "1.8rem", fontWeight: 900, color: "#ffffff", marginBottom: "10px", lineHeight: 1.25 }}>
-                  Master Forex & Algo Trading Like a Game
+                  Master Forex &amp; Algo Trading Like a Game
                 </h2>
                 <p style={{ color: "#94a3b8", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "20px" }}>
                   Test your knowledge through 5 progressive worlds, build consecutive combo multipliers, level up your Trader Rank from Novice Pip Hunter to Institutional Quant Sovereign, and challenge the 60-Second Speedrun Blitz!
@@ -757,18 +1103,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AUTHORIZATION VERIFICATION PORTAL */}
-      <section id="authorization" style={{ background: "var(--bg-primary)", padding: "70px 0" }}>
-        <div className="container">
-          <div className="section-header animate-in">
-            <span className="label">License & Access</span>
-            <h2>Check Authorized Accounts for All EAs</h2>
-            <p>Verify your MetaTrader account status across any of our Expert Advisors instantly.</p>
-          </div>
-          <AccountChecker initialEa="all" />
-        </div>
-      </section>
-
       {/* ABOUT */}
       <section id="about" style={{ background: "var(--bg-secondary)" }}>
         <div className="container">
@@ -797,7 +1131,7 @@ export default function Home() {
                   <span className="stat-label">Authorized Accounts</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">MT4 & MT5</span>
+                  <span className="stat-number">MT4 &amp; MT5</span>
                   <span className="stat-label">Platform Support</span>
                 </div>
               </div>
@@ -820,8 +1154,8 @@ export default function Home() {
               { icon: "💬", title: "Telegram", desc: "@SyariefAzman", url: "https://t.me/SyariefAzman" },
               { icon: "🐦", title: "Twitter/X", desc: "@SyariefAzman", url: "https://www.twitter.com/SyariefAzman" },
               { icon: "📢", title: "Telegram Channel", desc: "t.me/EABudakUbat", url: "https://t.me/EABudakUbat" },
-              { icon: "🛒", title: "MQL5 Market", desc: "Official MT5 Product", url: "https://www.mql5.com/en/market/product/195399" },
-              { icon: "📊", title: "MQL5 Signal", desc: "Signal Channel", url: "https://www.mql5.com/en/channels/eabudakubat" },
+              { icon: "🛒", title: "MQL5 Market", desc: "Official MT5 Product", url: MQL5_MARKET_LINK },
+              { icon: "📊", title: "MQL5 Signal", desc: "Signal Channel", url: SIGNAL_LINK },
             ].map((c, i) => (
               <a key={i} href={c.url} className="contact-card" target="_blank" rel="noopener noreferrer">
                 <span className="contact-icon">{c.icon}</span>
@@ -841,7 +1175,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header animate-in">
             <span className="label community-label">Community Hub</span>
-            <h2>Share & Connect</h2>
+            <h2>Share &amp; Connect</h2>
             <p>Got an idea? Want to request an EA? Give feedback? We'd love to hear from you.</p>
           </div>
 
@@ -1095,9 +1429,9 @@ export default function Home() {
         <div className="container">
           <div className="footer-grid">
             <div>
-              <h3 className="footer-brand">EA Budak Ubat</h3>
+              <h3 className="footer-brand">👑 EA Budak Ubat</h3>
               <p className="footer-desc">
-                Professional trading tools and Expert Advisors for MetaTrader platforms by Syarief Azman. Built with passion and real-world trading experience.
+                Flagship automated quantitative grid trading system and specialized Expert Advisors for MetaTrader platforms by Syarief Azman. Built with passion, real-world trading experience, and mathematical precision.
               </p>
               <div className="social-links">
                 <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
@@ -1106,9 +1440,9 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h4>Products</h4>
+              <h4>Trading Systems</h4>
               <ul className="footer-links">
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat</Link></li>
+                <li><Link href="/ea-budak-ubat">EA Budak Ubat (Flagship)</Link></li>
                 <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
                 <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
                 <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
@@ -1117,30 +1451,31 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4>Resources</h4>
+              <h4>Flagship Tools</h4>
               <ul className="footer-links">
+                <li><a href="#tools" onClick={() => setActiveTool("simulator")}>Strategy Simulator</a></li>
+                <li><a href="#tools" onClick={() => setActiveTool("presets")}>Preset Studio (.set)</a></li>
+                <li><a href="#tools" onClick={() => setActiveTool("calculator")}>Margin Calculator</a></li>
+                <li><a href="#tools" onClick={() => setActiveTool("license")}>License Checker</a></li>
                 <li><Link href="/guide">System Guide</Link></li>
-                <li><Link href="/ea-budak-ubat#preset-generator">Presets (.set)</Link></li>
-                <li><Link href="/ea-budak-ubat#risk-calculator">Margin Calculator</Link></li>
                 <li><Link href="/changelog">Version Changelog</Link></li>
-                <li><a href="#authorization">License Checker</a></li>
               </ul>
             </div>
             <div>
-              <h4>Contact</h4>
+              <h4>Contact &amp; Official Links</h4>
               <ul className="footer-links">
                 <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
                 <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
                 <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                <li><a href="https://www.mql5.com/en/market/product/195399" target="_blank" rel="noopener noreferrer">MQL5 Market (MT5)</a></li>
-                <li><a href="https://www.mql5.com/en/channels/eabudakubat" target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
+                <li><a href={MQL5_MARKET_LINK} target="_blank" rel="noopener noreferrer">MQL5 Market (Official MT5)</a></li>
+                <li><a href={SIGNAL_LINK} target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
               </ul>
             </div>
           </div>
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
             <p className="footer-disclaimer">
-              Risk warning: Trading on margin carries a high level of risk. Automated trading systems can result in significant losses. Past performance is not indicative of future results. Always test on a demo account first. Not available in restricted jurisdictions.
+              Risk warning: Trading on margin carries a high level of risk. Automated grid and martingale systems can result in significant loss of capital. Past performance is not indicative of future results. Always test on a demo account first. Not available in restricted jurisdictions.
             </p>
           </div>
         </div>
