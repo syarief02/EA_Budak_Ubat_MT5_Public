@@ -109,9 +109,9 @@ export default function AboutPage() {
               <div className="about-stat-sub">MT4 &amp; MT5 Traders</div>
             </div>
             <div className="about-stat-card">
-              <span className="about-stat-number">2017</span>
+              <span className="about-stat-number">2014</span>
               <div className="about-stat-label">Genesis Year</div>
-              <div className="about-stat-sub">8+ Years Live Heritage</div>
+              <div className="about-stat-sub">12+ Years Live Heritage</div>
             </div>
             <div className="about-stat-card">
               <span className="about-stat-number">Pure MQL</span>
@@ -436,24 +436,37 @@ export default function AboutPage() {
           <div className="section-header" style={{ textAlign: "left", marginBottom: "28px" }}>
             <span className="label" style={{ margin: 0 }}>SECTION 05</span>
             <h2 style={{ fontSize: "1.9rem", marginTop: "8px" }}>
-              Historical Milestones: 8+ Years of Continuous Iteration
+              Historical Milestones: 12+ Years of Continuous Iteration
             </h2>
             <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "900px" }}>
-              From open-source community forum testing to official MQL5 Market commercial verification and generative AI integration.
+              From its 2014 initial publicization (v1.27) and open-source community forum testing to official MQL5 Market commercial verification and generative AI integration.
             </p>
           </div>
 
           <div className="about-timeline-wrapper">
             <div className="about-timeline-nodes" style={{ gridTemplateColumns: "1fr", gap: "24px" }}>
+              <div className="about-timeline-item" style={{ borderLeftColor: "#6366f1" }}>
+                <div className="about-timeline-year">2014 – 2016 · INITIAL PUBLIC GENESIS (v1.27)</div>
+                <div className="about-timeline-heading" style={{ fontSize: "1.15rem" }}>
+                  &ldquo;EA Budak Ubat v1.27&rdquo; on MT4
+                </div>
+                <div className="about-timeline-text" style={{ fontSize: "0.92rem", maxWidth: "880px" }}>
+                  Originally engineered as an automated quantitative tool and initially publicized in 2014 as <strong>EA Budak Ubat v1.27</strong> on MT4. 
+                  The name <em>&ldquo;Budak Ubat&rdquo;</em> (Malay for Medicine Boy) was established as a humble tribute to Syarief&rsquo;s 
+                  pharmaceutical quality control career. Documented across early forex communities (Forex Factory, Forex Station, early Myfxbook records), 
+                  it demonstrated early automated recovery capabilities that laid the groundwork for future iterations.
+                </div>
+              </div>
+
               <div className="about-timeline-item" style={{ borderLeftColor: "#3b82f6" }}>
-                <div className="about-timeline-year">2017 – 2019 · THE GENESIS &amp; FORUM ROOTS</div>
+                <div className="about-timeline-year">2017 – 2019 · FORUM EXPANSION &amp; FLEXIBLE ITERATIONS</div>
                 <div className="about-timeline-heading" style={{ fontSize: "1.15rem" }}>
                   &ldquo;EA Budak Ubat v1.51 Flexible&rdquo; on MT4
                 </div>
                 <div className="about-timeline-text" style={{ fontSize: "0.92rem", maxWidth: "880px" }}>
-                  Originally developed as a personal trading tool and shared on Southeast Asian retail forums (such as SoeHoe). 
-                  The name <em>&ldquo;Budak Ubat&rdquo;</em> (Malay for Medicine Boy) was chosen as an affectionate homage to Syarief&rsquo;s 
-                  pharmaceutical career. Tested live across real FBS, XM, and Exness accounts with active community peer-review.
+                  Widely distributed across Southeast Asian retail forums (notably SoeHoe) as <strong>v1.51 Flexible</strong>. 
+                  Introduced customizable Candle entry modes, flexible Martingale multipliers, and extensive live account forward-testing 
+                  across FBS, XM, and Exness real accounts.
                 </div>
               </div>
 
@@ -706,3 +719,4 @@ export default function AboutPage() {
     </>
   );
 }
+

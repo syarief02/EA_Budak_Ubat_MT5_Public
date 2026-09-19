@@ -1605,9 +1605,9 @@ export default function Home() {
                 <div className="about-stat-sub">MT4 &amp; MT5 Live Users</div>
               </div>
               <div className="about-stat-card">
-                <span className="about-stat-number">2017</span>
+                <span className="about-stat-number">2014</span>
                 <div className="about-stat-label">Genesis Year</div>
-                <div className="about-stat-sub">8+ Years Live Iteration</div>
+                <div className="about-stat-sub">12+ Years Live Heritage</div>
               </div>
               <div className="about-stat-card">
                 <span className="about-stat-number">100%</span>
@@ -1632,7 +1632,7 @@ export default function Home() {
                 <div className="about-pillar-icon">💊</div>
                 <h3 className="about-pillar-title">1. The &ldquo;Budak Ubat&rdquo; Heritage</h3>
                 <p className="about-pillar-desc">
-                  The nomenclature originates from Malay, translating loosely to <em>&ldquo;Medicine Boy&rdquo;</em> — a humble tribute to Syarief&rsquo;s career in pharmaceutical analysis. Originally shared in 2017 on SoeHoe trading forums as v1.51 Flexible, the project has matured through continuous live community trials into a globally distributed quantitative suite.
+                  The nomenclature originates from Malay, translating loosely to <em>&ldquo;Medicine Boy&rdquo;</em> — a humble tribute to Syarief&rsquo;s career in pharmaceutical analysis. Initially publicized in 2014 as <strong>EA Budak Ubat v1.27</strong> on MT4 and later expanded via SoeHoe and international forums (including the v1.51 Flexible iteration), the algorithm has continuously evolved through more than a decade of live market regimes into an institutional-grade quantitative suite.
                 </p>
               </div>
 
@@ -1665,14 +1665,21 @@ export default function Home() {
             <div className="about-timeline-wrapper">
               <div className="about-timeline-title">
                 <span>⏳</span>
-                <span>The Algorithmic Evolution Timeline</span>
+                <span>The Algorithmic Evolution Timeline (12+ Years Heritage)</span>
               </div>
               <div className="about-timeline-nodes">
                 <div className="about-timeline-item">
-                  <div className="about-timeline-year">2017 – 2019</div>
-                  <div className="about-timeline-heading">Forum Genesis</div>
+                  <div className="about-timeline-year">2014 – 2016</div>
+                  <div className="about-timeline-heading">Initial Genesis (v1.27)</div>
                   <div className="about-timeline-text">
-                    v1.51 Flexible shared on SoeHoe &amp; regional forums. Live community testing on FBS and XM real accounts.
+                    Publicized in 2014 as EA Budak Ubat v1.27 on MT4; documented across early forex communities and Myfxbook logs.
+                  </div>
+                </div>
+                <div className="about-timeline-item">
+                  <div className="about-timeline-year">2017 – 2019</div>
+                  <div className="about-timeline-heading">Forum Expansion (v1.51)</div>
+                  <div className="about-timeline-text">
+                    v1.51 Flexible shared on SoeHoe &amp; regional forums with dynamic multiplier testing on FBS and XM live accounts.
                   </div>
                 </div>
                 <div className="about-timeline-item">
