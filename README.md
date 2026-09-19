@@ -44,7 +44,7 @@ The EA automatically enters trades based on technical analysis, manages a grid o
 
 | Feature | Description |
 |---|---|
-| **Multi-Platform** | Runs on both MT4 and MT5 (Beta) |
+| **Multi-Platform** | Runs on both MT4 and MT5 (Official Release) |
 | **4 Analysis Methods** | Classic Candle, SMA20, Alligator, Ichimoku |
 | **Grid Martingale** | Automatic position layering with configurable multiplier |
 | **AutoConfig AI** | Dynamic parameter optimization based on ADR |
