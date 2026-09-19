@@ -613,6 +613,7 @@ export default function Home() {
             <li><a href="#mql-products" onClick={() => setMobileNavOpen(false)}>MQL5 Suite</a></li>
             <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
             <li><a href="#authorization" onClick={() => setMobileNavOpen(false)} style={{ color: "#10b981", fontWeight: 700 }}>⚡ Whitelist / Download EA</a></li>
+            <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
             <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
             <li>
@@ -1527,38 +1528,209 @@ export default function Home() {
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
-      {/* ABOUT */}
-      <section id="about" style={{ background: "var(--bg-secondary)" }}>
+      {/* ABOUT THE ARCHITECT & SYSTEM */}
+      <section id="about" style={{ background: "var(--bg-secondary)", position: "relative", overflow: "hidden" }}>
         <div className="container">
           <div className="section-header animate-in">
-            <span className="label">About</span>
-            <h2>Built by a Trader, for Traders</h2>
+            <span className="label">THE ARCHITECT &amp; QUANTITATIVE PHILOSOPHY</span>
+            <h2>Where Pharmaceutical Precision Meets Algorithmic Trading</h2>
+            <p style={{ maxWidth: "840px", margin: "12px auto 0", color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.7 }}>
+              The engineering story behind <strong>EA Budak Ubat</strong> — translating zero-tolerance laboratory chemical assay precision, 
+              Good Laboratory Practice (GLP), and ISO calibration discipline into high-resilience quantitative trading systems.
+            </p>
           </div>
+
           <div className="about-content animate-in">
-            <div className="about-text">
-              <p>
-                Hi, I am <strong>Syarief Azman</strong>, the developer behind EA Budak Ubat — a Malaysian developer and forex trader
-                building automated trading tools. My Expert Advisors are designed with real-world trading experience, focusing on
-                reliability, safety mechanisms, and transparent open-source code.
-              </p>
-              <p>
-                Whether you prefer systematic grid trading, AI-powered analysis, trend-following with Ichimoku or Alligator indicators,
-                or breakout strategies — each tool is built to give you an edge while respecting risk management principles.
-              </p>
-              <div className="about-stats">
-                <div className="stat-item">
-                  <span className="stat-number">6</span>
-                  <span className="stat-label">Trading Tools</span>
+            {/* CREATOR PROFILE CARD */}
+            <div className="about-creator-card">
+              <div className="about-creator-header">
+                <div className="about-avatar-frame" aria-hidden="true">
+                  <span>🔬</span>
                 </div>
-                <div className="stat-item">
-                  <span className="stat-number">900+</span>
-                  <span className="stat-label">Authorized Accounts</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-number">MT4 &amp; MT5</span>
-                  <span className="stat-label">Platform Support</span>
+                <div className="about-creator-titles">
+                  <div className="about-creator-name">Syarief Azman bin Rosli</div>
+                  <div className="about-creator-role">
+                    Quantitative Software Architect · Pharmaceutical Quality Control Analyst
+                  </div>
+                  <div className="about-creator-location">
+                    <span>📍 Petaling Jaya, Selangor, Malaysia</span>
+                    <span style={{ margin: "0 6px" }}>·</span>
+                    <a
+                      href="https://github.com/syarief02"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#38bdf8", textDecoration: "none", fontWeight: 700 }}
+                    >
+                      GitHub @syarief02
+                    </a>
+                  </div>
                 </div>
               </div>
+
+              {/* CREDENTIALS BADGES */}
+              <div className="about-badges">
+                <span className="about-badge-item highlight-cyan">
+                  🧪 National Pharmaceutical Regulatory Agency (NPRA, MOH)
+                </span>
+                <span className="about-badge-item highlight-blue">
+                  🎓 Harvard CS50x &amp; CS50 Cybersecurity
+                </span>
+                <span className="about-badge-item highlight-amber">
+                  💻 2.87M+ Lines of Code Authored (78 Repositories)
+                </span>
+                <span className="about-badge-item highlight-emerald">
+                  🛡️ Pure Native MQL5 / MQL4 (Zero DLL Vulnerability)
+                </span>
+                <span className="about-badge-item">
+                  ⭐ Official MQL5 Market Seller
+                </span>
+              </div>
+
+              {/* CORE ETHOS QUOTE */}
+              <div className="about-bio-quote">
+                &ldquo;In pharmaceutical quality control, an uncalibrated micropipette or an undetected trace contaminant invalidates an entire chemical assay. In retail algorithmic trading, undisciplined parameters and emotional biases destroy trading capital. I engineer every Expert Advisor with the exact same laboratory rigor: hypothesis-driven development, continuous tick-level backtesting, and automated risk boundaries.&rdquo;
+              </div>
+            </div>
+
+            {/* EXPANDED STATS GRID */}
+            <div className="about-stats-grid">
+              <div className="about-stat-card">
+                <span className="about-stat-number">2.87M+</span>
+                <div className="about-stat-label">Lines of Code</div>
+                <div className="about-stat-sub">Across 78 Repositories</div>
+              </div>
+              <div className="about-stat-card">
+                <span className="about-stat-number">900+</span>
+                <div className="about-stat-label">Authorized Accounts</div>
+                <div className="about-stat-sub">MT4 &amp; MT5 Live Users</div>
+              </div>
+              <div className="about-stat-card">
+                <span className="about-stat-number">2017</span>
+                <div className="about-stat-label">Genesis Year</div>
+                <div className="about-stat-sub">8+ Years Live Iteration</div>
+              </div>
+              <div className="about-stat-card">
+                <span className="about-stat-number">100%</span>
+                <div className="about-stat-label">Pure Native MQL</div>
+                <div className="about-stat-sub">Zero Risky DLL Binaries</div>
+              </div>
+              <div className="about-stat-card">
+                <span className="about-stat-number">4 Engines</span>
+                <div className="about-stat-label">Signal Confluence</div>
+                <div className="about-stat-sub">Ichimoku, Alligator, SMA, Candle</div>
+              </div>
+              <div className="about-stat-card">
+                <span className="about-stat-number">1-Minute</span>
+                <div className="about-stat-label">AutoConfig AI</div>
+                <div className="about-stat-sub">Real-Time ADR Recalculation</div>
+              </div>
+            </div>
+
+            {/* 4 PILLARS OF BUDAK UBAT */}
+            <div className="about-pillars-grid">
+              <div className="about-pillar-card">
+                <div className="about-pillar-icon">💊</div>
+                <h3 className="about-pillar-title">1. The &ldquo;Budak Ubat&rdquo; Heritage</h3>
+                <p className="about-pillar-desc">
+                  The nomenclature originates from Malay, translating loosely to <em>&ldquo;Medicine Boy&rdquo;</em> — a humble tribute to Syarief&rsquo;s career in pharmaceutical analysis. Originally shared in 2017 on SoeHoe trading forums as v1.51 Flexible, the project has matured through continuous live community trials into a globally distributed quantitative suite.
+                </p>
+              </div>
+
+              <div className="about-pillar-card">
+                <div className="about-pillar-icon">🔬</div>
+                <h3 className="about-pillar-title">2. Laboratory Precision to Code</h3>
+                <p className="about-pillar-desc">
+                  Operating high-precision instrumentation (HPLC, GC-MS, ICP-MS Agilent 8900) and executing ISO 8655-2 / ISO 4787 volumetric verifications instilled a culture of zero margin for error. We treat financial tick data like molecular assays: strictly validating empirical data and eliminating confirmation bias.
+                </p>
+              </div>
+
+              <div className="about-pillar-card">
+                <div className="about-pillar-icon">🤖</div>
+                <h3 className="about-pillar-title">3. Dynamic AutoConfig AI Engine</h3>
+                <p className="about-pillar-desc">
+                  Static grid bots inevitably fail when volatility shifts. EA Budak Ubat&rsquo;s AutoConfig AI mathematically anchors grid spacing and take-profit targets to real-time 20-day Average Daily Range (ADR) and 365-day macro baselines, recalculating every 60 seconds to expand during market shocks and compress during consolidation.
+                </p>
+              </div>
+
+              <div className="about-pillar-card">
+                <div className="about-pillar-icon">🛡️</div>
+                <h3 className="about-pillar-title">4. Capital Resilience &amp; Margin Realism</h3>
+                <p className="about-pillar-desc">
+                  We reject dishonest &ldquo;zero-risk&rdquo; marketing. Martingale sequences require mathematical boundaries: hard lot caps, expanding step increments, and the critical mandate of Cent (USC) accounts with 1:500–1:1000+ leverage to provide a 100x margin buffer that withstands macroeconomic fat-tail trends.
+                </p>
+              </div>
+            </div>
+
+            {/* TIMELINE PREVIEW */}
+            <div className="about-timeline-wrapper">
+              <div className="about-timeline-title">
+                <span>⏳</span>
+                <span>The Algorithmic Evolution Timeline</span>
+              </div>
+              <div className="about-timeline-nodes">
+                <div className="about-timeline-item">
+                  <div className="about-timeline-year">2017 – 2019</div>
+                  <div className="about-timeline-heading">Forum Genesis</div>
+                  <div className="about-timeline-text">
+                    v1.51 Flexible shared on SoeHoe &amp; regional forums. Live community testing on FBS and XM real accounts.
+                  </div>
+                </div>
+                <div className="about-timeline-item">
+                  <div className="about-timeline-year">2020 – 2022</div>
+                  <div className="about-timeline-heading">Mathematical Hardening</div>
+                  <div className="about-timeline-text">
+                    Integrated dynamic distance increments, H1 RSI higher-timeframe filters, and laboratory automation workflows.
+                  </div>
+                </div>
+                <div className="about-timeline-item">
+                  <div className="about-timeline-year">SEPTEMBER 2023</div>
+                  <div className="about-timeline-heading">MQL5 Market Debut</div>
+                  <div className="about-timeline-text">
+                    Complete rewrite to Pure Native MT5. Zero external DLLs, official Netting &amp; Hedging certification.
+                  </div>
+                </div>
+                <div className="about-timeline-item">
+                  <div className="about-timeline-year">2024 – 2025</div>
+                  <div className="about-timeline-heading">Multi-EA Ecosystem</div>
+                  <div className="about-timeline-text">
+                    Launched GoldMind AI (FastAPI + OpenAI MT5 Vision), BracketBlitz (OCO breakout), and MathEdge Pro.
+                  </div>
+                </div>
+                <div className="about-timeline-item">
+                  <div className="about-timeline-year">2026 (CURRENT)</div>
+                  <div className="about-timeline-heading">v1.67 Intra-Candle Engine</div>
+                  <div className="about-timeline-text">
+                    Real-time tick-by-tick basket break-even trailing, dynamic ADR scaling, and automated whitelist infrastructure.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ACTION BAR */}
+            <div className="about-actions-bar">
+              <Link href="/about" className="about-btn-primary">
+                <span>📖</span>
+                <span>Read Full Biography &amp; Technical Architecture</span>
+                <span>→</span>
+              </Link>
+              <a
+                href={MQL5_MARKET_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-btn-secondary"
+              >
+                <span>🛒</span>
+                <span>Verified MQL5 Market Author</span>
+              </a>
+              <a
+                href="https://t.me/SyariefAzman"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-btn-secondary"
+              >
+                <span>💬</span>
+                <span>Connect with Developer on Telegram</span>
+              </a>
             </div>
           </div>
         </div>
@@ -1908,6 +2080,7 @@ export default function Home() {
             <div>
               <h4>Flagship Tools</h4>
               <ul className="footer-links">
+                <li><Link href="/about" style={{ color: "#00f0ff", fontWeight: 700 }}>About Syarief Azman</Link></li>
                 <li><a href="#broker-partners">Get EA Free</a></li>
                 <li><a href="#simulator">Strategy Simulator</a></li>
                 <li><a href="#presets">Preset Studio (.set)</a></li>
