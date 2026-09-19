@@ -8,13 +8,41 @@ import CommandTerminal from "@/app/components/CommandTerminal";
 
 export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
-  title: "EA Budak Ubat | Trading Tools & Expert Advisors for MetaTrader",
-  description: "Professional-grade Expert Advisors and AI-powered trading systems for MetaTrader 4 & 5. EA Budak Ubat grid martingale and GoldMind AI signal trading.",
-  keywords: "EA, Expert Advisor, MetaTrader, MT4, MT5, grid trading, martingale, forex, automated trading, AI trading, XAUUSD, gold, ChatGPT",
+  title: {
+    default: "EA Budak Ubat | Trading Tools & Expert Advisors for MetaTrader",
+    template: "%s | EA Budak Ubat",
+  },
+  description: "Professional-grade Expert Advisors and AI-powered trading systems for MetaTrader 4 & 5. EA Budak Ubat grid martingale, GoldMind AI signal trading, and 6 specialized algorithmic systems.",
+  keywords: "EA, Expert Advisor, MetaTrader, MT4, MT5, grid trading, martingale, forex, automated trading, AI trading, XAUUSD, gold, ChatGPT, algorithmic trading, forex EA",
+  authors: [{ name: "Syarief Azman", url: "https://github.com/syarief02" }],
+  creator: "Syarief Azman",
+  publisher: "EA Budak Ubat",
   openGraph: {
-    title: "EA Budak Ubat Trading Tools",
-    description: "Professional Expert Advisors & AI Trading Systems for MetaTrader",
+    title: "EA Budak Ubat | Trading Tools & Expert Advisors for MetaTrader",
+    description: "Professional Expert Advisors & AI Trading Systems for MetaTrader 4 & 5",
+    url: "https://eabudakubat.com",
+    siteName: "EA Budak Ubat",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@SyariefAzman",
+    site: "@SyariefAzman",
+  },
+  alternates: {
+    canonical: "https://eabudakubat.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -48,6 +76,38 @@ export default function RootLayout({ children }) {
             alt=""
           />
         </noscript>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "EA Budak Ubat",
+              url: "https://eabudakubat.com",
+              logo: "https://eabudakubat.com/icon.png",
+              description: "Professional Expert Advisors & AI Trading Systems for MetaTrader 4 & 5 by Syarief Azman",
+              founder: {
+                "@type": "Person",
+                name: "Syarief Azman",
+                url: "https://github.com/syarief02",
+                jobTitle: "Algorithmic Trading Engineer & Pharmaceutical Scientist",
+              },
+              sameAs: [
+                "https://t.me/SyariefAzman",
+                "https://t.me/EABudakUbat",
+                "https://github.com/syarief02",
+                "https://www.twitter.com/SyariefAzman",
+                "https://www.mql5.com/en/users/syarief.azman/seller",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "support@eabudakubat.com",
+                contactType: "customer support",
+                url: "https://t.me/SyariefAzman",
+              },
+            }),
+          }}
+        />
       </head>
       <body>
         <FluidCanvas />
