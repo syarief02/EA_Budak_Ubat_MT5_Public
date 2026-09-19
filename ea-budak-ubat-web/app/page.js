@@ -5,11 +5,8 @@ import Link from "next/link";
 
 import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
-import LiveStrategySimulator from "@/app/components/LiveStrategySimulator";
 import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
-import SetGenerator from "@/app/components/SetGenerator";
-import GridCalculator from "@/app/components/GridCalculator";
 import MQLProductsShowcase from "@/app/components/MQLProductsShowcase";
 import { playTactileClick } from "@/lib/audioSynthesizer";
 
@@ -249,7 +246,7 @@ function timeAgo(dateStr) {
   const seconds = Math.floor((now - date) / 1000);
   if (seconds < 60) return "just now";
   const minutes = Math.floor(seconds / 60);
-  if (seconds < 60) return `${minutes}m ago`;
+  if (minutes < 60) return `${minutes}m ago`;
   const hours = Math.floor(minutes / 60);
   if (hours < 24) return `${hours}h ago`;
   const days = Math.floor(hours / 24);
@@ -440,25 +437,13 @@ const STRATEGY_DATA = {
 
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [showAllBrokers, setShowAllBrokers] = useState(false);
   const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
   const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
 
-  // Community State
+  // Community State (Spotlight showcase)
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
-  const [filter, setFilter] = useState("all");
-  const [formData, setFormData] = useState({
-    name: "",
-    type: "feedback",
-    ea_name: "",
-    message: "",
-    admin_token: "",
-  });
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState("");
-  const [botTrap, setBotTrap] = useState("");
-  const [formRenderedAt, setFormRenderedAt] = useState(Date.now());
   const [reactions, setReactions] = useState({});
 
   useEffect(() => {
@@ -508,69 +493,7 @@ export default function Home() {
     setLoading(false);
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitError("");
-    setSubmitSuccess(false);
-
-    if (!formData.name.trim() || !formData.message.trim()) {
-      setSubmitError("Please fill in your name and message.");
-      return;
-    }
-
-    if (formData.type === "ea_request" && !formData.ea_name.trim()) {
-      setSubmitError("Please provide a name for the EA you're requesting.");
-      return;
-    }
-
-    setSubmitting(true);
-
-    try {
-      const payload = {
-        name: formData.name.trim(),
-        type: formData.type,
-        message: formData.message.trim(),
-        bot_catch: botTrap,
-        form_rendered_at: formRenderedAt,
-      };
-
-      if (formData.type === "ea_request" && formData.ea_name.trim()) {
-        payload.ea_name = formData.ea_name.trim();
-      }
-
-      if (formData.admin_token && formData.admin_token.trim()) {
-        payload.admin_token = formData.admin_token.trim();
-      }
-
-      const res = await fetch("/api/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const json = await res.json();
-
-      if (!res.ok || !json.success) {
-        setSubmitError(json.error || "Something went wrong. Please try again.");
-      } else {
-        setSubmitSuccess(true);
-        setFormData({ name: "", type: "feedback", ea_name: "", message: "", admin_token: "" });
-        setBotTrap("");
-        setFormRenderedAt(Date.now());
-        fetchComments();
-        setTimeout(() => setSubmitSuccess(false), 4000);
-      }
-    } catch (err) {
-      setSubmitError("Network error. Please try again.");
-      console.error("Submit error:", err);
-    }
-
-    setSubmitting(false);
-  }
-
-  const filteredComments = (
-    filter === "all" ? comments : comments.filter((c) => c.type === filter)
-  ).filter((c) => {
+  const filteredComments = comments.filter((c) => {
     const ea = (c.ea_name || "").toLowerCase();
     const msg = (c.message || "").toLowerCase();
     const nm = (c.name || "").toLowerCase();
@@ -593,7 +516,7 @@ export default function Home() {
     );
     document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [comments, filter, loading]);
+  }, [comments, loading]);
 
   return (
     <>
@@ -602,20 +525,13 @@ export default function Home() {
         <div className="container">
           <a href="#" className="nav-brand">👑 EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><a href="#broker-partners" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 800 }}>🎁 Get EA Free</a></li>
-            <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 MQL5 Store</Link></li>
+            <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 Products</Link></li>
+            <li><Link href="/tools" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 700 }}>⚙️ Tools &amp; Simulator</Link></li>
             <li><a href="#how-to-get-free" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
-            <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Engines</a></li>
-            <li><a href="#simulator" onClick={() => setMobileNavOpen(false)}>Simulator</a></li>
-            <li><a href="#presets" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
-            <li><a href="#calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
-            <li><a href="#ecosystem" onClick={() => setMobileNavOpen(false)}>Ecosystem</a></li>
-            <li><a href="#mql-products" onClick={() => setMobileNavOpen(false)}>MQL5 Suite</a></li>
-            <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
-            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)} style={{ color: "#10b981", fontWeight: 700 }}>⚡ Whitelist / Download EA</a></li>
-            <li><a href="#about" onClick={() => setMobileNavOpen(false)}>About</a></li>
+            <li><Link href="/about" onClick={() => setMobileNavOpen(false)}>About</Link></li>
+            <li><Link href="/community" onClick={() => setMobileNavOpen(false)}>Community</Link></li>
+            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)} style={{ color: "#10b981", fontWeight: 700 }}>⚡ Whitelist</a></li>
             <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li><a href="#community-hub" onClick={() => setMobileNavOpen(false)}>Community</a></li>
             <li>
               <a
                 href="#broker-partners"
@@ -903,16 +819,16 @@ export default function Home() {
         <div className="container">
           <div className="section-header animate-in">
             <span className="label" style={{ color: "#00f0ff", borderColor: "rgba(0, 240, 255, 0.3)" }}>
-              ⭐ ALL 14 OFFICIAL BROKER PARTNERS // 提携ブローカー14社一覧
+              ⭐ OFFICIAL BROKER PARTNERS // 提携ブローカー一覧
             </span>
             <h2>Select Your Broker &amp; Unlock EA Free</h2>
-            <p>
-              Register your trading account under any of our 14 official partner brokers below to receive free permanent whitelist licensing for EA Budak Ubat.
+            <p style={{ maxWidth: "800px", margin: "10px auto 0" }}>
+              Register your live trading account under any of our official partner brokers below to receive permanent whitelist licensing for EA Budak Ubat at zero software cost.
             </p>
           </div>
 
           <div className="partner-broker-grid">
-            {PARTNER_BROKERS.map((b, idx) => (
+            {(showAllBrokers ? PARTNER_BROKERS : PARTNER_BROKERS.slice(0, 3)).map((b, idx) => (
               <div key={b.name} className="partner-broker-card animate-in" style={{ animationDelay: `${idx * 0.08}s` }}>
                 <div className="partner-broker-content">
                   <div className="partner-broker-top-bar">
@@ -955,6 +871,38 @@ export default function Home() {
                 </a>
               </div>
             ))}
+          </div>
+
+          {/* EXPAND / COLLAPSE ALL 14 BROKERS TOGGLE */}
+          <div style={{ textAlign: "center", marginTop: "32px" }}>
+            <button
+              type="button"
+              onClick={() => {
+                playTactileClick(0.08);
+                setShowAllBrokers(!showAllBrokers);
+              }}
+              style={{
+                padding: "14px 32px",
+                borderRadius: "12px",
+                fontWeight: 800,
+                fontSize: "0.95rem",
+                background: "rgba(15, 23, 42, 0.8)",
+                border: "1px solid rgba(0, 240, 255, 0.4)",
+                color: "#00f0ff",
+                cursor: "pointer",
+                boxShadow: "0 4px 25px rgba(0, 0, 0, 0.4)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <span>
+                {showAllBrokers
+                  ? "▲ Show Top 3 Featured Brokers Only"
+                  : `▼ View All 14 Authorized Broker Partners (${PARTNER_BROKERS.length - 3} More)`}
+              </span>
+            </button>
           </div>
 
           {/* AFFILIATE PERKS SHOWCASE */}
@@ -1115,49 +1063,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TOOL 1: SIMULATOR */}
-      <section id="simulator" style={{ padding: "40px 0" }}>
+      {/* TRADER WORKBENCH SUITE PREVIEW */}
+      <section id="tools-preview" style={{ padding: "80px 0", background: "var(--bg-secondary)", position: "relative" }}>
         <div className="container">
           <div className="section-header animate-in">
-            <span className="label">TOOL 01 // 仮想市場シミュレータ</span>
-            <h2>Interactive Algorithmic Execution Simulator</h2>
-            <p>
-              Simulate live market scenarios, test dynamic ADR grid layering, and watch the break-even Take Profit pool execute in real time.
+            <span className="label">QUANTITATIVE WORKBENCH // ツール群</span>
+            <h2>Algorithmic Simulation &amp; Margin Tools</h2>
+            <p style={{ maxWidth: "800px", margin: "12px auto 0" }}>
+              Calibrate your trading parameters before deploying EA Budak Ubat on live capital. 
+              Access our complete dedicated workbench of execution simulators, preset generators, and risk calculators.
             </p>
           </div>
-          <LiveStrategySimulator />
-        </div>
-      </section>
 
-      <div className="jp-architectural-line" aria-hidden="true"></div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px", marginBottom: "36px" }}>
+            <div className="about-pillar-card animate-in" style={{ border: "1px solid rgba(0, 240, 255, 0.3)" }}>
+              <div className="about-pillar-icon" style={{ background: "rgba(0, 240, 255, 0.15)", color: "#00f0ff" }}>📊</div>
+              <h3 className="about-pillar-title">Execution Simulator</h3>
+              <p className="about-pillar-desc">
+                Simulate live market scenarios, test dynamic ADR grid layering, and observe the volume-weighted break-even Take Profit pool execute in real time.
+              </p>
+              <Link
+                href="/tools#simulator"
+                className="btn btn-secondary btn-sm"
+                onClick={() => playTactileClick(0.08)}
+                style={{ marginTop: "16px", color: "#00f0ff", borderColor: "rgba(0, 240, 255, 0.4)", display: "inline-flex", alignItems: "center", gap: "6px" }}
+              >
+                <span>Launch Simulator</span>
+                <span>➜</span>
+              </Link>
+            </div>
 
-      {/* TOOL 2: PRESET GENERATOR */}
-      <section id="presets" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
-        <div className="container">
-          <div className="section-header animate-in">
-            <span className="label">TOOL 02 // パラメータ設定生成器</span>
-            <h2>EA Parameter Preset Studio (.set)</h2>
-            <p>
-              Download pre-calibrated parameter files or customize grid multiplier, ADR auto-config, and take profit targets ready to load directly into MetaTrader.
-            </p>
+            <div className="about-pillar-card animate-in" style={{ border: "1px solid rgba(59, 130, 246, 0.3)" }}>
+              <div className="about-pillar-icon" style={{ background: "rgba(59, 130, 246, 0.15)", color: "#60a5fa" }}>⚙️</div>
+              <h3 className="about-pillar-title">Preset Studio (.set)</h3>
+              <p className="about-pillar-desc">
+                Download pre-calibrated parameter files or customize grid multipliers, ADR auto-config ratios, and take profit targets ready to load directly into MetaTrader.
+              </p>
+              <Link
+                href="/tools#presets"
+                className="btn btn-secondary btn-sm"
+                onClick={() => playTactileClick(0.08)}
+                style={{ marginTop: "16px", color: "#38bdf8", borderColor: "rgba(59, 130, 246, 0.4)", display: "inline-flex", alignItems: "center", gap: "6px" }}
+              >
+                <span>Open Preset Studio</span>
+                <span>➜</span>
+              </Link>
+            </div>
+
+            <div className="about-pillar-card animate-in" style={{ border: "1px solid rgba(16, 185, 129, 0.3)" }}>
+              <div className="about-pillar-icon" style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399" }}>🧮</div>
+              <h3 className="about-pillar-title">Cent &amp; Margin Risk</h3>
+              <p className="about-pillar-desc">
+                Plan your capital requirements. Calculate cumulative lots, drawdown depth, and liquidation safety cushions across Cent and Standard accounts.
+              </p>
+              <Link
+                href="/tools#calculator"
+                className="btn btn-secondary btn-sm"
+                onClick={() => playTactileClick(0.08)}
+                style={{ marginTop: "16px", color: "#10b981", borderColor: "rgba(16, 185, 129, 0.4)", display: "inline-flex", alignItems: "center", gap: "6px" }}
+              >
+                <span>Open Margin Calculator</span>
+                <span>➜</span>
+              </Link>
+            </div>
           </div>
-          <SetGenerator />
-        </div>
-      </section>
 
-      <div className="jp-architectural-line" aria-hidden="true"></div>
-
-      {/* TOOL 3: RISK & MARGIN CALCULATOR */}
-      <section id="calculator" style={{ padding: "70px 0" }}>
-        <div className="container">
-          <div className="section-header animate-in">
-            <span className="label">TOOL 03 // 証拠金計算機</span>
-            <h2>Grid Risk &amp; Margin Calculator</h2>
-            <p>
-              Plan your capital requirements. Calculate cumulative lots, drawdown distance, and liquidation safety cushions across Cent and Standard accounts.
-            </p>
+          <div style={{ textAlign: "center" }}>
+            <Link
+              href="/tools"
+              className="about-btn-primary"
+              onClick={() => playTactileClick(0.12)}
+              style={{ padding: "14px 36px", fontSize: "1rem" }}
+            >
+              <span>⚙️</span>
+              <span>Launch Full Trader Tools Workbench</span>
+              <span>➜</span>
+            </Link>
           </div>
-          <GridCalculator />
         </div>
       </section>
 
@@ -1773,204 +1755,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COMMUNITY HUB */}
+      {/* COMMUNITY SPOTLIGHT */}
       <section id="community-hub" style={{ background: "var(--bg-secondary)" }}>
         <div className="container">
           <div className="section-header animate-in">
-            <span className="label community-label">Community Hub</span>
-            <h2>Share &amp; Connect</h2>
-            <p>Got an idea? Want to request an EA? Give feedback? We'd love to hear from you.</p>
+            <span className="label community-label">Community Spotlight</span>
+            <h2>Trader Feedback &amp; Ideas</h2>
+            <p>Real feedback, algorithmic ideas, and EA feature requests from our active trading community.</p>
           </div>
 
-          {/* Post Form */}
-          <form className="community-form glass-card animate-in" onSubmit={handleSubmit} style={{ marginBottom: "60px" }}>
-            {/* Honeypot Bot Trap (Hidden from real users) */}
-            <div style={{ display: "none", opacity: 0, position: "absolute", left: "-9999px" }} aria-hidden="true">
-              <label htmlFor="bot_catch">Leave this field blank</label>
-              <input
-                id="bot_catch"
-                type="text"
-                name="bot_catch"
-                value={botTrap}
-                onChange={(e) => setBotTrap(e.target.value)}
-                tabIndex={-1}
-                autoComplete="off"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label" htmlFor="community-name">Your Name</label>
-              <input
-                id="community-name"
-                type="text"
-                className="form-input"
-                placeholder="e.g. Trader Ahmad"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                maxLength={50}
-              />
-            </div>
-
-            {(() => {
-              const n = (formData.name || "").toLowerCase();
-              const isProtected =
-                n.includes("syarief") ||
-                n.includes("creator") ||
-                n.includes("admin") ||
-                n.includes("moderator") ||
-                n.includes("official") ||
-                n.includes("budak ubat team");
-              return isProtected ? (
-                <div className="form-group form-group-slide" style={{ animation: "fadeIn 0.25s ease-out" }}>
-                  <label className="form-label" htmlFor="admin-token" style={{ color: "#60a5fa" }}>
-                    🔐 Creator / Admin Passkey
-                  </label>
-                  <input
-                    id="admin-token"
-                    type="password"
-                    className="form-input"
-                    placeholder="Enter official passkey to verify Creator badge..."
-                    value={formData.admin_token}
-                    onChange={(e) => setFormData({ ...formData, admin_token: e.target.value })}
-                    maxLength={100}
-                    style={{ borderColor: "rgba(59, 130, 246, 0.4)", background: "rgba(59, 130, 246, 0.05)" }}
-                  />
-                  <span style={{ fontSize: "0.75rem", color: "#93c5fd", marginTop: "4px", display: "block" }}>
-                    Required when posting official announcements under Creator/Admin identities.
-                  </span>
-                </div>
-              ) : null;
-            })()}
-
-            <div className="form-group">
-              <label className="form-label">Post Type</label>
-              <div className="type-selector">
-                {POST_TYPES.map((t) => (
-                  <button
-                    key={t.key}
-                    type="button"
-                    className={`type-pill ${formData.type === t.key ? "active" : ""}`}
-                    style={{
-                      "--pill-color": t.color,
-                      borderColor: formData.type === t.key ? t.color : undefined,
-                      background: formData.type === t.key ? `${t.color}15` : undefined,
-                      color: formData.type === t.key ? t.color : undefined,
-                    }}
-                    onClick={() => setFormData({ ...formData, type: t.key })}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {formData.type === "ea_request" && (
-              <div className="form-group form-group-slide">
-                <label className="form-label" htmlFor="ea-name">EA Name / Description</label>
-                <input
-                  id="ea-name"
-                  type="text"
-                  className="form-input"
-                  placeholder="e.g. RSI Scalper EA for EURUSD"
-                  value={formData.ea_name}
-                  onChange={(e) => setFormData({ ...formData, ea_name: e.target.value })}
-                  maxLength={100}
-                />
-              </div>
-            )}
-
-            <div className="form-group">
-              <label className="form-label" htmlFor="community-message">Message</label>
-              <textarea
-                id="community-message"
-                className="form-textarea"
-                placeholder="Tell us what you think, what you need, or share your trading experience..."
-                rows={5}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                maxLength={2000}
-              />
-              <span className="char-count">{formData.message.length}/2000</span>
-            </div>
-
-            <button
-              type="submit"
-              className="btn btn-community-primary submit-btn"
-              disabled={submitting}
-              style={{ animation: "none" }}
-            >
-              {submitting ? (
-                <><span className="spinner"></span> Posting...</>
-              ) : (
-                "🚀 Post"
-              )}
-            </button>
-
-            {submitSuccess && (
-              <div className="form-alert form-alert-success">
-                ✅ Your post has been published! Thanks for sharing.
-              </div>
-            )}
-            {submitError && (
-              <div className="form-alert form-alert-error">
-                ❌ {submitError}
-              </div>
-            )}
-          </form>
-
-          {/* Feed Header & Filters */}
-          <div className="section-header animate-in" style={{ marginTop: "40px" }}>
-            <h2>What People Are Saying</h2>
-          </div>
-
-          <div className="feed-filters animate-in">
-            {[
-              { key: "all", label: "🌐 All" },
-              { key: "idea", label: "💡 Ideas" },
-              { key: "feedback", label: "💬 Feedback" },
-              { key: "ea_request", label: "🤖 EA Requests" },
-            ].map((f) => (
-              <button
-                key={f.key}
-                className={`filter-tab ${filter === f.key ? "active" : ""}`}
-                onClick={() => setFilter(f.key)}
-              >
-                {f.label}
-                {f.key !== "all" && (
-                  <span className="filter-count">
-                    {comments.filter((c) => c.type === f.key).length}
-                  </span>
-                )}
-                {f.key === "all" && (
-                  <span className="filter-count">{comments.length}</span>
-                )}
-              </button>
-            ))}
-          </div>
-
-          {/* Comments List */}
+          {/* Top 3 Comments Showcase */}
           {loading ? (
             <div className="feed-loading">
               <div className="loading-dots">
                 <span></span><span></span><span></span>
               </div>
-              <p>Loading posts...</p>
+              <p>Loading community posts...</p>
             </div>
-          ) : filteredComments.length === 0 ? (
+          ) : comments.length === 0 ? (
             <div className="feed-empty animate-in">
-              <span className="feed-empty-icon">📭</span>
+              <span className="feed-empty-icon">💬</span>
               <h3>No posts yet</h3>
-              <p>Be the first to share your thoughts!</p>
+              <p>Be the first to join the conversation in our community!</p>
             </div>
           ) : (
-            <div className="feed-list">
-              {filteredComments.map((comment, i) => {
+            <div className="feed-list" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
+              {filteredComments.slice(0, 3).map((comment, i) => {
                 const typeInfo = getTypeInfo(comment.type);
                 return (
                   <div
                     key={comment.id}
                     className="comment-card animate-in"
-                    style={{ animationDelay: `${i * 0.05}s` }}
+                    style={{ animationDelay: `${i * 0.05}s`, display: "flex", flexDirection: "column", height: "100%" }}
                   >
                     <div className="comment-header">
                       <div className="comment-author-row">
@@ -2010,13 +1826,14 @@ export default function Home() {
                       </div>
                     )}
 
-                    <p className="comment-message">{comment.message}</p>
+                    <p className="comment-message" style={{ flexGrow: 1, maxHeight: "120px", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {comment.message}
+                    </p>
 
-                    <div className="comment-actions-bar">
+                    <div className="comment-actions-bar" style={{ marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "12px" }}>
                       <button
                         type="button"
                         className={`comment-react-btn ${(reactions[comment.id]?.user_helpful) ? "active" : ""}`}
-                        data-cursor-label="LIKE"
                         onClick={() => handleReaction(comment.id, "helpful")}
                       >
                         <span>❤️</span>
@@ -2028,7 +1845,6 @@ export default function Home() {
                       <button
                         type="button"
                         className={`comment-react-btn ${(reactions[comment.id]?.user_bullish) ? "active" : ""}`}
-                        data-cursor-label="BULLISH"
                         onClick={() => handleReaction(comment.id, "bullish")}
                       >
                         <span>🚀</span>
@@ -2040,11 +1856,10 @@ export default function Home() {
                       <button
                         type="button"
                         className={`comment-react-btn ${(reactions[comment.id]?.user_insight) ? "active" : ""}`}
-                        data-cursor-label="IDEA"
                         onClick={() => handleReaction(comment.id, "insight")}
                       >
                         <span>💡</span>
-                        <span>Great Idea</span>
+                        <span>Idea</span>
                         {(reactions[comment.id]?.insight || 0) > 0 && (
                           <span className="react-count">{reactions[comment.id].insight}</span>
                         )}
@@ -2055,6 +1870,60 @@ export default function Home() {
               })}
             </div>
           )}
+
+          {/* CTA Hub Banner */}
+          <div
+            className="glass-card animate-in"
+            style={{
+              marginTop: "40px",
+              padding: "36px",
+              textAlign: "center",
+              background: "linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%)",
+              borderColor: "rgba(139, 92, 246, 0.25)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "16px",
+            }}
+          >
+            <span style={{ fontSize: "2rem" }}>💬</span>
+            <h3 style={{ fontSize: "1.35rem", fontWeight: 800, margin: 0, color: "#fff" }}>
+              Join the EA Budak Ubat Trader Community
+            </h3>
+            <p style={{ maxWidth: "600px", color: "var(--text-secondary)", margin: 0, fontSize: "0.95rem" }}>
+              Explore trader feedback, submit custom EA requests, share algorithmic strategies, or connect live on Telegram.
+            </p>
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center", marginTop: "8px" }}>
+              <Link
+                href="/community"
+                className="btn btn-primary"
+                style={{
+                  background: "linear-gradient(135deg, #00f0ff, #0070f3)",
+                  boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)",
+                  padding: "12px 28px",
+                  borderRadius: "12px",
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                }}
+              >
+                🚀 Open Community Hub &amp; Post
+              </Link>
+              <a
+                href="https://t.me/EABudakUbat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+                style={{
+                  padding: "12px 24px",
+                  borderRadius: "12px",
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                }}
+              >
+                📢 Join Telegram Channel
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -2085,13 +1954,12 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4>Flagship Tools</h4>
+              <h4>Ecosystem &amp; Tools</h4>
               <ul className="footer-links">
                 <li><Link href="/about" style={{ color: "#00f0ff", fontWeight: 700 }}>About Syarief Azman</Link></li>
-                <li><a href="#broker-partners">Get EA Free</a></li>
-                <li><a href="#simulator">Strategy Simulator</a></li>
-                <li><a href="#presets">Preset Studio (.set)</a></li>
-                <li><a href="#calculator">Margin Calculator</a></li>
+                <li><Link href="/products">Multi-EA Ecosystem</Link></li>
+                <li><Link href="/tools">Quant Tools &amp; Simulator</Link></li>
+                <li><Link href="/community">Community Discussion</Link></li>
                 <li><a href="#authorization">Whitelist Checker</a></li>
                 <li><Link href="/changelog">Version Changelog</Link></li>
               </ul>
