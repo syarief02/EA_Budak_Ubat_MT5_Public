@@ -37,6 +37,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+  overflow-x: hidden;
 }
 
 section[id],
@@ -3314,8 +3315,18 @@ section {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
   section {
     padding: 60px 0;
+  }
+
+  .hero-content {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .vps-content {
@@ -3338,13 +3349,18 @@ section {
 
   .hero-actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
   }
 
   .btn {
     width: 100%;
-    max-width: 300px;
+    max-width: 100%;
     justify-content: center;
+  }
+
+  .whitelisted-fast-pass {
+    max-width: 100% !important;
   }
 }
 
@@ -7262,7 +7278,7 @@ section {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
