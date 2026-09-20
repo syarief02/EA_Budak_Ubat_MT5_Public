@@ -1030,16 +1030,16 @@ section {
 .checker-input-group {
   display: flex;
   gap: 12px;
-  align-items: stretch;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 .checker-input-wrapper {
   position: relative;
-  flex: 1 1 280px;
-  min-width: 240px;
+  flex: 1 1 auto;
+  min-width: 0;
   display: flex;
   align-items: center;
+  height: auto;
 }
 
 .input-prefix-icon {
@@ -1675,17 +1675,20 @@ section {
   color: var(--text-secondary);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .account-checker-card {
     padding: 24px 16px;
   }
   .checker-input-group {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
   .checker-input-wrapper {
     width: 100%;
-    min-width: 100%;
+    min-width: 0;
+    height: auto;
+    flex: none;
   }
   .checker-submit-btn {
     width: 100% !important;
@@ -3363,7 +3366,7 @@ section {
     width: 100%;
   }
 
-  .btn {
+  .hero-actions .btn {
     width: 100%;
     max-width: 100%;
     justify-content: center;
