@@ -181,7 +181,7 @@ export default function AccountChecker({
       {/* SEARCH FORM */}
       <form onSubmit={handleSearch} className="checker-form">
         <div className="checker-input-group">
-          <div className="checker-input-wrapper">
+          <div className="checker-input-wrapper" style={{ minWidth: "240px" }}>
             <span className="input-prefix-icon">🔢</span>
             <input
               type="text"
@@ -210,7 +210,7 @@ export default function AccountChecker({
               </button>
             )}
           </div>
-          <button type="submit" className="btn btn-primary checker-submit-btn" style={{ animation: "none" }}>
+          <button type="submit" className="btn btn-primary checker-submit-btn" style={{ animation: "none", flexShrink: 0 }}>
             🔍 Check Status
           </button>
         </div>
