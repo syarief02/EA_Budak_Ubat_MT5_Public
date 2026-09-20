@@ -58,13 +58,13 @@ const PARTNER_BROKERS = [
   },
   {
     name: "FBS",
-    badge: "⚡ 1:3000 Leverage · Cent Accounts",
-    headline: "Maximum Margin Resilience for Grid EAs",
-    desc: "The gold standard for martingale systems. Cent accounts turn a $10 deposit into 1,000 cents, providing massive margin depth to comfortably withstand market pullbacks.",
+    badge: "⚡ 1:3000 Extreme Leverage · Standard",
+    headline: "Ultra-Fast 0.01s Execution & Extreme Margin Power",
+    desc: "High-performance Standard accounts with market execution from 0.01s, spreads from 0.7 pips, and industry-leading leverage up to 1:3000. Perfect for high-speed algorithmic execution.",
     id: "588292",
     url: "https://fbs.partners?ibl=154319&ibp=588292",
-    features: ["Cent Accounts from $10", "1:3000 Extreme Leverage", "0.01s Execution Speed", "Ideal for Grid Martingale"],
-    minDeposit: "$10 (Cent Account)",
+    features: ["1:3000 Extreme Leverage", "0.01s Ultra-Fast Execution", "Spreads from 0.7 Pips", "Low $5 Minimum Deposit"],
+    minDeposit: "$5 (Standard Account)",
     color: "#00be40",
     btnBg: "linear-gradient(135deg, #00be40, #059669)",
     btnColor: "#ffffff",
@@ -1948,7 +1948,7 @@ export default function Home() {
                 <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #1 Choice)</a></li>
                 <li><a href="https://rinfinity.com/en/welcome-bonus?a=mxyg" target="_blank" rel="noopener noreferrer">RoboForex (ProCent · #2 Choice)</a></li>
                 <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
-                <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (Cent Account)</a></li>
+                <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (1:3000 Leverage)</a></li>
                 <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>
                 <li><a href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b" target="_blank" rel="noopener noreferrer">Headway ($150 Bonus)</a></li>
                 <li><a href="https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923" target="_blank" rel="noopener noreferrer">HF Markets (Cent Account)</a></li>
