@@ -689,10 +689,10 @@ export default function AboutPage() {
             <div>
               <h4>Authorized Brokers</h4>
               <ul className="footer-links">
+                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #1 Choice)</a></li>
                 <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
                 <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (Cent Account)</a></li>
                 <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>
-                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN)</a></li>
                 <li><a href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b" target="_blank" rel="noopener noreferrer">Headway ($150 Bonus)</a></li>
                 <li><a href="https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923" target="_blank" rel="noopener noreferrer">HF Markets (Cent Account)</a></li>
               </ul>

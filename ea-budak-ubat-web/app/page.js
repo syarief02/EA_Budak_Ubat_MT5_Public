@@ -18,6 +18,19 @@ const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
 const PARTNER_BROKERS = [
   {
+    name: "Tickmill",
+    badge: "🏆 #1 Recommended · 0.0 Raw Spreads",
+    headline: "Institutional ECN Execution & Lowest Gold Spreads",
+    desc: "The #1 recommended broker for EA Budak Ubat & GoldMind AI. True ECN execution with raw spreads from 0.0 pips, lowest gold commissions, and zero freeze levels for maximum EA profitability.",
+    id: "IB72324388",
+    url: "https://tickmill.link/46cOQ2h",
+    features: ["Raw Spreads from 0.0", "True ECN Execution", "Lowest Gold Commission", "VIP Fast Trade Servers"],
+    minDeposit: "$100 (Classic / Pro)",
+    color: "#e11d48",
+    btnBg: "linear-gradient(135deg, #e11d48, #be123c)",
+    btnColor: "#ffffff",
+  },
+  {
     name: "XM",
     badge: "🎁 100% Deposit Bonus",
     headline: "Ultra-Low Spreads & Micro/Standard Accounts",
@@ -54,19 +67,6 @@ const PARTNER_BROKERS = [
     minDeposit: "$10 (Cent / Standard)",
     color: "#0284c7",
     btnBg: "linear-gradient(135deg, #0284c7, #0369a1)",
-    btnColor: "#ffffff",
-  },
-  {
-    name: "Tickmill",
-    badge: "🪙 Lowest Raw Spreads on Gold",
-    headline: "Institutional ECN Liquidity for Automated EAs",
-    desc: "Institutional ECN liquidity with raw spreads starting from 0.0 pips and ultra-low commission structures. Perfect for high-frequency algorithmic scalping.",
-    id: "IB72324388",
-    url: "https://tickmill.link/46cOQ2h",
-    features: ["Raw Spreads from 0.0", "True ECN Execution", "Lowest Gold Commission", "VIP Fast Trade Servers"],
-    minDeposit: "$100 (Classic / Pro)",
-    color: "#e11d48",
-    btnBg: "linear-gradient(135deg, #e11d48, #be123c)",
     btnColor: "#ffffff",
   },
   {
@@ -769,7 +769,7 @@ export default function Home() {
               <div className="affiliate-step-num">1</div>
               <h3 className="affiliate-step-title">Register Broker Account</h3>
               <p className="affiliate-step-desc">
-                Select one of our official authorized brokers below (XM, FBS, JustMarkets, Tickmill, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
+                Select one of our official authorized brokers below (Tickmill, XM, FBS, JustMarkets, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
               </p>
               <a href="#broker-partners" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
                 View Recommended Brokers ↓
@@ -1945,10 +1945,10 @@ export default function Home() {
             <div>
               <h4>Authorized Brokers</h4>
               <ul className="footer-links">
+                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #1 Choice)</a></li>
                 <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
                 <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (Cent Account)</a></li>
                 <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>
-                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN)</a></li>
                 <li><a href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b" target="_blank" rel="noopener noreferrer">Headway ($150 Bonus)</a></li>
                 <li><a href="https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923" target="_blank" rel="noopener noreferrer">HF Markets (Cent Account)</a></li>
               </ul>
