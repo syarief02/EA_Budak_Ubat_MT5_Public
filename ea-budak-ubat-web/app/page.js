@@ -31,6 +31,19 @@ const PARTNER_BROKERS = [
     btnColor: "#ffffff",
   },
   {
+    name: "RoboForex",
+    badge: "🛡️ #2 Choice · ProCent & $30 Bonus",
+    headline: "ProCent Cent Accounts & Drawdown-Resilient Bonus",
+    desc: "The premier cent-account broker for Grid Martingale EAs. Receive a 30 USD non-withdrawable Welcome Bonus that stays in your account during drawdowns. ProCent micro-lots provide maximum margin depth to withstand volatile market swings.",
+    id: "mxyg",
+    url: "https://rinfinity.com/en/welcome-bonus?a=mxyg",
+    features: ["$30 Welcome Bonus", "ProCent Accounts from $10", "Drawdown-Proof Bonus Funds", "Tight Gold & FX Spreads"],
+    minDeposit: "$10 (ProCent Account)",
+    color: "#2563eb",
+    btnBg: "linear-gradient(135deg, #2563eb, #1d4ed8)",
+    btnColor: "#ffffff",
+  },
+  {
     name: "XM",
     badge: "🎁 100% Deposit Bonus",
     headline: "Ultra-Low Spreads & Micro/Standard Accounts",
@@ -119,19 +132,6 @@ const PARTNER_BROKERS = [
     minDeposit: "$10 (Cent Account)",
     color: "#06b6d4",
     btnBg: "linear-gradient(135deg, #06b6d4, #0891b2)",
-    btnColor: "#ffffff",
-  },
-  {
-    name: "RoboForex",
-    badge: "🪙 $30 Welcome Bonus · ProCent Accounts",
-    headline: "Maximum Drawdown Protection & Cent Resilience",
-    desc: "Receive a 30 USD non-withdrawable Welcome Bonus that stays in your account during drawdowns. ProCent accounts offer micro lots perfect for grid martingale systems.",
-    id: "mxyg",
-    url: "https://rinfinity.com/en/welcome-bonus?a=mxyg",
-    features: ["$30 Welcome Bonus", "ProCent Accounts Available", "Drawdown-Proof Bonus Funds", "Tight Gold & FX Spreads"],
-    minDeposit: "$10 (Cent Account)",
-    color: "#2563eb",
-    btnBg: "linear-gradient(135deg, #2563eb, #1d4ed8)",
     btnColor: "#ffffff",
   },
   {
@@ -769,7 +769,7 @@ export default function Home() {
               <div className="affiliate-step-num">1</div>
               <h3 className="affiliate-step-title">Register Broker Account</h3>
               <p className="affiliate-step-desc">
-                Select one of our official authorized brokers below (Tickmill, XM, FBS, JustMarkets, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
+                Select one of our official authorized brokers below (Tickmill, RoboForex, XM, FBS, JustMarkets, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
               </p>
               <a href="#broker-partners" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
                 View Recommended Brokers ↓
@@ -1946,6 +1946,7 @@ export default function Home() {
               <h4>Authorized Brokers</h4>
               <ul className="footer-links">
                 <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #1 Choice)</a></li>
+                <li><a href="https://rinfinity.com/en/welcome-bonus?a=mxyg" target="_blank" rel="noopener noreferrer">RoboForex (ProCent · #2 Choice)</a></li>
                 <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
                 <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (Cent Account)</a></li>
                 <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>

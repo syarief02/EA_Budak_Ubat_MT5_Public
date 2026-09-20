@@ -242,6 +242,7 @@ Register through one of the author's broker partner links below. After registeri
 | Broker | Link | Partner ID |
 |---|---|---|
 | **Tickmill** | [Register](https://tickmill.link/46cOQ2h) | `IB72324388` |
+| **RoboForex** | [Register](https://rinfinity.com/en/welcome-bonus?a=mxyg) | `mxyg` |
 | **FISG** | [Register](https://my.fisg.com/u/CTt0Rd) | `CTt0Rd` |
 | **CXM** | [Register](https://gocxm.co/links/go/5062) | `5062` |
 | **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` |
@@ -249,7 +250,6 @@ Register through one of the author's broker partner links below. After registeri
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` |
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` |
 | **LiteForex** | [Register](https://www.litefinance.com/?uid=805161060) | `805161060` |
-| **RoboForex** | [Register](https://rinfinity.com/en/welcome-bonus?a=mxyg) | `mxyg` |
 | **XM** | [Register](https://clicks.pipaffiliates.com/c?m=150422&c=862266) | `HVVR7` |
 | **Valetax** | [Register](https://ma.valetax.com/p/1939088) | `1939088` |
 | **HF Markets** | [Register](https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923) | `30572923` |
