@@ -90,7 +90,7 @@ export default function RootLayout({ children }) {
                 "@type": "Person",
                 name: "Syarief Azman",
                 url: "https://github.com/syarief02",
-                jobTitle: "Algorithmic Trading Engineer & Pharmaceutical Scientist",
+                jobTitle: "Algorithmic Trading Engineer & Quantitative Systems Architect",
               },
               sameAs: [
                 "https://t.me/SyariefAzman",

@@ -1532,10 +1532,10 @@ export default function Home() {
                 <div className="about-creator-titles">
                   <div className="about-creator-name">Syarief Azman bin Rosli</div>
                   <div className="about-creator-role">
-                    Quantitative Software Architect · Pharmaceutical Quality Control Analyst
+                    Quantitative Software Architect · Quality Control Systems Specialist
                   </div>
                   <div className="about-creator-location">
-                    <span>📍 Petaling Jaya, Selangor, Malaysia</span>
+                    <span>📍 Selangor, Malaysia</span>
                     <span style={{ margin: "0 6px" }}>·</span>
                     <a
                       href="https://github.com/syarief02"
@@ -1552,7 +1552,7 @@ export default function Home() {
               {/* CREDENTIALS BADGES */}
               <div className="about-badges">
                 <span className="about-badge-item highlight-cyan">
-                  🧪 National Pharmaceutical Regulatory Agency (NPRA, MOH)
+                  🧪 Analytical Chemistry &amp; Quality Control Systems Specialist
                 </span>
                 <span className="about-badge-item highlight-blue">
                   🎓 Harvard CS50x &amp; CS50 Cybersecurity
@@ -1570,7 +1570,7 @@ export default function Home() {
 
               {/* CORE ETHOS QUOTE */}
               <div className="about-bio-quote">
-                &ldquo;In pharmaceutical quality control, an uncalibrated micropipette or an undetected trace contaminant invalidates an entire chemical assay. In retail algorithmic trading, undisciplined parameters and emotional biases destroy trading capital. I engineer every Expert Advisor with the exact same laboratory rigor: hypothesis-driven development, continuous tick-level backtesting, and automated risk boundaries.&rdquo;
+                &ldquo;In analytical laboratory quality control, an uncalibrated micropipette or an undetected trace contaminant invalidates an entire chemical assay. In retail algorithmic trading, undisciplined parameters and emotional biases destroy trading capital. I engineer every Expert Advisor with the exact same laboratory rigor: hypothesis-driven development, continuous tick-level backtesting, and automated risk boundaries.&rdquo;
               </div>
             </div>
 
@@ -1614,7 +1614,7 @@ export default function Home() {
                 <div className="about-pillar-icon">💊</div>
                 <h3 className="about-pillar-title">1. The &ldquo;Budak Ubat&rdquo; Heritage</h3>
                 <p className="about-pillar-desc">
-                  The nomenclature originates from Malay, translating loosely to <em>&ldquo;Medicine Boy&rdquo;</em> — a humble tribute to Syarief&rsquo;s career in pharmaceutical analysis. Initially publicized in 2014 as <strong>EA Budak Ubat v1.27</strong> on MT4 and later expanded via SoeHoe and international forums (including the v1.51 Flexible iteration), the algorithm has continuously evolved through more than a decade of live market regimes into an institutional-grade quantitative suite.
+                  The nomenclature originates from Malay, translating loosely to <em>&ldquo;Medicine Boy&rdquo;</em> — a humble tribute to Syarief&rsquo;s background in chemistry and laboratory science. Initially publicized in 2014 as <strong>EA Budak Ubat v1.27</strong> on MT4 and later expanded via SoeHoe and international forums (including the v1.51 Flexible iteration), the algorithm has continuously evolved through more than a decade of live market regimes into an institutional-grade quantitative suite.
                 </p>
               </div>
 

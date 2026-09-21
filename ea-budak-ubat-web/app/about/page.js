@@ -92,7 +92,7 @@ export default function AboutPage() {
 
           <p className="hero-subtitle" style={{ maxWidth: "880px", margin: "0 0 30px", fontSize: "1.12rem", lineHeight: 1.75 }}>
             The story of <strong>EA Budak Ubat</strong> is not that of a generic retail bot. It is the real-world convergence of 
-            chemical quality control discipline at Malaysia&rsquo;s National Pharmaceutical Regulatory Agency (NPRA) with 
+            rigorous chemical quality control discipline with 
             over 2.87 million lines of self-taught quantitative software engineering.
           </p>
 
@@ -152,10 +152,10 @@ export default function AboutPage() {
                 Syarief Azman bin Rosli
               </h2>
               <div className="about-creator-role">
-                Quantitative Software Architect · Pharmaceutical Quality Control Analyst
+                Quantitative Software Architect · Quality Control Systems Specialist
               </div>
               <div className="about-creator-location">
-                <span>📍 Petaling Jaya, Selangor, Malaysia</span>
+                <span>📍 Selangor, Malaysia</span>
                 <span style={{ margin: "0 8px" }}>•</span>
                 <a
                   href={GITHUB_PROFILE}
@@ -180,7 +180,7 @@ export default function AboutPage() {
 
           <div className="about-badges">
             <span className="about-badge-item highlight-cyan">
-              🧪 National Pharmaceutical Regulatory Agency (NPRA, MOH Malaysia)
+              🧪 Analytical Chemistry &amp; Quality Control Systems Specialist
             </span>
             <span className="about-badge-item highlight-blue">
               🎓 Harvard University CS50x (Computer Science)
@@ -221,10 +221,8 @@ export default function AboutPage() {
               <div className="about-pillar-icon">⚗️</div>
               <h3 className="about-pillar-title">High-Sensitivity Analytical Instrumentation</h3>
               <p className="about-pillar-desc">
-                During regular hours, Syarief serves in the Quality Control Centre (Pusat Kawalan Kualiti) at Malaysia&rsquo;s 
-                <strong>National Pharmaceutical Regulatory Agency (NPRA)</strong> under the Ministry of Health. Operating across 
-                the Screening Unit (<em>Unit Penyaringan</em>) and Heavy Metals Unit (<em>Unit Logam Berat</em>), his daily workflow 
-                mandates the calibration and operation of cutting-edge analytical instruments:
+                Backed by a professional background in high-precision analytical chemistry and quality assurance, 
+                his technical workflow has mandated the calibration and operation of cutting-edge analytical instruments:
               </p>
               <ul style={{ marginTop: "12px", paddingLeft: "20px", color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.6 }}>
                 <li><strong>ICP-MS:</strong> Inductively Coupled Plasma Mass Spectrometry (Agilent 8900 Triple Quad)</li>
@@ -237,7 +235,7 @@ export default function AboutPage() {
               <div className="about-pillar-icon">📏</div>
               <h3 className="about-pillar-title">ISO Calibration &amp; GLP Protocols</h3>
               <p className="about-pillar-desc">
-                Pharmaceutical testing operates under a zero-tolerance policy for methodological deviations. Routine compliance 
+                Analytical laboratory testing operates under a zero-tolerance policy for methodological deviations. Routine compliance 
                 includes executing rigid Standard Operating Procedures:
               </p>
               <ul style={{ marginTop: "12px", paddingLeft: "20px", color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.6 }}>
@@ -275,7 +273,7 @@ export default function AboutPage() {
               The Autodidact Engineer: 2.87M Lines of Code
             </h2>
             <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "900px" }}>
-              A relentless builder mentality balancing civil service with institutional-grade algorithmic software architecture.
+              A relentless builder mentality balancing demanding professional engineering discipline with institutional-grade algorithmic software architecture.
             </p>
           </div>
 
@@ -310,9 +308,9 @@ export default function AboutPage() {
                   <span>🏢</span> Real-World Lab Automation Systems
                 </h3>
                 <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", lineHeight: 1.7 }}>
-                  His coding isn&rsquo;t confined to forex. He has built automated pharmaceutical calculation tools that slashed 
+                  His coding isn&rsquo;t confined to forex. He has built automated analytical calculation tools that slashed 
                   hours of manual laboratory data processing down to seconds: including the <em>Uniformity of Weight Guide (USP 43)</em> 
-                  and the internal <em>NPRA Lab Notes &amp; Competency Reference Hub</em>.
+                  and laboratory data automation workflows.
                 </p>
               </div>
             </div>
@@ -453,7 +451,7 @@ export default function AboutPage() {
                 <div className="about-timeline-text" style={{ fontSize: "0.92rem", maxWidth: "880px" }}>
                   Originally engineered as an automated quantitative tool and initially publicized in 2014 as <strong>EA Budak Ubat v1.27</strong> on MT4. 
                   The name <em>&ldquo;Budak Ubat&rdquo;</em> (Malay for Medicine Boy) was established as a humble tribute to Syarief&rsquo;s 
-                  pharmaceutical quality control career. Documented across early forex communities (Forex Factory, Forex Station, early Myfxbook records), 
+                  background in chemistry and laboratory science. Documented across early forex communities (Forex Factory, Forex Station, early Myfxbook records), 
                   it demonstrated early automated recovery capabilities that laid the groundwork for future iterations.
                 </div>
               </div>
