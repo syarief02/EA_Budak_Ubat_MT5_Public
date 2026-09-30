@@ -526,6 +526,7 @@ export default function Home() {
           <a href="#" className="nav-brand">👑 EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 Products</Link></li>
+            <li><Link href="/reel" onClick={() => setMobileNavOpen(false)} style={{ color: "#f59e0b", fontWeight: 700 }}>🎬 30s Reel</Link></li>
             <li><Link href="/tools" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 700 }}>⚙️ Tools &amp; Simulator</Link></li>
             <li><a href="#how-to-get-free" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
             <li><Link href="/about" onClick={() => setMobileNavOpen(false)}>About</Link></li>
@@ -591,6 +592,25 @@ export default function Home() {
             >
               🎁 Choose a Broker &amp; Unlock EA Free ➜
             </a>
+            <Link
+              href="/reel"
+              className="btn btn-secondary"
+              onClick={() => playTactileClick(0.1)}
+              style={{
+                padding: "14px 24px",
+                background: "linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(59, 130, 246, 0.15))",
+                border: "1px solid rgba(0, 240, 255, 0.5)",
+                color: "#00f0ff",
+                fontWeight: 800,
+                fontSize: "0.95rem",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                boxShadow: "0 0 20px rgba(0, 240, 255, 0.25)",
+              }}
+            >
+              🎬 Watch 30s Motion Reel
+            </Link>
             <a
               href="#authorization"
               className="btn btn-secondary"
