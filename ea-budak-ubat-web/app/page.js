@@ -437,7 +437,6 @@ const STRATEGY_DATA = {
 
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [showAllBrokers, setShowAllBrokers] = useState(false);
   const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
   const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
@@ -592,26 +591,6 @@ export default function Home() {
             >
               🎁 Choose a Broker &amp; Unlock EA Free ➜
             </a>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => { playTactileClick(0.1); setVideoModalOpen(true); }}
-              style={{
-                padding: "14px 24px",
-                background: "linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(59, 130, 246, 0.15))",
-                border: "1px solid rgba(0, 240, 255, 0.5)",
-                color: "#00f0ff",
-                fontWeight: 800,
-                fontSize: "0.95rem",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                boxShadow: "0 0 20px rgba(0, 240, 255, 0.25)",
-                cursor: "pointer",
-              }}
-            >
-              🎬 Watch 30s Motion Reel
-            </button>
             <a
               href="#authorization"
               className="btn btn-secondary"
@@ -2005,132 +1984,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* 30-SECOND MOTION GRAPHICS VIDEO MODAL */}
-      {videoModalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setVideoModalOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 99999,
-            backgroundColor: "rgba(3, 5, 9, 0.9)",
-            backdropFilter: "blur(14px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "20px",
-          }}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: "1040px",
-              background: "#060810",
-              borderRadius: "18px",
-              border: "1px solid rgba(0, 240, 255, 0.35)",
-              boxShadow: "0 25px 80px rgba(0, 240, 255, 0.25)",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "16px 24px",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                background: "rgba(10, 14, 26, 0.8)",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span style={{ fontSize: "1.2rem" }}>🎬</span>
-                <span style={{ fontWeight: 800, color: "#fff", fontSize: "1rem", letterSpacing: "-0.01em" }}>
-                  EA BUDAK UBAT // 30-Second Motion Graphics Reel
-                </span>
-                <span
-                  style={{
-                    fontSize: "0.72rem",
-                    padding: "3px 8px",
-                    borderRadius: "6px",
-                    background: "rgba(0, 240, 255, 0.15)",
-                    border: "1px solid rgba(0, 240, 255, 0.3)",
-                    color: "#00f0ff",
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                  }}
-                >
-                  1080p · 60FPS · STEREO SFX
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setVideoModalOpen(false)}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "#94a3b8",
-                  fontSize: "1.4rem",
-                  cursor: "pointer",
-                  padding: "4px 8px",
-                  lineHeight: 1,
-                }}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", background: "#000" }}>
-              <video
-                src="/videos/ea_budak_ubat_30s.mp4"
-                controls
-                autoPlay
-                playsInline
-                style={{ width: "100%", height: "100%", display: "block" }}
-              />
-            </div>
-
-            <div
-              style={{
-                padding: "16px 24px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-                gap: "12px",
-                background: "rgba(10, 14, 26, 0.8)",
-                borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-              }}
-            >
-              <div style={{ fontSize: "0.85rem", color: "#94a3b8" }}>
-                Showcasing the 4 Quantitative Analysis Engines, Dynamic 20-Day ADR AI, and Real-Time Tick Break-Even Trailing.
-              </div>
-              <a
-                href="/videos/ea_budak_ubat_30s.mp4"
-                download="ea_budak_ubat_motion_graphics_30s.mp4"
-                className="btn btn-secondary"
-                style={{
-                  fontSize: "0.85rem",
-                  padding: "8px 18px",
-                  background: "rgba(0, 240, 255, 0.12)",
-                  borderColor: "rgba(0, 240, 255, 0.4)",
-                  color: "#00f0ff",
-                  fontWeight: 700,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                }}
-              >
-                ⬇️ Download Master Video (1080p MP4)
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
