@@ -7,69 +7,69 @@ import { playTactileClick } from "@/lib/audioSynthesizer";
 const SCENES = [
   {
     num: "01",
-    title: "The Golden Forge",
-    time: "0.0s – 6.0s",
+    title: "The Volatility Matrix",
+    time: "0.0s – 4.5s",
     img: "/reel/scene1_matrix.jpg",
-    headline: "A Single Spark of Molten Gold. An Ecosystem Born.",
-    desc: "A pure drop of liquid gold descends in slow motion, triggering expanding concentric shockwaves across deep space. From the gold pool rises the iconic Crown emblem, stamped in 24K gold foil typography.",
-    sfx: "Sub-bass drone (D1 36Hz) + metallic liquid splash + resonant acoustic chime + 4-note ascending piano motif.",
-    badge: "Act 1 // The Forge",
-    color: "#D4AF37"
+    headline: "Volatily is Chaos. Until You Quantify It.",
+    desc: "3D perspective grid rolls forward in deep space beneath a particle starfield. Holographic 24-candlestick chart materializes with real-time SMA line and live tick price tags.",
+    sfx: "Sub-bass 808 drop (130Hz -> 28Hz) + electric boot hum + stereo whoosh.",
+    badge: "Act 1 // Matrix",
+    color: "#00f0ff"
   },
   {
     num: "02",
-    title: "Precision Engine: EA Budak Ubat",
-    time: "6.0s – 12.0s",
+    title: "Flagship Reveal: EA Budak Ubat v1.67",
+    time: "4.5s – 9.5s",
     img: "/reel/scene2_flagship.jpg",
-    headline: "Laboratory-Grade QC Meets Algorithmic Execution",
-    desc: "The golden crown transforms into interlocking Swiss chronometer gears: ADR AI Volatility Engine, Real-Time Break-Even, Risk Management, OnTick() Execution, and Capital Safeguard inside a spherical golden gyro.",
-    sfx: "Microsecond clockwork ticking + gear mesh metallic texture + strings swell + electronic rhythm pulse.",
-    badge: "Act 2 // Precision Engine",
-    color: "#F0D060"
+    headline: "4 Quantitative Engines · 1 Unstoppable Brain",
+    desc: "Golden crown emblem inside a glowing cyan hexagon badge. Concentric HUD calipers spin in counter-rotation. Four satellite nodes ignite at 90° angles (Ichimoku, Alligator, SMA20, Candle Action).",
+    sfx: "Full beat drops (4-on-the-floor kick, rolling 16th saw bass) + 4 laser lock-on chirps.",
+    badge: "Act 2 // Flagship",
+    color: "#f59e0b"
   },
   {
     num: "03",
-    title: "Dynamic Orbital Trajectory",
-    time: "12.0s – 15.0s",
+    title: "Dynamic ADR AI & Tick Break-Even",
+    time: "9.5s – 15.0s",
     img: "/reel/scene3_breakeven.jpg",
-    headline: "Multi-Asset Confluence in Cosmic Orbit",
-    desc: "The golden gyro expands into space, launching specialized algorithms into dynamic elliptical orbits. Real-time telemetry channels price action into algorithmic order matrices.",
-    sfx: "Whip-pan stereo whoosh + accelerating tempo + synthesized arpeggios.",
-    badge: "Act 3 // Orbital Trajectory",
-    color: "#D4AF37"
+    headline: "Real-Time Volatility Tracking & Zero Drawdown Panic",
+    desc: "20-Day ADR arc gauge calculates daily pips. Multi-order basket levels cascade downwards. Rebounding price pierces threshold, triggering an intense laser snap that secures +$1,842.60.",
+    sfx: "Sci-fi frequency sweep + ascending major chord profit chime (C6 -> E6 -> G6 -> C7).",
+    badge: "Act 3 // Break-Even",
+    color: "#10b981"
   },
   {
     num: "04",
     title: "The Multi-Algorithm Arsenal",
-    time: "15.0s – 18.0s",
+    time: "15.0s – 20.5s",
     img: "/reel/scene4_arsenal.jpg",
-    headline: "6 Elite Quantitative Systems. One Unified Arsenal.",
-    desc: "Six minted 3D gold medallions orbit in a cosmic double helix against amber candlestick telemetry: EA Budak Ubat, GoldMind AI, MathEdge Pro, Aligator Gozaimasu, Encik Moku, and BracketBlitz.",
-    sfx: "Full beat drops + 6-stage ascending coin chime scale (D5 to D6) + orchestral crescendo.",
-    badge: "Act 4 // The Arsenal",
-    color: "#F0D060"
+    headline: "Specialized Quants for Gold, Indices & Forex",
+    desc: "Camera whip-pans into a 4-card quantum array: GoldMind AI (XAUUSD), BracketBlitz EA (OCO Breakout), MathEdge Pro (US30 & NAS100), and Encik Moku (Ichimoku Trend).",
+    sfx: "Crash cymbal, stereo whip-pan whooshes, and melodic counterpoint arpeggios.",
+    badge: "Act 4 // Arsenal",
+    color: "#8b5cf6"
   },
   {
     num: "05",
-    title: "The Gift: $149 USD → $0 FREE",
-    time: "18.0s – 24.0s",
+    title: "100% Free Lifetime Whitelist",
+    time: "20.5s – 25.5s",
     img: "/reel/scene5_freelicense.jpg",
-    headline: "100% Free Lifetime Whitelist via Partner Brokers",
-    desc: "A golden luxury vault unlocks with radiant light particles. The standard $149 USD retail price tag is dynamically struck through, exploding into a triumphant $0 FREE lifetime whitelist verification for all 14 partner brokers.",
-    sfx: "Vault latch release + ascending chime cascade + massive 808 sub drop + triumphant brass hit.",
-    badge: "Act 5 // The Gift",
-    color: "#10B981"
+    headline: "Save $149 Upfront · Zero Subscription Fees",
+    desc: "3D rotating diamond token lands in center. Tier-1 partner broker badges orbit in 3D (Tickmill, RoboForex, XM, FBS, Eightcap, JustMarkets). Verified security shield confirms instant whitelist.",
+    sfx: "Heavy metallic impact + golden coin shimmer sparkle sequence (2400Hz to 3800Hz).",
+    badge: "Act 5 // Whitelist",
+    color: "#00f0ff"
   },
   {
     num: "06",
-    title: "The Call: Deploy Today",
-    time: "24.0s – 30.0s",
+    title: "Climax & Call To Action",
+    time: "25.5s – 30.0s",
     img: "/reel/scene6_cta.jpg",
-    headline: "eabudakubat.com · 3 Simple Steps to Algorithmic Freedom",
-    desc: "The 3D Golden Crown settles in full grandeur. The official domain https://eabudakubat.com ignites with illuminated underline, guiding traders through the 3-step setup: Choose Broker, Verify Whitelist, and Deploy.",
-    sfx: "Resonant major bell + descending resolution piano melody + warm reverb sustain.",
-    badge: "Act 6 // The Call",
-    color: "#D4AF37"
+    headline: "Trade Smarter. Automate Today.",
+    desc: "16-step snare roll tension riser into explosive drop. Grand domain lockup for eabudakubat.com with glowing laser underline, pulsing CTA button, and live Account Checker mockup.",
+    sfx: "Snare roll build-up, massive sub punch, 9-voice polyphonic octave chord, and trailing echo.",
+    badge: "Act 6 // Climax",
+    color: "#10b981"
   }
 ];
 
@@ -112,23 +112,23 @@ export default function ReelPage() {
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
         <div className="container" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-          <div className="hero-badge" style={{ borderColor: "rgba(212, 175, 55, 0.4)", background: "rgba(212, 175, 55, 0.08)", marginBottom: "20px" }}>
-            <span className="hero-badge-dot" style={{ background: "#D4AF37", boxShadow: "0 0 10px #D4AF37" }}></span>
-            <span style={{ color: "#D4AF37", letterSpacing: "0.08em", fontWeight: 800 }}>
-              👑 LIQUID GOLD EDITION · OFFICIAL 30-SECOND MOTION GRAPHICS REEL
+          <div className="hero-badge" style={{ borderColor: "rgba(0, 240, 255, 0.4)", background: "rgba(0, 240, 255, 0.08)", marginBottom: "20px" }}>
+            <span className="hero-badge-dot" style={{ background: "#00f0ff", boxShadow: "0 0 10px #00f0ff" }}></span>
+            <span style={{ color: "#00f0ff", letterSpacing: "0.08em", fontWeight: 800 }}>
+              🎬 OFFICIAL 30-SECOND MOTION GRAPHICS REEL // 1080P 60FPS
             </span>
           </div>
 
           <h1 style={{ fontSize: "clamp(2.2rem, 5vw, 3.8rem)", fontWeight: 900, marginBottom: "20px" }}>
-            <span className="gradient-text" style={{ background: "linear-gradient(135deg, #F0D060 0%, #D4AF37 50%, #CD7F32 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Liquid Gold Precision</span>
+            <span className="gradient-text">The Quantum Advantage</span>
             <br />
             <span style={{ fontSize: "0.65em", color: "#ffffff", fontWeight: 800 }}>
-              EA Budak Ubat Cinematic Motion Showcase
+              EA Budak Ubat Motion Design Showcase
             </span>
           </h1>
 
-          <p style={{ maxWidth: "780px", margin: "0 auto 36px", color: "#94a3b8", fontSize: "1.1rem", lineHeight: 1.6 }}>
-            Experience 30 seconds of luxury cinematic motion design: The Golden Forge, Precision Swiss Chronometer Gears, 6 Elite Quantitative Systems, the $0 Free Whitelist Gift, and Instant Deployment at <strong style={{ color: "#D4AF37" }}>eabudakubat.com</strong>.
+          <p style={{ maxWidth: "760px", margin: "0 auto 36px", color: "#94a3b8", fontSize: "1.1rem", lineHeight: 1.6 }}>
+            Experience 30 seconds of high-velocity motion design: 4 Quantitative Analysis Engines, Dynamic 20-Day ADR AutoConfig AI, Real-Time Tick Break-Even Trailing, and 100% Free Lifetime Whitelist Access.
           </p>
 
           {/* MASTER VIDEO PLAYER */}

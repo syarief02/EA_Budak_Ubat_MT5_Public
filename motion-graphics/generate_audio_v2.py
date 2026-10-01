@@ -1,334 +1,511 @@
 import numpy as np
 import scipy.signal as signal
-import wave
-import struct
-import math
+import scipy.io.wavfile as wavfile
+import os
 
 SAMPLE_RATE = 44100
 DURATION = 30.0
-T = np.linspace(0, DURATION, int(SAMPLE_RATE * DURATION), endpoint=False)
+TOTAL_SAMPLES = int(SAMPLE_RATE * DURATION)
+BPM = 90.0
+BEAT = 60.0 / BPM          # 0.666667s
+EIGHTH = BEAT / 2.0        # 0.333333s
+SIXTEENTH = BEAT / 4.0     # 0.166667s
 
-def note_to_freq(note_name):
-    # D1 = 36.71 Hz
+# Stereo Master Bus
+master_left = np.zeros(TOTAL_SAMPLES, dtype=np.float64)
+master_right = np.zeros(TOTAL_SAMPLES, dtype=np.float64)
+
+def mix(start_sec, left, right=None, gain=1.0):
+    global master_left, master_right
+    if right is None:
+        right = left
+    start = int(round(start_sec * SAMPLE_RATE))
+    if start >= TOTAL_SAMPLES:
+        return
+    length = min(len(left), TOTAL_SAMPLES - start)
+    master_left[start:start+length] += left[:length] * gain
+    master_right[start:start+length] += right[:length] * gain
+
+def note_freq(name):
+    # Reference A4 = 440
     notes = {'C':-9, 'C#':-8, 'D':-7, 'D#':-6, 'E':-5, 'F':-4, 'F#':-3, 'G':-2, 'G#':-1, 'A':0, 'A#':1, 'B':2}
-    letter = note_name[:-1]
-    octave = int(note_name[-1])
-    n = notes[letter] + (octave - 4) * 12
-    return 440.0 * (2.0 ** (n / 12.0))
+    letter = name[:-1]
+    octave = int(name[-1])
+    semitones = notes[letter] + (octave - 4) * 12
+    return 440.0 * (2.0 ** (semitones / 12.0))
 
-def apply_env(audio, attack_s, decay_s, sustain_l, release_s, duration_s):
-    samples = len(audio)
-    attack_samps = int(attack_s * SAMPLE_RATE)
-    decay_samps = int(decay_s * SAMPLE_RATE)
-    release_samps = int(release_s * SAMPLE_RATE)
-    
-    if attack_samps + decay_samps + release_samps > samples:
-        attack_samps = int(samples * 0.1)
-        decay_samps = int(samples * 0.1)
-        release_samps = int(samples * 0.2)
-        
-    env = np.ones(samples) * sustain_l
-    
-    # Attack
-    if attack_samps > 0:
-        env[:attack_samps] = np.linspace(0, 1, attack_samps)
-    
-    # Decay
-    if decay_samps > 0:
-        env[attack_samps:attack_samps+decay_samps] = np.linspace(1, sustain_l, decay_samps)
-        
-    # Release
-    if release_samps > 0:
-        env[-release_samps:] = np.linspace(sustain_l, 0, release_samps)
-        
-    return audio * env
+# -------------------------------------------------------------
+# INSTRUMENT ENGINES (Pure, Click-Free, Anti-Aliased)
+# -------------------------------------------------------------
 
-def pad(start_time, duration, freqs):
-    samples = int(duration * SAMPLE_RATE)
-    t = np.linspace(0, duration, samples, endpoint=False)
-    
-    out_l = np.zeros(samples)
-    out_r = np.zeros(samples)
-    
-    lfo = 0.5 * (1 + np.sin(2 * np.pi * 0.5 * t))
-    
-    for f in freqs:
-        saw_l = signal.sawtooth(2 * np.pi * (f * 0.995) * t)
-        saw_r = signal.sawtooth(2 * np.pi * (f * 1.005) * t)
-        
-        # Simple LP filter approximation using convolution or butterworth
-        b, a = signal.butter(2, 1000 / (SAMPLE_RATE/2), btype='low')
-        saw_l = signal.lfilter(b, a, saw_l)
-        saw_r = signal.lfilter(b, a, saw_r)
-        
-        out_l += saw_l
-        out_r += saw_r
-        
-    out_l *= (0.5 + 0.5 * lfo)
-    out_r *= (0.5 + 0.5 * lfo)
-    
-    out_l = apply_env(out_l, 1.0, 0, 1.0, 2.0, duration)
-    out_r = apply_env(out_r, 1.0, 0, 1.0, 2.0, duration)
-    return out_l * 0.2, out_r * 0.2
+def synth_piano(freq, dur=1.2, vel=0.7):
+    """Lush acoustic piano: fundamental + warm decaying harmonics"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    # Harmonics: fundamental, 2nd, 3rd, 4th, 5th
+    harmonics = [
+        (1.0, 1.0, 3.2),    # mult, amp, decay
+        (2.0, 0.55, 4.5),
+        (3.0, 0.28, 6.0),
+        (4.0, 0.14, 8.0),
+        (5.0, 0.06, 10.5),
+    ]
+    sig = np.zeros(n)
+    for mult, amp, decay in harmonics:
+        f = freq * mult
+        if f < SAMPLE_RATE / 2.2:
+            sig += amp * np.sin(2 * np.pi * f * t) * np.exp(-t * decay)
+    # Gentle hammer attack (5ms)
+    attack_n = int(0.005 * SAMPLE_RATE)
+    sig[:attack_n] *= np.linspace(0, 1, attack_n)
+    # Soft stereo width
+    pan = np.clip((freq - 440) / 880, -0.4, 0.4)
+    l = sig * (1.0 - pan) * vel * 0.45
+    r = sig * (1.0 + pan) * vel * 0.45
+    return l, r
 
-def sub_bass(duration, f):
-    samples = int(duration * SAMPLE_RATE)
-    t = np.linspace(0, duration, samples, endpoint=False)
-    sig = np.sin(2 * np.pi * f * t) + 0.15 * np.sin(2 * np.pi * f * 2 * t)
-    sig = apply_env(sig, 0.5, 0, 1.0, 0.5, duration)
-    return sig * 0.6, sig * 0.6
+def synth_warm_pad(frequencies, dur=4.0, gain=0.25):
+    """Rich cinematic analog pad with gentle chorus and stereo detune"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    left = np.zeros(n)
+    right = np.zeros(n)
+    for freq in frequencies:
+        for detune, pan in [(-0.003, -0.6), (0.0, 0.0), (0.003, 0.6)]:
+            f = freq * (1.0 + detune)
+            # Mixed warm triangle + soft saw
+            tri = 2.0 * np.abs(2.0 * (t * f - np.floor(t * f + 0.5))) - 1.0
+            saw = 2.0 * (t * f - np.floor(t * f + 0.5))
+            wave = tri * 0.7 + saw * 0.3
+            left += wave * (1.0 - pan * 0.5)
+            right += wave * (1.0 + pan * 0.5)
+    # Smooth 2-pole lowpass filter at 900Hz to remove harsh harmonics
+    b, a = signal.butter(2, 900.0 / (SAMPLE_RATE / 2.0), btype='low')
+    left = signal.lfilter(b, a, left)
+    right = signal.lfilter(b, a, right)
+    # Gentle attack (0.4s) and release (0.6s)
+    att_n = int(0.4 * SAMPLE_RATE)
+    rel_n = int(0.6 * SAMPLE_RATE)
+    env = np.ones(n)
+    if n > att_n + rel_n:
+        env[:att_n] = np.sin(np.linspace(0, np.pi/2, att_n)) ** 2
+        env[-rel_n:] = np.cos(np.linspace(0, np.pi/2, rel_n)) ** 2
+    return left * env * gain * 0.2, right * env * gain * 0.2
 
-def piano(duration, f):
-    samples = int(duration * SAMPLE_RATE)
-    t = np.linspace(0, duration, samples, endpoint=False)
-    sig = np.zeros(samples)
-    
-    harmonics = [1, 2, 3, 4, 5, 6]
-    amps = [1.0, 0.5, 0.25, 0.12, 0.06, 0.03]
-    
-    for h, a in zip(harmonics, amps):
-        decay_rate = 2.0 * h
-        env = np.exp(-decay_rate * t)
-        sig += a * env * np.sin(2 * np.pi * f * h * t)
-        
-    sig = apply_env(sig, 0.01, 0, 1.0, 0.1, duration)
-    return sig * 0.4, sig * 0.4
+def synth_sub_bass(freq, dur=1.5, gain=0.6):
+    """Clean deep sub-bass with warm 2nd harmonic"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    sig = np.sin(2 * np.pi * freq * t) + 0.25 * np.sin(2 * np.pi * freq * 2 * t)
+    # Smooth envelope
+    att_n = int(0.02 * SAMPLE_RATE)
+    rel_n = int(0.15 * SAMPLE_RATE)
+    env = np.ones(n)
+    if n > att_n + rel_n:
+        env[:att_n] = np.linspace(0, 1, att_n)
+        env[-rel_n:] = np.linspace(1, 0, rel_n)
+    sig = sig * env * gain
+    return sig, sig
 
-def bell(duration, f):
-    samples = int(duration * SAMPLE_RATE)
-    t = np.linspace(0, duration, samples, endpoint=False)
-    
-    ratio = 2.76
-    mod_idx = 3.0 * np.exp(-3.0 * t)
-    
-    modulator = np.sin(2 * np.pi * (f * ratio) * t)
-    carrier = np.sin(2 * np.pi * f * t + mod_idx * modulator)
-    
-    carrier *= np.exp(-1.5 * t)
-    carrier = apply_env(carrier, 0.01, 0, 1.0, 0.5, duration)
-    return carrier * 0.3, carrier * 0.3
+def synth_strings(frequencies, dur=5.0, gain=0.22):
+    """Lush string ensemble (detuned saws with ensemble chorus, NO noise)"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    left = np.zeros(n)
+    right = np.zeros(n)
+    for freq in frequencies:
+        for detune, pan, phase_shift in [(-0.005, -0.7, 0.0), (0.004, 0.7, 1.2), (0.000, 0.0, 2.4)]:
+            f = freq * (1.0 + detune)
+            # Band-limited sine series approximating bowed string
+            s1 = np.sin(2 * np.pi * f * t + phase_shift)
+            s2 = 0.5 * np.sin(2 * np.pi * f * 2 * t + phase_shift)
+            s3 = 0.25 * np.sin(2 * np.pi * f * 3 * t + phase_shift)
+            s4 = 0.12 * np.sin(2 * np.pi * f * 4 * t + phase_shift)
+            sig = s1 + s2 + s3 + s4
+            left += sig * (1.0 - pan * 0.5)
+            right += sig * (1.0 + pan * 0.5)
+    # Warm lowpass at 1200Hz
+    b, a = signal.butter(2, 1200.0 / (SAMPLE_RATE / 2.0), btype='low')
+    left = signal.lfilter(b, a, left)
+    right = signal.lfilter(b, a, right)
+    # Long expressive attack and decay
+    att_n = int(0.8 * SAMPLE_RATE)
+    rel_n = int(0.8 * SAMPLE_RATE)
+    env = np.ones(n)
+    if n > att_n + rel_n:
+        env[:att_n] = np.sin(np.linspace(0, np.pi/2, att_n)) ** 2
+        env[-rel_n:] = np.cos(np.linspace(0, np.pi/2, rel_n)) ** 2
+    return left * env * gain * 0.15, right * env * gain * 0.15
 
-def strings(duration, freqs):
-    samples = int(duration * SAMPLE_RATE)
-    t = np.linspace(0, duration, samples, endpoint=False)
-    out_l = np.zeros(samples)
-    out_r = np.zeros(samples)
-    
-    noise = np.random.randn(samples)
-    
-    for f in freqs:
-        # Narrow bandpass
-        b, a = signal.butter(2, [f*0.99 / (SAMPLE_RATE/2), f*1.01 / (SAMPLE_RATE/2)], btype='band')
-        filtered = signal.lfilter(b, a, noise)
-        out_l += filtered * 20.0
-        out_r += filtered * 20.0
-        
-    out_l = apply_env(out_l, 1.5, 0, 1.0, 1.5, duration)
-    out_r = apply_env(out_r, 1.5, 0, 1.0, 1.5, duration)
-    return out_l * 0.2, out_r * 0.2
+def synth_brass_stab(frequencies, dur=1.2, gain=0.35):
+    """Epic orchestral brass hit with filter bite"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    left = np.zeros(n)
+    right = np.zeros(n)
+    for freq in frequencies:
+        saw = 2.0 * (t * freq - np.floor(t * freq + 0.5))
+        saw_sub = np.sin(2 * np.pi * (freq / 2.0) * t) * 0.5
+        voice = saw * 0.7 + saw_sub * 0.3
+        left += voice
+        right += voice
+    # Filter envelope simulation
+    b, a = signal.butter(2, 1600.0 / (SAMPLE_RATE / 2.0), btype='low')
+    left = signal.lfilter(b, a, left)
+    right = signal.lfilter(b, a, right)
+    # Attack 15ms, punchy decay
+    att_n = int(0.015 * SAMPLE_RATE)
+    env = np.exp(-t * 2.8)
+    env[:att_n] *= np.linspace(0, 1, att_n)
+    return left * env * gain * 0.25, right * env * gain * 0.25
 
-def brass(duration, freqs):
-    samples = int(duration * SAMPLE_RATE)
-    t = np.linspace(0, duration, samples, endpoint=False)
-    out = np.zeros(samples)
-    
-    for f in freqs:
-        saw = signal.sawtooth(2 * np.pi * f * t)
-        
-        # Filter envelope
-        env = np.exp(-2.0 * t)
-        fc = 400 + 2000 * env
-        
-        # Time varying filter is hard with lfilter, use a static approximation or biquad in C.
-        # We'll use a static LP for simplicity here
-        b, a = signal.butter(2, 1200 / (SAMPLE_RATE/2), btype='low')
-        saw = signal.lfilter(b, a, saw)
-        out += saw
-        
-    out = apply_env(out, 0.1, 0, 1.0, 0.2, duration)
-    return out * 0.3, out * 0.3
+def synth_fm_bell(freq, dur=3.5, mod_ratio=2.756, gain=0.35):
+    """Crystalline FM bell / coin ring with long reverb tail"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    mod_index = 2.5 * np.exp(-t * 3.5)
+    modulator = np.sin(2 * np.pi * (freq * mod_ratio) * t)
+    carrier = np.sin(2 * np.pi * freq * t + mod_index * modulator)
+    # Envelope
+    env = np.exp(-t * 1.6)
+    att_n = int(0.003 * SAMPLE_RATE)
+    env[:att_n] *= np.linspace(0, 1, att_n)
+    sig = carrier * env * gain
+    # Panned stereo shimmer
+    pan = np.sin(freq * 0.05) * 0.5
+    return sig * (1.0 - pan), sig * (1.0 + pan)
 
-def clockwork():
-    dur = 0.05
-    samples = int(dur * SAMPLE_RATE)
-    noise = np.random.randn(samples)
-    b, a = signal.butter(2, 3000 / (SAMPLE_RATE/2), btype='high')
+# -------------------------------------------------------------
+# PERCUSSION ENGINE (Pristine, Zero Clicks)
+# -------------------------------------------------------------
+
+def drum_kick(dur=0.38, gain=0.85):
+    """Punchy 808-style electronic kick with smooth pitch drop"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    f = 42.0 + (140.0 - 42.0) * np.exp(-t * 28.0)
+    phase = 2 * np.pi * np.cumsum(f) / SAMPLE_RATE
+    body = np.sin(phase) * np.exp(-t * 8.5)
+    click = np.sin(2 * np.pi * 850 * t) * np.exp(-t * 90.0) * 0.35
+    wave = (body + click) * gain
+    return wave, wave
+
+def drum_snare(dur=0.28, gain=0.65):
+    """Clean modern snare: 200Hz tone + filtered snap"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    tone = np.sin(2 * np.pi * 205.0 * t) * np.exp(-t * 26.0)
+    noise = np.random.uniform(-1, 1, n)
+    b, a = signal.butter(2, [800.0 / (SAMPLE_RATE/2), 6000.0 / (SAMPLE_RATE/2)], btype='band')
+    noise = signal.lfilter(b, a, noise) * np.exp(-t * 18.0)
+    wave = (tone * 0.5 + noise * 0.5) * gain
+    return wave, wave
+
+def drum_hihat(dur=0.08, open_hh=False, gain=0.28):
+    """Crisp high-hat with metallic sparkle"""
+    actual_dur = dur * 3.0 if open_hh else dur
+    n = int(actual_dur * SAMPLE_RATE)
+    t = np.linspace(0, actual_dur, n, endpoint=False)
+    noise = np.random.uniform(-1, 1, n)
+    b, a = signal.butter(2, 7500.0 / (SAMPLE_RATE/2), btype='high')
     noise = signal.lfilter(b, a, noise)
-    noise = apply_env(noise, 0.001, 0.02, 0, 0.01, dur)
-    return noise * 0.1, noise * 0.1
+    metal = (np.sin(2 * np.pi * 5200 * t) + np.sin(2 * np.pi * 8400 * t)) * 0.25
+    decay = 14.0 if open_hh else 60.0
+    env = np.exp(-t * decay)
+    wave = (noise * 0.75 + metal) * env * gain
+    return wave, wave
 
-def kick():
-    dur = 0.3
-    samples = int(dur * SAMPLE_RATE)
-    t = np.linspace(0, dur, samples, endpoint=False)
-    # Pitch sweep 150 -> 40 in 50ms
-    f_t = np.maximum(40, 150 - (110 / 0.05) * t)
-    phase = np.cumsum(f_t) / SAMPLE_RATE * 2 * np.pi
-    sine = np.sin(phase)
-    sine = apply_env(sine, 0.001, 0.1, 0.1, 0.1, dur)
-    
-    noise = np.random.randn(samples)
-    noise = apply_env(noise, 0.001, 0.02, 0, 0.01, dur)
-    
-    out = sine * 0.8 + noise * 0.1
-    return out, out
-
-def snare():
-    dur = 0.3
-    samples = int(dur * SAMPLE_RATE)
-    t = np.linspace(0, dur, samples, endpoint=False)
-    
-    noise = np.random.randn(samples)
-    noise = apply_env(noise, 0.005, 0.1, 0, 0.1, dur)
-    
-    sine = np.sin(2 * np.pi * 200 * t)
-    sine = apply_env(sine, 0.005, 0.05, 0, 0.01, dur)
-    
-    out = noise * 0.5 + sine * 0.3
-    return out, out
-
-def hihat():
-    dur = 0.1
-    samples = int(dur * SAMPLE_RATE)
-    noise = np.random.randn(samples)
-    b, a = signal.butter(2, 8000 / (SAMPLE_RATE/2), btype='high')
+def drum_crash(dur=2.5, gain=0.5):
+    """Shimmering crash cymbal"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    noise = np.random.uniform(-1, 1, n)
+    b, a = signal.butter(2, 4500.0 / (SAMPLE_RATE/2), btype='high')
     noise = signal.lfilter(b, a, noise)
-    noise = apply_env(noise, 0.001, 0.03, 0, 0.01, dur)
-    return noise * 0.2, noise * 0.2
+    metal = np.sin(2 * np.pi * 5800 * t) * 0.25 + np.sin(2 * np.pi * 8900 * t) * 0.25
+    env = np.exp(-t * 2.4)
+    wave = (noise * 0.75 + metal) * env * gain
+    return wave, wave
 
-def add_clip(track_l, track_r, start, clip_l, clip_r):
-    start_samp = int(start * SAMPLE_RATE)
-    length = len(clip_l)
-    end_samp = start_samp + length
-    if end_samp > len(track_l):
-        length = len(track_l) - start_samp
-        clip_l = clip_l[:length]
-        clip_r = clip_r[:length]
-    track_l[start_samp:start_samp+length] += clip_l
-    track_r[start_samp:start_samp+length] += clip_r
+def sfx_clock_tick(gain=0.25):
+    """Swiss escapement precision tick (5ms bandpass transient)"""
+    dur = 0.04
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    tone = np.sin(2 * np.pi * 3200 * t) + np.sin(2 * np.pi * 4800 * t) * 0.5
+    env = np.exp(-t * 110.0)
+    wave = tone * env * gain
+    return wave, wave
 
-master_l = np.zeros(len(T))
-master_r = np.zeros(len(T))
+def sfx_sub_drop(dur=3.0, gain=0.85):
+    """Massive cinema 808 sub drop (120Hz -> 32Hz)"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    f = 32.0 + (120.0 - 32.0) * np.exp(-t * 1.8)
+    phase = 2 * np.pi * np.cumsum(f) / SAMPLE_RATE
+    env = np.exp(-t * 1.2)
+    wave = np.sin(phase) * env * gain
+    return wave, wave
 
-# D Major frequencies
-Dmaj = [note_to_freq('D3'), note_to_freq('F#3'), note_to_freq('A3')]
-Dmaj_pad = pad(0.5, 29.5, Dmaj)
-add_clip(master_l, master_r, 0.5, Dmaj_pad[0], Dmaj_pad[1])
+def sfx_whoosh(dur=0.7, pan_left_to_right=True, gain=0.4):
+    """Smooth filtered stereo whoosh"""
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    noise = np.random.uniform(-1, 1, n)
+    b, a = signal.butter(2, [400.0 / (SAMPLE_RATE/2), 3500.0 / (SAMPLE_RATE/2)], btype='band')
+    filtered = signal.lfilter(b, a, noise)
+    env = np.sin(np.pi * (t / dur)) ** 2
+    pan = np.linspace(-1, 1, n) if pan_left_to_right else np.linspace(1, -1, n)
+    left = filtered * env * (1.0 - pan * 0.5) * gain
+    right = filtered * env * (1.0 + pan * 0.5) * gain
+    return left, right
 
-# Sub bass
-sub1 = sub_bass(6.0, note_to_freq('D1'))
-add_clip(master_l, master_r, 0.0, sub1[0], sub1[1])
-sub2 = sub_bass(6.0, note_to_freq('A1'))
-add_clip(master_l, master_r, 6.0, sub2[0], sub2[1])
-sub3 = sub_bass(6.0, note_to_freq('D2'))
-add_clip(master_l, master_r, 12.0, sub3[0], sub3[1])
-sub4 = sub_bass(6.0, note_to_freq('D1'))
-add_clip(master_l, master_r, 24.0, sub4[0], sub4[1])
+def sfx_liquid_splash(gain=0.5):
+    """Liquid gold droplet splash sound"""
+    dur = 0.8
+    n = int(dur * SAMPLE_RATE)
+    t = np.linspace(0, dur, n, endpoint=False)
+    # Pitch drop bubble + high splash
+    f_bubble = 600.0 * np.exp(-t * 18.0) + 180.0
+    phase = 2 * np.pi * np.cumsum(f_bubble) / SAMPLE_RATE
+    bubble = np.sin(phase) * np.exp(-t * 12.0)
+    noise = np.random.uniform(-1, 1, n)
+    b, a = signal.butter(2, [1800.0 / (SAMPLE_RATE/2), 7000.0 / (SAMPLE_RATE/2)], btype='band')
+    spray = signal.lfilter(b, a, noise) * np.exp(-t * 9.0)
+    wave = (bubble * 0.6 + spray * 0.4) * gain
+    return wave, wave
 
-# Piano Act 1
-p1 = piano(0.4, note_to_freq('D4'))
-p2 = piano(0.4, note_to_freq('F#4'))
-p3 = piano(0.4, note_to_freq('A4'))
-p4 = piano(2.0, note_to_freq('D5'))
-add_clip(master_l, master_r, 3.0, p1[0], p1[1])
-add_clip(master_l, master_r, 3.4, p2[0], p2[1])
-add_clip(master_l, master_r, 3.8, p3[0], p3[1])
-add_clip(master_l, master_r, 4.2, p4[0], p4[1])
-
-# Piano Act 2
-p1_2 = piano(0.4, note_to_freq('A4'))
-p2_2 = piano(0.4, note_to_freq('D5'))
-p3_2 = piano(0.4, note_to_freq('F#5'))
-p4_2 = piano(2.0, note_to_freq('A5'))
-add_clip(master_l, master_r, 8.0, p1_2[0], p1_2[1])
-add_clip(master_l, master_r, 8.4, p2_2[0], p2_2[1])
-add_clip(master_l, master_r, 8.8, p3_2[0], p3_2[1])
-add_clip(master_l, master_r, 9.2, p4_2[0], p4_2[1])
-
-# Strings
-str_clip1 = strings(7.0, [note_to_freq('D4'), note_to_freq('F#4'), note_to_freq('A4')])
-add_clip(master_l, master_r, 5.0, str_clip1[0], str_clip1[1])
-
-str_clip2 = strings(6.0, [note_to_freq('D4'), note_to_freq('F#4'), note_to_freq('A4')])
-add_clip(master_l, master_r, 16.0, str_clip2[0], str_clip2[1])
-
-# Bell
-b1 = bell(5.0, note_to_freq('D5'))
-add_clip(master_l, master_r, 2.5, b1[0], b1[1])
-b2 = bell(6.0, note_to_freq('D4'))
-add_clip(master_l, master_r, 24.0, b2[0], b2[1])
-
-# Clockwork
-for i in range(10):
-    cw = clockwork()
-    add_clip(master_l, master_r, 6.0 + i*0.667, cw[0], cw[1])
-
-# Electronic Beat Act 2
-for i in range(4):
-    k = kick()
-    hh = hihat()
-    add_clip(master_l, master_r, 9.0 + i*(60/90), k[0], k[1])
-    add_clip(master_l, master_r, 9.0 + i*(60/90) + 0.333, hh[0], hh[1])
-
-# Beat Act 3 & 4
-for i in range(12, 24):
-    # This is a bit rough, but handles kick/snare pattern
-    if i % 2 == 0:
-        k = kick()
-        add_clip(master_l, master_r, float(i), k[0], k[1])
-    else:
-        s = snare()
-        add_clip(master_l, master_r, float(i), s[0], s[1])
-    for j in range(4): # 8ths
-        hh = hihat()
-        add_clip(master_l, master_r, float(i) + j*0.25, hh[0], hh[1])
-
-# Coins
-coins = ['D5', 'E5', 'F#5', 'A5', 'B5', 'D6']
-for i, c in enumerate(coins):
-    b = bell(2.0, note_to_freq(c))
-    add_clip(master_l, master_r, 12.5 + i*0.5, b[0], b[1])
-
-# Brass
-br1 = brass(1.0, [note_to_freq('D4'), note_to_freq('F#4'), note_to_freq('A4')])
-add_clip(master_l, master_r, 20.0, br1[0], br1[1])
-br2 = brass(1.0, [note_to_freq('G3'), note_to_freq('B3'), note_to_freq('D4')])
-add_clip(master_l, master_r, 22.0, br2[0], br2[1])
-
-# Piano end
-p_end1 = piano(1.0, note_to_freq('A4'))
-p_end2 = piano(1.0, note_to_freq('F#4'))
-p_end3 = piano(4.0, note_to_freq('D4'))
-add_clip(master_l, master_r, 25.0, p_end1[0], p_end1[1])
-add_clip(master_l, master_r, 26.0, p_end2[0], p_end2[1])
-add_clip(master_l, master_r, 27.0, p_end3[0], p_end3[1])
+def sfx_chime_cascade(gain=0.45):
+    """Ascending cascade of crystalline chimes"""
+    notes = [note_freq('D5'), note_freq('F#5'), note_freq('A5'), note_freq('D6'), note_freq('F#6'), note_freq('A6')]
+    cascade_dur = 1.2
+    n = int(cascade_dur * SAMPLE_RATE)
+    left = np.zeros(n)
+    right = np.zeros(n)
+    for i, freq in enumerate(notes):
+        st = i * 0.11
+        l, r = synth_fm_bell(freq, dur=1.0, mod_ratio=2.756, gain=gain * 0.8)
+        st_samp = int(st * SAMPLE_RATE)
+        rem = min(len(l), n - st_samp)
+        pan = (i / float(len(notes) - 1)) * 1.4 - 0.7
+        left[st_samp:st_samp+rem] += l[:rem] * (1.0 - pan * 0.5)
+        right[st_samp:st_samp+rem] += r[:rem] * (1.0 + pan * 0.5)
+    return left, right
 
 
-# Mastering
-def soft_limiter(sig):
-    # Simple soft knee limiter
-    threshold = 0.8
-    out = np.copy(sig)
-    mask = np.abs(out) > threshold
-    out[mask] = threshold + (out[mask] - threshold) / (1 + ((out[mask] - threshold) / (1 - threshold))**2)
-    
-    # Normalize to -1dBFS (approx 0.89)
-    peak = np.max(np.abs(out))
-    if peak > 0:
-        out *= (0.89 / peak)
-    return out
+# =============================================================
+# COMPOSE 30-SECOND LIQUID GOLD CINEMATIC SCORE
+# =============================================================
+print("Composing 30-Second Liquid Gold Score (90 BPM, D Major)...")
 
-master_l = soft_limiter(master_l)
-master_r = soft_limiter(master_r)
+# Chord progression in D Major:
+# Bar 1-3 (0.0s - 6.0s): D Major (D3, F#3, A3, D4)
+# Bar 4-6 (6.0s - 12.0s): B Minor -> G Major -> A Major -> D Major
+# Bar 7-9 (12.0s - 18.0s): D Major -> B Minor -> G Major -> A Major (Full groove)
+# Bar 10-12 (18.0s - 24.0s): D Major -> A Major -> G Major -> D Major (Triumphant)
+# Bar 13-15 (24.0s - 30.0s): D Major Grand Resolution
 
-master_l = np.int16(master_l * 32767)
-master_r = np.int16(master_r * 32767)
-stereo = np.empty(master_l.size * 2, dtype=np.int16)
-stereo[0::2] = master_l
-stereo[1::2] = master_r
+chord_D = [note_freq('D3'), note_freq('F#3'), note_freq('A3'), note_freq('D4')]
+chord_Bm = [note_freq('B2'), note_freq('D3'), note_freq('F#3'), note_freq('B3')]
+chord_G = [note_freq('G2'), note_freq('B2'), note_freq('D3'), note_freq('G3')]
+chord_A = [note_freq('A2'), note_freq('C#3'), note_freq('E3'), note_freq('A3')]
 
-with wave.open(r"c:\Users\User\OneDrive\Desktop\ea bu mt5 public\motion-graphics\soundtrack_v2.wav", 'w') as f:
-    f.setnchannels(2)
-    f.setsampwidth(2)
-    f.setframerate(SAMPLE_RATE)
-    f.writeframes(stereo.tobytes())
+# -------------------------------------------------------------
+# ACT 1: THE GOLDEN FORGE (0.0s – 6.0s)
+# -------------------------------------------------------------
+# 0.0s: Molten gold drop falls in space, deep sub drone
+mix(0.0, *synth_sub_bass(note_freq('D1'), dur=6.0, gain=0.75))
+mix(0.0, *synth_warm_pad(chord_D, dur=6.0, gain=0.35))
+mix(0.0, *sfx_whoosh(1.4, pan_left_to_right=True, gain=0.35))
+
+# 1.2s: Droplet splash & expanding ripples
+mix(1.2, *sfx_liquid_splash(gain=0.6))
+
+# 2.2s: 3D Crown materializes with resonant gold bell
+mix(2.2, *synth_fm_bell(note_freq('D5'), dur=4.5, gain=0.45))
+
+# 2.9s - 4.5s: Piano Theme (Ascending 4-note motif: D4 -> F#4 -> A4 -> D5)
+mix(2.9, *synth_piano(note_freq('D4'), dur=0.6, vel=0.75))
+mix(3.4, *synth_piano(note_freq('F#4'), dur=0.6, vel=0.80))
+mix(3.9, *synth_piano(note_freq('A4'), dur=0.6, vel=0.85))
+mix(4.4, *synth_piano(note_freq('D5'), dur=2.5, vel=0.95))
+
+# 4.5s: Strings swell beneath Crown
+mix(4.5, *synth_strings([note_freq('F#4'), note_freq('A4'), note_freq('D5')], dur=4.5, gain=0.3))
+
+
+# -------------------------------------------------------------
+# ACT 2: PRECISION ENGINE (6.0s – 12.0s)
+# -------------------------------------------------------------
+# 5.8s: Transition whoosh into Swiss horology gears
+mix(5.7, *sfx_whoosh(0.8, pan_left_to_right=False, gain=0.4))
+
+# 6.0s - 9.0s: Precision clockwork escapement ticking (16th notes at 90 BPM = every 0.1667s)
+for step in range(18):
+    t_tick = 6.0 + step * SIXTEENTH
+    mix(t_tick, *sfx_clock_tick(gain=0.22 if step % 2 == 0 else 0.14))
+
+# 6.0s: Bass shifts to B1
+mix(6.0, *synth_sub_bass(note_freq('B1'), dur=2.7, gain=0.65))
+mix(6.0, *synth_warm_pad(chord_Bm, dur=3.0, gain=0.35))
+
+# 7.5s - 9.0s: Piano second phrase (F#4 -> A4 -> C#5 -> E5)
+mix(7.5, *synth_piano(note_freq('F#4'), dur=0.5, vel=0.75))
+mix(8.0, *synth_piano(note_freq('A4'), dur=0.5, vel=0.80))
+mix(8.5, *synth_piano(note_freq('C#5'), dur=0.5, vel=0.85))
+mix(9.0, *synth_piano(note_freq('E5'), dur=2.0, vel=0.90))
+
+# 8.7s: Bass moves to G1
+mix(8.7, *synth_sub_bass(note_freq('G1'), dur=3.3, gain=0.7))
+mix(8.7, *synth_warm_pad(chord_G, dur=3.3, gain=0.35))
+
+# 9.0s - 12.0s: Rhythmic pulse enters (kick on quarter notes, closed hihat on 8ths)
+for b in range(4):
+    t_b = 9.333 + b * BEAT
+    mix(t_b, *drum_kick(dur=0.32, gain=0.75))
+    mix(t_b + EIGHTH, *drum_hihat(dur=0.06, open_hh=False, gain=0.25))
+
+# 11.2s: Tension riser into the 6-Quant Arsenal
+mix(11.2, *sfx_whoosh(0.85, pan_left_to_right=True, gain=0.45))
+
+
+# -------------------------------------------------------------
+# ACT 3: THE MULTI-ALGORITHM ARSENAL (12.0s – 18.0s)
+# -------------------------------------------------------------
+# 12.0s: Full groove drops! Kick + Snare + HiHats at 90 BPM
+mix(12.0, *drum_crash(dur=2.8, gain=0.6))
+mix(12.0, *sfx_sub_drop(dur=2.5, gain=0.8))
+
+# 9 beats of full driving rhythm (12.0s to 18.0s)
+num_groove_beats = int(round((18.0 - 12.0) / BEAT))
+for b in range(num_groove_beats):
+    t_b = 12.0 + b * BEAT
+    # Kick on 1 and 3 (every 2 beats) + extra syncopation
+    if b % 2 == 0:
+        mix(t_b, *drum_kick(dur=0.35, gain=0.88))
+    # Snare on 2 and 4
+    if b % 2 == 1:
+        mix(t_b, *drum_snare(dur=0.25, gain=0.72))
+    # Hi-hats on 8th notes
+    mix(t_b, *drum_hihat(dur=0.06, open_hh=False, gain=0.25))
+    mix(t_b + EIGHTH, *drum_hihat(dur=0.08, open_hh=(b % 2 == 1), gain=0.32))
+
+# Harmonic pad progression across Act 3
+mix(12.0, *synth_warm_pad(chord_D, dur=2.7, gain=0.38))
+mix(12.0, *synth_sub_bass(note_freq('D1'), dur=2.7, gain=0.75))
+
+mix(14.7, *synth_warm_pad(chord_Bm, dur=2.7, gain=0.38))
+mix(14.7, *synth_sub_bass(note_freq('B1'), dur=2.7, gain=0.75))
+
+# 6 Minted Gold Medallions orbit - Ascending FM chime for each of the 6 EAs:
+# 12.4s: EA Budak Ubat (D5)
+# 12.9s: GoldMind AI (E5)
+# 13.4s: MathEdge Pro (F#5)
+# 13.9s: Aligator Gozaimasu (A5)
+# 14.4s: Encik Moku (B5)
+# 14.9s: BracketBlitz (D6)
+coin_notes = [note_freq('D5'), note_freq('E5'), note_freq('F#5'), note_freq('A5'), note_freq('B5'), note_freq('D6')]
+for i, c_freq in enumerate(coin_notes):
+    mix(12.4 + i * 0.5, *synth_fm_bell(c_freq, dur=2.0, gain=0.35))
+
+# 15.5s: Orchestral strings swell with candlestick chart backdrop
+mix(15.2, *synth_strings([note_freq('D4'), note_freq('F#4'), note_freq('A4'), note_freq('D5')], dur=3.2, gain=0.35))
+mix(17.4, *sfx_whoosh(0.7, pan_left_to_right=False, gain=0.4))
+
+
+# -------------------------------------------------------------
+# ACT 4: THE GIFT ($149 USD -> $0 FREE) (18.0s – 24.0s)
+# -------------------------------------------------------------
+# 18.0s: Vault latch unlocks
+mix(18.0, *sfx_liquid_splash(gain=0.45))
+mix(18.0, *synth_sub_bass(note_freq('G1'), dur=2.7, gain=0.75))
+mix(18.0, *synth_warm_pad(chord_G, dur=2.7, gain=0.38))
+
+# 18.5s: Ascending Chime Cascade ($149 struck through)
+mix(18.5, *sfx_chime_cascade(gain=0.5))
+
+# 19.5s: Massive 808 Sub Drop & Triumphant Brass Hit ($0 FREE explosion!)
+mix(19.5, *sfx_sub_drop(dur=3.2, gain=0.92))
+mix(19.5, *drum_crash(dur=3.0, gain=0.65))
+mix(19.5, *synth_brass_stab(chord_D, dur=1.8, gain=0.45))
+mix(19.5, *synth_fm_bell(note_freq('D5'), dur=4.0, gain=0.45))
+
+# Full driving celebration beat (19.5s to 24.0s)
+for b in range(7):
+    t_b = 19.5 + b * BEAT
+    if b % 2 == 0:
+        mix(t_b, *drum_kick(dur=0.35, gain=0.9))
+    if b % 2 == 1:
+        mix(t_b, *drum_snare(dur=0.25, gain=0.75))
+    mix(t_b, *drum_hihat(dur=0.06, open_hh=False, gain=0.28))
+    mix(t_b + EIGHTH, *drum_hihat(dur=0.08, open_hh=True, gain=0.35))
+
+# 20.8s: Second triumphant brass chord (G Major -> A Major)
+mix(20.8, *synth_brass_stab(chord_A, dur=1.6, gain=0.42))
+mix(20.8, *synth_warm_pad(chord_A, dur=2.5, gain=0.35))
+
+# 22.2s: Piano arpeggios in celebration
+mix(22.0, *synth_piano(note_freq('A4'), dur=0.4, vel=0.85))
+mix(22.3, *synth_piano(note_freq('D5'), dur=0.4, vel=0.90))
+mix(22.6, *synth_piano(note_freq('F#5'), dur=0.4, vel=0.95))
+mix(22.9, *synth_piano(note_freq('A5'), dur=1.8, vel=1.0))
+
+
+# -------------------------------------------------------------
+# ACT 5: THE CALL TO ACTION (24.0s – 30.0s)
+# -------------------------------------------------------------
+# 24.0s: Beat gracefully pulls back, Crown settles
+mix(24.0, *sfx_whoosh(0.9, pan_left_to_right=True, gain=0.4))
+mix(24.1, *drum_crash(dur=3.5, gain=0.55))
+mix(24.1, *synth_sub_bass(note_freq('D1'), dur=5.5, gain=0.7))
+
+# 24.1s: Resonant Cathedral Bell on D4 (rich, long reverb)
+mix(24.1, *synth_fm_bell(note_freq('D4'), dur=5.8, gain=0.5))
+
+# 24.8s - 27.5s: Descending resolution piano phrase (A4 -> F#4 -> D4)
+mix(24.8, *synth_piano(note_freq('A4'), dur=1.0, vel=0.78))
+mix(25.6, *synth_piano(note_freq('F#4'), dur=1.0, vel=0.75))
+mix(26.4, *synth_piano(note_freq('D4'), dur=3.2, vel=0.85))
+
+# Warm strings & pad hold final peaceful D Major chord
+mix(24.0, *synth_strings(chord_D, dur=5.5, gain=0.3))
+mix(24.0, *synth_warm_pad(chord_D, dur=5.5, gain=0.32))
+
+# 27.2s: Final sparkle chime echo
+mix(27.2, *synth_fm_bell(note_freq('D6'), dur=2.5, gain=0.28))
+
+
+# -------------------------------------------------------------
+# MASTERING BUS (Strictly Linear, Analog Tanh Saturation, No Discontinuities)
+# -------------------------------------------------------------
+print("Mastering audio bus with analog soft-knee saturation...")
+
+# 1. Gentle fade-in (10ms) and fade-out (0.6s) to ensure zero pop/click
+fade_in_n = int(0.01 * SAMPLE_RATE)
+fade_out_n = int(0.6 * SAMPLE_RATE)
+
+master_left[:fade_in_n] *= np.linspace(0, 1, fade_in_n)
+master_right[:fade_in_n] *= np.linspace(0, 1, fade_in_n)
+
+master_left[-fade_out_n:] *= np.linspace(1, 0, fade_out_n)
+master_right[-fade_out_n:] *= np.linspace(1, 0, fade_out_n)
+
+# 2. Check pre-saturation peaks
+peak_pre = max(np.max(np.abs(master_left)), np.max(np.abs(master_right)))
+print(f"Pre-mastering peak level: {peak_pre:.3f}")
+if peak_pre > 0:
+    master_left /= (peak_pre / 1.15)
+    master_right /= (peak_pre / 1.15)
+
+# 3. Clean hyperbolic tangent saturation (warm analog curve, zero phase inversion, zero clipping)
+master_left = np.tanh(master_left) * 0.92
+master_right = np.tanh(master_right) * 0.92
+
+# 4. Convert to standard 16-bit PCM
+stereo = np.vstack([master_left, master_right]).T
+audio_16bit = np.int16(stereo * 32767.0)
+
+# Output paths
+out_v2 = os.path.join(os.path.dirname(__file__), "soundtrack_v2.wav")
+wavfile.write(out_v2, SAMPLE_RATE, audio_16bit)
+print(f"Successfully wrote clean soundtrack: {out_v2} ({os.path.getsize(out_v2)} bytes)")

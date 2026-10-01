@@ -598,18 +598,18 @@ export default function Home() {
               onClick={() => playTactileClick(0.1)}
               style={{
                 padding: "14px 24px",
-                background: "linear-gradient(135deg, rgba(212, 175, 55, 0.22), rgba(240, 208, 96, 0.16))",
-                border: "1px solid rgba(212, 175, 55, 0.65)",
-                color: "#F0D060",
+                background: "linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(59, 130, 246, 0.15))",
+                border: "1px solid rgba(0, 240, 255, 0.5)",
+                color: "#00f0ff",
                 fontWeight: 800,
                 fontSize: "0.95rem",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                boxShadow: "0 0 25px rgba(212, 175, 55, 0.35)",
+                boxShadow: "0 0 20px rgba(0, 240, 255, 0.25)",
               }}
             >
-              👑 Watch 30s Liquid Gold Reel
+              🎬 Watch 30s Motion Reel
             </Link>
             <a
               href="#authorization"
