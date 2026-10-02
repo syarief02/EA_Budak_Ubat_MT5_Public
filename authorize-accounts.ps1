@@ -471,9 +471,11 @@ Git-Commit-Push $MATHEDGE_REPO "feat(auth): authorize accounts $accString in Mat
 if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
     Git-Commit-Push $DESKTOP_MT5_REPO "feat(auth): authorize accounts $accString in MT5"
     Git-Commit-Push $GOLDMIND_REPO "feat(auth): authorize accounts $accString in GoldMind AI"
-    if (Test-Path $MQL5_FORGE_REPO) {
-        Git-Commit-Push $MQL5_FORGE_REPO "feat(auth): authorize accounts $accString in MQL5 Forge"
-    }
+} else {
+    Git-Commit-Push $DESKTOP_MT5_REPO "feat(auth): authorize accounts $accString in authorized account list"
+}
+if (Test-Path $MQL5_FORGE_REPO) {
+    Git-Commit-Push $MQL5_FORGE_REPO "feat(auth): authorize accounts $accString in MQL5 Forge"
 }
 
 # 7. Deploy Website
