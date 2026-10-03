@@ -354,6 +354,37 @@ const PRODUCTS = [
   },
 ];
 
+const HOME_FAQS = [
+  {
+    q: "Is EA Budak Ubat really free?",
+    a: "Yes. The software license costs $0 when you open and fund a live MT4 or MT5 account through one of our partner broker links. Your deposit stays in your own trading account. Nothing is paid to us.",
+  },
+  {
+    q: "How do I get my account whitelisted?",
+    a: "Register with a partner broker using the links on this page, fund the account, then send your trading account number to @SyariefAzman on Telegram. Once it is added, the license checker on this page will show your account as authorized.",
+  },
+  {
+    q: "How much capital do I need?",
+    a: "Partner broker minimums start from $10 on cent accounts. For running the grid with 0.01 starting lots, at least $100 on a Cent account (or more on a Standard account) is recommended.",
+  },
+  {
+    q: "Which pair and timeframe should I run it on?",
+    a: "EURUSD on M5 is the reference setup, with our pre-calibrated .set presets from the Preset Studio. If you run it on several charts, give each chart a different MagicNumber.",
+  },
+  {
+    q: "Why was I told to download a new version?",
+    a: "Free-license builds are refreshed periodically with a new validity date and the latest fixes. When a new build is announced on the Telegram channel, download the current MT5 or MT4 file from this page and replace the old one in your Experts folder.",
+  },
+  {
+    q: "I can't switch brokers. Can I still use it?",
+    a: "Yes. The standalone MT5 edition on MQL5 Market works with any MT5 broker, with no broker affiliation and no monthly expiry.",
+  },
+  {
+    q: "Is it risk-free?",
+    a: "No. EA Budak Ubat is a grid and martingale system, and margin trading can lose significant capital. Test on a demo account first, use a Cent account with conservative lot sizes, and never trade money you cannot afford to lose.",
+  },
+];
+
 const STRATEGY_DATA = {
   "ea-budak-ubat": {
     name: "EA Budak Ubat",
@@ -438,6 +469,7 @@ const STRATEGY_DATA = {
 export default function Home() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [showAllBrokers, setShowAllBrokers] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
   const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
   const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
 
@@ -523,7 +555,7 @@ export default function Home() {
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="container">
-          <a href="#" className="nav-brand">👑 EA Budak Ubat</a>
+          <a href="/" className="nav-brand">👑 EA Budak Ubat</a>
           <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
             <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 Products</Link></li>
             <li><Link href="/reel" onClick={() => setMobileNavOpen(false)} style={{ color: "#f59e0b", fontWeight: 700 }}>🎬 30s Reel</Link></li>
@@ -574,8 +606,8 @@ export default function Home() {
             Why pay $149? Unlock the full, unrestricted power of <strong>EA Budak Ubat (v1.67 MT5 &amp; v1.62 MT4)</strong> at <strong>$0 upfront software cost</strong> simply by opening and funding a live trading account under our official regulated partner brokers.
           </p>
 
-          {/* HIGH-CONVERTING HERO ACTION BUTTONS */}
-          <div className="hero-actions" style={{ marginBottom: "20px" }}>
+          {/* HERO ACTIONS: ONE PRIMARY PATH + GUIDE */}
+          <div className="hero-actions" style={{ marginBottom: "14px" }}>
             <a
               href="#broker-partners"
               className="btn btn-primary"
@@ -592,110 +624,45 @@ export default function Home() {
             >
               🎁 Choose a Broker &amp; Unlock EA Free ➜
             </a>
-            <Link
-              href="/reel"
-              className="btn btn-secondary"
-              onClick={() => playTactileClick(0.1)}
-              style={{
-                padding: "14px 24px",
-                background: "linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(59, 130, 246, 0.15))",
-                border: "1px solid rgba(0, 240, 255, 0.5)",
-                color: "#00f0ff",
-                fontWeight: 800,
-                fontSize: "0.95rem",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                boxShadow: "0 0 20px rgba(0, 240, 255, 0.25)",
-              }}
-            >
-              🎬 Watch 30s Motion Reel
-            </Link>
-            <a
-              href="#authorization"
-              className="btn btn-secondary"
-              onClick={() => playTactileClick(0.08)}
-              style={{
-                background: "linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(0, 240, 255, 0.18))",
-                border: "1px solid rgba(16, 185, 129, 0.55)",
-                color: "#10b981",
-                padding: "14px 24px",
-                fontWeight: 800,
-                fontSize: "0.95rem",
-                boxShadow: "0 0 20px rgba(16, 185, 129, 0.25)",
-              }}
-            >
-              ⚡ Already Whitelisted? Download Latest EA ↓
-            </a>
-            <a
-              href={DOWNLOAD_MT5}
-              className="btn btn-secondary"
-              onClick={() => playTactileClick(0.08)}
-              style={{ padding: "14px 20px" }}
-            >
-              ⬇️ Latest MT5 (.ex5)
-            </a>
-            <a
-              href={DOWNLOAD_MT4}
-              className="btn btn-secondary"
-              onClick={() => playTactileClick(0.08)}
-              style={{ padding: "14px 20px" }}
-            >
-              ⬇️ Latest MT4 (.ex4)
-            </a>
             <a
               href="#how-to-get-free"
               className="btn btn-secondary"
               onClick={() => playTactileClick(0.08)}
-              style={{ padding: "14px 20px", fontWeight: 700 }}
+              style={{ padding: "14px 24px", fontWeight: 700 }}
             >
-              🚀 3-Step Setup Guide
+              🚀 See the 3-Step Setup
             </a>
           </div>
 
-          {/* RETURNING WHITELISTED CLIENT FAST-PASS CALLOUT */}
-          <div className="whitelisted-fast-pass animate-in" style={{
-            maxWidth: "800px",
-            margin: "0 auto 28px",
-            background: "linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, rgba(0, 240, 255, 0.08) 100%)",
-            border: "1px solid rgba(16, 185, 129, 0.35)",
-            borderRadius: "14px",
-            padding: "14px 22px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "14px",
-            boxShadow: "0 4px 24px rgba(0, 0, 0, 0.3)",
-          }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", textAlign: "left" }}>
-              <span style={{ fontSize: "1.5rem" }}>⚡</span>
+          <p className="hero-trust-line">
+            <span>✓ $0 software cost</span>
+            <span>✓ MT4 &amp; MT5</span>
+            <span>✓ {PARTNER_BROKERS.length} partner brokers</span>
+            <span>✓ Pure native MQL (no DLLs)</span>
+          </p>
+
+          {/* RETURNING WHITELISTED CLIENT FAST-PASS: DIRECT DOWNLOADS */}
+          <div className="whitelisted-fast-pass animate-in">
+            <div className="fast-pass-text">
+              <span className="fast-pass-icon">⚡</span>
               <div>
-                <span style={{ color: "#10b981", fontWeight: 800, fontSize: "0.85rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>
-                  Returning Traders / Whitelisted Accounts
-                </span>
-                <p style={{ margin: 0, fontSize: "0.88rem", color: "#e2e8f0" }}>
-                  Told to download the updated EA? Verify your account &amp; grab <strong>v1.67 MT5</strong> or <strong>v1.62 MT4</strong> directly.
+                <span className="fast-pass-kicker">Already whitelisted?</span>
+                <p>
+                  Grab the latest build: <strong>v1.67 MT5</strong> or <strong>v1.62 MT4</strong>, or check your account first.
                 </p>
               </div>
             </div>
-            <a
-              href="#authorization"
-              className="btn btn-sm"
-              onClick={() => playTactileClick(0.08)}
-              style={{
-                background: "#10b981",
-                color: "#0a0e1a",
-                fontWeight: 900,
-                padding: "9px 20px",
-                borderRadius: "8px",
-                whiteSpace: "nowrap",
-                border: "none",
-                boxShadow: "0 0 15px rgba(16, 185, 129, 0.4)",
-              }}
-            >
-              📥 Go to Downloads &amp; Checker ➜
-            </a>
+            <div className="fast-pass-actions">
+              <a href={DOWNLOAD_MT5} className="fast-pass-btn primary" onClick={() => playTactileClick(0.08)}>
+                ⬇️ MT5 .ex5
+              </a>
+              <a href={DOWNLOAD_MT4} className="fast-pass-btn" onClick={() => playTactileClick(0.08)}>
+                ⬇️ MT4 .ex4
+              </a>
+              <a href="#authorization" className="fast-pass-btn" onClick={() => playTactileClick(0.08)}>
+                🔐 Check Account
+              </a>
+            </div>
           </div>
 
           {/* TELEMETRY STRIP */}
@@ -824,9 +791,9 @@ export default function Home() {
                 <a href={DOWNLOAD_MT5} className="btn btn-primary btn-sm" onClick={() => playTactileClick(0.08)}>
                   ⬇️ MT5 (.ex5)
                 </a>
-                <a href="#presets" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
+                <Link href="/tools#presets" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
                   ⚙️ Load .set Presets
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -893,7 +860,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* EXPAND / COLLAPSE ALL 14 BROKERS TOGGLE */}
+          {/* EXPAND / COLLAPSE ALL BROKERS TOGGLE */}
           <div style={{ textAlign: "center", marginTop: "32px" }}>
             <button
               type="button"
@@ -920,7 +887,7 @@ export default function Home() {
               <span>
                 {showAllBrokers
                   ? "▲ Show Top 3 Featured Brokers Only"
-                  : `▼ View All 14 Authorized Broker Partners (${PARTNER_BROKERS.length - 3} More)`}
+                  : `▼ View All ${PARTNER_BROKERS.length} Authorized Broker Partners (${PARTNER_BROKERS.length - 3} More)`}
               </span>
             </button>
           </div>
@@ -1050,41 +1017,8 @@ export default function Home() {
 
       <div className="jp-architectural-line" aria-hidden="true"></div>
 
-      {/* QUICK JUMP TOOLS NAVIGATION */}
-      <section id="tools" style={{ padding: "60px 0 20px 0" }}>
-        <div className="jp-kanji-watermark" aria-hidden="true">対話型ツール</div>
-        <div className="container">
-          <div className="section-header animate-in">
-            <span className="label">INTERACTIVE WORKBENCH // ツール群</span>
-            <h2>EA Budak Ubat Flagship Tooling Suite</h2>
-            <p>
-              Simulate market moves, generate customized .set parameter presets, calculate grid margin cushions, and verify authorized accounts in real time.
-            </p>
-          </div>
-
-          <div className="tools-nav-bar animate-in" style={{ justifyContent: "center" }}>
-            <a href="#simulator" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
-              <span>⚡</span>
-              <span>Market Simulator</span>
-            </a>
-            <a href="#presets" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
-              <span>⚙️</span>
-              <span>Preset Studio (.set)</span>
-            </a>
-            <a href="#calculator" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
-              <span>🧮</span>
-              <span>Margin &amp; Risk Calculator</span>
-            </a>
-            <a href="#authorization" className="tool-nav-btn" onClick={() => playTactileClick(0.08)}>
-              <span>🔐</span>
-              <span>Account License Checker</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* TRADER WORKBENCH SUITE PREVIEW */}
-      <section id="tools-preview" style={{ padding: "80px 0", background: "var(--bg-secondary)", position: "relative" }}>
+      <section id="tools" style={{ padding: "80px 0", background: "var(--bg-secondary)", position: "relative" }}>
         <div className="container">
           <div className="section-header animate-in">
             <span className="label">QUANTITATIVE WORKBENCH // ツール群</span>
@@ -1745,6 +1679,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section id="faq">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: HOME_FAQS.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            }),
+          }}
+        />
+        <div className="container">
+          <div className="section-header animate-in">
+            <span className="label">FAQ // よくある質問</span>
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers before you open an account or download the EA.</p>
+          </div>
+          <div className="faq-list animate-in">
+            {HOME_FAQS.map((faq, i) => (
+              <div key={faq.q} className={`faq-item ${openFaq === i ? "open" : ""}`}>
+                <button
+                  type="button"
+                  className="faq-question"
+                  aria-expanded={openFaq === i}
+                  onClick={() => { playTactileClick(0.06); setOpenFaq(openFaq === i ? null : i); }}
+                >
+                  {faq.q}
+                  <span className="faq-chevron">▼</span>
+                </button>
+                <div className="faq-answer">
+                  <p>{faq.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="contact">
         <div className="container">
@@ -1792,7 +1769,7 @@ export default function Home() {
               </div>
               <p>Loading community posts...</p>
             </div>
-          ) : comments.length === 0 ? (
+          ) : filteredComments.length === 0 ? (
             <div className="feed-empty animate-in">
               <span className="feed-empty-icon">💬</span>
               <h3>No posts yet</h3>
@@ -1982,6 +1959,7 @@ export default function Home() {
                 <li><Link href="/tools">Quant Tools &amp; Simulator</Link></li>
                 <li><Link href="/community">Community Discussion</Link></li>
                 <li><a href="#authorization">Whitelist Checker</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><Link href="/changelog">Version Changelog</Link></li>
               </ul>
             </div>
