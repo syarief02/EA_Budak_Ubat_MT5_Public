@@ -102,6 +102,24 @@ function Section({ id, title, children }) {
   );
 }
 
+// Screenshots of the real app (demo account; account number, broker and email replaced)
+const IMG = "/bubat-ai/bubat-ai-";
+const WIDE = { width: 1920, height: 1260 };
+const SETUP = { width: 1554, height: 1104 };
+
+function Shot({ name, size = WIDE, alt, caption, eager }) {
+  const src = `${IMG}${name}.webp`;
+  return (
+    <figure className="guide-shot">
+      <a href={src} target="_blank" rel="noopener noreferrer" title="Open full size">
+        <img src={src} alt={alt} width={size.width} height={size.height}
+             loading={eager ? "eager" : "lazy"} decoding="async" />
+      </a>
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  );
+}
+
 function Table({ head, rows }) {
   return (
     <div className="guide-table-wrap">
@@ -174,6 +192,11 @@ export default function BubatAIPage() {
           <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "14px" }}>
             Free 7-day trial · Demo accounts only by default · Not financial advice
           </p>
+          <div id="top-shot" style={{ marginTop: "34px", scrollMarginTop: "100px" }}>
+            <Shot name="overview" eager
+                  alt="Bubat AI Overview screen: balance, equity, health check, agent status and five open demo positions with stop loss and take profit"
+                  caption="The Overview screen on a demo account: balance, the health check, agent status and the bot's open trades, each with a stop loss and take profit. All screenshots on this page are from the real app on a demo account; the account number, broker and email are replaced." />
+          </div>
         </div>
       </section>
 
@@ -359,6 +382,9 @@ export default function BubatAIPage() {
               <li><strong>When you approve,</strong> the change is applied, the full test suite runs, and it is undone automatically if anything fails.</li>
               <li>Your reason for rejecting is saved, and the brain reads it on its next run.</li>
             </ul>
+            <Shot name="brain"
+                  alt="Brain tab: the latest assessment and proposals P3 and P4, each labelled SAFER with a report check, reason, evidence and Reject or Approve buttons"
+                  caption="The Brain tab. Each proposal shows the exact change, a SAFER or RISKIER label set by code, a report check computed from your real results, and the brain's own reason. Nothing changes until you press Approve." />
           </Section>
 
           <Section id="never" title="What the AI can never do">
@@ -388,6 +414,9 @@ export default function BubatAIPage() {
           <Section id="safety" title="The 16 safety walls">
             <p>Every trade is checked against these, in order. The first one that fails stops the trade. The AI cannot switch them off.</p>
             <Table head={["#", "Wall", "What it does"]} rows={WALLS.map((w, i) => [i + 1, w[0], w[1]])} />
+            <Shot name="logs"
+                  alt="Logs tab, Trades log: a list of trades refused by the safety walls for counter-trend direction, spread too wide, and the gold balance minimum"
+                  caption="The walls at work in Logs, then Trades: signals refused because they went against the 1-hour trend, the spread was wider than 3.5 pips, or the balance was under $300 for gold. Every refusal is written down with its reason." />
           </Section>
 
           <Section id="requirements" title="What you need">
@@ -417,6 +446,23 @@ export default function BubatAIPage() {
                 </ol>
               </li>
             </ol>
+            <div className="guide-shots">
+              <Shot name="setup-welcome" size={SETUP}
+                    alt="Setup wizard, Welcome step: the risk notice with a tick box to accept the risks"
+                    caption="a. Welcome: read the risks and tick the box." />
+              <Shot name="setup-account" size={SETUP}
+                    alt="Setup wizard, Account step: signed in with Google, READY, free trial 7 days left"
+                    caption="b. Account: after Google sign-in it shows READY and your trial days." />
+              <Shot name="setup-pc" size={SETUP}
+                    alt="Setup wizard, Your PC step: memory, graphics card, disk space, and the AI models chosen for this PC"
+                    caption="c. Your PC: what this computer has and which AI models it gets." />
+              <Shot name="setup-models" size={SETUP}
+                    alt="Setup wizard, AI models step: installing Ollama and downloading two models with a progress bar"
+                    caption="d. AI models: Install downloads Ollama and the models, with progress." />
+              <Shot name="setup-mt5" size={SETUP}
+                    alt="Setup wizard, MetaTrader 5 step: CONNECTED, DEMO and ALGO TRADING ON"
+                    caption="e. MetaTrader 5: you want CONNECTED, DEMO and ALGO TRADING ON." />
+            </div>
             <p>
               Optional: check the download is genuine by comparing its SHA-256 (PowerShell:{" "}
               <code>Get-FileHash BubatAI-Setup-&lt;version&gt;.exe</code>) with the <code>.sha256</code> file on the download page.
@@ -436,6 +482,9 @@ export default function BubatAIPage() {
               <li><strong>Google sign-in only:</strong> licenses are tied to your Google account.</li>
               <li><strong>Offline?</strong> If the license server can&apos;t be reached, Bubat AI keeps trading for up to 3 days.</li>
             </ul>
+            <Shot name="trial-ended"
+                  alt="Red banner across the top of the app: Free trial ended, new trades are paused, with Email support, Website and Check again buttons"
+                  caption="When the trial ends, this banner appears. Email support fills in the license request for you; once your license is active, press Check again." />
           </Section>
 
           <Section id="using" title="Using the app">
@@ -449,12 +498,19 @@ export default function BubatAIPage() {
                 ["Settings", "Account and license, data sharing, updates, run setup again."],
               ]}
             />
+            <p>The Overview is pictured <a href="#top-shot">at the top of this page</a>.</p>
+            <Shot name="chat"
+                  alt="Chat tab: the question Why is the bot losing money? and the AI's answer listing win rate, net result, spread costs, weak sessions and symbols"
+                  caption="A real Chat answer, from the local AI on this PC in about a minute. It reads the bot's own results, so it can tell you plainly where the losses come from." />
             <p><strong>Chat examples:</strong> &quot;Why is the bot losing money?&quot;, &quot;Give me entry, TP and SL for GBPUSD&quot;, &quot;Which pairs look best this session?&quot;. Commands: <code>think &lt;question&gt;</code> forces the deep model, <code>fast &lt;question&gt;</code> the quick one, <code>clear</code> resets the conversation, <code>approve P5</code> / <code>reject P5 reason</code> decide a proposal.</p>
             <p><strong>Start / Stop agent</strong> (top right) controls trading. <strong>Stop</strong> lets the agent finish its current step; open trades keep their stop loss and take profit in MetaTrader 5.</p>
             <p>
               <strong>Advanced settings</strong> (lot size, daily loss limit, risk walls) are in{" "}
               <code>%LOCALAPPDATA%\Programs\Bubat AI\app\forex_local_agent\config.json</code>. Stop the agent, edit, then start it again. Your settings are kept when Bubat AI updates.
             </p>
+            <Shot name="settings"
+                  alt="Settings tab: account and license (free trial, 6 days left), data sharing, updates, trading safety and setup"
+                  caption="Settings: your account and license, data sharing and deleting it, updates (with automatic weekend updates), and Run setup again." />
           </Section>
 
           <Section id="running" title="Keeping it running">
