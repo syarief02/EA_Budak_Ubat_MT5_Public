@@ -9177,3 +9177,12 @@ section {
     padding: 10px 8px;
   }
 }
+
+/* Legal pages (/privacy, /terms) */
+.legal-body p { margin: 0 0 16px; }
+.legal-body a { color: #00f0ff; text-decoration: underline; text-underline-offset: 3px; }
+.legal-body a:hover { color: #38bdf8; }
+.legal-body strong { color: var(--text-primary); }
+.legal-body code { font-size: 0.9em; background: rgba(0, 240, 255, 0.08); padding: 1px 6px; border-radius: 4px; }
+.legal-body li { margin: 4px 0; }
+.footer-bottom a { color: #00f0ff; }

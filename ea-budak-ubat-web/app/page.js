@@ -1975,7 +1975,7 @@ export default function Home() {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved. · <Link href="/privacy">Privacy Policy</Link> · <Link href="/terms">Terms of Use</Link></p>
             <p className="footer-disclaimer">
               Risk warning: Trading on margin carries a high level of risk. Automated grid and martingale systems can result in significant loss of capital. Past performance is not indicative of future results. Always test on a demo account first. Not available in restricted jurisdictions.
             </p>
