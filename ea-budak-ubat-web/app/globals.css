@@ -9186,3 +9186,22 @@ section {
 .legal-body code { font-size: 0.9em; background: rgba(0, 240, 255, 0.08); padding: 1px 6px; border-radius: 4px; }
 .legal-body li { margin: 4px 0; }
 .footer-bottom a { color: #00f0ff; }
+
+/* Bubat AI guide (/bubat-ai) */
+.legal-body ul, .legal-body ol { padding-left: 24px; margin: 0 0 16px; }
+.legal-body ol ol { margin: 8px 0; }
+.guide-warning { border: 1px solid rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.08); color: var(--text-secondary); border-radius: 12px; padding: 16px 20px; margin: 10px 0 24px; line-height: 1.7; }
+.guide-warning strong { color: #fbbf24; }
+.guide-toc { border: 1px solid rgba(0, 240, 255, 0.2); background: rgba(0, 240, 255, 0.04); border-radius: 12px; padding: 16px 22px; }
+.guide-toc strong { color: var(--text-primary); }
+.guide-toc ol { columns: 2; column-gap: 32px; margin: 10px 0 0; padding-left: 22px; }
+.guide-toc li { margin: 3px 0; break-inside: avoid; }
+.guide-toc a { color: #00f0ff; text-decoration: none; }
+.guide-toc a:hover { text-decoration: underline; }
+.guide-table-wrap { overflow-x: auto; margin: 8px 0 18px; }
+.guide-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.guide-table th { text-align: left; color: var(--text-primary); font-weight: 750; padding: 10px 12px; border-bottom: 1px solid rgba(0, 240, 255, 0.35); background: rgba(0, 240, 255, 0.05); }
+.guide-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); vertical-align: top; }
+.guide-table td:first-child { color: var(--text-primary); font-weight: 650; white-space: nowrap; }
+.guide-faq h3 { font-size: 1.08rem; color: var(--text-primary); margin: 22px 0 6px; font-weight: 750; }
+@media (max-width: 640px) { .guide-toc ol { columns: 1; } .guide-table td:first-child { white-space: normal; } }

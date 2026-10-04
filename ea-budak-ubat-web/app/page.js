@@ -1956,6 +1956,7 @@ export default function Home() {
               <ul className="footer-links">
                 <li><Link href="/about" style={{ color: "#00f0ff", fontWeight: 700 }}>About Syarief Azman</Link></li>
                 <li><Link href="/products">Multi-EA Ecosystem</Link></li>
+                <li><Link href="/bubat-ai" style={{ color: "#00f0ff", fontWeight: 700 }}>Bubat AI (Local AI Trader)</Link></li>
                 <li><Link href="/tools">Quant Tools &amp; Simulator</Link></li>
                 <li><Link href="/community">Community Discussion</Link></li>
                 <li><a href="#authorization">Whitelist Checker</a></li>

@@ -18,6 +18,7 @@ export default function sitemap() {
     { url: `${baseUrl}/aligator-gozaimasu`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/encik-moku`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/headway`, lastModified, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${baseUrl}/bubat-ai`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/privacy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
   ];
