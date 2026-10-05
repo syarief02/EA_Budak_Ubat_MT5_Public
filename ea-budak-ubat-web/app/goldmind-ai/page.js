@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
-const DOWNLOAD_EX5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_EX5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020261030.ex5";
 const DOWNLOAD_ZIP = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
 const DOWNLOAD_MT5 = DOWNLOAD_EX5;
 
@@ -109,7 +109,7 @@ export default function GoldMindAIPage() {
                         <a href={DOWNLOAD_ZIP} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">📦 Download Project (.zip)</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key. Expires 2026-09-30. By Syarief Azman.
+                        <strong>Open Source</strong> — Free to use. Requires your own OpenAI API key. Expires 2026-10-30. By Syarief Azman.
                     </p>
                 </div>
             </section>

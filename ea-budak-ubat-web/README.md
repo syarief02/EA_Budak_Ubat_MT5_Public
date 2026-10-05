@@ -61,12 +61,12 @@ Are you trading trending pairs?
 
 | EA | Expiry | Notes |
 |---|---|---|
-| EA Budak Ubat | 2026-09-30 | Authorized accounts never expire |
-| GoldMind AI | 2026-09-30 | — |
-| BracketBlitz EA | 2026-09-30 | — |
-| MathEdge Pro | 2026-09-30 | — |
-| Aligator Gozaimasu | 2026-09-30 | — |
-| Encik Moku | 2026-09-30 | — |
+| EA Budak Ubat | 2026-10-30 | Authorized accounts never expire |
+| GoldMind AI | 2026-10-30 | — |
+| BracketBlitz EA | 2026-10-30 | — |
+| MathEdge Pro | 2026-10-30 | — |
+| Aligator Gozaimasu | 2026-10-30 | — |
+| Encik Moku | 2026-10-30 | — |
 
 > Contact [@SyariefAzman](https://t.me/SyariefAzman) on Telegram for updated files when expiration approaches.
 
@@ -78,8 +78,8 @@ Are you trading trending pairs?
 
 ### Downloads
 
-- [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020260930.ex4)
-- [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5)
+- [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261030.ex4)
+- [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261030.ex5)
 - [🛒 Buy on MQL5 Market (MT5)](https://www.mql5.com/en/market/product/195399)
 - [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy)
 - [📡 MQL5 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
@@ -202,7 +202,7 @@ Is Authorized? ───── Yes ──► ✅ Run EA (no expiry)
     │
     No
     │
-Before Expiry? ───── Yes ──► ⚠️ Trial Mode (runs until 2026-09-30)
+Before Expiry? ───── Yes ──► ⚠️ Trial Mode (runs until 2026-10-30)
     │
     No
     │
@@ -219,7 +219,7 @@ Visit the [EA Budak Ubat page](https://eabudakubat.com/ea-budak-ubat) on the web
 ### Installation
 
 **MT4:**
-1. Download `EA - Budak Ubat v1.62 - MT4 - 20260930.ex4`
+1. Download `EA - Budak Ubat v1.62 - MT4 - 20261030.ex4`
 2. Open MT4 → `File` → `Open Data Folder`
 3. Navigate to `MQL4/Experts/`
 4. Copy the `.ex4` file into this folder
@@ -230,7 +230,7 @@ Visit the [EA Budak Ubat page](https://eabudakubat.com/ea-budak-ubat) on the web
 9. Click **OK**
 
 **MT5:**
-1. Download `EA - Budak Ubat v1.67 - MT5 - 20260930.ex5`
+1. Download `EA - Budak Ubat v1.67 - MT5 - 20261030.ex5`
 2. Open MT5 → `File` → `Open Data Folder`
 3. Navigate to `MQL5/Experts/`
 4. Copy the `.ex5` file into this folder
@@ -455,8 +455,8 @@ A: Yes. The key stays on your computer in the `.env` file and is never sent anyw
 
 ### Downloads
 
-- [⬇️ Download MT4](https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020260930.ex4)
-- [⬇️ Download MT5](https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT5%20-%2020260930.ex5)
+- [⬇️ Download MT4](https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020261030.ex4)
+- [⬇️ Download MT5](https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT5%20-%2020261030.ex5)
 - [📂 GitHub Repository](https://github.com/syarief02/BracketBlitz-EA)
 
 ### What It Does
@@ -546,8 +546,8 @@ A: BracketBlitz is designed for breakout-capture, well-suited for news events. B
 
 ### Downloads
 
-- [⬇️ Download MT4](https://github.com/syarief02/MathEdge-Pro/raw/main/MathEdge%20Pro%20-%20MT4%20-%2020260930.ex4)
-- [⬇️ Download MT5](https://github.com/syarief02/MathEdge-Pro/raw/main/MT5/MathEdge%20Pro%20-%20MT5%20-%2020260930.ex5)
+- [⬇️ Download MT4](https://github.com/syarief02/MathEdge-Pro/raw/main/MathEdge%20Pro%20-%20MT4%20-%2020261030.ex4)
+- [⬇️ Download MT5](https://github.com/syarief02/MathEdge-Pro/raw/main/MT5/MathEdge%20Pro%20-%20MT5%20-%2020261030.ex5)
 - [📂 GitHub Repository](https://github.com/syarief02/MathEdge-Pro)
 
 ### What It Does
@@ -648,8 +648,8 @@ A: No default SL. Set `EmergencySL_Points > 0` for a safety net.
 
 ### Downloads
 
-- [⬇️ Download MT4](https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020260930.ex4)
-- [⬇️ Download MT5](https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020260930.ex5)
+- [⬇️ Download MT4](https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020261030.ex4)
+- [⬇️ Download MT5](https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020261030.ex5)
 - [📂 GitHub Repository](https://github.com/syarief02/EA-Aligator-Gozaimasu)
 
 ### What It Does
@@ -737,8 +737,8 @@ A: Yes. MT4/MT5 → Strategy Tester (Ctrl+R). MTF modes require history data for
 
 ### Downloads
 
-- [⬇️ Download MT4](https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%2020260930.ex4)
-- [⬇️ Download MT5](https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020260930.ex5)
+- [⬇️ Download MT4](https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%2020261030.ex4)
+- [⬇️ Download MT5](https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020261030.ex5)
 - [📂 GitHub Repository](https://github.com/syarief02/EA-Encik-Moku)
 
 ### What It Does

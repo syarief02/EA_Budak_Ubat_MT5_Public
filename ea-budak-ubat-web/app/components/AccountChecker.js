@@ -98,7 +98,7 @@ export default function AccountChecker({
         </div>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           <a
-            href="https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5"
+            href="https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261030.ex5"
             download
             className="btn btn-primary btn-sm"
             style={{ fontWeight: 800, padding: "8px 16px" }}
@@ -106,7 +106,7 @@ export default function AccountChecker({
             ⬇️ MT5 (.ex5 v1.67)
           </a>
           <a
-            href="https://github.com/syarief02/EA_Budak_Ubat/raw/master/EA%20-%20Budak%20Ubat%20v1.62%20-%2020260930.ex4"
+            href="https://github.com/syarief02/EA_Budak_Ubat/raw/master/EA%20-%20Budak%20Ubat%20v1.62%20-%2020261030.ex4"
             download
             className="btn btn-secondary btn-sm"
             style={{ fontWeight: 700, padding: "8px 16px" }}

@@ -1,12 +1,12 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020260930.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT5%20-%2020260930.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020261030.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT5%20-%2020261030.ex5";
 
 const FEATURES = [
     { icon: "⚡", title: "Rapid-Fire Brackets", desc: "Continuously places Buy Stop + Sell Stop pending orders around the live price, straddling the market for instant breakout capture." },
@@ -107,7 +107,7 @@ export default function BracketBlitzPage() {
                         <a href="#strategy" className="btn btn-secondary">📖 Learn More</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use on any instrument in MetaTrader. Expires 2026-09-30.
+                        <strong>Open Source</strong> — Free to use on any instrument in MetaTrader. Expires 2026-10-30.
                     </p>
                 </div>
             </section>

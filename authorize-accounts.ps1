@@ -195,7 +195,7 @@ if (Test-Path $readme) {
 Write-Host ""
 Write-Host "--- STEP 2: Compiling EAs ---" -ForegroundColor Cyan
 
-$dateSuffix = "20260930"
+$dateSuffix = "20261030"
 
 if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
     # 1. EA Budak Ubat MT4
