@@ -2,6 +2,70 @@
 
 import { useState } from "react";
 
+const BOOL_PARAMS = new Set(["GridTrading", "UseRSIFilter", "EnableBreakEven", "AutoConfig"]);
+
+// Input names exactly as declared in each EA, in declaration order: [preset key, EA input name].
+// MetaTrader silently ignores .set keys that don't match an input, so these must stay in sync with the EA sources.
+// The MT5 EA suffixes its pip inputs with _Inp; MT4 v1.62 has no RSI, risk or margin inputs.
+const PLATFORMS = {
+  mt5: {
+    label: "⚡ MetaTrader 5 (v1.67)",
+    ea: "EA Budak Ubat v1.67 (MT5)",
+    fileTag: "v1.67_MT5",
+    boolValues: ["false", "true"],
+    inputs: [
+      ["Lots", "Lots"],
+      ["GridTrading", "GridTrading"],
+      ["MartingaleMultiplier", "MartingaleMultiplier"],
+      ["MaxLot", "MaxLot"],
+      ["TakeProfit", "TakeProfit_Inp"],
+      ["StopLoss", "StopLoss_Inp"],
+      ["minDistance", "minDistance_Inp"],
+      ["distanceIncrement", "distanceIncrement_Inp"],
+      ["maxDistance", "maxDistance_Inp"],
+      ["MaxTrade", "MaxTrade"],
+      ["StartTime", "StartTime"],
+      ["StopTime", "StopTime"],
+      ["UseRSIFilter", "UseRSIFilter"],
+      ["RSI_TF", "RSI_TF"],
+      ["RSI_Period", "RSI_Period"],
+      ["RSI_BuyCeiling", "RSI_BuyCeiling"],
+      ["RSI_SellFloor", "RSI_SellFloor"],
+      ["MaxSpread_Pips", "MaxSpread_Pips"],
+      ["MaxDrawdownPct", "MaxDrawdownPct"],
+      ["EnableBreakEven", "EnableBreakEven"],
+      ["BreakEven_Trigger", "BreakEven_Trigger"],
+      ["BreakEven_Lock", "BreakEven_Lock"],
+      ["MinMarginLevelToTrade", "MinMarginLevelToTrade"],
+      ["EmergencyMarginLevel", "EmergencyMarginLevel"],
+      ["AutoConfig", "AutoConfig"],
+      ["MagicNumber", "MagicNumber"],
+    ],
+  },
+  mt4: {
+    label: "💻 MetaTrader 4 (v1.62)",
+    ea: "EA Budak Ubat v1.62 (MT4)",
+    fileTag: "v1.62_MT4",
+    boolValues: ["0", "1"],
+    inputs: [
+      ["Lots", "Lots"],
+      ["GridTrading", "GridTrading"],
+      ["MartingaleMultiplier", "MartingaleMultiplier"],
+      ["MaxLot", "MaxLot"],
+      ["TakeProfit", "TakeProfit"],
+      ["StopLoss", "StopLoss"],
+      ["minDistance", "minDistance"],
+      ["distanceIncrement", "distanceIncrement"],
+      ["maxDistance", "maxDistance"],
+      ["MaxTrade", "MaxTrade"],
+      ["StartTime", "StartTime"],
+      ["StopTime", "StopTime"],
+      ["AutoConfig", "AutoConfig"],
+      ["MagicNumber", "MagicNumber"],
+    ],
+  },
+};
+
 const PRESETS = [
   {
     id: "conservative",
@@ -32,6 +96,8 @@ const PRESETS = [
       EnableBreakEven: "1",
       BreakEven_Trigger: "15.0",
       BreakEven_Lock: "2.0",
+      MinMarginLevelToTrade: "200.0",
+      EmergencyMarginLevel: "60.0",
       StartTime: "00:00",
       StopTime: "23:59",
       AutoConfig: "0",
@@ -67,6 +133,8 @@ const PRESETS = [
       EnableBreakEven: "0",
       BreakEven_Trigger: "15.0",
       BreakEven_Lock: "2.0",
+      MinMarginLevelToTrade: "0.0",
+      EmergencyMarginLevel: "0.0",
       StartTime: "00:00",
       StopTime: "23:59",
       AutoConfig: "0",
@@ -75,10 +143,10 @@ const PRESETS = [
   },
   {
     id: "gold",
-    name: "Gold (XAUUSD) Trend & Swing v1.63",
+    name: "Gold (XAUUSD) Trend & Swing",
     icon: "🪙",
-    badge: "v1.63 Gold Engine",
-    desc: "Calibrated for Gold price scaling (1 pip = $0.01): 3,500 TP ($35.00 trend capture), 350 minDistance ($3.50 spacing), RSI filter disabled, and Break-Even profit lock enabled.",
+    badge: "Gold Engine",
+    desc: "Calibrated for Gold price scaling (1 pip = $0.01): 3,500 TP ($35.00 trend capture), 350 minDistance ($3.50 spacing), RSI filter disabled, Break-Even profit lock and margin guards enabled.",
     symbol: "XAUUSD (Gold)",
     timeframe: "M5 / M15",
     params: {
@@ -102,6 +170,8 @@ const PRESETS = [
       EnableBreakEven: "1",
       BreakEven_Trigger: "1200.0",
       BreakEven_Lock: "200.0",
+      MinMarginLevelToTrade: "200.0",
+      EmergencyMarginLevel: "60.0",
       StartTime: "01:00",
       StopTime: "22:00",
       AutoConfig: "0",
@@ -137,6 +207,8 @@ const PRESETS = [
       EnableBreakEven: "0",
       BreakEven_Trigger: "10.0",
       BreakEven_Lock: "2.0",
+      MinMarginLevelToTrade: "0.0",
+      EmergencyMarginLevel: "0.0",
       StartTime: "00:00",
       StopTime: "23:59",
       AutoConfig: "1",
@@ -146,15 +218,23 @@ const PRESETS = [
 ];
 
 export default function SetGenerator() {
+  const [platformId, setPlatformId] = useState("mt5");
   const [selectedPresetId, setSelectedPresetId] = useState("balanced");
   const [customParams, setCustomParams] = useState(PRESETS[1].params);
   const [downloaded, setDownloaded] = useState(false);
 
+  const platform = PLATFORMS[platformId];
+  const isMt5 = platformId === "mt5";
   const selectedPreset = PRESETS.find((p) => p.id === selectedPresetId) || PRESETS[1];
 
   const handleSelectPreset = (preset) => {
     setSelectedPresetId(preset.id);
     setCustomParams({ ...preset.params });
+    setDownloaded(false);
+  };
+
+  const handleSelectPlatform = (id) => {
+    setPlatformId(id);
     setDownloaded(false);
   };
 
@@ -165,7 +245,7 @@ export default function SetGenerator() {
   const handleDownload = () => {
     const lines = [
       "; ====================================================",
-      `; EA Budak Ubat v1.63 Parameter Preset`,
+      `; ${platform.ea} Parameter Preset`,
       `; Strategy: ${selectedPreset.name}`,
       `; Recommended Asset: ${selectedPreset.symbol}`,
       `; Generated: ${new Date().toISOString().split("T")[0]}`,
@@ -174,8 +254,10 @@ export default function SetGenerator() {
       "",
     ];
 
-    Object.entries(customParams).forEach(([k, v]) => {
-      lines.push(`${k}=${v}`);
+    platform.inputs.forEach(([key, inputName]) => {
+      const raw = customParams[key];
+      const value = BOOL_PARAMS.has(key) ? platform.boolValues[raw === "1" ? 1 : 0] : raw;
+      lines.push(`${inputName}=${value}`);
     });
 
     const content = lines.join("\r\n");
@@ -183,7 +265,7 @@ export default function SetGenerator() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `EA_Budak_Ubat_${selectedPreset.id}_v1.63.set`;
+    link.download = `EA_Budak_Ubat_${selectedPreset.id}_${platform.fileTag}.set`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -202,8 +284,20 @@ export default function SetGenerator() {
         </div>
         <h3 className="checker-title">MT4 & MT5 Preset (.set) Download Portal</h3>
         <p className="checker-subtitle">
-          Select an optimized risk strategy, inspect or adjust the inputs, and instantly download a ready-to-load <code>.set</code> configuration file for MetaTrader.
+          Pick your platform and an optimized risk strategy, inspect or adjust the inputs, and instantly download a ready-to-load <code>.set</code> configuration file for MetaTrader.
         </p>
+        <div className="platform-tab-group" style={{ justifyContent: "center", marginTop: 12 }}>
+          {Object.entries(PLATFORMS).map(([id, p]) => (
+            <button
+              key={id}
+              type="button"
+              className={`platform-pill ${platformId === id ? "active" : ""}`}
+              onClick={() => handleSelectPlatform(id)}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* PRESET SELECTOR CARDS */}
@@ -235,7 +329,9 @@ export default function SetGenerator() {
             <h4>
               Selected: <span className="highlight-text">{selectedPreset.name}</span>
             </h4>
-            <span className="preset-symbol-hint">Recommended for {selectedPreset.symbol} on {selectedPreset.timeframe}</span>
+            <span className="preset-symbol-hint">
+              {platform.ea} · Recommended for {selectedPreset.symbol} on {selectedPreset.timeframe}
+            </span>
           </div>
 
           <button
@@ -244,7 +340,7 @@ export default function SetGenerator() {
             onClick={handleDownload}
             style={{ animation: "none" }}
           >
-            {downloaded ? "✓ Downloaded .set File!" : "📥 Download .set File"}
+            {downloaded ? "✓ Downloaded .set File!" : `📥 Download ${isMt5 ? "MT5" : "MT4"} .set File`}
           </button>
         </div>
 
@@ -294,38 +390,69 @@ export default function SetGenerator() {
               className="param-field-input"
             />
           </div>
-          <div className="param-field">
-            <label>RSI Filter Toggle (v1.63)</label>
-            <select
-              value={customParams.UseRSIFilter}
-              onChange={(e) => handleParamChange("UseRSIFilter", e.target.value)}
-              className="param-field-select"
-            >
-              <option value="1">1 (Enabled - Standard)</option>
-              <option value="0">0 (Disabled - Gold Safe)</option>
-            </select>
-          </div>
-          <div className="param-field">
-            <label>Break-Even Lock (v1.63)</label>
-            <select
-              value={customParams.EnableBreakEven}
-              onChange={(e) => handleParamChange("EnableBreakEven", e.target.value)}
-              className="param-field-select"
-            >
-              <option value="1">1 (Enabled - Lock Profit)</option>
-              <option value="0">0 (Disabled - Standard)</option>
-            </select>
-          </div>
-          <div className="param-field">
-            <label>Max Drawdown % (v1.63)</label>
-            <input
-              type="text"
-              value={customParams.MaxDrawdownPct}
-              onChange={(e) => handleParamChange("MaxDrawdownPct", e.target.value)}
-              className="param-field-input"
-            />
-          </div>
+          {isMt5 && (
+            <>
+              <div className="param-field">
+                <label>RSI Filter Toggle</label>
+                <select
+                  value={customParams.UseRSIFilter}
+                  onChange={(e) => handleParamChange("UseRSIFilter", e.target.value)}
+                  className="param-field-select"
+                >
+                  <option value="1">On (Standard)</option>
+                  <option value="0">Off (Gold Safe)</option>
+                </select>
+              </div>
+              <div className="param-field">
+                <label>Break-Even Lock</label>
+                <select
+                  value={customParams.EnableBreakEven}
+                  onChange={(e) => handleParamChange("EnableBreakEven", e.target.value)}
+                  className="param-field-select"
+                >
+                  <option value="1">On (Lock Profit)</option>
+                  <option value="0">Off (Standard)</option>
+                </select>
+              </div>
+              <div className="param-field">
+                <label>Max Drawdown % (0 = off)</label>
+                <input
+                  type="text"
+                  value={customParams.MaxDrawdownPct}
+                  onChange={(e) => handleParamChange("MaxDrawdownPct", e.target.value)}
+                  className="param-field-input"
+                />
+              </div>
+              <div className="param-field">
+                <label>Min Margin Level % (0 = off)</label>
+                <input
+                  type="text"
+                  value={customParams.MinMarginLevelToTrade}
+                  onChange={(e) => handleParamChange("MinMarginLevelToTrade", e.target.value)}
+                  className="param-field-input"
+                />
+              </div>
+              <div className="param-field">
+                <label>Emergency Margin Stop % (0 = off)</label>
+                <input
+                  type="text"
+                  value={customParams.EmergencyMarginLevel}
+                  onChange={(e) => handleParamChange("EmergencyMarginLevel", e.target.value)}
+                  className="param-field-input"
+                />
+              </div>
+            </>
+          )}
         </div>
+
+        {!isMt5 && (
+          <div className="how-to-load-box" style={{ marginBottom: 12 }}>
+            <span className="load-icon">ℹ️</span>
+            <div>
+              <strong>MT4 v1.62 note:</strong> the RSI filter, Break-Even lock, drawdown guard and margin safeguards are MT5-only features, so the MT4 file contains only the grid, lot, time and magic number inputs.
+            </div>
+          </div>
+        )}
 
         {/* HOW TO LOAD IN METATRADER */}
         <div className="how-to-load-box">
@@ -338,4 +465,3 @@ export default function SetGenerator() {
     </div>
   );
 }
-
