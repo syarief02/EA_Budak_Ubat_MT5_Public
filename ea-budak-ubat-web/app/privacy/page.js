@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="4 October 2026">
+    <LegalPage title="Privacy Policy" updated="7 October 2026">
       <p>
         <strong>Bubat AI</strong> is a forex trading agent that runs on your own Windows PC. This policy explains what
         information leaves your PC when you use the Bubat AI app, why, and what you can do about it. Contact:{" "}
@@ -47,7 +47,24 @@ export default function PrivacyPage() {
         <li>You can delete everything you have shared with <em>Delete my shared data</em> in Settings.</li>
       </ul>
       <p>
-        <strong>4. Updates and news.</strong> The app downloads updates from our official GitHub releases page and
+        <strong>4. Your AI&apos;s trading signals (shared learning).</strong> So that every Bubat AI learns faster, the
+        app shares the <strong>signals</strong> its AI makes: for each buy or sell call, the currency pair, buy or sell,
+        the time (to the minute), the AI&apos;s confidence, the AI model and the app version, plus a one-way code that
+        prevents duplicates. It <strong>never</strong> includes your account number, balance, money amounts, lot sizes,
+        your broker, the AI&apos;s reasoning or chats, or whether a trade was placed.
+      </p>
+      <p>
+        These signals are <strong>shared with other Bubat AI users&apos; apps</strong>, without your email or any other
+        identity, so their AI can learn from them; each app works out the result of a signal itself from public market
+        prices. Your app receives other users&apos; signals in the same anonymous form.
+      </p>
+      <ul style={{ paddingLeft: "22px", margin: "0 0 16px" }}>
+        <li>During the free trial, sharing signals is part of the trial.</li>
+        <li>With a license you can turn it off in Settings; your app then also stops receiving other users&apos; signals.</li>
+        <li>Signals are deleted after 90 days, and you can delete yours at any time with <em>Delete my shared data</em> in Settings.</li>
+      </ul>
+      <p>
+        <strong>5. Updates and news.</strong> The app downloads updates from our official GitHub releases page and
         reads public financial news websites. These sites may see your IP address, as with any web visit.
       </p>
 
@@ -63,22 +80,24 @@ export default function PrivacyPage() {
 
       <H2>Where it is stored and who sees it</H2>
       <p>
-        Data is stored with <strong>Supabase</strong> (our database and sign-in provider). Only the Bubat AI owner can
-        read it. Community trade results are analysed in aggregate (for example the average result per currency pair) to
-        improve the bot. We do not sell or share personal data with anyone else.
+        Data is stored with <strong>Supabase</strong> (our database and sign-in provider, Singapore region). Only the
+        Bubat AI owner can read your email, license and trade results. Shared signals (item 4) are given to other
+        users&apos; apps without your identity. Community trade results are analysed in aggregate (for example the
+        average result per currency pair) to improve the bot. We do not sell personal data or share it with anyone else.
       </p>
 
       <H2>How long we keep it</H2>
       <p>
         Your email and license record are kept while you use Bubat AI, plus up to 12 months after your last sign-in.
-        Shared trade results are kept until you delete them or ask us to.
+        Shared trade results are kept until you delete them or ask us to. Shared signals are kept for 90 days, or until
+        you delete them.
       </p>
 
       <H2>Your rights</H2>
       <p>
         You can ask what we hold about you, ask us to correct it, or ask us to delete your account and data, by emailing{" "}
         <a href="mailto:support@eabudakubat.com">support@eabudakubat.com</a>. You can delete your shared trade results
-        yourself in the app at any time. Bubat AI is operated from Malaysia and follows the Personal Data Protection Act
+        and signals yourself in the app at any time. Bubat AI is operated from Malaysia and follows the Personal Data Protection Act
         2010 (PDPA).
       </p>
 
