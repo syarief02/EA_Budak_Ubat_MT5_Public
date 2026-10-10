@@ -65,7 +65,7 @@ const PARAM_TABS = {
     { name: "MaxDrawdownPct", def: "0.0", desc: "Hard equity protection cutoff %. Closes all positions if drawdown reaches this % (0 = disabled)" },
     { name: "EnableBreakEven", def: "false", desc: "Automatically lock profits by moving SL once basket exceeds trigger pips" },
     { name: "BreakEven_Trigger", def: "15.0", desc: "Floating profit in pips required to activate Break-Even" },
-    { name: "BreakEven_Lock", def: "2.0", desc: "Guaranteed pips locked in profit above/below average entry price" },
+    { name: "BreakEven_Lock", def: "2.0", desc: "Pips of profit locked above/below the average entry price once break-even triggers (price gaps and slippage can still fill worse)" },
     { name: "MinMarginLevelToTrade", def: "0.0", desc: "Pauses adding new grid orders if margin level drops below this % (0 = off, 200% in Market Edition)" },
     { name: "EmergencyMarginLevel", def: "0.0", desc: "Emergency basket stop-out protection %. Closes trades cleanly if margin level drops below this % (0 = off, 60% in Market Edition)" },
   ],
@@ -237,8 +237,6 @@ export default function EABudakUbatPage() {
           <PriceTierUrgency
             currentPrice={149}
             nextPrice={159}
-            soldInTier={7}
-            tierLimit={10}
             marketUrl={MQL5_MARKET_LINK}
           />
 

@@ -1,7 +1,28 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo } from "react";
+import Image from "next/image";
 import { getActiveAds, BROKER_ADS } from "@/lib/adsData";
+
+const FALLBACK_BANNER = "/banners/default-banner.svg";
+
+// next/image serves a resized WebP/AVIF (CSS caps banners at ~180x54), so full-size broker artwork is fine in /public/banners
+function BannerImage({ ad, className }) {
+  const [failed, setFailed] = useState(false);
+  const src = failed ? FALLBACK_BANNER : ad.image;
+  return (
+    <Image
+      src={src}
+      alt={ad.imageAlt}
+      width={160}
+      height={52}
+      className={className}
+      loading="eager"
+      unoptimized={src.endsWith(".svg")}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 export default function RotatingAdBanner({ variant = "strip" }) {
   const ads = useMemo(() => {
@@ -93,18 +114,7 @@ export default function RotatingAdBanner({ variant = "strip" }) {
             </span>
 
             <div className="promo-strip-media-box">
-              <img
-                src={ad.image}
-                alt={ad.imageAlt}
-                width={160}
-                height={52}
-                className={`promo-strip-img ad-img-${ad.id}`}
-                loading="eager"
-                referrerPolicy="no-referrer-when-downgrade"
-                onError={(e) => {
-                  e.currentTarget.src = "/banners/default-banner.svg";
-                }}
-              />
+              <BannerImage key={ad.id} ad={ad} className={`promo-strip-img ad-img-${ad.id}`} />
             </div>
 
             <span className="promo-strip-text">
@@ -240,18 +250,7 @@ export default function RotatingAdBanner({ variant = "strip" }) {
         title={ad.headline}
       >
         <div className="headway-bonus-image-box">
-          <img
-            src={ad.image}
-            alt={ad.imageAlt}
-            width={160}
-            height={52}
-            className={`headway-bonus-img ad-img-${ad.id}`}
-            loading="eager"
-            referrerPolicy="no-referrer-when-downgrade"
-            onError={(e) => {
-              e.currentTarget.src = "/banners/default-banner.svg";
-            }}
-          />
+          <BannerImage key={ad.id} ad={ad} className={`headway-bonus-img ad-img-${ad.id}`} />
         </div>
 
         <div className="headway-bonus-details">

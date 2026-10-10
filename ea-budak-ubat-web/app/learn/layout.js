@@ -1,8 +1,11 @@
+import { BASE_OPEN_GRAPH } from "@/lib/siteMetadata";
+
 export const metadata = {
   metadataBase: new URL('https://eabudakubat.com'),
-  title: 'Forex Quest: Algorithmic Trader Knowledge Codex | EA Budak Ubat',
+  title: 'Forex Quest: Algorithmic Trader Knowledge Codex',
   description: 'Gamified Forex education covering currency pairs, technical indicators, risk management, grid systems, and news trading. Level up from Novice Pip Hunter to Institutional Quant Sovereign.',
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     title: 'Forex Quest: Algorithmic Trader Knowledge Codex | EA Budak Ubat',
     description: 'Gamified Forex education covering currency pairs, technical indicators, risk management, grid systems, and news trading. Level up from Novice Pip Hunter to Institutional Quant Sovereign.',
     type: 'website',

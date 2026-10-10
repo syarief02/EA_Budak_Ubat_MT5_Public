@@ -1,10 +1,14 @@
 import "./globals.css";
 import { Suspense } from "react";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import FacebookPixel from "@/app/components/FacebookPixel";
 import FluidCanvas from "@/app/components/FluidCanvas";
 import LiquidGlassEffects from "@/app/components/LiquidGlassEffects";
 import CommandTerminal from "@/app/components/CommandTerminal";
+
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-jetbrains" });
 
 export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
@@ -20,7 +24,8 @@ export const metadata = {
   openGraph: {
     title: "EA Budak Ubat | Trading Tools & Expert Advisors for MetaTrader",
     description: "Professional Expert Advisors & AI Trading Systems for MetaTrader 4 & 5",
-    url: "https://eabudakubat.com",
+    // "./" resolves to each page's own path
+    url: "./",
     siteName: "EA Budak Ubat",
     type: "website",
     locale: "en_US",
@@ -31,7 +36,8 @@ export const metadata = {
     site: "@SyariefAzman",
   },
   alternates: {
-    canonical: "https://eabudakubat.com",
+    // "./" resolves to each page's own path; an absolute URL here made every page canonicalise to the homepage
+    canonical: "./",
   },
   robots: {
     index: true,
@@ -48,7 +54,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <script
           id="fb-pixel"
@@ -63,7 +69,6 @@ export default function RootLayout({ children }) {
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
               fbq('init', '2242456612962821');
-              fbq('track', 'PageView');
             `,
           }}
         />

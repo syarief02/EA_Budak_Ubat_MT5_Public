@@ -240,7 +240,7 @@ const CHANGELOG_DATA = [
         type: "feature",
         tag: "New Feature",
         title: "Trailing Break-Even Profit Lock",
-        desc: "Introduced EnableBreakEven, BreakEven_Trigger, and BreakEven_Lock. Automatically locks in guaranteed profit pips once the grid basket reaches the trigger profit distance from weighted average entry.",
+        desc: "Introduced EnableBreakEven, BreakEven_Trigger, and BreakEven_Lock. Automatically locks in profit pips once the grid basket reaches the trigger profit distance from weighted average entry.",
       },
       {
         type: "tool",

@@ -1,8 +1,11 @@
+import { BASE_OPEN_GRAPH } from "@/lib/siteMetadata";
+
 export const metadata = {
   metadataBase: new URL('https://eabudakubat.com'),
-  title: '30-Second Motion Graphics Reel | EA Budak Ubat',
+  title: '30-Second Motion Graphics Reel',
   description: 'Experience the 30-second high-energy motion graphics reel showcasing EA Budak Ubat v1.67, 4 Quantitative Analysis Engines, Dynamic ADR AutoConfig AI, and Real-Time Tick Break-Even Trailing.',
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     title: '30-Second Motion Graphics Reel | EA Budak Ubat',
     description: 'Experience the 30-second high-energy motion graphics reel showcasing EA Budak Ubat v1.67, 4 Quantitative Analysis Engines, Dynamic ADR AutoConfig AI, and Real-Time Tick Break-Even Trailing.',
     url: 'https://eabudakubat.com/reel',

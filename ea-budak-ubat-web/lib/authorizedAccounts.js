@@ -31,6 +31,9 @@ export const ALL_AUTHORIZED_ACCOUNTS = new Set([
   ...MT5_AUTHORIZED_ACCOUNTS
 ]);
 
+// Unique MT4 + MT5 accounts rounded down for display, e.g. "880+" (most accounts are in both sets)
+export const AUTHORIZED_ACCOUNTS_DISPLAY = `${Math.floor(ALL_AUTHORIZED_ACCOUNTS.size / 10) * 10}+`;
+
 export const EA_DATABASE = [
   {
     slug: "ea-budak-ubat",

@@ -6,14 +6,10 @@ import { playTactileClick } from "@/lib/audioSynthesizer";
 export default function PriceTierUrgency({
   currentPrice = 149,
   nextPrice = 159,
-  soldInTier = 7,
-  tierLimit = 10,
   marketUrl = "https://www.mql5.com/en/market/product/195399",
   compact = false,
 }) {
   const [copied, setCopied] = useState(false);
-  const remainingInTier = Math.max(1, tierLimit - soldInTier);
-  const progressPercent = Math.min(100, Math.round((soldInTier / tierLimit) * 100));
 
   const handleCopyLink = (e) => {
     e.preventDefault();
@@ -32,10 +28,7 @@ export default function PriceTierUrgency({
         <div className="tier-badge-row">
           <span className="tier-pill-active">
             <span className="tier-pulse-dot"></span>
-            Tier 1 · Official MQL5 Market
-          </span>
-          <span className="tier-countdown-badge">
-            🔥 Only {remainingInTier} {remainingInTier === 1 ? "Spot" : "Spots"} Left at ${currentPrice}
+            Official MQL5 Market
           </span>
         </div>
 
@@ -107,26 +100,12 @@ export default function PriceTierUrgency({
         </div>
       </div>
 
-      {/* Progress Bar */}
       <div className="tier-progress-section">
-        <div className="progress-labels">
-          <span className="progress-status-text">
-            <strong>{soldInTier}/{tierLimit}</strong> Lifetime Licenses Claimed in Current Tier
-          </span>
-          <span className="progress-percent-text">{progressPercent}% Filled</span>
-        </div>
-
-        <div className="tier-progress-track" role="progressbar" aria-valuenow={progressPercent} aria-valuemin="0" aria-valuemax="100">
-          <div
-            className="tier-progress-fill"
-            style={{ width: `${progressPercent}%` }}
-          >
-            <span className="progress-bar-sheen"></span>
-          </div>
-        </div>
-
         <p className="tier-disclaimer">
-          ⚡ <em>Official Schedule:</em> The lifetime purchase price increases by <strong>+$10 USD</strong> after every 10 purchases. Secure your permanent copy now or start with flexible monthly rental.
+          <em>Pricing schedule:</em> the lifetime purchase price increases by <strong>+$10 USD</strong> after every 10 purchases. Try the free demo in the MT5 Strategy Tester before you buy, or start with a monthly rental.
+        </p>
+        <p className="tier-disclaimer">
+          ⚠️ Grid and martingale trading can lose significant capital. Test on a demo account first; past performance does not guarantee future results.
         </p>
       </div>
 

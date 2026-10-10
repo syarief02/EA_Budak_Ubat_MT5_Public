@@ -9,6 +9,7 @@ import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import MQLProductsShowcase from "@/app/components/MQLProductsShowcase";
 import { playTactileClick } from "@/lib/audioSynthesizer";
+import { AUTHORIZED_ACCOUNTS_DISPLAY } from "@/lib/authorizedAccounts";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261030.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261030.ex5";
@@ -85,11 +86,11 @@ const PARTNER_BROKERS = [
   {
     name: "Headway",
     badge: "🔥 $150 No-Deposit Bonus",
-    headline: "Trade 5 Markets with Zero Risk for 7 Days",
-    desc: "Claim a free $150 no-deposit trading bonus. Test EA Budak Ubat with zero personal capital risk and keep all your generated trading profits!",
+    headline: "Trade 5 Markets with No Deposit for 7 Days",
+    desc: "Claim a free $150 no-deposit trading bonus. Test EA Budak Ubat without depositing your own capital; profit withdrawals are subject to Headway's bonus terms.",
     id: "516d6b",
     url: "https://headway.partners/landings/en/bonus-150/?hwp=516d6b",
-    features: ["$150 Free Trading Credit", "Cent Accounts Supported", "Unlimited Leverage", "100% Zero Risk Trial"],
+    features: ["$150 Free Trading Credit", "Cent Accounts Supported", "Unlimited Leverage", "No Deposit Needed"],
     minDeposit: "$0 (Free $150 Bonus)",
     color: "#f59e0b",
     btnBg: "linear-gradient(135deg, #f59e0b, #d97706)",
@@ -357,7 +358,7 @@ const PRODUCTS = [
 const HOME_FAQS = [
   {
     q: "Is EA Budak Ubat really free?",
-    a: "Yes. The software license costs $0 when you open and fund a live MT4 or MT5 account through one of our partner broker links. Your deposit stays in your own trading account. Nothing is paid to us.",
+    a: "Yes. The software license costs $0 when you open and fund a live MT4 or MT5 account through one of our partner broker links. Your deposit stays in your own trading account and you pay us nothing. Disclosure: our broker links are partner (IB/affiliate) links, so the broker pays us a referral commission on your trading; that commission is what funds the free license.",
   },
   {
     q: "How do I get my account whitelisted?",
@@ -373,7 +374,7 @@ const HOME_FAQS = [
   },
   {
     q: "Why was I told to download a new version?",
-    a: "Free-license builds are refreshed periodically with a new validity date and the latest fixes. When a new build is announced on the Telegram channel, download the current MT5 or MT4 file from this page and replace the old one in your Experts folder.",
+    a: "Your account whitelist is permanent, but the free-license build file itself is refreshed periodically with a new validity date and the latest fixes. When a new build is announced on the Telegram channel, download the current MT5 or MT4 file from this page and replace the old one in your Experts folder.",
   },
   {
     q: "I can't switch brokers. Can I still use it?",
@@ -391,8 +392,6 @@ const STRATEGY_DATA = {
     version: "v1.67",
     tagline: "Flagship Autonomous Grid Martingale Engine (Real-Time Tick Trailing)",
     desc: "Autonomous dynamic grid with break-even TP pooling, 4 technical entry modes (SMA20, Candle, Alligator, Ichimoku), 20-day ADR AutoConfig AI, and real-time tick basket break-even trailing for ranging markets.",
-    winRate: "84.2%",
-    drawdown: "< 12.8%",
     timeframe: "M5 Recommended",
     instruments: "Ranging FX Pairs (EURUSD, GBPUSD, AUDUSD, Cent Gold)",
     sparkline: "M0,110 Q50,90 100,98 T200,75 T300,60 T400,38 T500,20",
@@ -404,8 +403,6 @@ const STRATEGY_DATA = {
     version: "v1.01",
     tagline: "Neural Signal Engine (ChatGPT 4o-mini + MQL5 Bridge)",
     desc: "Computer vision & LLM chart reasoning algorithm designed exclusively for XAUUSD gold breakouts with strict news and volatility gating.",
-    winRate: "91.0%",
-    drawdown: "< 8.5%",
     timeframe: "M15 / H1 Analysis",
     instruments: "XAUUSD (Gold)",
     sparkline: "M0,120 Q60,110 120,80 T240,65 T360,40 T440,25 T500,12",
@@ -417,8 +414,6 @@ const STRATEGY_DATA = {
     version: "v1.00",
     tagline: "Dual OCO Rapid-Fire Momentum Engine",
     desc: "Perpetually refreshes Buy Stop + Sell Stop brackets surrounding active price every 30s. Designed for high-impact CPI, NFP, and FOMC catalysts.",
-    winRate: "78.5%",
-    drawdown: "< 14.0%",
     timeframe: "M1 / M5 Catalyst",
     instruments: "All Major FX & Metals",
     sparkline: "M0,105 Q70,95 140,82 T260,70 T380,45 T450,30 T500,18",
@@ -430,8 +425,6 @@ const STRATEGY_DATA = {
     version: "v1.1",
     tagline: "Statistical Quantitative Sequence Model",
     desc: "Engineered specifically for US30 Dow Jones and NAS100 tech indices during high-liquidity New York session openings.",
-    winRate: "82.0%",
-    drawdown: "< 11.2%",
     timeframe: "M15 NY Session",
     instruments: "US30 / NAS100",
     sparkline: "M0,115 Q80,100 150,78 T270,55 T390,35 T460,22 T500,14",
@@ -443,8 +436,6 @@ const STRATEGY_DATA = {
     version: "v1.06",
     tagline: "Multi-Timeframe Trend Confirmation Suite",
     desc: "Synchronizes Bill Williams Alligator lips/teeth/jaws across up to 4 simultaneous timeframes with auto-compounding lot scaling.",
-    winRate: "86.5%",
-    drawdown: "< 13.5%",
     timeframe: "M15 / H1 Confirmation",
     instruments: "EURUSD, GBPUSD, USDJPY",
     sparkline: "M0,112 Q65,92 135,74 T255,58 T375,38 T445,24 T500,15",
@@ -456,8 +447,6 @@ const STRATEGY_DATA = {
     version: "v1.06",
     tagline: "Cloud Kumo Equilibrium & Trend Following",
     desc: "Automated Ichimoku Kinko Hyo strategy executing entries above bullish Kumo clouds with RSI & Stochastic confirmation filters.",
-    winRate: "85.0%",
-    drawdown: "< 12.0%",
     timeframe: "M30 / H1 Trend",
     instruments: "Trend-Dominant FX",
     sparkline: "M0,118 Q75,102 145,80 T265,60 T385,40 T455,26 T500,16",
@@ -472,6 +461,7 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeStrategy, setActiveStrategy] = useState("ea-budak-ubat");
   const currentStrat = STRATEGY_DATA[activeStrategy] || STRATEGY_DATA["ea-budak-ubat"];
+  const currentProduct = PRODUCTS.find((p) => p.slug === activeStrategy);
 
   // Community State (Spotlight showcase)
   const [comments, setComments] = useState([]);
@@ -640,6 +630,9 @@ export default function Home() {
             <span>✓ {PARTNER_BROKERS.length} partner brokers</span>
             <span>✓ Pure native MQL (no DLLs)</span>
           </p>
+          <p className="risk-note">
+            <strong>Risk warning:</strong> EA Budak Ubat is a grid/martingale system and margin trading can lose significant capital. Test on a demo account first and only trade money you can afford to lose.
+          </p>
 
           {/* RETURNING WHITELISTED CLIENT FAST-PASS: DIRECT DOWNLOADS */}
           <div className="whitelisted-fast-pass animate-in">
@@ -669,16 +662,16 @@ export default function Home() {
           <div className="jp-telemetry-strip animate-in">
             <div className="jp-telemetry-item">
               <span className="jp-telemetry-dot"></span>
-              <span>MODEL WIN RATE: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>84.2%</span></span>
+              <span>ENTRY ENGINES: <span className="jp-telemetry-val" style={{ color: "var(--liquid-cyan)" }}>4 (CANDLE · SMA20 · ALLIGATOR · ICHIMOKU)</span></span>
             </div>
             <div className="jp-telemetry-item">
-              <span>MAX DRAWDOWN: <span className="jp-telemetry-val" style={{ color: "var(--liquid-emerald)" }}>&lt; 12.8%</span></span>
+              <span>RISK PROFILE: <span className="jp-telemetry-val" style={{ color: "var(--liquid-gold)" }}>HIGH (GRID / MARTINGALE)</span></span>
             </div>
             <div className="jp-telemetry-item">
               <span>SOFTWARE COST: <span className="jp-telemetry-val" style={{ color: "#00f0ff" }}>$0 (100% FREE)</span></span>
             </div>
             <div className="jp-telemetry-item">
-              <span>AUTHORIZED ACCOUNTS: <span className="jp-telemetry-val">900+ VERIFIED</span></span>
+              <span>AUTHORIZED ACCOUNTS: <span className="jp-telemetry-val">{AUTHORIZED_ACCOUNTS_DISPLAY}</span></span>
             </div>
           </div>
 
@@ -690,12 +683,11 @@ export default function Home() {
                 <span className="flagship-hud-dot amber"></span>
                 <span className="flagship-hud-dot green"></span>
                 <span style={{ marginLeft: "6px", fontWeight: 700, color: "#e2e8f0" }}>
-                  EA BUDAK UBAT v1.67 // LIVE RUNTIME TELEMETRY
+                  EA BUDAK UBAT v1.67 // SAMPLE DASHBOARD
                 </span>
               </div>
               <div className="flagship-hud-live-tag">
-                <span className="pulse-dot-green"></span>
-                <span>REALTIME TICK MONITOR ACTIVE</span>
+                <span>ILLUSTRATIVE VALUES</span>
               </div>
             </div>
 
@@ -715,15 +707,15 @@ export default function Home() {
                 </div>
                 <div className="flagship-hud-cell">
                   <div className="flagship-hud-label">Weighted Break-Even Lock</div>
-                  <div className="flagship-hud-val" style={{ color: "#00f0ff" }}>1.08420 (+2.0 Pips Guaranteed)</div>
+                  <div className="flagship-hud-val" style={{ color: "#00f0ff" }}>1.08420 (+2.0 Pips Locked)</div>
                 </div>
                 <div className="flagship-hud-cell">
                   <div className="flagship-hud-label">Intra-Candle Tick Guard</div>
-                  <div className="flagship-hud-val" style={{ color: "#34d399" }}>ACTIVE (0.0ms Latency in OnTick)</div>
+                  <div className="flagship-hud-val" style={{ color: "#34d399" }}>ACTIVE (Checked Every Tick)</div>
                 </div>
                 <div className="flagship-hud-cell">
                   <div className="flagship-hud-label">Emergency Margin Cushion</div>
-                  <div className="flagship-hud-val" style={{ color: "#f59e0b" }}>4,850% (Protected &gt; 200%)</div>
+                  <div className="flagship-hud-val" style={{ color: "#f59e0b" }}>4,850% (Grid Freezes Below 200%)</div>
                 </div>
               </div>
             </div>
@@ -811,6 +803,9 @@ export default function Home() {
             <h2>Select Your Broker &amp; Unlock EA Free</h2>
             <p style={{ maxWidth: "800px", margin: "10px auto 0" }}>
               Register your live trading account under any of our official partner brokers below to receive permanent whitelist licensing for EA Budak Ubat at zero software cost.
+            </p>
+            <p className="risk-note" style={{ margin: "12px auto 0" }}>
+              <strong>Disclosure:</strong> these are partner (IB/affiliate) links. The broker pays us a referral commission based on your trading. Trading on margin carries a high risk of loss.
             </p>
           </div>
 
@@ -906,7 +901,7 @@ export default function Home() {
               {AFFILIATE_PERKS.map((perk, pIdx) => (
                 <div key={perk.title} className="affiliate-perk-card animate-in" style={{ animationDelay: `${pIdx * 0.06}s` }}>
                   <span className="perk-icon">{perk.icon}</span>
-                  <h4 className="perk-title">{perk.title}</h4>
+                  <h3 className="perk-title">{perk.title}</h3>
                   <p className="perk-desc">{perk.desc}</p>
                 </div>
               ))}
@@ -990,9 +985,9 @@ export default function Home() {
 
             <div className="arch-card animate-in">
               <span className="arch-icon">⚡</span>
-              <h3 className="arch-title">0.0ms Tick Basket Break-Even</h3>
+              <h3 className="arch-title">Tick-Level Basket Break-Even</h3>
               <p className="arch-desc">
-                The breakthrough v1.67 upgrade: monitors real-time price spikes across open baskets in OnTick(), locking in guaranteed positive pips the microsecond profit targets are touched—regardless of candle close timings.
+                The breakthrough v1.67 upgrade: monitors real-time price spikes across open baskets in OnTick(), locking in positive pips as soon as profit targets are touched—regardless of candle close timings.
               </p>
             </div>
 
@@ -1164,8 +1159,6 @@ export default function Home() {
               <PriceTierUrgency
                 currentPrice={149}
                 nextPrice={159}
-                soldInTier={7}
-                tierLimit={10}
                 marketUrl={MQL5_MARKET_LINK}
                 compact={true}
               />
@@ -1195,8 +1188,8 @@ export default function Home() {
           {/* INTERACTIVE STRATEGY MATRIX DECK */}
           <div className="strategy-matrix-container border-beam-card animate-in">
             <div className="sparkline-header">
-              <span className="sparkline-title">⚡ REALTIME STRATEGY TELEMETRY // {currentStrat.code}</span>
-              <span className="sparkline-val-badge">LIVE SIMULATION ACTIVE</span>
+              <span className="sparkline-title">⚡ STRATEGY OVERVIEW // {currentStrat.code}</span>
+              <span className="sparkline-val-badge">ILLUSTRATIVE</span>
             </div>
 
             {/* Strategy Selectors */}
@@ -1227,15 +1220,15 @@ export default function Home() {
 
                 <div className="strategy-telemetry-panel">
                   <div className="telemetry-cell">
-                    <div className="telemetry-cell-label">Model Win Rate</div>
-                    <div className="telemetry-cell-value" style={{ color: currentStrat.color }}>
-                      {currentStrat.winRate}
+                    <div className="telemetry-cell-label">Strategy Type</div>
+                    <div className="telemetry-cell-value" style={{ color: currentStrat.color, fontSize: "1rem" }}>
+                      {currentProduct?.category}
                     </div>
                   </div>
                   <div className="telemetry-cell">
-                    <div className="telemetry-cell-label">Drawdown Threshold</div>
-                    <div className="telemetry-cell-value" style={{ color: "var(--liquid-emerald)" }}>
-                      {currentStrat.drawdown}
+                    <div className="telemetry-cell-label">Platforms</div>
+                    <div className="telemetry-cell-value" style={{ color: "var(--liquid-emerald)", fontSize: "1rem" }}>
+                      {currentProduct?.platforms.join(" & ")}
                     </div>
                   </div>
                   <div className="telemetry-cell">
@@ -1284,10 +1277,10 @@ export default function Home() {
               <div className="sparkline-canvas-box">
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--text-muted)" }}>
-                    EQUITY ACCELERATION CURVE
+                    ILLUSTRATIVE CURVE
                   </span>
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: currentStrat.color, fontWeight: 700 }}>
-                    MAX GAIN
+                    NOT A BACKTEST
                   </span>
                 </div>
                 <svg className="sparkline-svg" viewBox="0 0 500 130">
@@ -1441,15 +1434,15 @@ export default function Home() {
               <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                 <div style={{ background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: "16px", padding: "18px 24px", textAlign: "center", minWidth: "120px" }}>
                   <div style={{ fontSize: "1.8rem", marginBottom: "4px", color: "#38bdf8", fontWeight: 900 }}>5</div>
-                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "#64748b", letterSpacing: "0.08em" }}>WORLDS</div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "var(--text-muted)", letterSpacing: "0.08em" }}>WORLDS</div>
                 </div>
                 <div style={{ background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: "16px", padding: "18px 24px", textAlign: "center", minWidth: "120px" }}>
                   <div style={{ fontSize: "1.8rem", marginBottom: "4px", color: "#f59e0b", fontWeight: 900 }}>6</div>
-                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "#64748b", letterSpacing: "0.08em" }}>TRADER RANKS</div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "var(--text-muted)", letterSpacing: "0.08em" }}>TRADER RANKS</div>
                 </div>
                 <div style={{ background: "rgba(0, 0, 0, 0.4)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: "16px", padding: "18px 24px", textAlign: "center", minWidth: "120px" }}>
                   <div style={{ fontSize: "1.8rem", marginBottom: "4px", color: "#ec4899", fontWeight: 900 }}>3.0x</div>
-                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "#64748b", letterSpacing: "0.08em" }}>MAX STREAK</div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 800, color: "var(--text-muted)", letterSpacing: "0.08em" }}>MAX STREAK</div>
                 </div>
               </div>
             </div>
@@ -1536,7 +1529,7 @@ export default function Home() {
                 <div className="about-stat-sub">Across 78 Repositories</div>
               </div>
               <div className="about-stat-card">
-                <span className="about-stat-number">900+</span>
+                <span className="about-stat-number">{AUTHORIZED_ACCOUNTS_DISPLAY}</span>
                 <div className="about-stat-label">Authorized Accounts</div>
                 <div className="about-stat-sub">MT4 &amp; MT5 Live Users</div>
               </div>

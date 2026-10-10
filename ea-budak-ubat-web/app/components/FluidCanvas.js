@@ -13,7 +13,10 @@ export default function FluidCanvas() {
     if (!ctx) return;
 
     let animationFrameId;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Reduced motion: paint one static frame. Touch devices: render at 1x, the background is soft gradients anyway.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const maxDpr = window.matchMedia("(pointer: coarse)").matches ? 1 : 2;
+    let dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
     let width = (canvas.width = window.innerWidth * dpr);
     let height = (canvas.height = window.innerHeight * dpr);
 
@@ -73,9 +76,10 @@ export default function FluidCanvas() {
     const ripples = [];
 
     const handleResize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
       width = canvas.width = window.innerWidth * dpr;
       height = canvas.height = window.innerHeight * dpr;
+      if (reduceMotion) render();
     };
 
     const handleMouseMove = (e) => {
@@ -441,7 +445,7 @@ export default function FluidCanvas() {
       ctx.fillStyle = vigGrad;
       ctx.fillRect(0, 0, logicalW, logicalH);
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!reduceMotion) animationFrameId = requestAnimationFrame(render);
     };
 
     render();

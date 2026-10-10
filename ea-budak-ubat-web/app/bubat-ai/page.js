@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BASE_OPEN_GRAPH } from "@/lib/siteMetadata";
 
 export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
@@ -7,6 +8,7 @@ export const metadata = {
     "Everything about Bubat AI: how it trades, its 16 safety walls, requirements, installation, the free 7-day trial, daily use, updates, privacy and troubleshooting.",
   alternates: { canonical: "/bubat-ai" },
   openGraph: {
+    ...BASE_OPEN_GRAPH,
     title: "Bubat AI | Local AI Forex Trading Agent for MetaTrader 5",
     description: "A forex trading agent that runs on your own PC with a local AI model. Free 7-day trial.",
     type: "website",

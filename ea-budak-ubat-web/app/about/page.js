@@ -5,6 +5,7 @@ import Link from "next/link";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import { playTactileClick } from "@/lib/audioSynthesizer";
+import { AUTHORIZED_ACCOUNTS_DISPLAY } from "@/lib/authorizedAccounts";
 
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const MQL5_SELLER_LINK = "https://www.mql5.com/en/users/syarief.azman/seller";
@@ -104,7 +105,7 @@ export default function AboutPage() {
               <div className="about-stat-sub">Across 78 Git Repos</div>
             </div>
             <div className="about-stat-card">
-              <span className="about-stat-number">900+</span>
+              <span className="about-stat-number">{AUTHORIZED_ACCOUNTS_DISPLAY}</span>
               <div className="about-stat-label">Authorized Accounts</div>
               <div className="about-stat-sub">MT4 &amp; MT5 Traders</div>
             </div>
@@ -365,7 +366,7 @@ export default function AboutPage() {
               <h3 className="about-pillar-title">Intra-Candle Tick Break-Even</h3>
               <p className="about-pillar-desc">
                 In v1.67, the EA calculates the volume-weighted average cost of all open layers on every tick. As soon as floating 
-                equity surpasses the safety threshold, the system moves stop-losses to guaranteed profit, closing entire heavy baskets 
+                equity surpasses the safety threshold, the system moves stop-losses into profit, closing entire heavy baskets 
                 on minor retracements.
               </p>
             </div>
