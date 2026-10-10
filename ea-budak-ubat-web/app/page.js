@@ -87,10 +87,10 @@ const PARTNER_BROKERS = [
     name: "Headway",
     badge: "🔥 $150 No-Deposit Bonus",
     headline: "Trade 5 Markets with No Deposit for 7 Days",
-    desc: "Claim a free $150 no-deposit trading bonus. Test EA Budak Ubat without depositing your own capital; profit withdrawals are subject to Headway's bonus terms.",
+    desc: "Claim a free $150 no-deposit trading bonus to try 5 markets for 7 days (profit withdrawals follow Headway's bonus terms). The free EA license still needs a $100 deposit.",
     id: "516d6b",
     url: "https://headway.partners/landings/en/bonus-150/?hwp=516d6b",
-    features: ["$150 Free Trading Credit", "Cent Accounts Supported", "Unlimited Leverage", "No Deposit Needed"],
+    features: ["$150 Free Trading Credit", "Cent Accounts Supported", "Unlimited Leverage", "No Deposit for Bonus"],
     minDeposit: "$0 (Free $150 Bonus)",
     color: "#f59e0b",
     btnBg: "linear-gradient(135deg, #f59e0b, #d97706)",
@@ -221,7 +221,7 @@ const AFFILIATE_PERKS = [
   {
     icon: "🪙",
     title: "Cent Account Capital Resilience",
-    desc: "Start with as little as $10 to $50. Cent accounts transform your capital into 1,000 to 5,000 units, letting grid martingale breathe safely.",
+    desc: "On a Cent account, the $100 qualifying deposit becomes 10,000 cent units, giving the grid far more room to breathe at 0.01 starting lots.",
   },
   {
     icon: "💬",
@@ -362,11 +362,11 @@ const HOME_FAQS = [
   },
   {
     q: "How do I get my account whitelisted?",
-    a: "Register with a partner broker using the links on this page, fund the account, then send your trading account number to @SyariefAzman on Telegram. Once it is added, the license checker on this page will show your account as authorized.",
+    a: "Register with a partner broker using the links on this page, deposit at least $100 USD (any account type), then send your trading account number to @SyariefAzman on Telegram. Once it is added, the license checker on this page will show your account as authorized.",
   },
   {
     q: "How much capital do I need?",
-    a: "Partner broker minimums start from $10 on cent accounts. For running the grid with 0.01 starting lots, at least $100 on a Cent account (or more on a Standard account) is recommended.",
+    a: "The free license requires a deposit of at least $100 USD on any account type. A Cent account is recommended for balances under $1,000 USD, because it gives the grid far more room at 0.01 starting lots. Each broker's own minimum deposit is shown on its card, but the free license needs the $100.",
   },
   {
     q: "Which pair and timeframe should I run it on?",
@@ -760,7 +760,7 @@ export default function Home() {
               <div className="affiliate-step-num">2</div>
               <h3 className="affiliate-step-title">Fund &amp; Submit Account ID</h3>
               <p className="affiliate-step-desc">
-                Fund your live trading account ($10 Cent or $100 Standard recommended). Then submit your account number via our online license checker or Telegram to get whitelisted.
+                Deposit at least $100 USD into your live trading account (any account type; Cent recommended under $1,000). Then submit your account number via our online license checker or Telegram to get whitelisted.
               </p>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                 <a href="#authorization" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
@@ -805,7 +805,7 @@ export default function Home() {
               Register your live trading account under any of our official partner brokers below to receive permanent whitelist licensing for EA Budak Ubat at zero software cost.
             </p>
             <p className="risk-note" style={{ margin: "12px auto 0" }}>
-              <strong>Disclosure:</strong> these are partner (IB/affiliate) links. The broker pays us a referral commission based on your trading. Trading on margin carries a high risk of loss.
+              <strong>Free license:</strong> deposit at least $100 USD (any account type). <strong>Disclosure:</strong> these are partner (IB/affiliate) links. The broker pays us a referral commission based on your trading. Trading on margin carries a high risk of loss.
             </p>
           </div>
 
@@ -836,7 +836,7 @@ export default function Home() {
 
                   <div className="partner-broker-meta-bar">
                     <span>PARTNER CODE: <strong className="partner-broker-code-highlight">{b.id}</strong></span>
-                    <span>MIN: {b.minDeposit}</span>
+                    <span>BROKER MIN: {b.minDeposit}</span>
                   </div>
                 </div>
 

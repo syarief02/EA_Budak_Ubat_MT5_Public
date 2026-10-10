@@ -61,8 +61,8 @@ const UNLOCKED_EAS = [
 const BROKER_BENEFITS = [
   {
     icon: "🪙",
-    title: "Akaun Cent Modal Serendah $10",
-    desc: "Sangat ideal untuk EA Martingale & Grid. Modal $10 dipaparkan sebagai 1,000 cents, membolehkan robot membuka lot 0.01 dengan ketahanan margin maksimum.",
+    title: "Akaun Cent untuk EA Grid",
+    desc: "Sangat ideal untuk EA Martingale & Grid. Deposit $100 dipaparkan sebagai 10,000 cents, membolehkan robot membuka lot 0.01 dengan ketahanan margin maksimum.",
   },
   {
     icon: "🚀",
@@ -94,11 +94,11 @@ const BROKER_BENEFITS = [
 const HEADWAY_FAQS = [
   {
     q: "Mengapa saya disyorkan guna Akaun Cent di Headway untuk EA?",
-    a: "EA berasaskan grid martingale seperti EA Budak Ubat memerlukan ketahanan modal apabila pasaran membuat retracement. Dengan akaun Cent, deposit serendah $10 atau $50 akan menjadi 1,000 atau 5,000 unit cent. Ini membolehkan EA berjalan dengan lot 0.01 mikro secara sangat selamat dan meminimumkan risiko drawdown.",
+    a: "EA berasaskan grid martingale seperti EA Budak Ubat memerlukan ketahanan modal apabila pasaran membuat retracement. Dengan akaun Cent, deposit $100 akan menjadi 10,000 unit cent. Ini membolehkan EA berjalan dengan lot 0.01 mikro secara sangat selamat dan meminimumkan risiko drawdown.",
   },
   {
     q: "Berapa modal minimum yang disyorkan?",
-    a: "Untuk Akaun Cent: Disyorkan serendah $10 hingga $100. Untuk Akaun Standard: Disyorkan $100 hingga $500 ke atas bergantung kepada tetapan lot dan bilangan pair yang anda jalankan.",
+    a: "Lesen EA percuma memerlukan deposit sekurang-kurangnya $100 USD (sebarang jenis akaun). Akaun Cent disyorkan untuk baki bawah $1,000. Untuk Akaun Standard, $100 hingga $500 ke atas disyorkan bergantung kepada tetapan lot dan bilangan pair yang anda jalankan.",
   },
   {
     q: "Adakah robot EA ini betul-betul percuma selepas saya mendaftar?",
@@ -223,8 +223,8 @@ export default function HeadwayLandingPage() {
           </h1>
 
           <p className="hero-subtitle animate-in" style={{ maxWidth: "780px", margin: "0 auto 28px" }}>
-            Nikmati kelebihan berdagang dengan broker antarabangsa yang mesra robot trading. Akaun Cent serendah{" "}
-            <strong>$10</strong>, leverage sehingga <strong>1:Unlimited</strong>, deposit/withdrawal pantas FPX & Crypto, serta pengaktifan whitelist percuma untuk kesemua Expert Advisor kami!
+            Nikmati kelebihan berdagang dengan broker antarabangsa yang mesra robot trading. Akaun Cent & Standard, leverage sehingga{" "}
+            <strong>1:Unlimited</strong>, deposit/withdrawal pantas FPX & Crypto, serta pengaktifan whitelist percuma untuk kesemua Expert Advisor kami dengan deposit <strong>$100</strong>!
           </p>
 
           {/* PARTNER CODE HIGHLIGHT BOX */}
@@ -276,7 +276,7 @@ export default function HeadwayLandingPage() {
               />
               <div className="headway-page-banner-desc">
                 <strong>🎁 Tawaran Khas: Bonus Tanpa Deposit $150 daripada Headway!</strong>
-                <p>Berdagang selama 7 hari merentasi 5 pasaran tanpa risiko modal sendiri. Uji EA Budak Ubat secara live & keluarkan keuntungan!</p>
+                <p>Berdagang selama 7 hari merentasi 5 pasaran tanpa deposit (pengeluaran keuntungan tertakluk kepada terma bonus Headway). Lesen EA percuma memerlukan deposit $100.</p>
               </div>
               <span className="headway-page-banner-cta">Tuntut $150 Bonus ➜</span>
             </a>
@@ -286,7 +286,7 @@ export default function HeadwayLandingPage() {
           <div className="trust-badges-bar animate-in">
             <div className="trust-badge-pill">
               <span className="icon">🪙</span>
-              <span>Akaun Cent Modal $10</span>
+              <span>Lesen EA: Deposit $100</span>
             </div>
             <div className="trust-badge-pill">
               <span className="icon">⚡</span>
@@ -433,7 +433,7 @@ export default function HeadwayLandingPage() {
               <div className="step-badge">2</div>
               <h3 className="step-title">Buka Akaun Cent / Standard</h3>
               <p className="step-body">
-                Di Dashboard Headway, buat akaun dagangan baharu (pilih <strong>MT4</strong> atau <strong>MT5</strong>, jenis <strong>Cent</strong> atau <strong>Standard</strong>). Lakukan deposit permulaan (serendah $10-$50 untuk akaun Cent).
+                Di Dashboard Headway, buat akaun dagangan baharu (pilih <strong>MT4</strong> atau <strong>MT5</strong>, jenis <strong>Cent</strong> atau <strong>Standard</strong>). Lakukan deposit sekurang-kurangnya <strong>$100 USD</strong> (sebarang jenis akaun; Cent disyorkan untuk baki bawah $1,000).
               </p>
               <div
                 style={{
