@@ -2,11 +2,11 @@
 // Platform separation: MT4 (852 accounts) and MT5 (881 accounts)
 
 export const BROKERS = [
+  { name: "FBS", id: "588292", url: "https://fbs.partners?ibl=154319&ibp=588292", support: "support@fbs.com" },
   { name: "Tickmill", id: "IB72324388", url: "https://tickmill.link/46cOQ2h", support: "support@tickmill.com" },
   { name: "RoboForex", id: "mxyg", url: "https://rinfinity.com/en/welcome-bonus?a=mxyg", support: "support@roboforex.com" },
   { name: "FISG", id: "CTt0Rd", url: "https://my.fisg.com/u/CTt0Rd", support: "support@fisg.com" },
   { name: "CXM Direct", id: "5062", url: "https://gocxm.co/links/go/5062", support: "clients@cxmdirect.com" },
-  { name: "FBS", id: "588292", url: "https://fbs.partners?ibl=154319&ibp=588292", support: "support@fbs.com" },
   { name: "Headway", id: "1021290", url: "https://headway.partners/user/signup?hwp=516d6b", support: "care@hw.site" },
   { name: "Markets4you", id: "4hcnvz4", url: "https://account.markets4you.online/en/user-registration/?affid=4hcnvz4", support: "support@markets4you.com" },
   { name: "InstaForex", id: "KUSD", url: "https://www.instaforex.com?x=KUSD", support: "support@instaforex.com" },

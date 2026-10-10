@@ -55,7 +55,7 @@ const SCENES = [
     time: "20.5s – 25.5s",
     img: "/reel/scene5_freelicense.jpg",
     headline: "Save $149 Upfront · Zero Subscription Fees",
-    desc: "3D rotating diamond token lands in center. Tier-1 partner broker badges orbit in 3D (Tickmill, RoboForex, XM, FBS, Eightcap, JustMarkets). Verified security shield confirms instant whitelist.",
+    desc: "3D rotating diamond token lands in center. Tier-1 partner broker badges orbit in 3D (FBS, Tickmill, RoboForex, XM, Eightcap, JustMarkets). Verified security shield confirms instant whitelist.",
     sfx: "Heavy metallic impact + golden coin shimmer sparkle sequence (2400Hz to 3800Hz).",
     badge: "Act 5 // Whitelist",
     color: "#00f0ff"

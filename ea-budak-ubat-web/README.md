@@ -890,11 +890,11 @@ Clients who have registered through my link can just PM the trading account numb
 
 | Broker | Register Link | Partner/Affiliate ID | Support Email |
 |---|---|---|---|
+| **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` | support@fbs.com |
 | **Tickmill** | [Register](https://tickmill.link/46cOQ2h) | `IB72324388` | support@tickmill.com |
 | **RoboForex** | [Register](https://rinfinity.com/en/welcome-bonus?a=mxyg) | `mxyg` | info@roboforex.com |
 | **FISG** | [Register](https://my.fisg.com/u/CTt0Rd) | `CTt0Rd` | support@fisg.com |
 | **CXM** | [Register](https://gocxm.co/links/go/5062) | `5062` | support@cxm.com |
-| **FBS** | [Register](https://fbs.partners?ibl=154319&ibp=588292) | `588292` | support@fbs.com |
 | **HeadWay** | [Register](https://headway.partners/user/signup?hwp=516d6b) | `1021290` | care@hw.site |
 | **Markets4you** | [Register](https://account.markets4you.online/en/user-registration/?affid=4hcnvz4) | `4hcnvz4` | info@markets4you.com |
 | **InstaForex** | [Register](https://www.instaforex.com?x=KUSD) | `KUSD` | support@instaforex.com |

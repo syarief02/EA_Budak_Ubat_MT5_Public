@@ -18,10 +18,23 @@ const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
 const PARTNER_BROKERS = [
   {
+    name: "FBS",
+    badge: "🏆 #1 Choice · 1:3000 Extreme Leverage",
+    headline: "Ultra-Fast 0.01s Execution & Extreme Margin Power",
+    desc: "The #1 recommended broker for high-speed algorithmic execution. High-performance Standard accounts with market execution from 0.01s, spreads from 0.7 pips, and industry-leading leverage up to 1:3000 for maximum margin safety.",
+    id: "588292",
+    url: "https://fbs.partners?ibl=154319&ibp=588292",
+    features: ["1:3000 Extreme Leverage", "0.01s Ultra-Fast Execution", "Spreads from 0.7 Pips", "Low $5 Minimum Deposit"],
+    minDeposit: "$5 (Standard Account)",
+    color: "#00be40",
+    btnBg: "linear-gradient(135deg, #00be40, #059669)",
+    btnColor: "#ffffff",
+  },
+  {
     name: "Tickmill",
-    badge: "🏆 #1 Recommended · 0.0 Raw Spreads",
+    badge: "🛡️ #2 Choice · 0.0 Raw Spreads",
     headline: "Institutional ECN Execution & Lowest Gold Spreads",
-    desc: "The #1 recommended broker for EA Budak Ubat & GoldMind AI. True ECN execution with raw spreads from 0.0 pips, lowest gold commissions, and zero freeze levels for maximum EA profitability.",
+    desc: "The top recommended broker for EA Budak Ubat & GoldMind AI. True ECN execution with raw spreads from 0.0 pips, lowest gold commissions, and zero freeze levels for maximum EA profitability.",
     id: "IB72324388",
     url: "https://tickmill.link/46cOQ2h",
     features: ["Raw Spreads from 0.0", "True ECN Execution", "Lowest Gold Commission", "VIP Fast Trade Servers"],
@@ -32,7 +45,7 @@ const PARTNER_BROKERS = [
   },
   {
     name: "RoboForex",
-    badge: "🛡️ #2 Choice · ProCent & $30 Bonus",
+    badge: "🛡️ #3 Choice · ProCent & $30 Bonus",
     headline: "ProCent Cent Accounts & Drawdown-Resilient Bonus",
     desc: "The premier cent-account broker for Grid Martingale EAs. Receive a 30 USD non-withdrawable Welcome Bonus that stays in your account during drawdowns. ProCent micro-lots provide maximum margin depth to withstand volatile market swings.",
     id: "mxyg",
@@ -54,19 +67,6 @@ const PARTNER_BROKERS = [
     minDeposit: "$10 (Micro / Standard)",
     color: "#ef4444",
     btnBg: "linear-gradient(135deg, #ef4444, #dc2626)",
-    btnColor: "#ffffff",
-  },
-  {
-    name: "FBS",
-    badge: "⚡ 1:3000 Extreme Leverage · Standard",
-    headline: "Ultra-Fast 0.01s Execution & Extreme Margin Power",
-    desc: "High-performance Standard accounts with market execution from 0.01s, spreads from 0.7 pips, and industry-leading leverage up to 1:3000. Perfect for high-speed algorithmic execution.",
-    id: "588292",
-    url: "https://fbs.partners?ibl=154319&ibp=588292",
-    features: ["1:3000 Extreme Leverage", "0.01s Ultra-Fast Execution", "Spreads from 0.7 Pips", "Low $5 Minimum Deposit"],
-    minDeposit: "$5 (Standard Account)",
-    color: "#00be40",
-    btnBg: "linear-gradient(135deg, #00be40, #059669)",
     btnColor: "#ffffff",
   },
   {
@@ -756,7 +756,7 @@ export default function Home() {
               <div className="affiliate-step-num">1</div>
               <h3 className="affiliate-step-title">Register Broker Account</h3>
               <p className="affiliate-step-desc">
-                Select one of our official authorized brokers below (Tickmill, RoboForex, XM, FBS, JustMarkets, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
+                Select one of our official authorized brokers below (FBS, Tickmill, RoboForex, XM, JustMarkets, Headway, etc.) and create a new MT4 or MT5 account using our partner link.
               </p>
               <a href="#broker-partners" className="btn btn-secondary btn-sm" onClick={() => playTactileClick(0.08)}>
                 View Recommended Brokers ↓
@@ -1942,10 +1942,10 @@ export default function Home() {
             <div>
               <h4>Authorized Brokers</h4>
               <ul className="footer-links">
-                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #1 Choice)</a></li>
-                <li><a href="https://rinfinity.com/en/welcome-bonus?a=mxyg" target="_blank" rel="noopener noreferrer">RoboForex (ProCent · #2 Choice)</a></li>
+                <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (1:3000 Leverage · #1 Choice)</a></li>
+                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #2 Choice)</a></li>
+                <li><a href="https://rinfinity.com/en/welcome-bonus?a=mxyg" target="_blank" rel="noopener noreferrer">RoboForex (ProCent · #3 Choice)</a></li>
                 <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
-                <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (1:3000 Leverage)</a></li>
                 <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>
                 <li><a href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b" target="_blank" rel="noopener noreferrer">Headway ($150 Bonus)</a></li>
                 <li><a href="https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923" target="_blank" rel="noopener noreferrer">HF Markets (Cent Account)</a></li>
