@@ -43,8 +43,8 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 > - **The expiry date only applies to trials on unauthorized real accounts.** This covers `expDate` in the source, the `YYYYMMDD` suffix in binary file names (e.g. `- 20261030.ex4`), and "Expires 2026-10-30" on the website. Demo accounts never expire either.
 > - The monthly expiry update (`update-ea.ps1`) only moves the trial cutoff. It does not affect authorized customers.
 > - **Customer replies, Telegram posts and site copy for an authorized account** must say the license is permanent (no expiry). NEVER tell an authorized customer their EA "expires", is "valid until <date>", or must be downloaded again each month to keep working. Mention new monthly builds only as optional updates.
-> - How the code enforces it: `RunAuthorization()` / `ExpiryCheck()` skip the date when `isAuthorized()` or `IsDemo()` is true. The web checker (`checkAccount()` in `ea-budak-ubat-web/lib/authorizedAccounts.js`) returns `"Permanent (No Expiry)"` for whitelisted accounts and `"Trial Mode (Expires …)"` for everyone else.
-> - ⚠️ **Known gap: MathEdge Pro (MT4 `MathEdge Pro.mq4` and MT5 `MT5/MathEdge Pro.mq5`).** `IsExpired()` in `OnInit()` / `OnTick()` never checks `isAuthorized()`, so these builds currently expire for ALL accounts, authorized ones included. Do not promise MathEdge Pro users a permanent license until this is fixed. Remove this bullet once it is.
+> - How the code enforces it: `RunAuthorization()` / `ExpiryCheck()` skip the date when `isAuthorized()` or `IsDemo()` is true (MathEdge Pro: `HasPermanentLicense()` inside `IsExpired()`). The web checker (`checkAccount()` in `ea-budak-ubat-web/lib/authorizedAccounts.js`) returns `"Permanent (No Expiry)"` for whitelisted accounts and `"Trial Mode (Expires …)"` for everyone else.
+> - **Any new EA must follow the same rule:** the expiry check runs only when the account is real AND not in `allowedAccountNumbers`.
 
 ---
 
