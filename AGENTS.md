@@ -92,6 +92,15 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd ".\ea-budak-ubat-
 
 ---
 
+### 4. Add a Newly Published MQL5 Market Product to eabudakubat.com
+When a product from the MQL5 daily generator is published (e.g. `add Fulcrum Value Profile #201778 to the website`):
+1. **Storefront row**: the generator's `database/supabase_client.py publish "<Name>" <ID> <url>` inserts the `mql_products` row; curate its `category`, `icon`, `description`, `target_assets`, `price`, `color` and `display_order` (previous max + 1).
+2. **Fallback list**: append the same entry to `FALLBACK_PRODUCTS` in `ea-budak-ubat-web/app/api/products/route.js` (copy the shape of the last entry). The live site currently serves this fallback list, so the product only appears once this change is deployed.
+3. **Verify, Push & Deploy**: `node --check ea-budak-ubat-web/app/api/products/route.js`, commit `feat(web): add <Name> (#<ID>) to MQL5 products showcase`, push (Vercel deploys production from git), confirm the slug at `https://eabudakubat.com/api/products?t=<timestamp>`, then run the MQL5 Forge sync.
+*Full end-to-end flow (build, publish on MQL5, website, announcement): `MQL5 daily EA generator/agents.md`, steps 8-10.*
+
+---
+
 ## 📁 Repository & Path Directory Mapping
 
 | Key | Location |
