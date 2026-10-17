@@ -116,6 +116,9 @@ function Section({ id, title, children }) {
 const IMG = "/bubat-ai/bubat-ai-";
 const WIDE = { width: 1920, height: 1260 };
 const SETUP = { width: 1554, height: 1104 };
+const SCORE = { width: 1533, height: 243 };
+const LAB = { width: 1533, height: 650 };
+const EDGE = { width: 1533, height: 558 };
 
 function Shot({ name, size = WIDE, alt, caption, eager }) {
   const src = `${IMG}${name}.webp`;
@@ -205,8 +208,8 @@ export default function BubatAIPage() {
           </p>
           <div id="top-shot" style={{ marginTop: "34px", scrollMarginTop: "100px" }}>
             <Shot name="overview" eager
-                  alt="Bubat AI Overview screen: balance, equity, health check, agent status and five open demo positions with stop loss and take profit"
-                  caption="The Overview screen on a demo account: balance, the health check, agent status and the bot's open trades, each with a stop loss and take profit. All screenshots on this page are from the real app on a demo account; the account number, broker and email are replaced." />
+                  alt="Bubat AI Overview screen: balance, equity, health check, agent status and open demo positions, the first ones tagged Lab S0118"
+                  caption="The Overview screen on a demo account (17 October 2026): balance, the health check, agent status and the bot's open trades, each with a stop loss and take profit. Trades tagged Lab S0118 come from the Strategy Lab's daily breakout strategy. All screenshots on this page are from the real app on a demo account; the account number, broker and email are replaced." />
           </div>
         </div>
       </section>
@@ -259,6 +262,9 @@ export default function BubatAIPage() {
               worse. A newer prompt that teaches it how its trades really work is still being measured against the old
               one on live decisions; it waits much more and has too few signals to judge yet.
             </p>
+            <Shot name="edge" size={EDGE}
+                  alt="Edge study card on the Brain tab: 3968 past moments; old prompt NO EDGE, knowledge prompt INCONCLUSIVE, compared with following the H1 trend, always buy and always sell"
+                  caption="The edge study on the Brain tab. Edge is the result minus what simply holding that side earned on the same pair, so riding a trend does not count as skill. The rule for the verdict was fixed before the study ran." />
             <p>
               So trading is moving, step by step, from the AI&apos;s calls to rule-based strategies that pass the{" "}
               <a href="#lab">Strategy Lab</a>&apos;s tests. The first one, a daily breakout strategy that only buys,
@@ -440,8 +446,8 @@ export default function BubatAIPage() {
               <li>Ideas that would need a code change are listed separately, as suggestions only.</li>
             </ul>
             <Shot name="brain"
-                  alt="Brain tab: the latest assessment and proposals P3 and P4, each labelled SAFER with a report check, reason, evidence and Reject or Approve buttons"
-                  caption="The Brain tab. Each proposal shows the exact change, a SAFER or RISKIER label set by code, a report check computed from your real results, and the brain's own reason. Nothing changes until you press Approve." />
+                  alt="Brain tab: the latest assessment, nothing waiting for a decision, and decided proposals: P10 rejected, P7 to P9 withdrawn"
+                  caption="The Brain tab: the latest assessment, then the proposals. Nothing is waiting here; P10 was rejected by the owner (it repeated rules already in force) and P7 to P9 withdrew themselves when a fresh replay no longer supported them. A waiting proposal shows the change, a SAFER or RISKIER label, the replay and Approve / Reject buttons." />
           </Section>
 
           <Section id="lab" title="The Strategy Lab">
@@ -466,6 +472,12 @@ export default function BubatAIPage() {
               Overview&apos;s <strong>AI vs Strategy Lab</strong> card scores both side by side on your account (closed
               trades, average R, win rate, net result), and the Brain tab lists what the Lab is testing and why ideas failed.
             </p>
+            <Shot name="lab" size={LAB}
+                  alt="Strategy Lab card on the Brain tab: 388 strategies tested, S0118 Daily Breakout Buy-Only Low live, the closest failed ideas with the reason each failed"
+                  caption="The Strategy Lab card on the Brain tab: S0118 is live; below it, the closest misses and why each failed (too few trades, or not enough above drift on the years it was not built from)." />
+            <Shot name="scoreboard" size={SCORE}
+                  alt="AI vs Strategy Lab card: since 11 October, AI 20 closed trades at -0.163R, Strategy Lab 2 closed trades at -1.000R"
+                  caption="The AI vs Strategy Lab card on the Overview, scored the same way over the same period. On 17 October the Lab had only 2 closed trades (both at the stop) and 7 still open: far too few to judge." />
           </Section>
 
           <Section id="never" title="What the AI can never do">
@@ -501,8 +513,8 @@ export default function BubatAIPage() {
             </p>
             <Table head={["#", "Wall", "What it does"]} rows={WALLS.map((w, i) => [i + 1, w[0], w[1]])} />
             <Shot name="logs"
-                  alt="Logs tab, Trades log: a list of trades refused by the safety walls for counter-trend direction, spread too wide, and the gold balance minimum"
-                  caption="The walls at work in Logs, then Trades: signals refused because they went against the 1-hour trend, the spread was wider than 3.5 pips, or the balance was under $300 for gold. Every refusal is written down with its reason." />
+                  alt="Logs tab, Trades log: signals refused by the safety walls (max open trades, session profile, session slot cap, open risk cap) and one trade opened"
+                  caption="The walls at work in Logs, then Trades: signals refused because all 10 trade slots were full, the New York session was restricted after losing, its one slot was taken, or the day's open-risk budget was used up. One AUDUSD trade passed every wall and opened. Every refusal is written down with its reason." />
           </Section>
 
           <Section id="requirements" title="What you need">
@@ -586,7 +598,7 @@ export default function BubatAIPage() {
             />
             <p>The Overview is pictured <a href="#top-shot">at the top of this page</a>.</p>
             <Shot name="chat"
-                  alt="Chat tab: the question Why is the bot losing money? and the AI's answer listing win rate, net result, spread costs, weak sessions and symbols"
+                  alt="Chat tab: the question Why is the bot losing money? and the AI's answer with a table of trades, win rate, net result, expectancy and spread cost"
                   caption="A real Chat answer, from the local AI on this PC in about a minute. It reads the bot's own results, so it can tell you plainly where the losses come from." />
             <p><strong>Chat examples:</strong> &quot;Why is the bot losing money?&quot;, &quot;Give me entry, TP and SL for GBPUSD&quot;, &quot;Which pairs look best this session?&quot;. Commands: <code>think &lt;question&gt;</code> forces the deep model, <code>fast &lt;question&gt;</code> the quick one, <code>clear</code> resets the conversation, <code>approve P5</code> / <code>reject P5 reason</code> decide a proposal.</p>
             <p><strong>Start / Stop agent</strong> (top right) controls trading. <strong>Stop</strong> lets the agent finish its current step; open trades keep their stop loss and take profit in MetaTrader 5.</p>
@@ -595,8 +607,8 @@ export default function BubatAIPage() {
               <code>%LOCALAPPDATA%\Programs\Bubat AI\app\forex_local_agent\config.json</code>. Stop the agent, edit, then start it again. Your settings are kept when Bubat AI updates.
             </p>
             <Shot name="settings"
-                  alt="Settings tab: account and license (free trial, 6 days left), data sharing, updates, trading safety and setup"
-                  caption="Settings: your account and license, data sharing and deleting it, updates (with automatic weekend updates), and Run setup again." />
+                  alt="Settings tab: account and license (free trial, 6 days left), shared trades and signals, updates, automatic agent restart and start with Windows"
+                  caption="Settings: your account and license, sharing of trade results and signals (and deleting them), updates (optionally installed while the market is closed), automatic agent restart and starting with Windows." />
           </Section>
 
           <Section id="running" title="Keeping it running">
