@@ -5,7 +5,7 @@ export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
   title: "Bubat AI | Local AI Forex Trading Agent for MetaTrader 5 (User Guide)",
   description:
-    "Everything about Bubat AI: how it trades, its 16 safety walls, requirements, installation, the free 7-day trial, daily use, updates, privacy and troubleshooting.",
+    "Everything about Bubat AI: how the AI trades, the Strategy Lab, its 17 safety walls, honest results, requirements, installation, the free 7-day trial, daily use, updates, privacy and troubleshooting.",
   alternates: { canonical: "/bubat-ai" },
   openGraph: {
     ...BASE_OPEN_GRAPH,
@@ -15,7 +15,8 @@ export const metadata = {
   },
 };
 
-const DOWNLOAD = "https://github.com/syarief02/bubat-ai-releases/releases/latest";
+// During the beta every release is a GitHub pre-release, which /releases/latest skips
+const DOWNLOAD = "https://github.com/syarief02/bubat-ai-releases/releases";
 const EMAIL = "support@eabudakubat.com";
 
 const TOC = [
@@ -27,10 +28,12 @@ const TOC = [
   ["order", "From signal to order"],
   ["manage", "Managing open trades"],
   ["sessions", "Sessions and daily grading"],
+  ["learns", "How it learns"],
   ["review", "The daily review"],
+  ["lab", "The Strategy Lab"],
   ["never", "What the AI can never do"],
   ["example", "A worked example"],
-  ["safety", "The 16 safety walls"],
+  ["safety", "The 17 safety walls"],
   ["requirements", "What you need"],
   ["install", "Install, step by step"],
   ["models", "Which AI your PC gets"],
@@ -49,17 +52,18 @@ const WALLS = [
   ["Entry window", "Optional trading hours. Off by default (all sessions trade)."],
   ["Confidence cap", "Signals the AI is \"too sure\" about (above 0.89) are refused: in testing they did worse, not better."],
   ["Demo account", "Real-money accounts are refused unless you switch this off by hand."],
-  ["H1 trend", "Never buys against a falling 1-hour trend, never sells against a rising one."],
-  ["Daily loss stop", "After losing 5% of the balance in one day (UTC), no new trades until the next day."],
-  ["Capacity", "At most 10 open trades at once."],
+  ["H1 trend", "Never buys against a falling 1-hour trend, never sells against a rising one (AI trades)."],
+  ["Daily loss stop", "After losing 8% of the balance in one day (UTC), no new trades until the next day."],
+  ["Capacity", "At most 10 open trades at once. Strategy Lab trades may hold at most 7 of them, so the AI always keeps room."],
   ["One per pair", "Only one open trade per currency pair."],
   ["News blackout", "No trades from 30 minutes before to 15 minutes after big news. NFP, CPI and Fed decisions pause every pair."],
-  ["Currency exposure", "At most 3 open trades involving the same currency."],
+  ["Currency exposure", "At most 3 open trades involving the same currency, counted separately for the AI (together with your manual trades) and for the Strategy Lab."],
   ["Gold guard", "No gold (XAUUSD) on accounts under $300."],
   ["Risk per trade", "Refuses a trade whose stop loss would cost more than 2% of the balance."],
+  ["Open risk", "Refuses a trade when what all open trades would lose at their stops, plus this one, is more than what is left of the day's 8% loss limit. Strategy Lab trades together may risk at most 6% of the balance."],
   ["Spread (pips)", "Refuses when the spread is wider than 3.5 pips."],
   ["Spread cost", "Refuses when the spread eats more than 6% of the stop-loss distance."],
-  ["Session rules", "Each session (Asia, London, New York...) has its own trade slots, spread limit and loss budget, tightened automatically when that session keeps losing."],
+  ["Session rules", "Each session (Asia, London, New York...) has its own trade slots, spread limit and loss budget, tightened automatically when that session keeps losing (AI trades)."],
   ["Margin", "Refuses when there isn't enough free margin."],
 ];
 
@@ -79,12 +83,16 @@ const TROUBLE = [
   ["Health check shows WARN or FAULT", "Open Overview: each line says what is wrong. FAULT means something needs fixing now."],
   ["Model download stopped", "Run setup again from Settings and press Install: downloads continue where they stopped."],
   ["Chat answers are slow", "Deep \"why\" questions use the larger model and can take 1 to 5 minutes, longer on a PC without a graphics card."],
+  ["Games stutter while the market is open", "The trading AI stays loaded on the graphics card (about 5 GB) between its hourly decisions. Stop the agent, set \"ollama_keep_alive\": null in config.json, and start it again: the memory is then freed a few minutes after each decision, and each decision starts a little slower."],
+  ["A trade hit its stop around 05:00 or 06:00 Malaysia time", "That is the daily rollover: for about an hour the broker's spreads widen, often to 10 to 35 pips, so a stop close to the price can be hit by the spread alone. Monday's open (Sunday night in New York) is the widest."],
   ["Something broke after an update", "Settings, then Go back to the previous version."],
 ];
 
 const FAQ = [
   ["Will it make me money?", "Nobody can promise that, and so far it hasn't: see Honest results above. Treat it as an experiment on a demo account."],
-  ["Why does it trade so rarely?", "By design. A trade needs confidence of 0.80 or more, which the AI only gives when a clear trend on both the 5-minute and 1-hour charts lines up with a matching news headline, and then all 16 safety walls must agree. Quiet, news-free or choppy markets mean hours of WAIT."],
+  ["Why does it trade so rarely?", "By design. A trade needs confidence of 0.80 or more, which the AI only gives when a clear trend on both the 5-minute and 1-hour charts lines up with a matching news headline, and then all 17 safety walls must agree. Quiet, news-free or choppy markets mean hours of WAIT."],
+  ["What is the difference between AI trades and Lab trades?", "AI trades come from the AI's hourly BUY / SELL calls and are labelled \"Bubat AI\" in MetaTrader 5. Lab trades come from a fixed rule-based strategy that passed the Strategy Lab's tests and that you approved; they are labelled \"Bubat Lab\" and the strategy's ID. Both use 0.01 lot and the same account safety walls, and the Overview's AI vs Strategy Lab card scores them side by side."],
+  ["Why does a Lab trade stay open for days?", "Lab strategies trade daily or 4-hour charts with wide stops, and close a trade at its stop, its target, its own exit signal or after a set number of bars, exactly as they were tested. They don't use the AI's break-even or trailing stop."],
   ["Can I use it on a real-money account?", "Not by default. You would have to change a setting by hand, and we strongly advise against it until it has been profitable on demo for months."],
   ["Does it send my trades or account to anyone?", "Your account number, balance and money amounts never leave your PC. During the trial, the bot's trade results (pair, direction, result in R) are shared to improve Bubat AI. See Your data."],
   ["Does it need the internet?", "Yes, for live news, the license check and updates. The AI itself runs on your PC. If the license server can't be reached, it keeps trading for up to 3 days."],
@@ -177,10 +185,11 @@ export default function BubatAIPage() {
             Bubat AI: <span className="gradient-text">a forex trading agent that runs on your own PC</span>
           </h1>
           <p className="hero-subtitle" style={{ margin: "0 0 26px", fontSize: "1.1rem", lineHeight: 1.75 }}>
-            An AI model on your computer reads live MetaTrader 5 prices and the news every 5 minutes and decides
-            whether to buy, sell or wait. Fixed rules, not the AI, set every price, lot size and stop, and 16 safety
-            walls can veto any trade. This page explains everything: exactly how the AI makes each trading decision,
-            how to install it, the free trial, and what to expect.
+            An AI model on your computer reads live MetaTrader 5 prices and the news once an hour and decides
+            whether to buy, sell or wait. Fixed rules, not the AI, set every price, lot size and stop, and 17 safety
+            walls can veto any trade. Next to it, a Strategy Lab tests rule-based strategies on years of history and
+            can trade the few that pass, once you approve them. This page explains everything: exactly how each
+            trading decision is made, how to install it, the free trial, and what to expect.
           </p>
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <a href={DOWNLOAD} target="_blank" rel="noopener noreferrer" className="nav-cta"
@@ -224,7 +233,7 @@ export default function BubatAIPage() {
               free engine called Ollama: no cloud AI service and no AI subscription.
             </p>
             <ul>
-              <li><strong>It is:</strong> an automated agent that analyses 28 currency pairs and gold every 5 minutes, opens and manages trades with stop loss and take profit, and explains its reasoning in a chat.</li>
+              <li><strong>It is:</strong> an automated agent that analyses 28 currency pairs and gold once an hour, opens and manages trades with stop loss and take profit, tests its own rule-based strategies in a Strategy Lab, and explains its reasoning in a chat.</li>
               <li><strong>It isn&apos;t:</strong> a guaranteed money-maker, a signal service, financial advice, or a licensed investment product.</li>
               <li><strong>Separate from EA Budak Ubat:</strong> that is a grid Expert Advisor running inside MetaTrader. Bubat AI is its own app.</li>
             </ul>
@@ -232,15 +241,30 @@ export default function BubatAIPage() {
 
           <Section id="results" title="Honest results so far">
             <p>
-              On a demo account between 28 September and 3 October 2026, the bot made <strong>419 trades</strong> with a
-              <strong> 36% win rate</strong> and lost about <strong>0.29R per trade</strong> (R is the amount risked by
-              the stop loss): a net loss. The daily review found most of the loss came from spread costs, trade
-              management and weak sessions rather than the AI&apos;s direction calls, and several safety walls were
-              added in response. Those trades were made by an earlier version with an older AI model (Qwen3 8B), which
-              gave most signals a high score. Since 4 October 2026 the trading AI is Qwen3.5, which follows the
-              confidence rules more strictly and so trades far less often (see{" "}
-              <a href="#decides">How it decides</a>). There are no results for it yet. Results may improve or not; that
-              is why it trades demo accounts only by default.
+              On a demo account between 28 September and 3 October 2026, an earlier version with an older AI model
+              (Qwen3 8B) made <strong>419 trades</strong> with a <strong>36% win rate</strong> and lost about{" "}
+              <strong>0.29R per trade</strong> (R is the amount risked by the stop loss). Several safety walls were
+              added in response, and the trading AI became Qwen3.5, which trades far less often.
+            </p>
+            <p>
+              From 3 to 16 October 2026, after those changes, the AI made <strong>71 trades</strong>. It won{" "}
+              <strong>58%</strong> of them but still lost about <strong>0.14R per trade</strong>: its wins are small
+              (break-even and trailing exits) and its losses are full stops. The safety walls did their job: in the
+              week to 16 October, the signals they refused would also have lost money.
+            </p>
+            <p>
+              We then tested whether the AI&apos;s calls have an edge at all: an <strong>edge study</strong> replayed
+              almost 4,000 moments from a year of price history (September 2025 to October 2026). Its BUY / SELL calls
+              did <strong>no better than simply following the 1-hour trend</strong>, and its most confident calls did
+              worse. A newer prompt that teaches it how its trades really work is still being measured against the old
+              one on live decisions; it waits much more and has too few signals to judge yet.
+            </p>
+            <p>
+              So trading is moving, step by step, from the AI&apos;s calls to rule-based strategies that pass the{" "}
+              <a href="#lab">Strategy Lab</a>&apos;s tests. The first one, a daily breakout strategy that only buys,
+              has traded on our demo since 11 October 2026 next to the AI: far too few trades to judge yet. The AI keeps
+              trading while the Lab looks for more. Results may improve or not; that is why it trades demo accounts
+              only by default.
             </p>
           </Section>
 
@@ -251,27 +275,33 @@ export default function BubatAIPage() {
               everything that involves money</strong>: entry price, stop loss, take profit, lot size, and whether the trade
               is allowed at all. The AI never calculates a price, never sees your balance, and cannot switch off a rule.
             </p>
-            <p>This happens in a loop that repeats every 5 minutes while the forex market is open:</p>
+            <p>
+              This happens <strong>once an hour</strong>, at the start of each hour, while the forex market is open
+              (until 10 October 2026 it was every 5 minutes: about 35,000 answers in 5 days, with the graphics card
+              busy two minutes in every five):
+            </p>
             <ol>
-              <li><strong>Look:</strong> for each of the 29 instruments, gather charts, news and the bot&apos;s own recent history.</li>
+              <li><strong>Look:</strong> for each of the 29 instruments, gather charts, news and the bot&apos;s own recent decisions.</li>
               <li><strong>Decide:</strong> the AI answers BUY, SELL or WAIT with a confidence score.</li>
               <li><strong>Calculate:</strong> for strong signals, the rules work out the exact trade.</li>
-              <li><strong>Check:</strong> the best signals go first, and each must pass all 16 safety walls.</li>
-              <li><strong>Trade and manage:</strong> orders go to MetaTrader 5; open trades are watched every 15 seconds.</li>
-              <li><strong>Learn:</strong> closed trades are recorded, each session is graded daily, and (on 16 GB PCs) a daily review proposes improvements for you to approve.</li>
+              <li><strong>Check:</strong> the best signals go first, and each must pass all 17 safety walls.</li>
+              <li><strong>Trade and manage:</strong> orders go to MetaTrader 5; open trades are watched every 15 seconds, all hour long.</li>
+              <li><strong>Learn:</strong> every signal is scored against what prices really did, each session is graded daily, the Strategy Lab tests new strategies every night, and (on 16 GB PCs) a daily review proposes improvements for you to approve.</li>
             </ol>
           </Section>
 
           <Section id="sees" title="What the AI sees for each pair">
-            <p>Every 5 minutes, at the close of each 5-minute (M5) candle, the AI receives a short report for one pair at a time:</p>
+            <p>At the start of each hour, the AI receives a short report for one pair at a time:</p>
             <Table
               head={["Input", "What it contains"]}
               rows={[
-                ["Price and trend", "Current price; where it sits against the 20 and 50 moving averages (EMA); a plain label such as \"STRONG BEARISH (below 20 & 50 EMA)\"; the % change over the last 100 candles; the high and low of that range; the last 5 candles."],
+                ["Price and trend", "Current price on the 5-minute (M5) chart; where it sits against the 20 and 50 moving averages (EMA); a plain label such as \"STRONG BEARISH (below 20 & 50 EMA)\"; the % change over the last 100 candles; the high and low of that range; the last 5 candles."],
                 ["Momentum", "RSI(14) with a label (oversold, bearish pressure, bullish pressure, overbought) and MACD with its signal line and histogram."],
                 ["Volatility", "ATR(14): the average size of recent candles, used later to size the stop loss."],
                 ["The bigger picture", "The 1-hour (H1) trend: bullish, bearish or neutral. This matters most: the AI is told never to trade against it."],
                 ["News", "Up to 3 recent headlines about that pair from Google News, plus this week's economic calendar (high-impact releases such as NFP, CPI and central-bank decisions)."],
+                ["Trading knowledge (new prompt)", "For a random half of the pairs each hour, as a test against the old prompt: notes written by code on the 1-hour, 4-hour and daily trend, how stretched the price is, where it sits in its 5-day and daily range, and whether a price level stands in the way of the target. It is also taught that its trades have 35 to 70 pip stops and usually last many hours."],
+                ["Its track record (while it helps)", "How its past calls in similar situations (pair, direction, 1-hour trend, RSI zone, session, confidence) really worked out, scored on real prices after costs, including anonymous signals from other Bubat AI users. A nightly check stops showing it if the AI's calls get worse with it: on our PC that happened on 9 October, so it is off there."],
                 ["Its own history", "The bot's last 5 recorded decisions on this pair, so it doesn't contradict itself without reason."],
                 ["Learned rules", "A short list of rules written after reviewing past losses (for example \"wait when M5 and H1 disagree\" and \"pause around tier-1 USD news\")."],
               ]}
@@ -307,6 +337,11 @@ export default function BubatAIPage() {
               waits otherwise. Many hours with few or no trades is normal and intended.
             </p>
             <p>
+              Because the AI never trades against the 1-hour trend, every BUY or SELL it gives agrees with that trend.
+              Its real choice is <em>when</em> to trade and when to wait, which is exactly what the edge study measured
+              (see <a href="#results">Honest results</a>).
+            </p>
+            <p>
               If the AI&apos;s answer can&apos;t be read after 3 attempts, or the AI engine isn&apos;t responding, the
               bot treats it as <strong>WAIT</strong>: a failure never turns into a trade. If the AI engine (Ollama) has
               stopped, Bubat AI starts it again by itself.
@@ -326,20 +361,21 @@ export default function BubatAIPage() {
                   <li><strong>Lot size:</strong> a fixed 0.01 lot by default (it can be switched to risk-based sizing in the settings).</li>
                 </ul>
               </li>
-              <li><strong>Pass the 16 safety walls</strong> (next section). The first wall that says no stops the trade, and the reason is written to the log.</li>
+              <li><strong>Pass the 17 safety walls</strong> (see <a href="#safety">The 17 safety walls</a>). The first wall that says no stops the trade, and the reason is written to the log.</li>
               <li><strong>Send the order</strong> to MetaTrader 5 with the stop loss and take profit attached, so the trade is protected even if your PC switches off.</li>
             </ol>
           </Section>
 
           <Section id="manage" title="Managing open trades, and after they close">
             <ul>
-              <li><strong>Every 15 seconds</strong> while waiting for the next candle, the bot checks its open trades:
+              <li><strong>Every 15 seconds</strong> between its hourly decisions, the bot checks its open AI trades:
                 <ul>
                   <li><strong>Break-even:</strong> at +15 pips profit, the stop loss moves to entry + 1 pip, so the trade can no longer lose.</li>
                   <li><strong>Trailing stop:</strong> from +20 pips, the stop follows the price 10 pips behind it, moving in steps of at least 2 pips.</li>
                 </ul>
               </li>
-              <li><strong>Exits</strong> happen at the take profit, the (moved) stop loss, or by your hand in MetaTrader 5. The bot never closes trades early on its own.</li>
+              <li><strong>Exits</strong> happen at the take profit, the (moved) stop loss, or by your hand in MetaTrader 5. The bot never closes AI trades early on its own. (Strategy Lab trades are different: they keep the stop and target they were tested with, no break-even or trailing, and may also close on their own exit rule or after a set time.)</li>
+              <li><strong>Rollover:</strong> for about an hour after 05:00 Malaysia time (06:00 from November to March: the broker&apos;s midnight) spreads widen, often to 10 to 35 pips, and most at Monday&apos;s open. A trade whose stop is close to the price can be stopped out by the spread alone.</li>
               <li><strong>Cool-down:</strong> after a trade on a pair closes, that pair is not traded again for 30 minutes.</li>
               <li><strong>Record:</strong> every closed trade is logged with how it ended (take profit, stop loss, break-even, trailing) and its result in R, which feeds the session grading and the daily review.</li>
               <li><strong>Only its own trades:</strong> the bot only moves stops on trades it opened (marked with its own ID in MetaTrader 5); trades you open by hand are never touched. They do count toward its limits, though: open-trade count, one trade per pair, currency exposure and the daily loss limit.</li>
@@ -349,17 +385,17 @@ export default function BubatAIPage() {
 
           <Section id="sessions" title="Trading sessions and daily grading">
             <p>
-              Each trading session has its own limits and its own share of the 5% daily loss limit, so one bad session
-              can&apos;t use up the whole day. Times in Malaysia time (UTC+8):
+              Each trading session has its own limits for AI trades and its own share of the 8% daily loss limit, so
+              one bad session can&apos;t use up the whole day. Times in Malaysia time (UTC+8):
             </p>
             <Table
               head={["Session", "Malaysia time", "Max open trades", "Loss budget"]}
               rows={[
-                ["Asia", "06:00 to 15:00", "4", "1.0% of balance"],
-                ["London", "15:00 to 20:00", "10", "1.75%"],
-                ["London and New York overlap", "20:00 to 00:00", "8", "1.0%"],
-                ["New York", "00:00 to 05:00", "6", "1.0%"],
-                ["Rollover (spreads are widest)", "05:00 to 06:00", "2", "0.25%"],
+                ["Asia", "06:00 to 15:00", "4", "1.6% of balance"],
+                ["London", "15:00 to 20:00", "10", "2.8%"],
+                ["London and New York overlap", "20:00 to 00:00", "8", "1.6%"],
+                ["New York", "00:00 to 05:00", "6", "1.6%"],
+                ["Rollover (spreads are widest)", "05:00 to 06:00", "2", "0.4%"],
               ]}
             />
             <p>
@@ -370,23 +406,66 @@ export default function BubatAIPage() {
             </p>
           </Section>
 
+          <Section id="learns" title="How it learns">
+            <p>Every night the bot learns from its own trading, in steps that you can watch on the Brain tab:</p>
+            <ul>
+              <li><strong>Every signal is scored</strong>, traded or not: around 07:30 Malaysia time the trainer checks what prices really did after each BUY or SELL call, after costs, and builds the AI&apos;s track record for each kind of situation. The AI is shown that record before each decision, unless a nightly check finds that its calls got worse with it (on our PC they did, so it is off there).</li>
+              <li><strong>A learned gate</strong> can take over from the fixed 0.80 confidence rule, picking trades on their track record instead, but only while it beats the rule on days it was not built from. It switches itself on and off; so far it has mostly been off.</li>
+              <li><strong>Shared learning:</strong> each copy of Bubat AI shares its AI&apos;s signals anonymously and learns from everyone&apos;s, each scored again on your own broker&apos;s prices, so results cannot be faked.</li>
+              <li><strong>Trading knowledge:</strong> a newer prompt teaches the AI how its trades really work. It is used for a random half of the pairs each hour, and the bot compares the two prompts on their results before keeping either.</li>
+              <li><strong>Edge study:</strong> a replay of thousands of past moments that answers the question every trading bot should face: does the AI do better than a simple rule? Its result is on the Brain tab (see <a href="#results">Honest results</a>).</li>
+              <li><strong>Weight training</strong> (retraining the AI model itself) needs a strong graphics card and a large download, so it is not set up on tester PCs yet.</li>
+            </ul>
+            <p>
+              Learning must not quietly turn into &quot;stop trading&quot;: the new prompt, for example, can only be kept if
+              it still makes at least 30% as many trades as the old one. Better trades are what the{" "}
+              <a href="#lab">Strategy Lab</a> is for.
+            </p>
+          </Section>
+
           <Section id="review" title="The daily review (the &quot;brain&quot;)">
             <p>
-              On PCs with 16 GB of memory, a larger AI model (gpt-oss 20B) runs once a day, around 05:15 Malaysia time.
-              It reads the last 5 days of results, compares the bot with simple alternatives (such as &quot;just follow the
-              1-hour trend&quot; and &quot;never trade&quot;), checks which safety walls helped, and proposes up to 3
-              improvements.
+              On PCs with 16 GB of memory, a larger AI model (gpt-oss 20B) runs once a day at 05:05 Malaysia time, just
+              after the rollover, and finishes before the next trading hour. It reads the last 5 days of results,
+              compares the bot with simple alternatives (such as &quot;just follow the 1-hour trend&quot; and &quot;never
+              trade&quot;), checks which safety walls helped, and proposes up to 3 improvements.
             </p>
             <ul>
+              <li><strong>Its claims are checked by code.</strong> Each proposal carries a replay of your real results computed by code, not the model&apos;s own evidence, and a proposal still waiting that a fresh replay no longer supports withdraws itself.</li>
               <li><strong>It never changes anything by itself.</strong> Each proposal waits in the Brain tab for you to approve or reject, with the evidence and a check of the claim computed from your real results.</li>
               <li><strong>It can only touch a short list of settings, within hard limits</strong>, for example the confidence threshold (0.70 to 0.95), maximum open trades (1 to 10), the spread limit (up to 3.5 pips), the news pause around releases, and each session&apos;s slots and loss budget. It can also suggest stopping a losing pair or adding a written rule.</li>
               <li><strong>Each proposal is labelled SAFER or RISKIER by code</strong>, not by the AI.</li>
               <li><strong>When you approve,</strong> the change is applied, the full test suite runs, and it is undone automatically if anything fails.</li>
               <li>Your reason for rejecting is saved, and the brain reads it on its next run.</li>
+              <li>Ideas that would need a code change are listed separately, as suggestions only.</li>
             </ul>
             <Shot name="brain"
                   alt="Brain tab: the latest assessment and proposals P3 and P4, each labelled SAFER with a report check, reason, evidence and Reject or Approve buttons"
                   caption="The Brain tab. Each proposal shows the exact change, a SAFER or RISKIER label set by code, a report check computed from your real results, and the brain's own reason. Nothing changes until you press Approve." />
+          </Section>
+
+          <Section id="lab" title="The Strategy Lab">
+            <p>
+              The Lab is Bubat AI&apos;s research department. Every night, around 06:15 Malaysia time, it writes
+              rule-based strategies (for example &quot;buy when the daily candle breaks the last 20 days&apos; high&quot;) and
+              tests them on <strong>5 years of your broker&apos;s price history</strong>. Ideas come from a starting library,
+              from variations of the best results so far and, on 16 GB PCs at weekends, from trading ideas the deep
+              model finds on the web.
+            </p>
+            <ul>
+              <li><strong>Costs are real:</strong> your broker&apos;s spreads, 0.2 pip of slippage, overnight swap, and the wide spreads at the daily rollover (daily strategies enter after it).</li>
+              <li><strong>Tested on data it never saw:</strong> the first 70% of the history builds the strategy, the last 30% judges it. It needs at least 100 trades to build and 50 to judge, at least +0.05R per trade on the unseen part with a t-statistic of 2 or more, and profit in at least 60% of the years.</li>
+              <li><strong>It must beat drift.</strong> Markets drift (a currency can rise for months), so a strategy only passes if it beats taking the same trade at any random time in the same direction by at least +0.05R. A strategy that buys and sells may instead beat a random choice of direction.</li>
+              <li><strong>A luck bar:</strong> the more strategies are tried, the higher a result must be to stand out from luck, and the Lab shows that bar. Each idea may be varied at most 60 times so one idea can&apos;t flood it.</li>
+              <li><strong>Paper first:</strong> a strategy that passes paper-trades on live prices (up to 8 at a time). After 100 paper trades averaging at least +0.05R it is proposed for live trading, and <strong>it trades only once you approve it</strong> in the Brain tab.</li>
+              <li><strong>Live, but fenced:</strong> Lab trades use 0.01 lot, are labelled &quot;Bubat Lab&quot; in MetaTrader 5, and pass every account safety wall. They skip the AI&apos;s 1-hour trend and session rules (their own tested rules replace them), and the Lab may hold at most 7 of the 10 open trades and risk at most 6% of the balance, so the AI always keeps room.</li>
+              <li><strong>Retired by results:</strong> a live strategy whose last 20 trades average below -0.2R goes back to paper by itself; a paper strategy is dropped after 100 trades at or below zero, or 21 days without a trade.</li>
+            </ul>
+            <p>
+              Most ideas fail, and that is the point: on our PC the Lab has tested 388 strategies and 1 passed. The
+              Overview&apos;s <strong>AI vs Strategy Lab</strong> card scores both side by side on your account (closed
+              trades, average R, win rate, net result), and the Brain tab lists what the Lab is testing and why ideas failed.
+            </p>
           </Section>
 
           <Section id="never" title="What the AI can never do">
@@ -395,26 +474,31 @@ export default function BubatAIPage() {
               <li>Switch off, skip or change a safety wall.</li>
               <li>Trade a real-money account (unless you change that setting yourself).</li>
               <li>Change settings or code without your approval.</li>
+              <li>Put a Strategy Lab strategy on live trading without your approval.</li>
               <li>Close or touch trades you opened by hand.</li>
               <li>Place an order from the chat: entry/TP/SL suggestions in the Chat tab are information only.</li>
             </ul>
           </Section>
 
           <Section id="example" title="A worked example">
-            <p>A simplified example of one 5-minute cycle (prices illustrative):</p>
+            <p>A simplified example of one hourly decision (prices illustrative):</p>
             <ol>
-              <li>At 21:05 Malaysia time, EURUSD is below both moving averages, RSI 38, MACD bearish, and the 1-hour trend is bearish. A headline says the euro is falling after weak German data.</li>
+              <li>At 21:00 Malaysia time, EURUSD is below both moving averages, RSI 38, MACD bearish, and the 1-hour trend is bearish. A headline says the euro is falling after weak German data.</li>
               <li>The AI answers: <code>SELL, confidence 0.84</code>, &quot;Bearish trend on M5 and H1 with a matching euro-negative headline.&quot;</li>
               <li>0.84 is between 0.80 and 0.89, so it is queued. After all pairs are analysed, it ranks first (full H1 trend, low spread).</li>
               <li>The rules calculate it: entry 1.1250 (Bid), ATR 9 pips, so the stop is 15 pips (the minimum) at 1.1265 and the take profit 27 pips away at 1.1223. Lot 0.01.</li>
-              <li>The walls check it: demo account, no news due within 30 minutes, under 10 trades, no EURUSD already open, EUR exposure below 3, spread 0.2 pips (about 1% of the stop), today&apos;s loss well under 5%, London-New York session has a free slot. All pass, and the order goes to MetaTrader 5 with SL and TP attached.</li>
+              <li>The walls check it: demo account, no news due within 30 minutes, under 10 trades, no EURUSD already open, EUR exposure below 3, the stop costs under 2% of the balance and fits in what is left of today&apos;s 8% loss limit, spread 0.2 pips (about 1% of the stop), London-New York session has a free slot. All pass, and the order goes to MetaTrader 5 with SL and TP attached.</li>
               <li>The price falls 16 pips, so the stop moves to break-even. At 21 pips the trailing stop takes over. It reverses and closes at +12 pips (+0.8R). EURUSD then rests for 30 minutes.</li>
             </ol>
             <p>If the same chart had come with no matching headline, the AI would most likely have scored it 0.72 to 0.78 and the bot would have waited.</p>
           </Section>
 
-          <Section id="safety" title="The 16 safety walls">
-            <p>Every trade is checked against these, in order. The first one that fails stops the trade. The AI cannot switch them off.</p>
+          <Section id="safety" title="The 17 safety walls">
+            <p>
+              Every AI trade is checked against these, in order. The first one that fails stops the trade. The AI cannot
+              switch them off. Strategy Lab trades pass the same walls except the 1-hour trend and the session rules
+              (their own tested rules replace those), plus the Lab&apos;s own limits on open trades and risk.
+            </p>
             <Table head={["#", "Wall", "What it does"]} rows={WALLS.map((w, i) => [i + 1, w[0], w[1]])} />
             <Shot name="logs"
                   alt="Logs tab, Trades log: a list of trades refused by the safety walls for counter-trend direction, spread too wide, and the gold balance minimum"
@@ -426,7 +510,7 @@ export default function BubatAIPage() {
               <li><strong>Windows 10 or 11</strong>, 64-bit. No administrator rights needed.</li>
               <li><strong>8 GB of memory</strong> minimum (16 GB recommended for the daily review and deep chat).</li>
               <li><strong>About 25 GB of free disk space</strong> for the AI models.</li>
-              <li><strong>An NVIDIA graphics card with 4 GB or more</strong> is recommended. Without one it still works, slower, on 7 major pairs.</li>
+              <li><strong>An NVIDIA graphics card with 4 GB or more</strong> is recommended. Without one it still works, slower, on 7 major pairs. While the market is open the trading AI stays loaded on it (about 5 GB on an 8 GB card).</li>
               <li><strong>MetaTrader 5</strong> from your broker, logged in to a <strong>demo account</strong>, with Algo Trading turned on.</li>
               <li><strong>A Google account</strong> to sign in, and an internet connection.</li>
             </ul>
@@ -472,7 +556,7 @@ export default function BubatAIPage() {
           </Section>
 
           <Section id="models" title="Which AI your PC gets">
-            <p>The setup picks this automatically. The trading AI must answer about 29 pairs every 5 minutes, so it has to fit your PC.</p>
+            <p>The setup picks this automatically. The trading AI must answer for 29 pairs within a few minutes at the start of every hour, so it has to fit your PC.</p>
             <Table head={["Your PC", "Trading AI", "Pairs traded"]} rows={TIERS} />
           </Section>
 
@@ -493,11 +577,11 @@ export default function BubatAIPage() {
             <Table
               head={["Tab", "What it shows"]}
               rows={[
-                ["Overview", "Balance, equity, today's closed result, open positions with SL/TP and live profit, the health check, agent and market status."],
+                ["Overview", "Balance, equity, today's closed result, open positions with SL/TP and live profit (AI and Lab trades marked), the health check, agent and market status, and the AI vs Strategy Lab scoreboard."],
                 ["Chat", "Ask the AI anything about the market or your bot. Questions with why, should I, or entry / TP / SL use the deeper model with live prices and news."],
-                ["Brain", "The daily review and its proposals, with Approve and Reject buttons (16 GB PCs)."],
-                ["Logs", "What the bot is doing, its trades, errors and health checks, with search."],
-                ["Settings", "Account and license, data sharing, updates, run setup again."],
+                ["Brain", "The daily review and its proposals with Approve and Reject buttons (16 GB PCs), what the AI has learned, the Strategy Lab's results (with a Run lab now button), and the edge study."],
+                ["Logs", "Each hourly cycle, the agent, trades, errors, health checks, brain, Lab, trainer and edge study, with search."],
+                ["Settings", "Account and license, data sharing (trade results and signals), updates, automatic agent restart and start with Windows, trading safety, run setup again."],
               ]}
             />
             <p>The Overview is pictured <a href="#top-shot">at the top of this page</a>.</p>
@@ -520,6 +604,7 @@ export default function BubatAIPage() {
               <li><strong>Closing the window doesn&apos;t stop trading.</strong> Bubat AI moves to the tray icon next to the clock; click it to reopen.</li>
               <li><strong>Keep the PC awake</strong> while the market is open: Windows Settings, System, Power, set Sleep to <em>Never</em>.</li>
               <li><strong>Keep MetaTrader 5 open</strong> and logged in, with Algo Trading on.</li>
+              <li><strong>If the trading agent stops unexpectedly</strong>, the app starts it again by itself (Settings, System automation &amp; recovery). From version 0.9.2 it stays stopped after you press Stop, until you press Start.</li>
               <li><strong>Weekends:</strong> the forex market closes Friday 5 PM New York time (Saturday 5 or 6 AM Malaysia) and reopens Sunday at the same time. The bot pauses by itself and resumes when the market opens.</li>
               <li><strong>Health check:</strong> every 12 hours the app checks the agent, MetaTrader 5, the AI engine, open positions and the loss limits, and notifies you on WARN or FAULT.</li>
             </ul>
@@ -531,7 +616,13 @@ export default function BubatAIPage() {
               the official download page, is <strong>verified with a checksum and tested</strong> before it replaces
               anything, and keeps your settings and history. The agent is stopped during the update and started again
               after. If anything goes wrong, Settings has <strong>Go back to the previous version</strong>. You can also let
-              it install updates automatically on weekends.
+              it install updates automatically while the market is closed.
+            </p>
+            <p>
+              During the beta, new versions are published as <em>pre-releases</em> on the download page. Version 0.9.0
+              can&apos;t see those, so if you have 0.9.0, download the newest setup and run it over your install once: your
+              sign-in, license, settings and history are kept, and new settings are added. From 0.9.1 on, updates appear
+              in the app by themselves.
             </p>
           </Section>
 
@@ -540,6 +631,7 @@ export default function BubatAIPage() {
               <li><strong>Never leaves your PC:</strong> your MetaTrader login, password, account number, balance, money amounts, chats and logs.</li>
               <li><strong>Sent for your license:</strong> your Google email and an anonymous ID for your PC.</li>
               <li><strong>Shared to improve Bubat AI:</strong> the bot&apos;s trade results (pair, buy/sell, session, times, result in R and pips, how it closed, app version, AI model, broker server). Required during the free trial; licensed users can turn it off. Anyone can delete what they shared in Settings.</li>
+              <li><strong>Shared with other users&apos; apps (shared learning):</strong> your AI&apos;s buy and sell signals (pair, buy or sell, time and confidence), without your email or any other identity, kept for 90 days. Part of the free trial; with a license you can turn it off, and your app then also stops receiving other users&apos; signals.</li>
             </ul>
             <p>Full details: <Link href="/privacy">Privacy Policy</Link> and <Link href="/terms">Terms of Use</Link>.</p>
           </Section>
