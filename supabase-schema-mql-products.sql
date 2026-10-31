@@ -1,10 +1,14 @@
 -- ==============================================================================
--- SUPABASE MIGRATION: MQL5 PRODUCTS SHOWCASE TABLE
--- Project: EA Budak Ubat / Syarief Algorithmic Trading Systems
--- Instructions: Copy and paste this script into your Supabase Dashboard -> SQL Editor -> Run
+-- MQL5 PRODUCTS SHOWCASE TABLE (live schema, applied 2026-10-31)
+-- Project: EA Budak Ubat website Supabase project qthjikwteugfowlflkfi
+--
+-- The table already exists and holds the live storefront (24 products at creation,
+-- loaded in one transaction from FALLBACK_PRODUCTS in ea-budak-ubat-web/app/api/products/route.js).
+-- /api/products serves these rows; FALLBACK_PRODUCTS is only the backup if the database is down.
+-- Do NOT re-run this file to "seed" data: add or update products through the MQL5 daily
+-- generator (database/supabase_client.py publish) and keep FALLBACK_PRODUCTS identical.
 -- ==============================================================================
 
--- 1. Create mql_products Table
 CREATE TABLE IF NOT EXISTS public.mql_products (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     slug TEXT UNIQUE NOT NULL,
@@ -16,7 +20,7 @@ CREATE TABLE IF NOT EXISTS public.mql_products (
     description TEXT NOT NULL,
     platforms JSONB NOT NULL DEFAULT '["MT5"]'::jsonb,
     target_assets TEXT NOT NULL DEFAULT 'Forex, Gold',
-    market_url TEXT NOT NULL,
+    market_url TEXT,                       -- NULL for products not sold on MQL5 (site links the seller page)
     mql5_product_id TEXT,
     price TEXT NOT NULL DEFAULT '$149 USD',
     rating NUMERIC(3,2) NOT NULL DEFAULT 5.00,
@@ -27,273 +31,40 @@ CREATE TABLE IF NOT EXISTS public.mql_products (
     download_url TEXT,
     active BOOLEAN NOT NULL DEFAULT true,
     display_order INTEGER NOT NULL DEFAULT 0,
+    is_mql5 BOOLEAN NOT NULL DEFAULT true,  -- shows PRICE vs ACCESS on the cards
+    has_page BOOLEAN NOT NULL DEFAULT false, -- links /<slug> instead of the MQL5 listing
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
--- 2. Enable Row Level Security (RLS)
+-- Row Level Security: the public (anon key) may only read active products.
+-- There is deliberately NO insert/update/delete policy for anon or authenticated users;
+-- writes go through the generator's database login only.
 ALTER TABLE public.mql_products ENABLE ROW LEVEL SECURITY;
-
--- 3. RLS Policy: Anyone can view active products
+DROP POLICY IF EXISTS "Allow anon full access with anon key" ON public.mql_products;
 DROP POLICY IF EXISTS "Public can view active mql_products" ON public.mql_products;
-CREATE POLICY "Public can view active mql_products" 
-ON public.mql_products 
-FOR SELECT 
+CREATE POLICY "Public can view active mql_products"
+ON public.mql_products
+FOR SELECT
 USING (active = true);
 
--- 4. RLS Policy: Anon/Authenticated can insert/update/delete (or restrict to service role / token)
-DROP POLICY IF EXISTS "Allow anon full access with anon key" ON public.mql_products;
-CREATE POLICY "Allow anon full access with anon key"
-ON public.mql_products
-FOR ALL
-USING (true)
-WITH CHECK (true);
-
--- 5. Seed Initial 6 Flagship Algorithmic Products
-INSERT INTO public.mql_products (
-    slug, name, version, category, icon, tagline, description, platforms, target_assets,
-    market_url, mql5_product_id, price, rating, reviews_count, features, badge, color, download_url, active, display_order
-)
-VALUES
-(
-    'ea-budak-ubat',
-    'EA Budak Ubat',
-    'v1.67',
-    'Grid Martingale',
-    '📊',
-    'Multi-Method Volatility-Adaptive Grid Martingale System',
-    'Flagship multi-method automated grid EA featuring 4 analysis methods (Ichimoku, Alligator, Candle, SMA20), dynamic Average Daily Range (ADR) scaling, tick-by-tick Break-Even profit lock, and hard equity drawdown cutoff protection.',
-    '["MT5", "MT4"]'::jsonb,
-    'Forex Majors (EURUSD, GBPUSD), M5 Cent/Standard',
-    'https://www.mql5.com/en/market/product/195399',
-    '195399',
-    '$149 USD',
-    5.00,
-    42,
-    '["4 Analysis Methods (Ichimoku, Alligator, Candle, SMA20)", "Dynamic ADR AutoConfig AI", "Tick-by-Tick Basket Break-Even", "Hard Drawdown Cutoff Protection"]'::jsonb,
-    '🔥 Flagship System',
-    '#00f0ff',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020260930.ex5',
-    true,
-    1
-),
-(
-    'goldmind-ai',
-    'GoldMind AI',
-    'v1.01',
-    'AI Neural / Gold Specialist',
-    '🤖',
-    'AI-Powered Real-Time XAUUSD Volatility Signal Engine',
-    'Advanced machine-learning inspired momentum algorithm specifically tailored for XAUUSD (Gold). Filters high-impact volatility spikes with dynamic spread and slippage guards.',
-    '["MT5"]'::jsonb,
-    'XAUUSD (Gold), M5 / M15',
-    'https://www.mql5.com/en/users/syarief.azman/seller',
-    null,
-    '$199 USD',
-    5.00,
-    19,
-    '["Proprietary Gold Volatility Engine", "Dynamic ADR Momentum Filter", "Automatic Spread Guard", "Zero Martingale Risk Mode"]'::jsonb,
-    '🪙 Gold Specialist',
-    '#f59e0b',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020260930.ex5',
-    true,
-    2
-),
-(
-    'encik-moku',
-    'Encik Moku',
-    'v1.06',
-    'Trend Following',
-    '🏯',
-    'Multi-Timeframe Ichimoku Kinko Hyo Trend Following EA',
-    'Automated execution of the revered Japanese Ichimoku trading system with Tenkan-sen / Kijun-sen cross confirmation, Kumo cloud filtering, and Chikou Span trailing logic.',
-    '["MT5", "MT4"]'::jsonb,
-    'Trending Forex & JPY Pairs, M15 / H1',
-    'https://www.mql5.com/en/users/syarief.azman/seller',
-    null,
-    '$129 USD',
-    4.95,
-    15,
-    '["Full Tenkan/Kijun/Kumo Cloud Confluence", "Multi-Timeframe Trend Confirmation", "Chikou Span Trailing Guard", "Adaptive Position Scaling"]'::jsonb,
-    '⚡ Trend Master',
-    '#10b981',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020260930.ex5',
-    true,
-    3
-),
-(
-    'bracketblitz',
-    'BracketBlitz EA',
-    'v1.00',
-    'News & Breakout',
-    '⚡',
-    'High-Impact Macro Economic Breakout & OCO Straddle EA',
-    'High-frequency bracket straddle system engineered for macroeconomic news releases (CPI, NFP, Interest Rate decisions). Deploys microsecond pending stop orders before volatility strikes.',
-    '["MT5", "MT4"]'::jsonb,
-    'High-Volatility Indices & Major FX Pairs',
-    'https://www.mql5.com/en/users/syarief.azman/seller',
-    null,
-    '$99 USD',
-    4.90,
-    11,
-    '["Dual OCO Order Bracketing", "Microsecond Precision Order Placement", "Auto-Trail On Volatility Spike", "Zero Overnight Hold Risk"]'::jsonb,
-    '🚀 News Volatility',
-    '#a855f7',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/BracketBlitz%20v1.00%20-%20MT5%20-%2020260930.ex5',
-    true,
-    4
-),
-(
-    'mathedge-pro',
-    'MathEdge Pro',
-    'v1.10',
-    'Quantitative / Indices',
-    '📐',
-    'Mathematical Probability & Mean Reversion Index System',
-    'Statistical arbitrage and mean-reversion algorithm designed specifically for US equity indices (US30, NAS100, SP500) using Gaussian distribution curves and volume-weighted price bands.',
-    '["MT5", "MT4"]'::jsonb,
-    'US30, NAS100, SP500 Indices, M15',
-    'https://www.mql5.com/en/users/syarief.azman/seller',
-    null,
-    '$149 USD',
-    4.92,
-    14,
-    '["Statistical Mean Reversion Algorithms", "Volume Weighted Price Action", "Dynamic Risk-to-Reward Optimizer", "Built for Equity Index Swings"]'::jsonb,
-    '💎 Indices Specialist',
-    '#3b82f6',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/MathEdge%20Pro%20v1.1%20-%20MT5%20-%2020260930.ex5',
-    true,
-    5
-),
-(
-    'aligator-gozaimasu',
-    'Aligator Gozaimasu',
-    'v1.06',
-    'Trend Following',
-    '🐊',
-    'Bill Williams 3-Line Alligator Momentum Hunter',
-    'Captures massive macro trends using Bill Williams Alligator lines (Jaw, Teeth, Lips) combined with fractal breakout validation and adaptive sleep/awake cycle filtering.',
-    '["MT5", "MT4"]'::jsonb,
-    'Forex Majors & Crypto Pairs, M15 / H1',
-    'https://www.mql5.com/en/users/syarief.azman/seller',
-    null,
-    '$99 USD',
-    4.88,
-    8,
-    '["Jaw, Teeth & Lips Confluence Trigger", "Fractal Breakout Confirmation", "Sleep/Awake Cycle Market Filtering", "Trailing Profit Lock"]'::jsonb,
-    '🐊 Momentum Hunter',
-    '#06b6d4',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020260930.ex5',
-    true,
-    6
-),
-(
-    'stratos-momentum-engine',
-    'Stratos Momentum Engine',
-    'v1.00',
-    'Momentum Breakout',
-    '🚀',
-    'Multi-Timeframe Momentum Breakout Engine',
-    'Multi-timeframe algorithmic breakout engine combining H1 Linear Regression slope direction filter, M15 Stochastic oscillator crossover entry timing, Donchian Channel breakout confirmation, and Chandelier ATR trailing stop protection.',
-    '["MT5"]'::jsonb,
-    'Major FX Pairs, Gold (XAUUSD), Indices, M15/H1',
-    'https://www.mql5.com/en/users/syarief.azman/seller',
-    null,
-    '$149 USD',
-    5.00,
-    0,
-    '["H1 Linear Regression Slope Filter", "M15 Stochastic Entry Momentum Timing", "Donchian Channel Breakout Confirmation", "Chandelier Dynamic ATR Trailing Stop"]'::jsonb,
-    '🚀 Momentum Breakout',
-    '#ec4899',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/Stratos_Momentum_Engine.ex5',
-    true,
-    7
-),
-(
-    'aegis-risk-sentinel',
-    'Aegis Risk Sentinel',
-    'v1.00',
-    'Risk Management / Utility',
-    '🛡️',
-    'Real-Time Portfolio Equity Sentinel & Emergency HUD Console',
-    'Institutional-grade risk governance and equity protection utility running on an optimized 250ms timer with tick-by-tick monitoring. Enforces daily loss ceilings, maximum drawdown cutoffs, weakest position disposal, and emergency panic liquidation.',
-    '["MT5"]'::jsonb,
-    'All Symbols & Accounts (Prop Firm & Standard)',
-    'https://www.mql5.com/en/market/product/196617',
-    '196617',
-    '$79 USD',
-    5.00,
-    3,
-    '["Real-Time 250ms Equity Sentinel Engine", "Midnight Daily Loss Ceiling Auto-Rollover", "Interactive Dark HUD with Panic Close Controls", "Basket Equity Trailing & Profit Lock"]'::jsonb,
-    '🛡️ Risk Governance',
-    '#14b8a6',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/Aegis_Risk_Sentinel.ex5',
-    true,
-    8
-),
-(
-    'spectra-trend-ribbon',
-    'Spectra Trend Ribbon',
-    'v1.00',
-    'Trend & Volatility Indicator',
-    '🌈',
-    'Adaptive Baseline & Dynamic ATR Volatility Envelope Indicator',
-    'High-performance trend direction and volatility expansion indicator combining a triple-smoothed adaptive baseline, dynamic Average True Range (ATR) envelope bands, and momentum breakout arrows to detect trend continuations emerging from low-volatility squeezes.',
-    '["MT5"]'::jsonb,
-    'Forex Majors, Indices (US30, NAS100), XAUUSD',
-    'https://www.mql5.com/en/market/product/196540',
-    '196540',
-    '$99 USD',
-    5.00,
-    5,
-    '["Triple-Smoothed Adaptive Baseline", "Dynamic ATR Volatility Envelope Bands", "Multi-Color Bullish & Bearish Breakout Arrows", "Differential OnCalculate Optimization (Zero Lag)"]'::jsonb,
-    '🌈 Trend & Volatility',
-    '#8b5cf6',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/Spectra_Trend_Ribbon.ex5',
-    true,
-    9
-),
-(
-    'apex-flow-reversion',
-    'Apex Flow Reversion',
-    'v1.00',
-    'Mean Reversion',
-    '🌊',
-    'VWAP Statistical Envelope Mean Reversion Expert Advisor',
-    'Intraday mean-reversion algorithmic trading system monitoring statistical price dispersion relative to an intraday Volume-Weighted Average Price (VWAP) anchor. Filters entries using standard deviation envelope bands, RSI exhaustion, and ATR volatility floor checks.',
-    '["MT4"]'::jsonb,
-    'EURUSD, GBPUSD, USDJPY, AUDUSD, M15/M30',
-    'https://www.mql5.com/en/market/product/196439',
-    '196439',
-    '$149 USD',
-    5.00,
-    7,
-    '["Dynamic Intraday VWAP Statistical Anchor", "Standard Deviation Envelope Bands", "RSI Momentum Exhaustion Filter", "Automated Break-Even & ATR Trailing Stop"]'::jsonb,
-    '🌊 VWAP Reversion',
-    '#0ea5e9',
-    'https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/Apex_Flow_Reversion.ex4',
-    true,
-    10
-)
-ON CONFLICT (slug) DO UPDATE SET
-    name = EXCLUDED.name,
-    version = EXCLUDED.version,
-    category = EXCLUDED.category,
-    icon = EXCLUDED.icon,
-    tagline = EXCLUDED.tagline,
-    description = EXCLUDED.description,
-    platforms = EXCLUDED.platforms,
-    target_assets = EXCLUDED.target_assets,
-    market_url = EXCLUDED.market_url,
-    mql5_product_id = EXCLUDED.mql5_product_id,
-    price = EXCLUDED.price,
-    rating = EXCLUDED.rating,
-    reviews_count = EXCLUDED.reviews_count,
-    features = EXCLUDED.features,
-    badge = EXCLUDED.badge,
-    color = EXCLUDED.color,
-    download_url = EXCLUDED.download_url,
-    active = EXCLUDED.active,
-    display_order = EXCLUDED.display_order,
-    updated_at = now();
-
+-- Generator's internal catalog (not read by the website): RLS on, no policies.
+CREATE TABLE IF NOT EXISTS public.mql_daily_products (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_name TEXT NOT NULL UNIQUE,
+    platform TEXT NOT NULL,
+    product_type TEXT NOT NULL,
+    strategy TEXT NOT NULL,
+    price_lifetime NUMERIC(10,2) NOT NULL,
+    price_rent_1m NUMERIC(10,2),
+    price_rent_3m NUMERIC(10,2),
+    price_rent_6m NUMERIC(10,2),
+    price_rent_12m NUMERIC(10,2),
+    source_path TEXT NOT NULL,
+    commit_hash TEXT,
+    validation_status TEXT DEFAULT 'PASSED',
+    mql5_product_id TEXT,
+    mql5_url TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE public.mql_daily_products ENABLE ROW LEVEL SECURITY;
