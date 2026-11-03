@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020261030.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020261030.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020261130.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020261130.ex5";
 
 const FEATURES = [
     { icon: "🐊", title: "Bill Williams Alligator", desc: "Core trend detection using the Alligator indicator — Jaw, Teeth, and Lips lines must align in the correct order to confirm a trend." },
@@ -122,7 +122,7 @@ export default function AligatorGozaimasuPage() {
                         <a href="#installation" className="btn btn-secondary">📖 Installation Guide</a>
                     </div>
                     <p className="hero-note">
-                        <strong>Open Source</strong> — Free to use. Expires 2026-10-30. By Syarief Azman.
+                        <strong>Open Source</strong> — Free to use. Expires 2026-11-30. By Syarief Azman.
                     </p>
                 </div>
             </section>
