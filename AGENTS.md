@@ -48,6 +48,19 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 
 ---
 
+## 📦 CRITICAL "SEND THE FRESH BINARY" RULE
+> **MANDATORY FOR ALL AI AGENTS — read before replying to any customer after authorizing:**
+> - **The whitelist is baked into the compiled binary.** An account only works with an `.ex5` / `.ex4` that was **compiled AFTER** that account was added to `allowedAccountNumbers`. `authorize-accounts.ps1` handles this by recompiling, but the customer is still holding the OLD file.
+> - **NEVER tell a customer they can reuse / keep using a file you sent them earlier.** Any binary built before their account was whitelisted will reject it and show:
+>   `EXPIRED. Account <number> is Unauthorized. Use Demo account to access Trials Mode.` — even though the account IS authorized. (This exact mistake happened once: a customer was told "boleh guna fail yang saya hantar sebelum ni" and the old build kept showing Unauthorized/Expired.)
+> - **After authorizing, you MUST give the customer the freshly compiled binary**, by EITHER:
+>   1. **Attaching the latest `.ex5` / `.ex4` directly in the chat** — from the public distribution folder, e.g. `EA - Budak Ubat v1.67 - MT5 - .ex5` in the repo root (this is the surest method), **OR**
+>   2. Telling them to **re-download the latest** from `https://eabudakubat.com` — valid ONLY after the script's Vercel deploy has finished.
+> - Always tell them to **delete/replace the old file** (`Buang fail lama dulu`) and restart MT4/MT5, otherwise the stale binary stays loaded.
+> - The permanent-license wording from the License & Expiry rule still applies: the fresh file gives them a permanent, no-expiry license on their authorized accounts.
+
+---
+
 ## ⚡ Quick Actions Cheatsheet
 
 ### 1. Authorize / Prepend Account Numbers
@@ -66,6 +79,8 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "."; .\authorize-
 - Copies compiled `.ex4` / `.ex5` binaries to public distribution and terminal folders.
 - Git commits and pushes across `EA-Budak-Ubat`, `EA_Budak_Ubat`, and `EA_Budak_Ubat_MT5_Public`.
 - Deploys Next.js website to Vercel production using the token in `.env`.
+
+> ⚠️ **When replying to the customer afterwards:** send them the **freshly compiled** binary (attach the latest `.ex5` / `.ex4`, or have them re-download from `https://eabudakubat.com` after the deploy) and tell them to delete the old file. Their account will NOT work on any file they already had. See the **"SEND THE FRESH BINARY" RULE** above.
 
 ---
 
