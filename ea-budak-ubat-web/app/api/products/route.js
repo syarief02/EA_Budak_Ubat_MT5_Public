@@ -848,7 +848,7 @@ const FALLBACK_PRODUCTS = [
     category: 'Volatility Cone Indicator',
     icon: '🕰️',
     tagline: 'Time-of-Day Volatility Cone with a Range Budget for MT4',
-    description: 'Indicator for MetaTrader 4 that shows how far price normally travels from the day open by each time of day: a median core cone and an 80th-percentile outer cone built from the last 20 complete days, fixed at the open so it never repaints and projected to the end of the day. A range budget compares today's range with the median full-day range (QUIET / NORMAL / HOT / EXTREME pace), and closed-bar expansion and exhaustion signals with alerts and 12 iCustom buffers mark unusual days. It never opens trades.',
+    description: 'Indicator for MetaTrader 4 that shows how far price normally travels from the day open by each time of day: a median core cone and an 80th-percentile outer cone built from the last 20 complete days, fixed at the open so it never repaints and projected to the end of the day. A range budget compares today\'s range with the median full-day range (QUIET / NORMAL / HOT / EXTREME pace), and closed-bar expansion and exhaustion signals with alerts and 12 iCustom buffers mark unusual days. It never opens trades.',
     platforms: ['MT4'],
     target_assets: 'Forex Majors and XAUUSD (Gold), M1 to H1 (M15 recommended)',
     market_url: 'https://www.mql5.com/en/market/product/206241',
