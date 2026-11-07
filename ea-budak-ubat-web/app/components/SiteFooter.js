@@ -16,14 +16,14 @@ export default function SiteFooter() {
               <span>EA Budak Ubat</span>
             </Link>
             <p className="footer-desc">
-              Expert Advisors for MetaTrader 4 and 5 by Syarief Azman, developed and maintained since 2014.
+              Expert Advisors, indicators, utilities and libraries for MetaTrader 4 and 5 by Syarief Azman, building trading software since 2014.
             </p>
           </div>
           <div>
             <h4>Explore</h4>
             <ul className="footer-links">
               <li><Link href="/ea-budak-ubat">EA Budak Ubat</Link></li>
-              <li><Link href="/products">MQL5 products</Link></li>
+              <li><Link href="/products">All products</Link></li>
               <li><Link href="/bubat-ai">Bubat AI</Link></li>
               <li><Link href="/tools">Trader tools</Link></li>
               <li><Link href="/guide">User guide</Link></li>

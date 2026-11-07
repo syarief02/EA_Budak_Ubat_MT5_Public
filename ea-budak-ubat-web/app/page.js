@@ -11,6 +11,7 @@ import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import { AUTHORIZED_ACCOUNTS_DISPLAY } from "@/lib/authorizedAccounts";
 import { FEATURED_BROKERS, PARTNER_BROKERS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
+import { PRODUCT_TYPES } from "@/lib/productTypes";
 
 // The YYYYMMDD suffix is the trial cutoff for unauthorized real accounts; swap it with the monthly expiry update.
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4";
@@ -349,14 +350,22 @@ export default function Home() {
                   <span className="hp-ea-more">Learn more <Icon name="arrowRight" size={16} /></span>
                 </Link>
               ))}
-              <Link href="/products" className="hp-card hp-ea hp-ea-store">
+              <div className="hp-card hp-ea hp-ea-store">
                 <div className="hp-ea-top">
-                  <h3>MQL5 Market products</h3>
-                  <span className="hp-ea-meta">Indicators · utilities · EAs</span>
+                  <h3>Not just Expert Advisors</h3>
+                  <span className="hp-ea-meta">MQL5 Market catalogue</span>
                 </div>
-                <p>Browse every tool we have published on the official MQL5 Market.</p>
-                <span className="hp-ea-more">Open the store <Icon name="arrowRight" size={16} /></span>
-              </Link>
+                <p>Indicators, trade utilities and developer libraries, plus more EAs on MQL5 Market.</p>
+                <ul className="hp-type-links">
+                  {PRODUCT_TYPES.map((t) => (
+                    <li key={t.key} style={{ "--accent": t.color }}>
+                      <Link href={`/products?type=${t.key}`}>
+                        <span className="hp-dot" aria-hidden="true" /> {t.plural}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="hp-card hp-standalone">
