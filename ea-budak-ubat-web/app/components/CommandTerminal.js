@@ -23,12 +23,13 @@ const COMMANDS = [
   // Tools & Generators
   { id: "presets", title: "Preset Generator (.set)", subtitle: "Generate custom configuration files for MT4/MT5", icon: "⚙️", action: "/ea-budak-ubat#preset-generator", cat: "Tools" },
   { id: "calculator", title: "Risk & Grid Calculator", subtitle: "Simulate lot progression, margin, and drawdown", icon: "🧮", action: "/ea-budak-ubat#risk-calculator", cat: "Tools" },
+  { id: "brokers", title: "Partner Brokers", subtitle: "Compare the 14 partner brokers for a free license", icon: "🏦", action: "/brokers", cat: "Tools" },
   { id: "license", title: "License & Account Checker", subtitle: "Verify trading account authorization across all EAs", icon: "🔐", action: "/#authorization", cat: "Tools" },
 
   // Community & Docs
   { id: "guide", title: "Installation & Strategy Guide", subtitle: "Complete documentation for MT4 & MT5 setup", icon: "📖", action: "/guide", cat: "Resources" },
   { id: "changelog", title: "System Changelog", subtitle: "Version history and patch release notes", icon: "📜", action: "/changelog", cat: "Resources" },
-  { id: "community", title: "Community Hub & Feedback", subtitle: "Join discussions and request custom features", icon: "💬", action: "/#community-hub", cat: "Resources" },
+  { id: "community", title: "Community Hub & Feedback", subtitle: "Join discussions and request custom features", icon: "💬", action: "/community", cat: "Resources" },
   { id: "telegram", title: "Official Telegram Channel", subtitle: "Join @EABudakUbat for updates & releases", icon: "📢", action: "https://t.me/EABudakUbat", external: true, cat: "Social" },
   { id: "creator", title: "Message Creator (Syarief Azman)", subtitle: "Telegram direct inquiry: @SyariefAzman", icon: "✉️", action: "https://t.me/SyariefAzman", external: true, cat: "Social" },
 

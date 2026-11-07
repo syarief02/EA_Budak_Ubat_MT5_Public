@@ -50,6 +50,12 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  async redirects() {
+    return [
+      // The /reel promo storyboard page was retired in Nov 2026; send old links to the home page.
+      { source: '/reel', destination: '/', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

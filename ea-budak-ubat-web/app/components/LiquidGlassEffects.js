@@ -1,82 +1,18 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { playReticleLock, playTactileClick } from "@/lib/audioSynthesizer";
+import { useEffect, useState } from "react";
+import { playTactileClick } from "@/lib/audioSynthesizer";
 
+// Site-wide polish: scroll progress bar, card tilt and button ripples (desktop only).
+// The sci-fi reticle cursor and the fixed corner readouts ("LATENCY: 0.8ms", "ZERO-SLIP") were removed in Nov 2026:
+// they read as gimmicks and stated performance figures nothing backs up.
 export default function LiquidGlassEffects() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [cursorActive, setCursorActive] = useState(false);
-  const [cursorLocked, setCursorLocked] = useState(false);
-  const [cursorLabel, setCursorLabel] = useState("");
-
-  const cursorRef = useRef(null);
-  const cursorDotRef = useRef(null);
 
   useEffect(() => {
     // Check if device supports fine cursor (desktop)
     const isFinePointer = window.matchMedia("(pointer: fine)").matches;
     if (!isFinePointer) return;
-
-    setCursorActive(true);
-
-    // 1. Magnetic Custom Cursor Physics
-    const mouse = { x: -100, y: -100, targetX: -100, targetY: -100, vx: 0, vy: 0 };
-    const dot = { x: -100, y: -100 };
-    let isHoveringInteractive = false;
-    let animId;
-
-    const onPointerMove = (e) => {
-      mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
-    };
-
-    const updateCursor = () => {
-      // Smooth spring lerp for outer reticle
-      mouse.vx = (mouse.targetX - mouse.x) * 0.24;
-      mouse.vy = (mouse.targetY - mouse.y) * 0.24;
-      mouse.x += mouse.vx;
-      mouse.y += mouse.vy;
-
-      // Instant pinpoint for inner dot
-      dot.x = mouse.targetX;
-      dot.y = mouse.targetY;
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
-      }
-      if (cursorDotRef.current) {
-        cursorDotRef.current.style.transform = `translate3d(${dot.x}px, ${dot.y}px, 0)`;
-      }
-
-      animId = requestAnimationFrame(updateCursor);
-    };
-
-    animId = requestAnimationFrame(updateCursor);
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-
-    // Interactive target detection for magnetic lock-on
-    const handleMouseOver = (e) => {
-      const target = e.target.closest("a, button, input, textarea, .product-card, .glass-card, [data-interactive]");
-      if (target) {
-        isHoveringInteractive = true;
-        setCursorLocked(true);
-        const label = target.getAttribute("data-cursor-label") || (target.tagName === "BUTTON" ? "EXECUTE" : target.tagName === "A" ? "OPEN" : "LOCK");
-        setCursorLabel(label);
-        playReticleLock(0.04);
-      }
-    };
-
-    const handleMouseOut = (e) => {
-      const target = e.target.closest("a, button, input, textarea, .product-card, .glass-card, [data-interactive]");
-      if (target) {
-        isHoveringInteractive = false;
-        setCursorLocked(false);
-        setCursorLabel("");
-      }
-    };
-
-    document.addEventListener("mouseover", handleMouseOver, { passive: true });
-    document.addEventListener("mouseout", handleMouseOut, { passive: true });
 
     // 2. Kinetic Scroll Progress & Velocimeter
     let ticking = false;
@@ -188,73 +124,26 @@ export default function LiquidGlassEffects() {
     });
 
     return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("scroll", onScroll);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
       cleanups.forEach((fn) => fn());
     };
   }, []);
 
   return (
-    <>
-      {/* KINETIC NEON SCROLL PROGRESS BAR */}
-      <div
-        className="kinetic-scroll-tracker"
-        aria-hidden="true"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: `${scrollProgress}%`,
-          height: "3px",
-          background: "linear-gradient(90deg, #00f0ff, #8b5cf6 45%, #ff2a85 80%, #10b981 100%)",
-          boxShadow: "0 0 14px rgba(0, 240, 255, 0.8), 0 0 28px rgba(139, 92, 246, 0.6)",
-          zIndex: 9999,
-          transition: "width 0.12s cubic-bezier(0.1, 0.9, 0.2, 1)",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* MAGNETIC ANIME RETICLE CURSOR */}
-      {cursorActive && (
-        <>
-          <div
-            ref={cursorRef}
-            className={`anime-cursor-reticle ${cursorLocked ? "locked" : ""}`}
-            aria-hidden="true"
-          >
-            <div className="reticle-ring"></div>
-            <div className="reticle-corner reticle-tl"></div>
-            <div className="reticle-corner reticle-tr"></div>
-            <div className="reticle-corner reticle-bl"></div>
-            <div className="reticle-corner reticle-br"></div>
-            {cursorLocked && cursorLabel && (
-              <span className="reticle-label">{cursorLabel}</span>
-            )}
-          </div>
-          <div ref={cursorDotRef} className="anime-cursor-dot" aria-hidden="true" />
-        </>
-      )}
-
-      {/* JAPANESE MINIMALIST BLUEPRINT HUD CORNERS */}
-      <div className="jp-hud-reticle jp-hud-tl" aria-hidden="true">
-        <span className="jp-reticle-cross">+</span>
-        <span className="jp-reticle-label">TYO // 35.6762°N</span>
-      </div>
-      <div className="jp-hud-reticle jp-hud-tr" aria-hidden="true">
-        <span className="jp-reticle-label">SYS.STABLE // v1.67</span>
-        <span className="jp-reticle-cross">+</span>
-      </div>
-      <div className="jp-hud-reticle jp-hud-bl" aria-hidden="true">
-        <span className="jp-reticle-cross">+</span>
-        <span className="jp-reticle-label">LATENCY: 0.8ms</span>
-      </div>
-      <div className="jp-hud-reticle jp-hud-br" aria-hidden="true">
-        <span className="jp-reticle-label">極限精度 // ZERO-SLIP</span>
-        <span className="jp-reticle-cross">+</span>
-      </div>
-    </>
+    <div
+      className="kinetic-scroll-tracker"
+      aria-hidden="true"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: `${scrollProgress}%`,
+        height: "2px",
+        background: "linear-gradient(90deg, #38bdf8, #3b82f6)",
+        zIndex: 9999,
+        transition: "width 0.12s cubic-bezier(0.1, 0.9, 0.2, 1)",
+        pointerEvents: "none",
+      }}
+    />
   );
 }

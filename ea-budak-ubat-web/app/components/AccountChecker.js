@@ -63,6 +63,7 @@ export default function AccountChecker({
 
   return (
     <div className="account-checker-card glass-card visible">
+      {!compact && (
       <div className="checker-header">
         <div className="checker-badge">
           <span className="checker-badge-icon">🔐</span>
@@ -71,8 +72,10 @@ export default function AccountChecker({
         <h3 className="checker-title">{title}</h3>
         {subtitle && <p className="checker-subtitle">{subtitle}</p>}
       </div>
+      )}
 
-      {/* QUICK DOWNLOAD CALLOUT FOR ALREADY WHITELISTED TRADERS */}
+      {/* QUICK DOWNLOAD CALLOUT FOR ALREADY WHITELISTED TRADERS (compact mode: the host page shows its own) */}
+      {!compact && (
       <div className="checker-whitelisted-quickbar" style={{
         background: "linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(16, 185, 129, 0.08))",
         border: "1px solid rgba(0, 240, 255, 0.25)",
@@ -115,6 +118,7 @@ export default function AccountChecker({
           </a>
         </div>
       </div>
+      )}
 
       {/* EA SELECTOR TABS */}
       <div className="checker-ea-selector">
@@ -452,7 +456,8 @@ export default function AccountChecker({
         </div>
       )}
 
-      {/* HOW TO GET AUTHORIZED & PARTNER BROKERS */}
+      {/* HOW TO GET AUTHORIZED & PARTNER BROKERS (compact mode: the host page shows its own steps and brokers) */}
+      {!compact && (
       <div className="how-to-authorize-section" id="partner-brokers">
         <div className="authorize-header">
           <h4>🌟 How to Get Permanent Authorization (No Expiry)</h4>
@@ -549,6 +554,7 @@ export default function AccountChecker({
           </a>
         </div>
       </div>
+      )}
     </div>
   );
 }
