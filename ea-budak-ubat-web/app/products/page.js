@@ -39,9 +39,12 @@ function ProductCard({ p }) {
         <span className="hp-type">{type.label}</span>
         {platforms.length > 0 && <span className="hp-product-platforms">{platforms.join(" · ")}</span>}
       </div>
-      <div>
-        <h3>{p.name}</h3>
-        <p className="hp-product-sub">{[sub, p.version].filter(Boolean).join(" · ")}</p>
+      <div className="hp-product-head">
+        {p.icon && <span className="hp-product-icon" aria-hidden="true">{p.icon}</span>}
+        <div>
+          <h3>{p.name}</h3>
+          <p className="hp-product-sub">{[sub, p.version].filter(Boolean).join(" · ")}</p>
+        </div>
       </div>
       {p.tagline && <p className="hp-product-tagline">{p.tagline}</p>}
       {features.length > 0 && (

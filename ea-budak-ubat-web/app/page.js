@@ -78,11 +78,11 @@ const FEATURES = [
 ];
 
 const COMPANION_EAS = [
-  { slug: "goldmind-ai", name: "GoldMind AI", version: "v1.01", platforms: "MT5", tagline: "ChatGPT-assisted chart analysis and trade execution for XAUUSD." },
-  { slug: "bracketblitz", name: "BracketBlitz", version: "v1.00", platforms: "MT4 · MT5", tagline: "OCO buy-stop and sell-stop brackets that follow price to catch breakouts." },
-  { slug: "mathedge-pro", name: "MathEdge Pro", version: "v1.1", platforms: "MT4 · MT5", tagline: "Daily level calculation and a fixed 3-order sequence for US30 and NAS100." },
-  { slug: "aligator-gozaimasu", name: "Aligator Gozaimasu", version: "v1.06", platforms: "MT4 · MT5", tagline: "Bill Williams Alligator trend entries confirmed on up to four timeframes." },
-  { slug: "encik-moku", name: "Encik Moku", version: "v1.06", platforms: "MT4 · MT5", tagline: "Ichimoku cloud trend entries with RSI and Stochastic confirmation." },
+  { slug: "goldmind-ai", icon: "🤖", name: "GoldMind AI", version: "v1.01", platforms: "MT5", tagline: "ChatGPT-assisted chart analysis and trade execution for XAUUSD." },
+  { slug: "bracketblitz", icon: "⚡", name: "BracketBlitz", version: "v1.00", platforms: "MT4 · MT5", tagline: "OCO buy-stop and sell-stop brackets that follow price to catch breakouts." },
+  { slug: "mathedge-pro", icon: "📐", name: "MathEdge Pro", version: "v1.1", platforms: "MT4 · MT5", tagline: "Daily level calculation and a fixed 3-order sequence for US30 and NAS100." },
+  { slug: "aligator-gozaimasu", icon: "🐊", name: "Aligator Gozaimasu", version: "v1.06", platforms: "MT4 · MT5", tagline: "Bill Williams Alligator trend entries confirmed on up to four timeframes." },
+  { slug: "encik-moku", icon: "🏯", name: "Encik Moku", version: "v1.06", platforms: "MT4 · MT5", tagline: "Ichimoku cloud trend entries with RSI and Stochastic confirmation." },
 ];
 
 const RESOURCES = [
@@ -342,9 +342,12 @@ export default function Home() {
             <div className="hp-ea-grid">
               {COMPANION_EAS.map((ea) => (
                 <Link key={ea.slug} href={`/${ea.slug}`} className="hp-card hp-ea">
-                  <div className="hp-ea-top">
-                    <h3>{ea.name}</h3>
-                    <span className="hp-ea-meta">{ea.version} · {ea.platforms}</span>
+                  <div className="hp-product-head">
+                    <span className="hp-product-icon" aria-hidden="true">{ea.icon}</span>
+                    <div className="hp-ea-top">
+                      <h3>{ea.name}</h3>
+                      <span className="hp-ea-meta">{ea.version} · {ea.platforms}</span>
+                    </div>
                   </div>
                   <p>{ea.tagline}</p>
                   <span className="hp-ea-more">Learn more <Icon name="arrowRight" size={16} /></span>

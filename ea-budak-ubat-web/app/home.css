@@ -1062,6 +1062,27 @@ a.hp-card:hover {
   font-size: 0.76rem;
 }
 
+.hp-product-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hp-product-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--hp-border);
+  background: rgba(255, 255, 255, 0.05);
+  background: color-mix(in srgb, var(--accent, var(--hp-accent)) 12%, transparent);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
 .hp-product h3 {
   font-size: 1.15rem;
   font-weight: 700;
