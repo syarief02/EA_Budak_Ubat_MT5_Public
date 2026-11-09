@@ -51,7 +51,7 @@ const WALLS = [
   ["License", "No new trades without a valid free trial or license. Trades already open are still managed."],
   ["Entry window", "Optional trading hours. Off by default (all sessions trade)."],
   ["Confidence cap", "Signals the AI is \"too sure\" about (above 0.89) are refused: in testing they did worse, not better."],
-  ["Demo account", "Real-money accounts are refused unless you switch this off by hand."],
+  ["Demo account (optional)", "Off by default: real-money accounts are traded, at your own risk. Set demo_only to true in config.json to trade demo accounts only."],
   ["H1 trend", "Never buys against a falling 1-hour trend, never sells against a rising one (AI trades)."],
   ["Daily loss stop", "After losing 8% of the balance in one day (UTC), no new trades until the next day."],
   ["Capacity", "At most 10 open trades at once. Strategy Lab trades may hold at most 7 of them, so the AI always keeps room."],
@@ -79,7 +79,7 @@ const TROUBLE = [
   ["The app says \"Agent stopped\"", "Press Start agent (top right). If it refuses, read the message: usually the license or Ollama."],
   ["Red banner: \"Free trial ended\"", "New trades are paused. Email " + EMAIL + " for a license, then press Check again."],
   ["\"MT5 not connected\"", "Open MetaTrader 5 and log in. Bubat AI connects to the MetaTrader 5 that is open on the same PC."],
-  ["The bot never trades", "Check Algo Trading is ON (green) in MetaTrader 5, the account is a demo, and the market is open. Few trades is also normal: most signals are blocked by the safety walls on purpose."],
+  ["The bot never trades", "Check Algo Trading is ON (green) in MetaTrader 5 and the market is open. Few trades is also normal: most signals are blocked by the safety walls on purpose."],
   ["Health check shows WARN or FAULT", "Open Overview: each line says what is wrong. FAULT means something needs fixing now."],
   ["Model download stopped", "Run setup again from Settings and press Install: downloads continue where they stopped."],
   ["Chat answers are slow", "Deep \"why\" questions use the larger model and can take 1 to 5 minutes, longer on a PC without a graphics card."],
@@ -93,7 +93,7 @@ const FAQ = [
   ["Why does it trade so rarely?", "By design. A trade needs confidence of 0.80 or more, which the AI only gives when a clear trend on both the 5-minute and 1-hour charts lines up with a matching news headline, and then all 17 safety walls must agree. Quiet, news-free or choppy markets mean hours of WAIT."],
   ["What is the difference between AI trades and Lab trades?", "AI trades come from the AI's hourly BUY / SELL calls and are labelled \"Bubat AI\" in MetaTrader 5. Lab trades come from a fixed rule-based strategy that passed the Strategy Lab's tests and that you approved; they are labelled \"Bubat Lab\" and the strategy's ID. Both use 0.01 lot and the same account safety walls, and the Overview's AI vs Strategy Lab card scores them side by side."],
   ["Why does a Lab trade stay open for days?", "Lab strategies trade daily or 4-hour charts with wide stops, and close a trade at its stop, its target, its own exit signal or after a set number of bars, exactly as they were tested. They don't use the AI's break-even or trailing stop."],
-  ["Can I use it on a real-money account?", "Not by default. You would have to change a setting by hand, and we strongly advise against it until it has been profitable on demo for months."],
+  ["Can I use it on a real-money account?", "Yes, at your own risk: it trades whatever account MetaTrader 5 is logged in to. Check the Real-account readiness card on the Overview first. It says whether the bot's own record supports real money; so far, on our demo, it does not. To trade demo accounts only, set risk_parameters.demo_only to true in config.json."],
   ["Does it send my trades or account to anyone?", "Your account number, balance and money amounts never leave your PC. During the trial, the bot's trade results (pair, direction, result in R) are shared to improve Bubat AI. See Your data."],
   ["Does it need the internet?", "Yes, for live news, the license check and updates. The AI itself runs on your PC. If the license server can't be reached, it keeps trading for up to 3 days."],
   ["Does it work on Mac, Linux or MetaTrader 4?", "No. Windows 10 or 11 (64-bit) with MetaTrader 5 only."],
@@ -204,7 +204,7 @@ export default function BubatAIPage() {
             </a>
           </div>
           <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "14px" }}>
-            Free 7-day trial · Demo accounts only by default · Not financial advice
+            Free 7-day trial · Demo or real account, at your own risk · Not financial advice
           </p>
           <div id="top-shot" style={{ marginTop: "34px", scrollMarginTop: "100px" }}>
             <Shot name="overview" eager
@@ -217,7 +217,7 @@ export default function BubatAIPage() {
       <main className="container" style={{ paddingBottom: "80px", maxWidth: "900px" }}>
         <div className="guide-warning">
           <strong>⚠️ Read this first.</strong> Bubat AI is experimental and <strong>has lost money in testing</strong>.
-          Forex and gold trading on margin is high risk. Use it on a <strong>demo account</strong>. Nothing here is
+          Forex and gold trading on margin is high risk. Test it on a <strong>demo account</strong> first; on a real account the risk is yours. Nothing here is
           financial advice.
         </div>
 
@@ -269,8 +269,8 @@ export default function BubatAIPage() {
               So trading is moving, step by step, from the AI&apos;s calls to rule-based strategies that pass the{" "}
               <a href="#lab">Strategy Lab</a>&apos;s tests. The first one, a daily breakout strategy that only buys,
               has traded on our demo since 11 October 2026 next to the AI: far too few trades to judge yet. The AI keeps
-              trading while the Lab looks for more. Results may improve or not; that is why it trades demo accounts
-              only by default.
+              trading while the Lab looks for more. Results may improve or not; the Overview&apos;s Real-account readiness card
+              shows whether its record supports real money.
             </p>
           </Section>
 
@@ -484,7 +484,6 @@ export default function BubatAIPage() {
             <ul>
               <li>Choose prices, stop loss, take profit or lot size.</li>
               <li>Switch off, skip or change a safety wall.</li>
-              <li>Trade a real-money account (unless you change that setting yourself).</li>
               <li>Change settings or code without your approval.</li>
               <li>Put a Strategy Lab strategy on live trading without your approval.</li>
               <li>Close or touch trades you opened by hand.</li>
@@ -499,7 +498,7 @@ export default function BubatAIPage() {
               <li>The AI answers: <code>SELL, confidence 0.84</code>, &quot;Bearish trend on M5 and H1 with a matching euro-negative headline.&quot;</li>
               <li>0.84 is between 0.80 and 0.89, so it is queued. After all pairs are analysed, it ranks first (full H1 trend, low spread).</li>
               <li>The rules calculate it: entry 1.1250 (Bid), ATR 9 pips, so the stop is 15 pips (the minimum) at 1.1265 and the take profit 27 pips away at 1.1223. Lot 0.01.</li>
-              <li>The walls check it: demo account, no news due within 30 minutes, under 10 trades, no EURUSD already open, EUR exposure below 3, the stop costs under 2% of the balance and fits in what is left of today&apos;s 8% loss limit, spread 0.2 pips (about 1% of the stop), London-New York session has a free slot. All pass, and the order goes to MetaTrader 5 with SL and TP attached.</li>
+              <li>The walls check it: no news due within 30 minutes, under 10 trades, no EURUSD already open, EUR exposure below 3, the stop costs under 2% of the balance and fits in what is left of today&apos;s 8% loss limit, spread 0.2 pips (about 1% of the stop), London-New York session has a free slot. All pass, and the order goes to MetaTrader 5 with SL and TP attached.</li>
               <li>The price falls 16 pips, so the stop moves to break-even. At 21 pips the trailing stop takes over. It reverses and closes at +12 pips (+0.8R). EURUSD then rests for 30 minutes.</li>
             </ol>
             <p>If the same chart had come with no matching headline, the AI would most likely have scored it 0.72 to 0.78 and the bot would have waited.</p>
@@ -523,7 +522,7 @@ export default function BubatAIPage() {
               <li><strong>8 GB of memory</strong> minimum (16 GB recommended for the daily review and deep chat).</li>
               <li><strong>About 25 GB of free disk space</strong> for the AI models.</li>
               <li><strong>An NVIDIA graphics card with 4 GB or more</strong> is recommended. Without one it still works, slower, on 7 major pairs. While the market is open the trading AI stays loaded on it (about 5 GB on an 8 GB card).</li>
-              <li><strong>MetaTrader 5</strong> from your broker, logged in to a <strong>demo account</strong>, with Algo Trading turned on.</li>
+              <li><strong>MetaTrader 5</strong> from your broker, logged in (a <strong>demo account</strong> to test first; a real account at your own risk), with Algo Trading turned on.</li>
               <li><strong>A Google account</strong> to sign in, and an internet connection.</li>
             </ul>
           </Section>
@@ -539,7 +538,7 @@ export default function BubatAIPage() {
                   <li><strong>Account:</strong> press <em>Sign in with Google</em>. Your browser opens; sign in, then come back. Your free trial starts.</li>
                   <li><strong>Your PC:</strong> shows your memory, graphics card and disk, and the AI models chosen for it.</li>
                   <li><strong>AI models:</strong> press <em>Install</em>. It installs Ollama if needed and downloads the models (about 7 to 22 GB, usually 10 to 40 minutes). You can keep using your PC; if it stops, press Install again and it continues.</li>
-                  <li><strong>MetaTrader 5:</strong> open MT5, log in to a demo account, turn on Algo Trading, then press <em>Check connection</em>. It should say CONNECTED and DEMO.</li>
+                  <li><strong>MetaTrader 5:</strong> open MT5, log in (a demo account to test first), turn on Algo Trading, then press <em>Check connection</em>. It should say CONNECTED, the account type (DEMO or REAL MONEY) and ALGO TRADING ON.</li>
                   <li><strong>Finish:</strong> leave <em>Start the trading agent now</em> ticked.</li>
                 </ol>
               </li>
@@ -559,7 +558,7 @@ export default function BubatAIPage() {
                     caption="d. AI models: Install downloads Ollama and the models, with progress." />
               <Shot name="setup-mt5" size={SETUP}
                     alt="Setup wizard, MetaTrader 5 step: CONNECTED, DEMO and ALGO TRADING ON"
-                    caption="e. MetaTrader 5: you want CONNECTED, DEMO and ALGO TRADING ON." />
+                    caption="e. MetaTrader 5: CONNECTED, the account type (DEMO here) and ALGO TRADING ON." />
             </div>
             <p>
               Optional: check the download is genuine by comparing its SHA-256 (PowerShell:{" "}
@@ -688,7 +687,7 @@ export default function BubatAIPage() {
             </p>
             <p className="footer-disclaimer">
               Risk warning: Trading on margin carries a high level of risk. Bubat AI has lost money in testing. Past
-              performance is not indicative of future results. Always use a demo account.
+              performance is not indicative of future results. Test on a demo account first; real-money trading is at your own risk.
             </p>
           </div>
         </div>

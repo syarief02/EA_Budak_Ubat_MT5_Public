@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <LegalPage title="Terms of Use" updated="4 October 2026">
+    <LegalPage title="Terms of Use" updated="9 November 2026">
       <p>
         These terms apply to the <strong>Bubat AI</strong> Windows app. By installing or using it you accept them.
       </p>
@@ -28,11 +28,13 @@ export default function TermsPage() {
         predict future results.
       </p>
 
-      <H2>3. Demo accounts only by default</H2>
+      <H2>3. Real-money accounts are your own risk</H2>
       <p>
-        Bubat AI refuses to trade real-money accounts unless you deliberately change a setting by hand
-        (<code>risk_parameters.allow_live_trading</code>). Test it on a demo account for weeks before you even consider
-        real money. If you enable real-money trading, you do so entirely at your own risk.
+        Bubat AI trades whatever MetaTrader 5 account is logged in, demo or real; it does not refuse real-money
+        accounts. If you run it on a real-money account, you do so entirely at your own risk, and every loss is yours.
+        Test it on a demo account first, and check the Real-account readiness card in the app, which shows whether the
+        bot&apos;s own record supports real money. To trade demo accounts only, set
+        <code>risk_parameters.demo_only</code> to <code>true</code> in <code>config.json</code>.
       </p>
 
       <H2>4. Not financial advice</H2>
