@@ -217,7 +217,7 @@ stateDiagram-v2
 
 ## Still open (needs an owner decision or production access)
 
-- Set `ADMIN_COMMENT_TOKEN` in Vercel (Production) before posting as "Syarief (Creator)" again. The old fallback value is public in git history, so treat it as burned.
+- Done 2026-11-13: `ADMIN_COMMENT_TOKEN` is set in Vercel (Production, sensitive). The local copy is in the git-ignored `.env` at the repo root. The community form never sends it, so posting as "Syarief (Creator)" means a POST to `/api/comments` with `admin_token` in the body. The old fallback value is public in git history, so treat it as burned.
 - Direct inserts. Until 2026-11-12 the route inserted with the public anon key, so RLS on `public.comments` has to allow anon inserts, and anyone with that key can insert rows directly and skip every check in `/api/comments`. `lib/supabaseServer.js` makes the route write with `SUPABASE_SERVICE_ROLE_KEY` when that server variable is set. To close the gap:
   1. Add `SUPABASE_SERVICE_ROLE_KEY` (Supabase → Project settings → API → `service_role`) to Vercel Production as a sensitive variable. Never prefix it with `NEXT_PUBLIC_`.
   2. Redeploy, then post once to confirm the board still works.
