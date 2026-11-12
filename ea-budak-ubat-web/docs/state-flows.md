@@ -218,7 +218,8 @@ stateDiagram-v2
 ## Still open (needs an owner decision or production access)
 
 - Done 2026-11-13: `ADMIN_COMMENT_TOKEN` is set in Vercel (Production, sensitive). The local copy is in the git-ignored `.env` at the repo root. The community form never sends it, so posting as "Syarief (Creator)" means a POST to `/api/comments` with `admin_token` in the body. The old fallback value is public in git history, so treat it as burned.
-- Direct inserts. Until 2026-11-12 the route inserted with the public anon key, so RLS on `public.comments` has to allow anon inserts, and anyone with that key can insert rows directly and skip every check in `/api/comments`. `lib/supabaseServer.js` makes the route write with `SUPABASE_SERVICE_ROLE_KEY` when that server variable is set. To close the gap:
-  1. Add `SUPABASE_SERVICE_ROLE_KEY` (Supabase → Project settings → API → `service_role`) to Vercel Production as a sensitive variable. Never prefix it with `NEXT_PUBLIC_`.
-  2. Redeploy, then post once to confirm the board still works.
-  3. In the Supabase SQL editor, list the policies with `select policyname, cmd, roles from pg_policies where schemaname = 'public' and tablename = 'comments';` and drop the INSERT policy that allows `anon` (or `public`). Keep the SELECT policy, which the feed needs.
+- Direct inserts. The route inserts with the public anon key, so RLS on `public.comments` has to allow anon inserts, and anyone with that key can insert rows directly and skip every check in `/api/comments`. The fix is a shared secret that only the server and the database know:
+  - `lib/supabaseServer.js` sends `x-comments-key: <COMMENTS_INSERT_KEY>` on every request when that Vercel server variable is set (never `NEXT_PUBLIC_`). Without it the route uses the plain anon client, as before.
+  - In the database, `private.app_settings` holds the same value, and `private.comments_insert_allowed()` (security definer) compares it with the request header. The INSERT policy `comments_insert_via_site_api` uses that function, and replaces the open anon INSERT policy. The SELECT policy stays, since the feed needs it.
+
+  Order matters: set the variable and redeploy first, then swap the policy. If the policy changes before the deployed code sends the header, every post fails. To undo, recreate an anon INSERT policy `with check (true)`.

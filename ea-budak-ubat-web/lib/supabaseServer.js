@@ -1,17 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
-import { supabase as anonClient, supabaseUrl } from '@/lib/supabase';
+import { supabase as anonClient, supabaseUrl, supabaseAnonKey } from '@/lib/supabase';
 
 // Server-only client for API routes. Never import this from a client component.
 //
-// With SUPABASE_SERVICE_ROLE_KEY set in the Vercel environment (a plain server variable, never NEXT_PUBLIC_),
-// /api/comments writes as the service role. The comments table's RLS can then refuse anon inserts, so nobody
-// can skip the route's checks (honeypot, limits, reserved names) by calling Supabase with the public anon key.
-// Without the variable this falls back to the anon client, which is how the site worked before.
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// The anon key is public, so the comments table must not accept inserts from anyone who holds it. RLS on
+// public.comments only lets an insert through when the request carries an `x-comments-key` header equal to the
+// secret stored in the database (private.app_settings, checked by private.comments_insert_allowed()).
+// Only this server knows the value, from COMMENTS_INSERT_KEY in the Vercel environment (a plain server variable,
+// never NEXT_PUBLIC_), so every post has to go through /api/comments and its checks (honeypot, limits,
+// reserved names). Without the variable this is the plain anon client.
+const insertKey = process.env.COMMENTS_INSERT_KEY;
 
 export const supabaseServer =
-  typeof serviceKey === 'string' && serviceKey.length > 20
-    ? createClient(supabaseUrl, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } })
+  typeof insertKey === 'string' && insertKey.length >= 32
+    ? createClient(supabaseUrl, supabaseAnonKey, {
+        auth: { persistSession: false, autoRefreshToken: false },
+        global: { headers: { 'x-comments-key': insertKey } },
+      })
     : anonClient;
-
-export const usingServiceRole = supabaseServer !== anonClient;

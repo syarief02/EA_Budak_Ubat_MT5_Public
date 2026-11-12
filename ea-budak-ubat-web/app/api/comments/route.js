@@ -266,7 +266,7 @@ export async function POST(request) {
       payload.ea_name = cleanEaName.slice(0, 100);
     }
 
-    // Service role when SUPABASE_SERVICE_ROLE_KEY is set (see lib/supabaseServer.js), so RLS can refuse anon inserts.
+    // Sends the x-comments-key header when COMMENTS_INSERT_KEY is set (see lib/supabaseServer.js); RLS refuses inserts without it.
     const { data, error } = await supabaseServer.from('comments').insert([payload]).select();
 
     if (error) {
