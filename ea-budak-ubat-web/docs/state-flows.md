@@ -212,10 +212,10 @@ stateDiagram-v2
 | Command palette | ArrowDown with no matches set the selection to `NaN`. | The index is clamped, and reset when the palette opens. |
 | EA page parameters | `RSI_TF` default listed as `PERIOD_M15`. The v1.67 source uses `PERIOD_H1`. | Text corrected. |
 | Forex Quest Blitz | The "next question" timeout from a finished game could replace the first question of a new game. | Pending timeouts are cleared on start, finish and unmount. |
+| Grid calculator, XAUUSD | A pip was treated as a $0.10 move at $10 per lot. EA v1.67 (and the Preset Studio's gold preset) use a $0.01 pip on 2- and 3-digit gold, so gold distances and drawdown did not match the EA's inputs. | $0.01 pip, $1 per 1.00 lot. The hint explains that the EURUSD defaults make a very tight gold grid. |
+| `/api/comments` limits | The per-IP limiter lives in memory, so each serverless instance has its own copy and it resets on cold start. | `lib/commentLimits.js` reads the comments table: at most 8 posts site-wide per 10 minutes (429), and the same message within 24 hours is refused (409, which also stops double posts). Query errors fail open. |
 
 ## Still open (needs an owner decision or production access)
 
 - Set `ADMIN_COMMENT_TOKEN` in Vercel (Production) before posting as "Syarief (Creator)" again. The old fallback value is public in git history, so treat it as burned.
 - Check the Supabase RLS on `public.comments`. If the anon role can `insert` directly, anyone with the public anon key can skip every server-side check in `/api/comments`.
-- The in-memory rate limiter in `/api/comments` is per serverless instance and resets on cold start, so it is close to a no-op on Vercel.
-- On XAUUSD the calculator treats a pip as a $0.10 move at $10 per lot. EA v1.67 uses a $0.01 pip on 2- and 3-digit gold, so gold distances and drawdown in the calculator do not match the EA's units.

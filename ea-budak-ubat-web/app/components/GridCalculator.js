@@ -56,8 +56,10 @@ export default function GridCalculator() {
         name: "Gold (XAUUSD)",
         price: 3500.0,
         contractSize: 100, // 100 oz per standard lot
-        pipValuePerLot: 10.0, // $10 per 1.0 pip (0.10 move)
-        pipUnit: "pips ($0.10)",
+        // Same unit as the EA's pip inputs: v1.67 uses the tick size unless it is 0.00001/0.001,
+        // so on 2- and 3-digit gold one "pip" is a $0.01 move, worth $1 on 1.00 lot (100 oz).
+        pipValuePerLot: 1.0,
+        pipUnit: "EA pips ($0.01)",
       };
     }
     return {
@@ -244,7 +246,9 @@ export default function GridCalculator() {
             <option value="XAUUSD">XAUUSD (Gold · High Volatility)</option>
           </select>
           <span className="calc-hint">
-            {symbol === "XAUUSD" ? "Requires UseRSIFilter = false in v1.63" : "Optimal for Grid Martingale"}
+            {symbol === "XAUUSD"
+              ? "Gold: 1 EA pip = $0.01 move. The EURUSD defaults make a very tight gold grid; use AutoConfig = true and UseRSIFilter = false"
+              : "Optimal for Grid Martingale"}
           </span>
         </div>
 

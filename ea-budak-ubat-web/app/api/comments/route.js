@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { checkSharedCommentLimits } from '@/lib/commentLimits';
 
 // In-memory sliding-window rate limiter per IP
-// (Max 3 submissions per 5 minutes)
+// (Max 3 submissions per 5 minutes). Per serverless instance only, so it resets on cold starts;
+// checkSharedCommentLimits() below is the limit that holds across instances.
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 3;
@@ -230,11 +232,29 @@ export async function POST(request) {
       }
     }
 
-    // 6. Record rate limit timestamp
+    // 6. Shared limits (read the comments table, so they hold across serverless instances)
+    const sharedLimit = await checkSharedCommentLimits(supabase, cleanMessage, now);
+    if (sharedLimit === 'duplicate') {
+      return NextResponse.json(
+        { success: false, error: 'This message has already been posted. Refresh the page to see it in the feed.' },
+        { status: 409 }
+      );
+    }
+    if (sharedLimit === 'busy') {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'The board is receiving a lot of posts right now. Please try again in a few minutes, or message @SyariefAzman on Telegram.',
+        },
+        { status: 429 }
+      );
+    }
+
+    // 7. Record rate limit timestamp
     timestamps.push(now);
     rateLimitMap.set(ip, timestamps);
 
-    // 7. Insert clean record into Supabase
+    // 8. Insert clean record into Supabase
     const payload = {
       name: cleanName,
       type: rawType,
