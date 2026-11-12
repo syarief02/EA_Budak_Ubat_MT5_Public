@@ -221,7 +221,7 @@ export async function POST(request) {
     if (isImpersonationAttempt) {
       // Reserved names need ADMIN_COMMENT_TOKEN from the Vercel environment. There is deliberately no fallback:
       // this repo is public, so any default here would let anyone post as the creator.
-      const creatorPass = process.env.ADMIN_COMMENT_TOKEN;
+      const creatorPass = (process.env.ADMIN_COMMENT_TOKEN || '').trim();
       if (!creatorPass || !body.admin_token || body.admin_token !== creatorPass) {
         return NextResponse.json(
           {

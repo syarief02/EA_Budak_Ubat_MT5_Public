@@ -9,10 +9,11 @@ import { supabase as anonClient, supabaseUrl, supabaseAnonKey } from '@/lib/supa
 // Only this server knows the value, from COMMENTS_INSERT_KEY in the Vercel environment (a plain server variable,
 // never NEXT_PUBLIC_), so every post has to go through /api/comments and its checks (honeypot, limits,
 // reserved names). Without the variable this is the plain anon client.
-const insertKey = process.env.COMMENTS_INSERT_KEY;
+// Trimmed because a value piped into `vercel env add` can keep a trailing newline, which is not a valid header value.
+const insertKey = (process.env.COMMENTS_INSERT_KEY || '').trim();
 
 export const supabaseServer =
-  typeof insertKey === 'string' && insertKey.length >= 32
+  insertKey.length >= 32
     ? createClient(supabaseUrl, supabaseAnonKey, {
         auth: { persistSession: false, autoRefreshToken: false },
         global: { headers: { 'x-comments-key': insertKey } },
