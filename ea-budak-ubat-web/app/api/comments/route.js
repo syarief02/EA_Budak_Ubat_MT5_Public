@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { supabaseServer } from '@/lib/supabaseServer';
 import { checkSharedCommentLimits } from '@/lib/commentLimits';
 
 // In-memory sliding-window rate limiter per IP
@@ -233,7 +234,7 @@ export async function POST(request) {
     }
 
     // 6. Shared limits (read the comments table, so they hold across serverless instances)
-    const sharedLimit = await checkSharedCommentLimits(supabase, cleanMessage, now);
+    const sharedLimit = await checkSharedCommentLimits(supabaseServer, cleanMessage, now);
     if (sharedLimit === 'duplicate') {
       return NextResponse.json(
         { success: false, error: 'This message has already been posted. Refresh the page to see it in the feed.' },
@@ -265,7 +266,8 @@ export async function POST(request) {
       payload.ea_name = cleanEaName.slice(0, 100);
     }
 
-    const { data, error } = await supabase.from('comments').insert([payload]).select();
+    // Service role when SUPABASE_SERVICE_ROLE_KEY is set (see lib/supabaseServer.js), so RLS can refuse anon inserts.
+    const { data, error } = await supabaseServer.from('comments').insert([payload]).select();
 
     if (error) {
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });

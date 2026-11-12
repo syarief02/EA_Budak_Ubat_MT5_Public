@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseUrl = (typeof rawUrl === 'string' && rawUrl.startsWith('http'))
+export const supabaseUrl = (typeof rawUrl === 'string' && rawUrl.startsWith('http'))
   ? rawUrl
   : 'https://qthjikwteugfowlflkfi.supabase.co';
 
