@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
@@ -15,21 +15,6 @@ const TELEGRAM_CHANNEL = "https://t.me/EABudakUbat";
 
 export default function AboutPage() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <>

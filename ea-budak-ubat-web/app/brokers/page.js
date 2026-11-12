@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
 import "../home.css";
+import { copyText } from "@/lib/clipboard";
+import { useFlash } from "@/lib/useFlash";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
 import Icon from "@/app/components/Icon";
@@ -11,14 +12,10 @@ import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import { PARTNER_BROKERS, CLIENT_PERKS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
 
 export default function BrokersPage() {
-  const [copied, setCopied] = useState(null);
+  const [copied, flashCopied] = useFlash(2000); // { id, ok } while the label shows
 
-  const copyCode = (id) => {
-    try {
-      navigator.clipboard?.writeText(id);
-    } catch (e) {}
-    setCopied(id);
-    setTimeout(() => setCopied(null), 2000);
+  const copyCode = async (id) => {
+    flashCopied({ id, ok: await copyText(id) });
   };
 
   return (
@@ -68,7 +65,7 @@ export default function BrokersPage() {
                       <dt>Partner code</dt>
                       <dd>
                         <button type="button" className="hp-copy" onClick={() => copyCode(b.id)} title="Copy partner code">
-                          {b.id} <span>{copied === b.id ? "Copied" : "Copy"}</span>
+                          {b.id} <span>{copied?.id === b.id ? (copied.ok ? "Copied" : "Copy failed") : "Copy"}</span>
                         </button>
                       </dd>
                     </div>

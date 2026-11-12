@@ -30,13 +30,16 @@ export default function FacebookPixel() {
         });
       }
 
-      // Lead / Download Event: EA Binary or Preset download
+      // Lead / Download Event: an EA binary or preset file actually being downloaded.
+      // Only links count. Matching button text ("download") also fired on FAQ questions, and the .set generator's
+      // button click plus the file link it creates counted one download twice.
+      const isLink = target.tagName === "A";
+      const path = href.split("?")[0];
       if (
-        href.endsWith(".ex5") ||
-        href.endsWith(".ex4") ||
-        href.endsWith(".set") ||
-        target.hasAttribute("download") ||
-        text.toLowerCase().includes("download")
+        isLink &&
+        (/\.(ex4|ex5|set|zip)$/i.test(path) ||
+          /github\.com\/[^/]+\/[^/]+\/releases/.test(path) || // Bubat AI installer page
+          target.hasAttribute("download"))
       ) {
         event("Lead", {
           content_name: text || "EA Binary / Preset",

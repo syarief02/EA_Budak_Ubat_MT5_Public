@@ -3,6 +3,28 @@
 import { useState, useMemo } from "react";
 import { BROKERS } from "@/lib/authorizedAccounts";
 
+// A number input whose text is kept as typed (draft) while focused, separate from the number the maths uses.
+// The number updates live whenever the draft is a valid value >= min; on blur the field shows the clamped number.
+// (Clamping on every keystroke turned "5000" into "10000": "5" was raised to the minimum 10 before the zeros.)
+function useNumberField(value, setValue, min) {
+  const [draft, setDraft] = useState(null); // null = not editing
+  return {
+    value: draft ?? String(value),
+    onFocus: () => setDraft(String(value)),
+    onChange: (e) => {
+      const text = e.target.value;
+      setDraft(text);
+      const n = Number(text);
+      if (text.trim() !== "" && Number.isFinite(n) && n >= min) setValue(n);
+    },
+    onBlur: () => {
+      const n = Number(draft);
+      if (draft !== null && draft.trim() !== "" && Number.isFinite(n)) setValue(Math.max(min, n));
+      setDraft(null);
+    },
+  };
+}
+
 export default function GridCalculator() {
   const [balanceUSD, setBalanceUSD] = useState(100);
   const [accountType, setAccountType] = useState("cent"); // "cent" or "standard"
@@ -13,6 +35,12 @@ export default function GridCalculator() {
   const [minDistance, setMinDistance] = useState(4);
   const [distanceIncrement, setDistanceIncrement] = useState(2);
   const [maxLayers, setMaxLayers] = useState(8);
+
+  const balanceField = useNumberField(balanceUSD, setBalanceUSD, 10);
+  const baseLotField = useNumberField(baseLot, setBaseLot, 0.01);
+  const multiplierField = useNumberField(multiplier, setMultiplier, 1.0);
+  const minDistanceField = useNumberField(minDistance, setMinDistance, 1);
+  const incrementField = useNumberField(distanceIncrement, setDistanceIncrement, 0);
 
   // Effective balance in account currency
   const effectiveBalance = useMemo(() => {
@@ -167,8 +195,7 @@ export default function GridCalculator() {
               min="10"
               max="100000"
               step="10"
-              value={balanceUSD}
-              onChange={(e) => setBalanceUSD(Math.max(10, Number(e.target.value) || 0))}
+              {...balanceField}
               className="calc-input"
             />
           </div>
@@ -247,8 +274,7 @@ export default function GridCalculator() {
               min="0.01"
               max="10.0"
               step="0.01"
-              value={baseLot}
-              onChange={(e) => setBaseLot(Math.max(0.01, Number(e.target.value) || 0.01))}
+              {...baseLotField}
               className="calc-input"
             />
           </div>
@@ -265,8 +291,7 @@ export default function GridCalculator() {
               min="1.0"
               max="2.0"
               step="0.05"
-              value={multiplier}
-              onChange={(e) => setMultiplier(Math.max(1.0, Number(e.target.value) || 1.0))}
+              {...multiplierField}
               className="calc-input"
             />
           </div>
@@ -283,8 +308,7 @@ export default function GridCalculator() {
               min="1"
               max="50"
               step="1"
-              value={minDistance}
-              onChange={(e) => setMinDistance(Math.max(1, Number(e.target.value) || 1))}
+              {...minDistanceField}
               className="calc-input"
             />
           </div>
@@ -301,8 +325,7 @@ export default function GridCalculator() {
               min="0"
               max="20"
               step="0.5"
-              value={distanceIncrement}
-              onChange={(e) => setDistanceIncrement(Math.max(0, Number(e.target.value) || 0))}
+              {...incrementField}
               className="calc-input"
             />
           </div>

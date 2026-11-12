@@ -135,10 +135,12 @@ export async function POST(request) {
       );
     }
 
-    // 3. Timing Velocity Defense (forms submitted faster than 1.2s are automated bots)
-    if (body.form_rendered_at) {
-      const elapsed = now - Number(body.form_rendered_at);
-      if (elapsed < 1200) {
+    // 3. Timing Velocity Defense (forms submitted faster than 1.2s are automated bots).
+    // The browser sends how long the form was open (form_elapsed_ms). Comparing a client timestamp with the
+    // server clock would reject real visitors whose clock runs ahead, so only the client-measured duration is used.
+    if (body.form_elapsed_ms !== undefined && body.form_elapsed_ms !== null) {
+      const elapsed = Number(body.form_elapsed_ms);
+      if (!Number.isFinite(elapsed) || elapsed < 1200) {
         return NextResponse.json(
           { success: false, error: 'Submission received too quickly. Please try again.' },
           { status: 400 }
@@ -214,8 +216,10 @@ export async function POST(request) {
       lowerName.includes('budak ubat team');
 
     if (isImpersonationAttempt) {
-      const creatorPass = process.env.ADMIN_COMMENT_TOKEN || 'eabudakubat-secure-2026';
-      if (!body.admin_token || body.admin_token !== creatorPass) {
+      // Reserved names need ADMIN_COMMENT_TOKEN from the Vercel environment. There is deliberately no fallback:
+      // this repo is public, so any default here would let anyone post as the creator.
+      const creatorPass = process.env.ADMIN_COMMENT_TOKEN;
+      if (!creatorPass || !body.admin_token || body.admin_token !== creatorPass) {
         return NextResponse.json(
           {
             success: false,

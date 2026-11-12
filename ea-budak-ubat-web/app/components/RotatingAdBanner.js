@@ -1,10 +1,31 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useMemo, useReducer } from "react";
 import Image from "next/image";
 import { getActiveAds, BROKER_ADS } from "@/lib/adsData";
 
 const FALLBACK_BANNER = "/banners/default-banner.svg";
+const AUTO_ADVANCE_MS = 6000;
+const AUTO_FADE_MS = 250;
+const MANUAL_FADE_MS = 200;
+
+// Slide state (docs/state-flows.md, section 5): "shown" or "fading" toward `target`.
+// One fade timer at a time; picking another ad mid-fade just replaces the target.
+// Pausing (hover) only stops the auto-advance timer, so a fade that started always completes.
+function slideReducer(state, action) {
+  switch (action.type) {
+    case "go":
+      if (state.phase === "shown" && action.target === state.index) return state;
+      if (state.phase === "fading" && action.target === state.target) return state;
+      return { ...state, phase: "fading", target: action.target, fadeMs: action.fadeMs };
+    case "commit":
+      return { index: state.target, phase: "shown", target: null, fadeMs: 0 };
+    case "jump":
+      return { index: action.index, phase: "shown", target: null, fadeMs: 0 };
+    default:
+      return state;
+  }
+}
 
 // next/image serves a resized WebP/AVIF (CSS caps banners at ~180x54), so full-size broker artwork is fine in /public/banners
 function BannerImage({ ad, className }) {
@@ -30,57 +51,48 @@ export default function RotatingAdBanner({ variant = "strip" }) {
     return active.length > 0 ? active : BROKER_ADS;
   }, []);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slide, dispatch] = useReducer(slideReducer, { index: 0, phase: "shown", target: null, fadeMs: 0 });
   const [isPaused, setIsPaused] = useState(false);
-  const [fadeState, setFadeState] = useState("in");
-  const timeoutRef = useRef(null);
+  const currentIndex = slide.index;
+  const fadeState = slide.phase === "fading" ? "out" : "in";
 
   // Randomize starting ad on client mount (avoids SSR hydration mismatch)
   useEffect(() => {
     if (ads.length > 1) {
       const randomIndex = Math.floor(Math.random() * ads.length);
-      if (randomIndex !== 0) {
-        setCurrentIndex(randomIndex);
-      }
+      if (randomIndex !== 0) dispatch({ type: "jump", index: randomIndex });
     }
   }, [ads.length]);
 
-  // Auto-cycle every 6 seconds
+  // Finish a fade: runs whenever a fade starts or its target changes, never cancelled by a pause.
   useEffect(() => {
-    if (isPaused || ads.length <= 1) return;
+    if (slide.phase !== "fading") return undefined;
+    const t = setTimeout(() => dispatch({ type: "commit" }), slide.fadeMs);
+    return () => clearTimeout(t);
+  }, [slide.phase, slide.target, slide.fadeMs]);
 
-    const interval = setInterval(() => {
-      setFadeState("out");
-      timeoutRef.current = setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % ads.length);
-        setFadeState("in");
-      }, 250);
-    }, 6000);
+  // Auto-advance 6 s after the current ad settled, unless hovered. A manual switch restarts the count.
+  useEffect(() => {
+    if (isPaused || ads.length <= 1 || slide.phase !== "shown") return undefined;
+    const t = setTimeout(
+      () => dispatch({ type: "go", target: (slide.index + 1) % ads.length, fadeMs: AUTO_FADE_MS }),
+      AUTO_ADVANCE_MS
+    );
+    return () => clearTimeout(t);
+  }, [isPaused, ads.length, slide.phase, slide.index]);
 
-    return () => {
-      clearInterval(interval);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [isPaused, ads.length]);
-
-  const switchAd = (newIndex) => {
-    if (newIndex === currentIndex) return;
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setFadeState("out");
-    timeoutRef.current = setTimeout(() => {
-      setCurrentIndex(newIndex);
-      setFadeState("in");
-    }, 200);
-  };
+  // Arrows step from where the banner is heading, so quick double clicks move two ads.
+  const base = slide.phase === "fading" ? slide.target : slide.index;
+  const switchAd = (newIndex) => dispatch({ type: "go", target: newIndex, fadeMs: MANUAL_FADE_MS });
 
   const nextAd = (e) => {
     if (e) e.preventDefault();
-    switchAd((currentIndex + 1) % ads.length);
+    switchAd((base + 1) % ads.length);
   };
 
   const prevAd = (e) => {
     if (e) e.preventDefault();
-    switchAd((currentIndex - 1 + ads.length) % ads.length);
+    switchAd((base - 1 + ads.length) % ads.length);
   };
 
   const ad = ads[currentIndex] || ads[0];

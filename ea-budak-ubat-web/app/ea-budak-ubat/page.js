@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 import GridCalculator from "@/app/components/GridCalculator";
@@ -55,7 +55,7 @@ const PARAM_TABS = {
   ],
   filter: [
     { name: "UseRSIFilter", def: "true", desc: "Toggle RSI filter ON/OFF. Set false for Gold (XAUUSD) to avoid blocking buys during macro uptrends" },
-    { name: "RSI_TF", def: "PERIOD_M15", desc: "Timeframe for RSI calculation (M1, M5, M15, M30, H1, etc.)" },
+    { name: "RSI_TF", def: "PERIOD_H1", desc: "Timeframe for RSI calculation (M1, M5, M15, M30, H1, etc.)" },
     { name: "RSI_Period", def: "14", desc: "Averaging period for RSI momentum calculation" },
     { name: "RSI_BuyCeiling", def: "70.0", desc: "Maximum RSI value allowed to open new Buy positions" },
     { name: "RSI_SellFloor", def: "30.0", desc: "Minimum RSI value allowed to open new Sell positions" },
@@ -109,21 +109,6 @@ export default function EABudakUbatPage() {
   const [activeInstall, setActiveInstall] = useState("mt4");
   const [openFaq, setOpenFaq] = useState(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <>

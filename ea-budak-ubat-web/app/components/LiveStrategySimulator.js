@@ -873,7 +873,7 @@ export default function LiveStrategySimulator() {
 
         {/* TAKE PROFIT CELEBRATION OVERLAY */}
         {tpCelebration && (
-          <div className="tp-celebration-badge animate-in">
+          <div className="tp-celebration-badge">
             <span className="tp-icon">🎉</span>
             <div>
               <div className="tp-title">BASKET TAKE PROFIT REALIZED!</div>

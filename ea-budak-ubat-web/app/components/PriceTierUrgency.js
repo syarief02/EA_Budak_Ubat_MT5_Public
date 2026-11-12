@@ -1,7 +1,8 @@
 ﻿"use client";
 
-import { useState } from "react";
 import { playTactileClick } from "@/lib/audioSynthesizer";
+import { copyText } from "@/lib/clipboard";
+import { useFlash } from "@/lib/useFlash";
 
 export default function PriceTierUrgency({
   currentPrice = 149,
@@ -9,14 +10,12 @@ export default function PriceTierUrgency({
   marketUrl = "https://www.mql5.com/en/market/product/195399",
   compact = false,
 }) {
-  const [copied, setCopied] = useState(false);
+  const [copied, flashCopied] = useFlash(2500); // "ok" | "failed" | null
 
-  const handleCopyLink = (e) => {
+  const handleCopyLink = async (e) => {
     e.preventDefault();
-    navigator.clipboard?.writeText(marketUrl);
-    setCopied(true);
     playTactileClick(0.1);
-    setTimeout(() => setCopied(false), 2500);
+    flashCopied((await copyText(marketUrl)) ? "ok" : "failed");
   };
 
   return (
@@ -143,7 +142,7 @@ export default function PriceTierUrgency({
           className="btn btn-secondary btn-sm copy-link-btn"
           title="Copy official MQL5 Market Link"
         >
-          {copied ? "✓ Copied" : "🔗 Share"}
+          {copied === "ok" ? "✓ Copied" : copied === "failed" ? "Copy failed" : "🔗 Share"}
         </button>
       </div>
 

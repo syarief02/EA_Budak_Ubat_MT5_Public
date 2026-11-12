@@ -73,10 +73,11 @@ export default function CommandTerminal() {
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen) {
-      playTactileClick(0.1);
-      setTimeout(() => inputRef.current?.focus(), 50);
-    }
+    if (!isOpen) return undefined;
+    playTactileClick(0.1);
+    setSelectedIndex(0);
+    const t = setTimeout(() => inputRef.current?.focus(), 50);
+    return () => clearTimeout(t);
   }, [isOpen]);
 
   // Filter commands
@@ -90,8 +91,12 @@ export default function CommandTerminal() {
     );
   });
 
-  // Handle arrow navigation
+  // Handle arrow navigation. With no matches there is nothing to move to (the old code produced NaN here).
   const handleNavKeyDown = (e) => {
+    if ((e.key === "ArrowDown" || e.key === "ArrowUp") && filtered.length === 0) {
+      e.preventDefault();
+      return;
+    }
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setSelectedIndex((prev) => (prev + 1) % filtered.length);

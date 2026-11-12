@@ -9,13 +9,12 @@ import SiteFooter from "@/app/components/SiteFooter";
 import Icon from "@/app/components/Icon";
 import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
-import { AUTHORIZED_ACCOUNTS_DISPLAY } from "@/lib/authorizedAccounts";
+import { AUTHORIZED_ACCOUNTS_DISPLAY, getEa } from "@/lib/authorizedAccounts";
 import { FEATURED_BROKERS, PARTNER_BROKERS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
 import { PRODUCT_TYPES } from "@/lib/productTypes";
 
-// The YYYYMMDD suffix is the trial cutoff for unauthorized real accounts; swap it with the monthly expiry update.
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5";
+// Built from TRIAL.expiryDate in lib/authorizedAccounts.js, so the monthly expiry update moves these too.
+const { downloadMt4: DOWNLOAD_MT4, downloadMt5: DOWNLOAD_MT5 } = getEa("ea-budak-ubat");
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const TELEGRAM_DEV = "https://t.me/SyariefAzman";
 
@@ -328,7 +327,7 @@ export default function Home() {
               Enter your MetaTrader account number to see whether it is whitelisted for EA Budak Ubat and the
               companion EAs. Authorized accounts are permanent and never expire.
             </SectionHead>
-            <AccountChecker initialEa="ea-budak-ubat" compact />
+            <AccountChecker initialEa="ea-budak-ubat" compact authorizeHref="#broker-partners" />
           </div>
         </section>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
@@ -267,19 +267,6 @@ export default function GuidePage() {
     const [openFaqs, setOpenFaqs] = useState({});
     const [activeInstall, setActiveInstall] = useState("mt4");
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) entry.target.classList.add("visible");
-                });
-            },
-            { threshold: 0.1 }
-        );
-        document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
-    }, []);
 
     const toggleFaq = (productIdx, faqIdx) => {
         const key = `${productIdx}-${faqIdx}`;

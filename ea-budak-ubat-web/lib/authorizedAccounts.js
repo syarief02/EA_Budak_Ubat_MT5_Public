@@ -34,6 +34,13 @@ export const ALL_AUTHORIZED_ACCOUNTS = new Set([
 // Unique MT4 + MT5 accounts rounded down for display, e.g. "880+" (most accounts are in both sets)
 export const AUTHORIZED_ACCOUNTS_DISPLAY = `${Math.floor(ALL_AUTHORIZED_ACCOUNTS.size / 10) * 10}+`;
 
+// Trial cutoff for unauthorized real accounts. Whitelisted and demo accounts never expire.
+// update-ea.ps1 rewrites this expiryDate; every EA's trial date and dated download URL below is built from it,
+// so the site cannot point at a binary name from another month.
+export const TRIAL = { expiryDate: "2026-11-30" };
+// "2026-11-30" -> "20261130", the suffix in the binary file names.
+export const TRIAL_FILE_DATE = TRIAL.expiryDate.replace(/-/g, "");
+
 export const EA_DATABASE = [
   {
     slug: "ea-budak-ubat",
@@ -42,16 +49,16 @@ export const EA_DATABASE = [
     platforms: ["MT4", "MT5"],
     icon: "📊",
     tagline: "Grid Martingale Expert Advisor",
-    expiryDate: "2026-11-30",
+    expiryDate: TRIAL.expiryDate,
     hasWhitelist: true,
     isOpenSource: false,
     marketUrl: "https://www.mql5.com/en/market/product/195399",
-    downloadMt5: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5",
-    downloadMt4: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4",
+    downloadMt5: `https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
+    downloadMt4: `https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
     mt4Accounts: MT4_AUTHORIZED_ACCOUNTS,
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: ALL_AUTHORIZED_ACCOUNTS,
-    description: "Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until 2026-11-30. Demo accounts are 100% free and unlimited. The official MT5 Market Edition is also available on MQL5 Market with native MetaQuotes activation.",
+    description: `Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until ${TRIAL.expiryDate}. Demo accounts are 100% free and unlimited. The official MT5 Market Edition is also available on MQL5 Market with native MetaQuotes activation.`,
   },
   {
     slug: "aligator-gozaimasu",
@@ -60,15 +67,15 @@ export const EA_DATABASE = [
     platforms: ["MT4", "MT5"],
     icon: "🐊",
     tagline: "Multi-Timeframe Alligator Trend EA",
-    expiryDate: "2026-11-30",
+    expiryDate: TRIAL.expiryDate,
     hasWhitelist: true,
     isOpenSource: false,
-    downloadMt5: "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%2020261130.ex5",
-    downloadMt4: "https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%2020261130.ex4",
+    downloadMt5: `https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
+    downloadMt4: `https://github.com/syarief02/EA-Aligator-Gozaimasu/raw/master/EA%20-%20Aligator%20Gozaimasu%20v1.06%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
     mt4Accounts: MT4_AUTHORIZED_ACCOUNTS,
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: ALL_AUTHORIZED_ACCOUNTS,
-    description: "Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until 2026-11-30. Demo accounts are 100% free and unlimited.",
+    description: `Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until ${TRIAL.expiryDate}. Demo accounts are 100% free and unlimited.`,
   },
   {
     slug: "encik-moku",
@@ -77,15 +84,15 @@ export const EA_DATABASE = [
     platforms: ["MT4", "MT5"],
     icon: "🏯",
     tagline: "Multi-Timeframe Ichimoku Trend EA",
-    expiryDate: "2026-11-30",
+    expiryDate: TRIAL.expiryDate,
     hasWhitelist: true,
     isOpenSource: false,
-    downloadMt5: "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020261130.ex5",
-    downloadMt4: "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%2020261130.ex4",
+    downloadMt5: `https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
+    downloadMt4: `https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
     mt4Accounts: MT4_AUTHORIZED_ACCOUNTS,
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: ALL_AUTHORIZED_ACCOUNTS,
-    description: "Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until 2026-11-30. Demo accounts are 100% free and unlimited.",
+    description: `Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until ${TRIAL.expiryDate}. Demo accounts are 100% free and unlimited.`,
   },
   {
     slug: "bracketblitz",
@@ -94,15 +101,15 @@ export const EA_DATABASE = [
     platforms: ["MT4", "MT5"],
     icon: "⚡",
     tagline: "OCO Bracket Breakout Strategy",
-    expiryDate: "2026-11-30",
+    expiryDate: TRIAL.expiryDate,
     hasWhitelist: true,
     isOpenSource: false,
-    downloadMt5: "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT5%20-%2020261130.ex5",
-    downloadMt4: "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020261130.ex4",
+    downloadMt5: `https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
+    downloadMt4: `https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
     mt4Accounts: MT4_AUTHORIZED_ACCOUNTS,
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: ALL_AUTHORIZED_ACCOUNTS,
-    description: "Live accounts active until 2026-11-30 trial period. Whitelisted partner accounts enjoy permanent renewals. Demo accounts are unlimited.",
+    description: `Live accounts active until ${TRIAL.expiryDate} trial period. Whitelisted partner accounts enjoy permanent renewals. Demo accounts are unlimited.`,
   },
   {
     slug: "mathedge-pro",
@@ -111,15 +118,15 @@ export const EA_DATABASE = [
     platforms: ["MT4", "MT5"],
     icon: "📐",
     tagline: "Math-Based US Index Trading",
-    expiryDate: "2026-11-30",
+    expiryDate: TRIAL.expiryDate,
     hasWhitelist: true,
     isOpenSource: false,
-    downloadMt5: "https://github.com/syarief02/MathEdge-Pro/raw/main/MT5/MathEdge%20Pro%20-%20MT5%20-%2020261130.ex5",
-    downloadMt4: "https://github.com/syarief02/MathEdge-Pro/raw/main/MathEdge%20Pro%20-%20MT4%20-%2020261130.ex4",
+    downloadMt5: `https://github.com/syarief02/MathEdge-Pro/raw/main/MT5/MathEdge%20Pro%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
+    downloadMt4: `https://github.com/syarief02/MathEdge-Pro/raw/main/MathEdge%20Pro%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
     mt4Accounts: MT4_AUTHORIZED_ACCOUNTS,
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: ALL_AUTHORIZED_ACCOUNTS,
-    description: "Live accounts active until 2026-11-30 trial period. Whitelisted partner accounts enjoy permanent renewals. Demo accounts are unlimited.",
+    description: `Live accounts active until ${TRIAL.expiryDate} trial period. Whitelisted partner accounts enjoy permanent renewals. Demo accounts are unlimited.`,
   },
   {
     slug: "goldmind-ai",
@@ -128,26 +135,44 @@ export const EA_DATABASE = [
     platforms: ["MT5"],
     icon: "🤖",
     tagline: "AI-Powered XAUUSD Signal Trading",
-    expiryDate: "2026-11-30",
+    expiryDate: TRIAL.expiryDate,
     hasWhitelist: true,
     isOpenSource: false,
-    downloadMt5: "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020261130.ex5",
+    downloadMt5: `https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
     downloadMt4: null,
     mt4Accounts: new Set(),
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: MT5_AUTHORIZED_ACCOUNTS,
-    description: "Live accounts active until 2026-11-30 license period. Whitelisted partner accounts enjoy permanent renewals. Demo accounts are unlimited.",
+    description: `Live accounts active until ${TRIAL.expiryDate} license period. Whitelisted partner accounts enjoy permanent renewals. Demo accounts are unlimited.`,
   },
 ];
 
+export function getEa(slug) {
+  return EA_DATABASE.find((ea) => ea.slug === slug) || null;
+}
+
+// Local calendar date as "YYYY-MM-DD", comparable with expiryDate strings.
+function todayIso(now) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
+
 /**
- * Check authorization status for an account number across EAs with MT4/MT5 platform separation
- * @param {number|string} accountNumber 
+ * Check authorization status for an account number across EAs with MT4/MT5 platform separation.
+ * Each result's `status` is one of:
+ *   "authorized"    - whitelisted on the platform(s) in scope; permanent, no expiry
+ *   "trial"         - real account not whitelisted, before the trial cutoff
+ *   "trial_expired" - not whitelisted and the cutoff in the current builds has passed
+ *   "open_source"   - EA has no lock
+ * An empty array means the EA filter has no build for the chosen platform.
+ * @param {number|string} accountNumber
  * @param {string} filterSlug 'all' or specific ea slug
  * @param {string} platformFilter 'all', 'mt4', or 'mt5'
+ * @param {Date} now injected for tests; defaults to the current time
  * @returns {Array} List of EA status results
  */
-export function checkAccount(accountNumber, filterSlug = "all", platformFilter = "all") {
+export function checkAccount(accountNumber, filterSlug = "all", platformFilter = "all", now = new Date()) {
+  const today = todayIso(now);
   const cleanNum = Number(String(accountNumber).trim());
   if (!cleanNum || isNaN(cleanNum)) {
     return [];
@@ -239,6 +264,8 @@ export function checkAccount(accountNumber, filterSlug = "all", platformFilter =
         message: detailMsg,
       };
     } else {
+      // The site's cutoff can lag the calendar if the monthly build is late; say so instead of "active".
+      const trialEnded = today > ea.expiryDate;
       return {
         slug: ea.slug,
         name: ea.name,
@@ -255,10 +282,14 @@ export function checkAccount(accountNumber, filterSlug = "all", platformFilter =
         marketUrl: ea.marketUrl || null,
         downloadMt5: ea.downloadMt5 || null,
         downloadMt4: ea.downloadMt4 || null,
-        status: "trial",
-        statusLabel: "Trial Mode (Expires " + ea.expiryDate + ")",
+        status: trialEnded ? "trial_expired" : "trial",
+        statusLabel: trialEnded
+          ? "Trial Ended (" + ea.expiryDate + ")"
+          : "Trial Mode (Expires " + ea.expiryDate + ")",
         badgeClass: "status-trial",
-        message: "Your account is running in Trial Mode (active until " + ea.expiryDate + "). Register under a partner broker for permanent whitelist authorization.",
+        message: trialEnded
+          ? "The trial in the current build ended on " + ea.expiryDate + ". A new monthly build with a fresh trial is published soon; register under a partner broker for permanent whitelist authorization, or use a demo account meanwhile."
+          : "Your account is running in Trial Mode (active until " + ea.expiryDate + "). Register under a partner broker for permanent whitelist authorization.",
       };
     }
   });

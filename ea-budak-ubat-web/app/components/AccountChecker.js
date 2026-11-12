@@ -2,64 +2,81 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { checkAccount, EA_DATABASE, BROKERS, MT4_AUTHORIZED_ACCOUNTS, MT5_AUTHORIZED_ACCOUNTS } from "@/lib/authorizedAccounts";
+import { checkAccount, getEa, EA_DATABASE, BROKERS, MT4_AUTHORIZED_ACCOUNTS, MT5_AUTHORIZED_ACCOUNTS } from "@/lib/authorizedAccounts";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
+import { copyText } from "@/lib/clipboard";
+import { useFlash } from "@/lib/useFlash";
 
+const FLAGSHIP = getEa("ea-budak-ubat");
+
+// States (see docs/state-flows.md, section 2):
+//   idle      - nothing submitted yet (submittedAccount === "")
+//   invalid   - searchError is set
+//   checked   - results belong to submittedAccount; EA/platform filters re-run the same number
+//   stale     - checked, but the input now holds a different number (press Check Status again)
+//   no match  - checked, but the EA filter has no build for the chosen platform
 export default function AccountChecker({
   initialEa = "all",
   title = "Authorized Account Verification",
   subtitle = "Check your MetaTrader account status across all Expert Advisors or filter by specific EA.",
   showAllOption = true,
   compact = false,
+  // Where "Get Permanent Authorization" goes. Compact mode hides #partner-brokers, so the host passes its own section.
+  authorizeHref = "#partner-brokers",
 }) {
   const [selectedEa, setSelectedEa] = useState(initialEa);
   const [platformFilter, setPlatformFilter] = useState("all");
   const [accountNumber, setAccountNumber] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
+  const [submittedAccount, setSubmittedAccount] = useState("");
   const [searchError, setSearchError] = useState("");
-  const [copiedBrokerId, setCopiedBrokerId] = useState(null);
+  const [copyState, flashCopy] = useFlash(2500); // { id, ok } while the label shows
 
   const results = useMemo(() => {
-    if (!hasSearched || !accountNumber.trim()) return [];
-    return checkAccount(accountNumber, selectedEa, platformFilter);
-  }, [hasSearched, accountNumber, selectedEa, platformFilter]);
+    if (!submittedAccount) return [];
+    return checkAccount(submittedAccount, selectedEa, platformFilter);
+  }, [submittedAccount, selectedEa, platformFilter]);
+
+  const isStale = submittedAccount !== "" && accountNumber !== submittedAccount;
+  const noMatch = submittedAccount !== "" && results.length === 0;
 
   const handleSearch = (e) => {
     if (e) e.preventDefault();
     const clean = accountNumber.trim();
     if (!clean) {
       setSearchError("Please enter a valid MetaTrader account number (digits only).");
-      setHasSearched(false);
+      setSubmittedAccount("");
       return;
     }
     if (!/^\d+$/.test(clean)) {
       setSearchError("Account number must contain digits only.");
-      setHasSearched(false);
+      setSubmittedAccount("");
       return;
     }
     setSearchError("");
-    setHasSearched(true);
+    setSubmittedAccount(clean);
   };
 
   const handleQuickExample = (num) => {
     setAccountNumber(String(num));
     setSearchError("");
-    setHasSearched(true);
+    setSubmittedAccount(String(num));
   };
 
-  const handleCopyId = (id) => {
-    navigator.clipboard?.writeText(id);
-    setCopiedBrokerId(id);
-    setTimeout(() => setCopiedBrokerId(null), 2500);
+  const handleCopyId = async (id) => {
+    const ok = await copyText(id);
+    flashCopy({ id, ok });
   };
 
   const summary = useMemo(() => {
     if (!results.length) return null;
     const authorizedCount = results.filter((r) => r.status === "authorized").length;
     const trialCount = results.filter((r) => r.status === "trial").length;
+    const trialEndedCount = results.filter((r) => r.status === "trial_expired").length;
     const openSourceCount = results.filter((r) => r.status === "open_source").length;
-    return { authorizedCount, trialCount, openSourceCount, total: results.length };
+    return { authorizedCount, trialCount, trialEndedCount, openSourceCount, total: results.length };
   }, [results]);
+
+  const selectedEaInfo = selectedEa === "all" ? null : getEa(selectedEa);
 
   return (
     <div className="account-checker-card glass-card visible">
@@ -101,7 +118,7 @@ export default function AccountChecker({
         </div>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           <a
-            href="https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5"
+            href={FLAGSHIP.downloadMt5}
             download
             className="btn btn-primary btn-sm"
             style={{ fontWeight: 800, padding: "8px 16px" }}
@@ -109,7 +126,7 @@ export default function AccountChecker({
             ⬇️ MT5 (.ex5 v1.67)
           </a>
           <a
-            href="https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4"
+            href={FLAGSHIP.downloadMt4}
             download
             className="btn btn-secondary btn-sm"
             style={{ fontWeight: 700, padding: "8px 16px" }}
@@ -128,10 +145,7 @@ export default function AccountChecker({
             <button
               type="button"
               className={`ea-tab ${selectedEa === "all" ? "active" : ""}`}
-              onClick={() => {
-                setSelectedEa("all");
-                if (hasSearched) setHasSearched(true);
-              }}
+              onClick={() => setSelectedEa("all")}
             >
               <span className="ea-tab-icon">🌐</span>
               <span className="ea-tab-name">All EAs (Global)</span>
@@ -142,10 +156,7 @@ export default function AccountChecker({
               key={ea.slug}
               type="button"
               className={`ea-tab ${selectedEa === ea.slug ? "active" : ""}`}
-              onClick={() => {
-                setSelectedEa(ea.slug);
-                if (hasSearched) setHasSearched(true);
-              }}
+              onClick={() => setSelectedEa(ea.slug)}
             >
               <span className="ea-tab-icon">{ea.icon}</span>
               <span className="ea-tab-name">{ea.name}</span>
@@ -206,7 +217,8 @@ export default function AccountChecker({
                 className="input-clear-btn"
                 onClick={() => {
                   setAccountNumber("");
-                  setHasSearched(false);
+                  setSubmittedAccount("");
+                  setSearchError("");
                 }}
                 title="Clear"
               >
@@ -220,8 +232,15 @@ export default function AccountChecker({
         </div>
 
         {searchError && (
-          <div className="checker-alert checker-alert-error">
+          <div className="checker-alert checker-alert-error" role="alert">
             ⚠️ {searchError}
+          </div>
+        )}
+
+        {isStale && !searchError && (
+          <div className="checker-alert" role="status" style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
+            Showing results for <strong>{submittedAccount}</strong>.
+            {accountNumber ? <> Press Check Status to check <strong>{accountNumber}</strong>.</> : null}
           </div>
         )}
 
@@ -260,13 +279,29 @@ export default function AccountChecker({
         </div>
       </div>
 
+      {/* NO MATCH: the chosen EA has no build for the chosen platform */}
+      {noMatch && (
+        <div className="checker-alert" role="status" style={{ color: "#e2e8f0" }}>
+          {selectedEaInfo
+            ? <>{selectedEaInfo.name} is available for {selectedEaInfo.platforms.join(" & ")} only. </>
+            : <>No EA matches this filter. </>}
+          <button
+            type="button"
+            className="example-pill"
+            onClick={() => setPlatformFilter("all")}
+          >
+            Show all platforms
+          </button>
+        </div>
+      )}
+
       {/* RESULTS DISPLAY */}
-      {hasSearched && results.length > 0 && (
+      {results.length > 0 && (
         <div className="checker-results-wrapper">
           {summary && selectedEa === "all" && (
             <div className="results-summary-banner">
               <div className="summary-account">
-                Results for Account: <strong>{accountNumber}</strong>
+                Results for Account: <strong>{submittedAccount}</strong>
               </div>
               <div className="summary-stats">
                 {summary.authorizedCount > 0 && (
@@ -277,6 +312,11 @@ export default function AccountChecker({
                 {summary.trialCount > 0 && (
                   <span className="summary-stat-pill trial">
                     ⏳ {summary.trialCount} Trial Mode (Active)
+                  </span>
+                )}
+                {summary.trialEndedCount > 0 && (
+                  <span className="summary-stat-pill trial">
+                    ⌛ {summary.trialEndedCount} Trial Ended
                   </span>
                 )}
                 {summary.openSourceCount > 0 && (
@@ -307,6 +347,7 @@ export default function AccountChecker({
                     <span className={`result-status-badge ${res.badgeClass}`}>
                       {res.status === "authorized" && `✅ ${res.platformBadge || "Permanent License"}`}
                       {res.status === "trial" && "⏳ Trial Active"}
+                      {res.status === "trial_expired" && "⌛ Trial Ended"}
                       {res.status === "open_source" && "🆓 Open Source"}
                     </span>
                   </div>
@@ -406,9 +447,29 @@ export default function AccountChecker({
                         </a>
                       )}
                       <a
-                        href="#partner-brokers"
+                        href={authorizeHref}
                         className="btn-get-authorized"
                       >
+                        🔓 Get Permanent Authorization
+                      </a>
+                      {res.marketUrl && (
+                        <a
+                          href={res.marketUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-get-authorized"
+                          style={{ background: "linear-gradient(135deg, #10b981, #059669)", borderColor: "transparent", color: "#ffffff" }}
+                        >
+                          🛒 Buy on MQL5 Market
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Trial ended: the dated builds no longer run on this account, so no download, only the ways forward */}
+                  {res.status === "trial_expired" && (
+                    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                      <a href={authorizeHref} className="btn-get-authorized">
                         🔓 Get Permanent Authorization
                       </a>
                       {res.marketUrl && (
@@ -529,7 +590,7 @@ export default function AccountChecker({
                     onClick={() => handleCopyId(b.id)}
                     title="Copy Partner ID"
                   >
-                    {copiedBrokerId === b.id ? "✓ Copied!" : "📋 Copy"}
+                    {copyState?.id === b.id ? (copyState.ok ? "✓ Copied!" : "Select & copy") : "📋 Copy"}
                   </button>
                 </div>
 

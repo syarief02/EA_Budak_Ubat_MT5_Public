@@ -6,6 +6,7 @@ import FacebookPixel from "@/app/components/FacebookPixel";
 import FluidCanvas from "@/app/components/FluidCanvas";
 import LiquidGlassEffects from "@/app/components/LiquidGlassEffects";
 import CommandTerminal from "@/app/components/CommandTerminal";
+import RevealOnScroll from "@/app/components/RevealOnScroll";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], display: "swap", variable: "--font-jetbrains" });
@@ -118,6 +119,7 @@ export default function RootLayout({ children }) {
         <FluidCanvas />
         <LiquidGlassEffects />
         <CommandTerminal />
+        <RevealOnScroll />
         <Suspense fallback={null}>
           <FacebookPixel />
         </Suspense>

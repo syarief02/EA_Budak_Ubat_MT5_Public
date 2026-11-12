@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 
@@ -60,21 +60,6 @@ const FAQS = [
 export default function AligatorGozaimasuPage() {
     const [openFaq, setOpenFaq] = useState(null);
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-        document.querySelectorAll(".animate-in").forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
-    }, []);
 
     return (
         <>

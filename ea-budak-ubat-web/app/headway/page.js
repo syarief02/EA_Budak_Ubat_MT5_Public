@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
+import { copyText } from "@/lib/clipboard";
+import { useFlash } from "@/lib/useFlash";
 
 const HEADWAY_SIGNUP_URL = "https://headway.partners/user/signup?hwp=516d6b";
 const HEADWAY_BONUS_150_URL = "https://headway.partners/landings/en/bonus-150/?hwp=516d6b";
@@ -119,40 +121,22 @@ const HEADWAY_FAQS = [
 ];
 
 export default function HeadwayLandingPage() {
-  const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [toastText, setToastText] = useState("");
+  // { ok, text } while the toast shows. In-app browsers without the Clipboard API used to get no feedback at all.
+  const [copyResult, flashCopyResult] = useFlash(3000);
+  const copied = copyResult?.ok === true;
+  const toastText = copyResult?.text || "";
 
-  const handleCopyCode = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(PARTNER_CODE);
-      setCopied(true);
-      setToastText(`Kod Partner "${PARTNER_CODE}" telah disalin!`);
-      setTimeout(() => {
-        setCopied(false);
-        setToastText("");
-      }, 3000);
-    }
+  const handleCopyCode = async () => {
+    const ok = await copyText(PARTNER_CODE);
+    flashCopyResult({
+      ok,
+      text: ok
+        ? `Kod Partner "${PARTNER_CODE}" telah disalin!`
+        : `Tidak dapat menyalin. Sila salin kod ini secara manual: ${PARTNER_CODE}`,
+    });
   };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll(".animate-in");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <>

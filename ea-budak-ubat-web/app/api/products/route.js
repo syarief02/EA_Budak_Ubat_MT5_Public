@@ -1075,8 +1075,9 @@ export async function POST(request) {
     const body = await request.json();
 
     // Authenticate creator/admin passkey
-    const creatorPass = process.env.ADMIN_COMMENT_TOKEN || 'eabudakubat-secure-2026';
-    if (!body.admin_token || body.admin_token !== creatorPass) {
+    // No fallback token: this repo is public. Without ADMIN_COMMENT_TOKEN in the environment the route refuses all writes.
+    const creatorPass = process.env.ADMIN_COMMENT_TOKEN;
+    if (!creatorPass || !body.admin_token || body.admin_token !== creatorPass) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized: Valid admin_token required to publish or update MQL products.' },
         { status: 403 }

@@ -92,6 +92,8 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd "."; .\update-ea.
 ```
 *Followed by git push and Vercel deployment.*
 
+> **Website:** the trial date and every dated download URL in `ea-budak-ubat-web/lib/authorizedAccounts.js` (EA_DATABASE, the home page download bar and the license checker) are built from one constant, `TRIAL = { expiryDate: "YYYY-MM-DD" }`, which `update-ea.ps1` rewrites. Do not hard-code dated `.ex4/.ex5` URLs in components; use `getEa(slug).downloadMt5 / downloadMt4`. The per-EA pages and `/changelog` still carry their own dated URLs. UI state diagrams for the whole visitor flow: `ea-budak-ubat-web/docs/state-flows.md`.
+
 ---
 
 ### 3. Update Broker Ad Banners & Promotions

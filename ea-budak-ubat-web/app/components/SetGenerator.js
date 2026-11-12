@@ -1,8 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { useFlash } from "@/lib/useFlash";
 
 const BOOL_PARAMS = new Set(["GridTrading", "UseRSIFilter", "EnableBreakEven", "AutoConfig"]);
+
+// The free-text inputs shown in the form. MetaTrader reads an unparseable value as 0 (Lots=0 means the EA never
+// trades), so the file is only offered once every visible field holds a plain number in range.
+const EDITABLE_NUMBERS = {
+  Lots: { label: "Starting Lots", positive: true },
+  MartingaleMultiplier: { label: "Martingale Multiplier", positive: true },
+  TakeProfit: { label: "Take Profit" },
+  minDistance: { label: "Min Distance" },
+  distanceIncrement: { label: "Distance Incr" },
+  MaxDrawdownPct: { label: "Max Drawdown %", max: 100, mt5Only: true },
+  MinMarginLevelToTrade: { label: "Min Margin Level %", mt5Only: true },
+  EmergencyMarginLevel: { label: "Emergency Margin Stop %", mt5Only: true },
+};
+const PLAIN_NUMBER = /^\d+(\.\d+)?$/;
+
+// First visible field that would write a bad value, as a message; "" when the file is safe to write.
+function findInvalidField(params, isMt5) {
+  for (const [key, rule] of Object.entries(EDITABLE_NUMBERS)) {
+    if (rule.mt5Only && !isMt5) continue;
+    const raw = String(params[key] ?? "").trim();
+    if (!PLAIN_NUMBER.test(raw)) return `${rule.label} must be a number like 0.01 (use a dot for decimals).`;
+    const n = Number(raw);
+    if (rule.positive && n <= 0) return `${rule.label} must be greater than 0.`;
+    if (rule.max !== undefined && n > rule.max) return `${rule.label} must be ${rule.max} or less.`;
+  }
+  return "";
+}
 
 // Input names exactly as declared in each EA, in declaration order: [preset key, EA input name].
 // MetaTrader silently ignores .set keys that don't match an input, so these must stay in sync with the EA sources.
@@ -221,32 +249,39 @@ export default function SetGenerator() {
   const [platformId, setPlatformId] = useState("mt5");
   const [selectedPresetId, setSelectedPresetId] = useState("balanced");
   const [customParams, setCustomParams] = useState(PRESETS[1].params);
-  const [downloaded, setDownloaded] = useState(false);
+  // "Downloaded" describes the file just saved; any edit below resets it (states: valid / invalid / downloaded).
+  const [downloaded, flashDownloaded, resetDownloaded] = useFlash(4000, false);
 
   const platform = PLATFORMS[platformId];
   const isMt5 = platformId === "mt5";
   const selectedPreset = PRESETS.find((p) => p.id === selectedPresetId) || PRESETS[1];
+  const invalidMessage = findInvalidField(customParams, isMt5);
+  const changedKeys = platform.inputs
+    .map(([key]) => key)
+    .filter((key) => String(customParams[key]) !== String(selectedPreset.params[key]));
 
   const handleSelectPreset = (preset) => {
     setSelectedPresetId(preset.id);
     setCustomParams({ ...preset.params });
-    setDownloaded(false);
+    resetDownloaded();
   };
 
   const handleSelectPlatform = (id) => {
     setPlatformId(id);
-    setDownloaded(false);
+    resetDownloaded();
   };
 
   const handleParamChange = (key, val) => {
     setCustomParams((prev) => ({ ...prev, [key]: val }));
+    resetDownloaded();
   };
 
   const handleDownload = () => {
+    if (invalidMessage) return;
     const lines = [
       "; ====================================================",
       `; ${platform.ea} Parameter Preset`,
-      `; Strategy: ${selectedPreset.name}`,
+      `; Strategy: ${selectedPreset.name}${changedKeys.length ? ` (customised: ${changedKeys.join(", ")})` : ""}`,
       `; Recommended Asset: ${selectedPreset.symbol}`,
       `; Generated: ${new Date().toISOString().split("T")[0]}`,
       `; Source: https://eabudakubat.com`,
@@ -256,7 +291,7 @@ export default function SetGenerator() {
 
     platform.inputs.forEach(([key, inputName]) => {
       const raw = customParams[key];
-      const value = BOOL_PARAMS.has(key) ? platform.boolValues[raw === "1" ? 1 : 0] : raw;
+      const value = BOOL_PARAMS.has(key) ? platform.boolValues[raw === "1" ? 1 : 0] : String(raw).trim();
       lines.push(`${inputName}=${value}`);
     });
 
@@ -269,10 +304,10 @@ export default function SetGenerator() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    // Revoking in the same tick can cancel the download in some browsers (older Safari / Firefox).
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
 
-    setDownloaded(true);
-    setTimeout(() => setDownloaded(false), 4000);
+    flashDownloaded(true);
   };
 
   return (
@@ -338,11 +373,19 @@ export default function SetGenerator() {
             type="button"
             className="btn btn-primary btn-download-set"
             onClick={handleDownload}
-            style={{ animation: "none" }}
+            disabled={Boolean(invalidMessage)}
+            aria-describedby={invalidMessage ? "set-generator-error" : undefined}
+            style={{ animation: "none", opacity: invalidMessage ? 0.5 : 1, cursor: invalidMessage ? "not-allowed" : "pointer" }}
           >
             {downloaded ? "✓ Downloaded .set File!" : `📥 Download ${isMt5 ? "MT5" : "MT4"} .set File`}
           </button>
         </div>
+
+        {invalidMessage && (
+          <div id="set-generator-error" className="checker-alert checker-alert-error" role="alert" style={{ marginBottom: 12 }}>
+            ⚠️ {invalidMessage}
+          </div>
+        )}
 
         <div className="params-quick-grid">
           <div className="param-field">

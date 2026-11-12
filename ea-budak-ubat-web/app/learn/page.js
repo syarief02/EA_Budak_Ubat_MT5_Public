@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { copyText } from "@/lib/clipboard";
+import { useFlash } from "@/lib/useFlash";
 import {
   playTactileClick,
   playReticleLock,
@@ -536,7 +538,8 @@ export default function LearnPage() {
   const [soundActive, setSoundActive] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [searchCodex, setSearchCodex] = useState("");
-  const [copiedPassport, setCopiedPassport] = useState(false);
+  const [copiedPassport, flashPassport] = useFlash(3000); // "ok" | "failed" | null
+  const blitzNextRef = useRef(null); // pending "next question" timer; cleared when a game starts, ends or unmounts
 
   // Blitz Mode State
   const [blitzActive, setBlitzActive] = useState(false);
@@ -750,7 +753,29 @@ export default function LearnPage() {
     setBlitzRevealed(false);
   };
 
+  const clearBlitzNext = () => {
+    if (blitzNextRef.current) clearTimeout(blitzNextRef.current);
+    blitzNextRef.current = null;
+  };
+
+  // Queue the next question; a timer left over from a finished game can no longer replace a new game's question.
+  const queueNextBlitzQuestion = (delayMs) => {
+    clearBlitzNext();
+    blitzNextRef.current = setTimeout(() => {
+      blitzNextRef.current = null;
+      pickRandomBlitzQuestion();
+    }, delayMs);
+  };
+
+  useEffect(() => clearBlitzNext, []);
+
+  // When the clock runs out mid-reveal, drop the queued question.
+  useEffect(() => {
+    if (blitzFinished) clearBlitzNext();
+  }, [blitzFinished]);
+
   const startBlitzGame = () => {
+    clearBlitzNext();
     playLevelUpFanfare();
     setBlitzActive(true);
     setBlitzTimeLeft(60);
@@ -805,9 +830,7 @@ export default function LearnPage() {
         saveProgress(newTotalXp, undefined, undefined, undefined);
       }
 
-      setTimeout(() => {
-        pickRandomBlitzQuestion();
-      }, 800);
+      queueNextBlitzQuestion(800);
     } else {
       setStreak(0);
       playQuizWrong();
@@ -815,12 +838,11 @@ export default function LearnPage() {
       setBlitzLives(newLives);
 
       if (newLives <= 0) {
+        clearBlitzNext();
         setBlitzFinished(true);
         setBlitzActive(false);
       } else {
-        setTimeout(() => {
-          pickRandomBlitzQuestion();
-        }, 1100);
+        queueNextBlitzQuestion(1100);
       }
     }
   };
@@ -840,11 +862,7 @@ export default function LearnPage() {
 Uji kefahaman & skill forex anda sekarang secara interaktif di:
 👉 https://eabudakubat.com/learn`;
 
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
-      setCopiedPassport(true);
-      setTimeout(() => setCopiedPassport(false), 3000);
-    }
+    copyText(text).then((ok) => flashPassport(ok ? "ok" : "failed"));
   };
 
   // Filter Codex
@@ -952,7 +970,7 @@ Uji kefahaman & skill forex anda sekarang secara interaktif di:
                 <span className="hud-stat-label">MASTERY PASSPORT</span>
                 <div className="passport-action-wrap">
                   <button onClick={handleCopyPassport} className="btn-passport">
-                    {copiedPassport ? "✓ Copied Card!" : "📋 Share Score Card"}
+                    {copiedPassport === "ok" ? "✓ Copied Card!" : copiedPassport === "failed" ? "Copy failed" : "📋 Share Score Card"}
                   </button>
                 </div>
                 <span className="xp-next-label">

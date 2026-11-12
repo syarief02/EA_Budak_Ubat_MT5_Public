@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
@@ -11,6 +11,29 @@ const POST_TYPES = [
   { key: "feedback", label: "💬 Feedback", color: "#3b82f6" },
   { key: "ea_request", label: "🤖 Request EA", color: "#f59e0b" },
 ];
+
+// Limits shared with /api/comments (the server enforces 2-50 for names and 5-1500 for messages).
+const NAME_MIN = 2;
+const MESSAGE_MIN = 5;
+const MESSAGE_MAX = 600;
+const MIN_FORM_MS = 2000;
+
+const EMPTY_FORM = { name: "", type: "feedback", ea_name: "", message: "" };
+
+// Returns the first problem with the form, or "" when it can be sent.
+function validatePost(form) {
+  if (form.name.trim().length < NAME_MIN) return `Please enter your name (at least ${NAME_MIN} characters).`;
+  if (form.type === "ea_request" && !form.ea_name.trim()) return "Please name the EA you would like built.";
+  if (form.message.trim().length < MESSAGE_MIN) return `Please write a message (at least ${MESSAGE_MIN} characters).`;
+  return "";
+}
+
+// Server list first, plus any of our own new posts the (cached) server list does not include yet.
+function mergeWithOwnPosts(serverList, ownPosts) {
+  const ids = new Set(serverList.map((c) => c.id));
+  const missing = ownPosts.filter((c) => !ids.has(c.id));
+  return [...missing, ...serverList];
+}
 
 function timeAgo(dateStr) {
   const now = new Date();
@@ -27,24 +50,28 @@ function timeAgo(dateStr) {
   return `${months}mo ago`;
 }
 
+// States (see docs/state-flows.md, section 3):
+//   feed:  loadState "loading" -> "ready" | "failed" (Retry goes back to "loading")
+//   form:  editing -> submitting -> posted | rejected; validatePost() blocks invalid sends
 export default function CommunityPage() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadState, setLoadState] = useState("loading");
   const [submitting, setSubmitting] = useState(false);
   const [filter, setFilter] = useState("all");
-  const [formData, setFormData] = useState({
-    name: "",
-    type: "feedback",
-    ea_name: "",
-    message: "",
-    admin_token: "",
-  });
+  const [formData, setFormData] = useState(EMPTY_FORM);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [botTrap, setBotTrap] = useState("");
-  const [formRenderedAt, setFormRenderedAt] = useState(Date.now());
   const [reactions, setReactions] = useState({});
+  const formOpenedAt = useRef(0); // set on mount and after each post
+  const ownPosts = useRef([]); // posts made in this visit, kept until the server list includes them
+  const fetchSeq = useRef(0); // only the newest GET may update the feed
+
+  const updateForm = (patch) => {
+    setSubmitSuccess(false);
+    setFormData((prev) => ({ ...prev, ...patch }));
+  };
 
   useEffect(() => {
     try {
@@ -74,31 +101,44 @@ export default function CommunityPage() {
     });
   };
 
-  useEffect(() => {
-    fetchComments();
-  }, []);
-
-  async function fetchComments() {
-    setLoading(true);
+  // `fresh` skips the CDN copy (s-maxage 10 + stale-while-revalidate 59), so a post just made is included.
+  const fetchComments = useCallback(async ({ fresh = false, quiet = false } = {}) => {
+    const seq = ++fetchSeq.current;
+    if (!quiet) setLoadState("loading");
     try {
-      const res = await fetch("/api/comments");
+      const url = fresh ? `/api/comments?fresh=${Date.now()}` : "/api/comments";
+      const res = await fetch(url, fresh ? { cache: "no-store" } : undefined);
       const json = await res.json();
-      if (json.success && json.comments) {
-        setComments(json.comments);
+      if (seq !== fetchSeq.current) return;
+      if (json.success && Array.isArray(json.comments)) {
+        const serverIds = new Set(json.comments.map((c) => c.id));
+        ownPosts.current = ownPosts.current.filter((c) => !serverIds.has(c.id));
+        setComments(mergeWithOwnPosts(json.comments, ownPosts.current));
+        setLoadState("ready");
+      } else if (!quiet) {
+        setLoadState("failed");
       }
     } catch (err) {
+      if (seq !== fetchSeq.current) return;
       console.error("Fetch comments error:", err);
+      if (!quiet) setLoadState("failed");
     }
-    setLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    formOpenedAt.current = Date.now();
+    fetchComments();
+  }, [fetchComments]);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (submitting) return;
     setSubmitError("");
     setSubmitSuccess(false);
 
-    if (!formData.name.trim() || !formData.message.trim()) {
-      setSubmitError("Please fill in your name and message.");
+    const problem = validatePost(formData);
+    if (problem) {
+      setSubmitError(problem);
       return;
     }
 
@@ -107,8 +147,8 @@ export default function CommunityPage() {
       return;
     }
 
-    const elapsed = Date.now() - formRenderedAt;
-    if (elapsed < 2000) {
+    const elapsed = Date.now() - formOpenedAt.current;
+    if (elapsed < MIN_FORM_MS) {
       setSubmitError("Please take your time before submitting.");
       return;
     }
@@ -123,23 +163,38 @@ export default function CommunityPage() {
         body: JSON.stringify({
           name: formData.name.trim(),
           type: formData.type,
-          ea_name: formData.ea_name.trim() || null,
+          // The server keeps an EA name only on EA requests, so only send it there.
+          ea_name: formData.type === "ea_request" ? formData.ea_name.trim() : null,
           message: formData.message.trim(),
-          admin_token: formData.admin_token.trim() || null,
+          bot_catch: botTrap,
+          form_elapsed_ms: elapsed,
         }),
       });
 
-      const json = await res.json();
-      if (json.success) {
+      let json = null;
+      try {
+        json = await res.json();
+      } catch (parseErr) {
+        json = null;
+      }
+
+      if (json?.success) {
+        const posted = json.comment;
+        if (posted?.id) {
+          ownPosts.current = [posted, ...ownPosts.current.filter((c) => c.id !== posted.id)];
+          setComments((prev) => mergeWithOwnPosts(prev, ownPosts.current));
+          // Make sure the visitor can see the post they just made.
+          setFilter((current) => (current === "all" || current === posted.type ? current : "all"));
+        }
         setSubmitSuccess(true);
-        setFormData({ name: "", type: "feedback", ea_name: "", message: "", admin_token: "" });
-        setFormRenderedAt(Date.now());
-        fetchComments();
+        setFormData(EMPTY_FORM);
+        formOpenedAt.current = Date.now();
+        fetchComments({ fresh: true, quiet: true });
       } else {
-        setSubmitError(json.error || "Failed to submit post.");
+        setSubmitError(json?.error || `Failed to submit post (error ${res.status}). Your text is still in the form.`);
       }
     } catch (err) {
-      setSubmitError("Network error. Please try again.");
+      setSubmitError("Network error. Your text is still in the form, please try again.");
     }
     setSubmitting(false);
   }
@@ -250,7 +305,7 @@ export default function CommunityPage() {
 
             <form onSubmit={handleSubmit}>
               <div style={{ display: "none" }} aria-hidden="true">
-                <input type="text" value={botTrap} onChange={(e) => setBotTrap(e.target.value)} tabIndex={-1} />
+                <input type="text" name="website_url" autoComplete="off" value={botTrap} onChange={(e) => setBotTrap(e.target.value)} tabIndex={-1} />
               </div>
 
               <div className="form-group" style={{ marginBottom: "16px" }}>
@@ -260,7 +315,7 @@ export default function CommunityPage() {
                   className="form-input"
                   placeholder="e.g. Trader Hafiz / Quant99"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => updateForm({ name: e.target.value })}
                   maxLength={50}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", color: "#ffffff" }}
                 />
@@ -273,7 +328,8 @@ export default function CommunityPage() {
                     <button
                       key={t.key}
                       type="button"
-                      onClick={() => { playTactileClick(0.06); setFormData({ ...formData, type: t.key }); }}
+                      aria-pressed={formData.type === t.key}
+                      onClick={() => { playTactileClick(0.06); updateForm({ type: t.key }); }}
                       style={{
                         flex: 1,
                         padding: "8px 12px",
@@ -292,18 +348,23 @@ export default function CommunityPage() {
                 </div>
               </div>
 
-              <div className="form-group" style={{ marginBottom: "16px" }}>
-                <label className="form-label" style={{ display: "block", marginBottom: "6px", fontSize: "0.88rem", fontWeight: 600 }}>Related EA (Optional)</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="e.g. EA Budak Ubat v1.67, GoldMind AI"
-                  value={formData.ea_name}
-                  onChange={(e) => setFormData({ ...formData, ea_name: e.target.value })}
-                  maxLength={50}
-                  style={{ width: "100%", padding: "10px 14px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", color: "#ffffff" }}
-                />
-              </div>
+              {/* Only EA requests carry an EA name (the server drops it for ideas and feedback), so ask for it only there. */}
+              {formData.type === "ea_request" && (
+                <div className="form-group" style={{ marginBottom: "16px" }}>
+                  <label htmlFor="ea-request-name" className="form-label" style={{ display: "block", marginBottom: "6px", fontSize: "0.88rem", fontWeight: 600 }}>EA You Want Built (Required)</label>
+                  <input
+                    id="ea-request-name"
+                    type="text"
+                    className="form-input"
+                    placeholder="e.g. Gold breakout EA, News filter for EA Budak Ubat"
+                    value={formData.ea_name}
+                    onChange={(e) => updateForm({ ea_name: e.target.value })}
+                    maxLength={50}
+                    required
+                    style={{ width: "100%", padding: "10px 14px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", color: "#ffffff" }}
+                  />
+                </div>
+              )}
 
               <div className="form-group" style={{ marginBottom: "20px" }}>
                 <label className="form-label" style={{ display: "block", marginBottom: "6px", fontSize: "0.88rem", fontWeight: 600 }}>Message</label>
@@ -312,20 +373,24 @@ export default function CommunityPage() {
                   className="form-input"
                   placeholder="Share your experience, suggest improvements, or ask a question..."
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  maxLength={600}
+                  onChange={(e) => updateForm({ message: e.target.value })}
+                  maxLength={MESSAGE_MAX}
                   style={{ width: "100%", padding: "10px 14px", borderRadius: "10px", background: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.12)", color: "#ffffff", resize: "vertical" }}
                 ></textarea>
+                <div style={{ textAlign: "right", fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "4px" }}>
+                  {formData.message.length}/{MESSAGE_MAX}
+                </div>
               </div>
 
               {submitSuccess && (
-                <div style={{ padding: "12px", borderRadius: "8px", background: "rgba(16, 185, 129, 0.15)", border: "1px solid #10b981", color: "#34d399", fontSize: "0.88rem", marginBottom: "16px" }}>
-                  ✓ Post submitted successfully! Thank you for sharing.
+                <div role="status" style={{ padding: "12px", borderRadius: "8px", background: "rgba(16, 185, 129, 0.15)", border: "1px solid #10b981", color: "#34d399", fontSize: "0.88rem", marginBottom: "16px" }}>
+                  ✓ Post submitted successfully! It is now at the top of the feed. For a private reply, message{" "}
+                  <a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer" style={{ color: "#34d399", textDecoration: "underline" }}>@SyariefAzman</a> on Telegram.
                 </div>
               )}
 
               {submitError && (
-                <div style={{ padding: "12px", borderRadius: "8px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid #ef4444", color: "#f87171", fontSize: "0.88rem", marginBottom: "16px" }}>
+                <div role="alert" style={{ padding: "12px", borderRadius: "8px", background: "rgba(239, 68, 68, 0.15)", border: "1px solid #ef4444", color: "#f87171", fontSize: "0.88rem", marginBottom: "16px" }}>
                   {submitError}
                 </div>
               )}
@@ -370,9 +435,16 @@ export default function CommunityPage() {
               </span>
             </div>
 
-            {loading ? (
+            {loadState === "loading" && comments.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
                 Loading community discussions...
+              </div>
+            ) : loadState === "failed" && comments.length === 0 ? (
+              <div className="glass-card" role="alert" style={{ textAlign: "center", padding: "40px", borderRadius: "16px" }}>
+                <p style={{ color: "var(--text-secondary)", margin: "0 0 12px" }}>The discussions could not be loaded right now.</p>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={() => fetchComments({ fresh: true })}>
+                  Retry
+                </button>
               </div>
             ) : filteredComments.length === 0 ? (
               <div className="glass-card" style={{ textAlign: "center", padding: "40px", borderRadius: "16px" }}>
@@ -410,6 +482,7 @@ export default function CommunityPage() {
                           type="button"
                           className={`comment-react-btn ${reactions[c.id]?.user_heart ? "active" : ""}`}
                           onClick={() => handleReaction(c.id, "heart")}
+                          title="Saved on this device only"
                         >
                           <span>❤️</span>
                           <span>Helpful</span>
@@ -419,6 +492,7 @@ export default function CommunityPage() {
                           type="button"
                           className={`comment-react-btn ${reactions[c.id]?.user_rocket ? "active" : ""}`}
                           onClick={() => handleReaction(c.id, "rocket")}
+                          title="Saved on this device only"
                         >
                           <span>🚀</span>
                           <span>Profitable</span>
