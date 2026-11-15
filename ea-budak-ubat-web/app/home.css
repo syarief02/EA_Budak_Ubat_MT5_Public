@@ -686,6 +686,39 @@ a.hp-card:hover {
   text-decoration: underline;
 }
 
+.hp-latest {
+  margin-top: 40px;
+}
+
+.hp-latest-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-bottom: 16px;
+}
+
+.hp-latest-head h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.hp-latest-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--hp-accent);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hp-latest-all:hover {
+  text-decoration: underline;
+}
+
 .hp-standalone {
   margin-top: 24px;
   display: flex;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import "./home.css";
@@ -11,7 +11,7 @@ import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import { AUTHORIZED_ACCOUNTS_DISPLAY, getEa } from "@/lib/authorizedAccounts";
 import { FEATURED_BROKERS, PARTNER_BROKERS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
-import { PRODUCT_TYPES } from "@/lib/productTypes";
+import { PRODUCT_TYPES, getProductType } from "@/lib/productTypes";
 
 // Built from TRIAL.expiryDate in lib/authorizedAccounts.js, so the monthly expiry update moves these too.
 const { downloadMt4: DOWNLOAD_MT4, downloadMt5: DOWNLOAD_MT5 } = getEa("ea-budak-ubat");
@@ -132,8 +132,32 @@ function SectionHead({ eyebrow, title, children, align = "center" }) {
   );
 }
 
+// Newest MQL5 Market products (the daily pipeline), newest first. Own EAs have their own pages and are listed above.
+function useLatestMarketProducts(count = 3) {
+  const [state, setState] = useState({ latest: [], total: 0 });
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/products")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        const all = Array.isArray(d?.products) ? d.products.filter((p) => p.active !== false) : [];
+        const market = all
+          .filter((p) => p.is_mql5 && !p.has_page && p.market_url)
+          .sort((a, b) => (b.display_order || 0) - (a.display_order || 0))
+          .slice(0, count);
+        if (alive) setState({ latest: market, total: all.length });
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [count]);
+  return state;
+}
+
 export default function Home() {
   const [openFaq, setOpenFaq] = useState(0);
+  const { latest: latestProducts, total: productTotal } = useLatestMarketProducts(3);
 
   return (
     <div className="hp">
@@ -369,6 +393,48 @@ export default function Home() {
                 </ul>
               </div>
             </div>
+
+            {latestProducts.length > 0 && (
+              <div className="hp-latest">
+                <div className="hp-latest-head">
+                  <h3>New on the MQL5 Market</h3>
+                  <Link href="/products" className="hp-latest-all">
+                    All {productTotal} products <Icon name="arrowRight" size={16} />
+                  </Link>
+                </div>
+                <div className="hp-ea-grid">
+                  {latestProducts.map((p) => {
+                    const type = getProductType(p);
+                    const platforms = Array.isArray(p.platforms) ? p.platforms.join(" · ") : "";
+                    const price = String(p.price || "").replace(/\s*USD$/i, "");
+                    return (
+                      <a
+                        key={p.slug}
+                        href={p.market_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hp-card hp-ea"
+                        style={{ "--accent": type.color }}
+                      >
+                        <div className="hp-product-head">
+                          <span className="hp-product-icon" aria-hidden="true">{p.icon}</span>
+                          <div className="hp-ea-top">
+                            <h3>{p.name}</h3>
+                            <span className="hp-ea-meta">
+                              {[type.label, platforms, price].filter(Boolean).join(" · ")}
+                            </span>
+                          </div>
+                        </div>
+                        <p>{p.tagline}</p>
+                        <span className="hp-ea-more">
+                          View on MQL5 <Icon name="external" size={14} />
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <div className="hp-card hp-standalone">
               <div>

@@ -6324,6 +6324,14 @@ section {
   color: var(--liquid-cyan);
 }
 
+/* On phones and touch screens the dock covered page content and buttons (e.g. the MQL5 buy button),
+   and its keyboard shortcut does nothing on touch, so it is hidden there. The site nav covers navigation. */
+@media (max-width: 768px), (pointer: coarse) {
+  .floating-hud-dock {
+    display: none;
+  }
+}
+
 /* COMMAND TERMINAL MODAL */
 .cmd-modal-backdrop {
   position: fixed;
