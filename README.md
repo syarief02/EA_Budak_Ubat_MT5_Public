@@ -385,6 +385,8 @@ What's new (MT5 and MT4, 16 Nov 2026):
 With both margin inputs at 0 (the downloadable default), trading is identical to v1.67.
 ```
 
+Announcement video (30 s, original music): [`ea-budak-ubat-web/public/videos/ea-budak-ubat-v1.68-update.mp4`](ea-budak-ubat-web/public/videos/ea-budak-ubat-v1.68-update.mp4) · [Telegram](https://t.me/EABudakUbat/757) · [Facebook](https://www.facebook.com/reel/2007034976660657/) · [YouTube](https://youtu.be/8SKy8gIIqY8)
+
 ### EA Budak Ubat v1.67
 
 ```
