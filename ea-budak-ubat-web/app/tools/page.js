@@ -8,10 +8,11 @@ import SetGenerator from "@/app/components/SetGenerator";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import { playTactileClick } from "@/lib/audioSynthesizer";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState("simulator");
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
     // Check URL hash if specified (e.g. #calculator, #presets, #simulator)
@@ -34,36 +35,12 @@ export default function ToolsPage() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">👑 EA Budak Ubat</Link>
-          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>Home</Link></li>
-            <li><Link href="/products" onClick={() => setMobileNavOpen(false)}>MQL5 Store</Link></li>
-            <li><Link href="/tools" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 700 }}>Tools Workbench ⚙️</Link></li>
-            <li><Link href="/about" onClick={() => setMobileNavOpen(false)}>About</Link></li>
-            <li><Link href="/community" onClick={() => setMobileNavOpen(false)}>Community</Link></li>
-            <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li>
-              <Link
-                href="/#broker-partners"
-                className="nav-cta"
-                onClick={() => { playTactileClick(0.1); setMobileNavOpen(false); }}
-                style={{ background: "linear-gradient(135deg, #00f0ff, #3b82f6)", color: "#0a0e1a", fontWeight: 900 }}
-              >
-                🔥 Get EA Free
-              </Link>
-            </li>
-          </ul>
-          <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-            {mobileNavOpen ? "✕" : "☰"}
-          </button>
-        </div>
-      </nav>
+      <SiteNav
+        active="/tools"
+      />
 
       {/* TOOLS HERO */}
       <section className="catalog-hero" style={{ paddingTop: "140px", paddingBottom: "50px", position: "relative" }}>
-        <div className="jp-kanji-watermark" aria-hidden="true">計算解析盤</div>
         <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -188,7 +165,7 @@ export default function ToolsPage() {
         {activeTab === "simulator" && (
           <div style={{ animation: "fadeIn 0.25s ease-out" }}>
             <div style={{ marginBottom: "24px" }}>
-              <span className="label">TOOL 01 // 仮想市場シミュレータ</span>
+              <span className="label">TOOL 01 · Execution simulator</span>
               <h2 style={{ fontSize: "1.8rem", color: "#ffffff", marginTop: "6px" }}>
                 Interactive Algorithmic Execution Simulator
               </h2>
@@ -203,7 +180,7 @@ export default function ToolsPage() {
         {activeTab === "presets" && (
           <div style={{ animation: "fadeIn 0.25s ease-out" }}>
             <div style={{ marginBottom: "24px" }}>
-              <span className="label">TOOL 02 // パラメータ設定生成器</span>
+              <span className="label">TOOL 02 · Preset generator</span>
               <h2 style={{ fontSize: "1.8rem", color: "#ffffff", marginTop: "6px" }}>
                 EA Parameter Preset Studio (.set)
               </h2>
@@ -218,7 +195,7 @@ export default function ToolsPage() {
         {activeTab === "calculator" && (
           <div style={{ animation: "fadeIn 0.25s ease-out" }}>
             <div style={{ marginBottom: "24px" }}>
-              <span className="label">TOOL 03 // 証拠金計算機</span>
+              <span className="label">TOOL 03 · Margin calculator</span>
               <h2 style={{ fontSize: "1.8rem", color: "#ffffff", marginTop: "6px" }}>
                 Grid Risk &amp; Cent Margin Calculator
               </h2>
@@ -236,57 +213,7 @@ export default function ToolsPage() {
       </main>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 className="footer-brand">👑 EA Budak Ubat</h3>
-              <p className="footer-desc">
-                Flagship automated quantitative grid trading system and specialized Expert Advisors for MetaTrader platforms by Syarief Azman.
-              </p>
-              <div className="social-links">
-                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-                <a href="https://github.com/syarief02" className="social-link" target="_blank" rel="noopener noreferrer" title="GitHub">💻</a>
-              </div>
-            </div>
-            <div>
-              <h4>Workbench Tools</h4>
-              <ul className="footer-links">
-                <li><button onClick={() => handleTabChange("simulator")} style={{ background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", padding: 0 }}>Execution Simulator</button></li>
-                <li><button onClick={() => handleTabChange("presets")} style={{ background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", padding: 0 }}>Preset Studio (.set)</button></li>
-                <li><button onClick={() => handleTabChange("calculator")} style={{ background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", padding: 0 }}>Margin Risk Calculator</button></li>
-                <li><Link href="/#authorization">License Whitelist Checker</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Official Pages</h4>
-              <ul className="footer-links">
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About the Architect</Link></li>
-                <li><Link href="/products">MQL5 Store Catalog</Link></li>
-                <li><Link href="/community">Community Discussion</Link></li>
-                <li><Link href="/changelog">Version Changelog</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Direct Support</h4>
-              <ul className="footer-links">
-                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                <li><a href="https://www.mql5.com/en/market/product/195399" target="_blank" rel="noopener noreferrer">MQL5 Market Listing</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
-            <p className="footer-disclaimer">
-              Risk warning: Trading on margin carries a high level of risk. Test on demo accounts before live trading. Official domain: https://eabudakubat.com.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

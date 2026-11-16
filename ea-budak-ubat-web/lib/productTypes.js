@@ -66,3 +66,9 @@ export function getProductSubcategory(product) {
     .trim();
   return rest.toLowerCase() === "developer" ? "" : rest;
 }
+
+// Where a product lives on this site: our own EAs have their own pages (/ea-budak-ubat, ...), MQL5 Market
+// products get a generated page at /products/<slug>.
+export function productPath(product) {
+  return product?.has_page ? `/${product.slug}` : `/products/${product?.slug}`;
+}

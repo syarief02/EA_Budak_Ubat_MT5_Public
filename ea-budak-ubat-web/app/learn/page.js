@@ -14,6 +14,8 @@ import {
   isSoundEnabled,
   toggleSound,
 } from "@/lib/audioSynthesizer";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 // ==========================================
 // 1. TRADER RANKS & XP TIERS
@@ -356,7 +358,7 @@ const WORLDS = [
           summary: "Fixed grid spacing fails during extreme volatility. Dynamic ADR adapts spacing to real market physics.",
           points: [
             "ADR (Average Daily Range): The average pip distance a pair moves from High to Low in 24 hours.",
-            "AutoConfig AI: EA Budak Ubat measures 365-day EURUSD ADR ratio to dynamically expand grid distance when markets get fast.",
+            "AutoConfig: EA Budak Ubat measures 365-day EURUSD ADR ratio to dynamically expand grid distance when markets get fast.",
             "VPS (Virtual Private Server): A cloud computer running 24/7 with 1-5ms latency directly adjacent to broker servers.",
             "Why VPS is essential: Home computers go to sleep, lose Wi-Fi, or reboot for updates, risking unmanaged grid baskets.",
           ],
@@ -375,7 +377,7 @@ const WORLDS = [
             explanation: "A VPS runs 24/7 in an enterprise data center with dedicated high-speed power and fiber-optic latency to broker servers.",
           },
           {
-            q: "What does AutoConfig AI in EA Budak Ubat adapt based on?",
+            q: "What does AutoConfig in EA Budak Ubat adapt based on?",
             options: [
               "Social media sentiment",
               "Average Daily Range (ADR) statistical volatility",
@@ -383,7 +385,7 @@ const WORLDS = [
               "Random number generation",
             ],
             correctIndex: 1,
-            explanation: "AutoConfig AI benchmarks the symbol against 365-day historical ADR, automatically adjusting grid spacing and TP to match volatility.",
+            explanation: "AutoConfig benchmarks the symbol against 365-day historical ADR, automatically adjusting grid spacing and TP to match volatility.",
           },
         ],
       },
@@ -882,29 +884,18 @@ Uji kefahaman & skill forex anda sekarang secara interaktif di:
       />
 
       {/* TOP NAVIGATION */}
-      <nav className="learn-nav">
-        <div className="container learn-nav-content">
-          <div className="learn-nav-left">
-            <Link href="/" className="learn-nav-brand">
-              <span>⚡</span> EA Budak Ubat
-            </Link>
-            <span className="learn-badge">ACADEMY 🎮</span>
-          </div>
-
-          <div className="learn-nav-actions">
-            <button
-              onClick={handleToggleSound}
-              className={`sound-toggle-btn ${soundActive ? "active" : ""}`}
-              title={soundActive ? "Mute Cybernetic Audio" : "Enable Cybernetic Audio"}
-            >
-              {soundActive ? "🔊 Sound ON" : "🔇 Sound OFF"}
-            </button>
-            <Link href="/" className="btn btn-secondary btn-sm">
-              ← Return to Hub
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
+      <div className="container learn-toolbar">
+        <span className="learn-badge">Forex Quest academy</span>
+        <button
+          type="button"
+          onClick={handleToggleSound}
+          className={`sound-toggle-btn ${soundActive ? "active" : ""}`}
+          title={soundActive ? "Mute game sounds" : "Turn on game sounds"}
+        >
+          {soundActive ? "Game sound on" : "Game sound off"}
+        </button>
+      </div>
 
       {/* HERO & TRADER HUD */}
       <header className="learn-hero">
@@ -1415,19 +1406,7 @@ Uji kefahaman & skill forex anda sekarang secara interaktif di:
       )}
 
       {/* FOOTER */}
-      <footer className="learn-footer">
-        <div className="container learn-footer-inner">
-          <p>© {new Date().getFullYear()} EA Budak Ubat Academy. Automated Trading Education & Research.</p>
-          <div className="learn-footer-links">
-            <Link href="/">Hub</Link>
-            <Link href="/guide">Guide</Link>
-            <Link href="/changelog">Changelog</Link>
-            <a href="https://eabudakubat.com" target="_blank" rel="noopener noreferrer">
-              Official Website
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

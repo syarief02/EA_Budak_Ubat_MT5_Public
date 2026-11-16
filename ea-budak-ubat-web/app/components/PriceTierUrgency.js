@@ -6,7 +6,6 @@ import { useFlash } from "@/lib/useFlash";
 
 export default function PriceTierUrgency({
   currentPrice = 149,
-  nextPrice = 159,
   marketUrl = "https://www.mql5.com/en/market/product/195399",
   compact = false,
 }) {
@@ -38,11 +37,6 @@ export default function PriceTierUrgency({
             <span className="price-period">USD / Lifetime</span>
           </div>
 
-          <div className="next-price-box">
-            <span className="next-price-label">Next Tier Price:</span>
-            <span className="next-price-value">${nextPrice} USD</span>
-            <span className="price-hike-tag">+${nextPrice - currentPrice} Increase</span>
-          </div>
         </div>
       </div>
 
@@ -101,7 +95,7 @@ export default function PriceTierUrgency({
 
       <div className="tier-progress-section">
         <p className="tier-disclaimer">
-          <em>Pricing schedule:</em> the lifetime purchase price increases by <strong>+$10 USD</strong> after every 10 purchases. Try the free demo in the MT5 Strategy Tester before you buy, or start with a monthly rental.
+          Try the free demo in the MT5 Strategy Tester before you buy, or start with a monthly rental.
         </p>
         <p className="tier-disclaimer">
           ⚠️ Grid and martingale trading can lose significant capital. Test on a demo account first; past performance does not guarantee future results.

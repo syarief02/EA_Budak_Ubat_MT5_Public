@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 
+// The nav brings its own styles, so any page can use it without importing home.css itself.
+import "@/app/home.css";
+
 const NAV_LINKS = [
   { href: "/ea-budak-ubat", label: "EA Budak Ubat" },
   { href: "/brokers", label: "Brokers" },
@@ -13,13 +16,24 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
 ];
 
-// Navigation for the home and /brokers pages; uses the shared .navbar styles from globals.css.
-export default function SiteNav({ active = "", ctaHref = "/#broker-partners", ctaLabel = "Get the EA free" }) {
+// Site-wide navigation (every page uses it). Uses the shared .navbar styles from globals.css plus hp- styles.
+// `sections` adds an "On this page" row of in-page anchors for long pages: a second row on desktop, and a group
+// inside the menu on phones and tablets.
+export default function SiteNav({
+  active = "",
+  ctaHref = "/#broker-partners",
+  ctaLabel = "Get the EA free",
+  ctaExternal = false,
+  sections = [],
+}) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const hasSections = sections.length > 0;
+  const ctaProps = ctaExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   return (
-    <nav className="navbar hp-nav" aria-label="Main">
+    <>
+    <nav className={`navbar hp-nav hp${hasSections ? " hp-nav-has-sub" : ""}`} aria-label="Main">
       <div className="container">
         <Link href="/" className="hp-brand" onClick={close}>
           <img src="/icon.png" alt="" width={30} height={30} />
@@ -38,8 +52,20 @@ export default function SiteNav({ active = "", ctaHref = "/#broker-partners", ct
               </Link>
             </li>
           ))}
+          {hasSections && (
+            <>
+              <li className="hp-nav-sec-head" aria-hidden="true">On this page</li>
+              {sections.map((s) => (
+                <li key={s.href} className="hp-nav-sec">
+                  <a href={s.href} onClick={close}>
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </>
+          )}
           <li>
-            <a href={ctaHref} className="nav-cta hp-nav-cta" onClick={close}>
+            <a href={ctaHref} className="nav-cta hp-nav-cta" onClick={close} {...ctaProps}>
               {ctaLabel}
             </a>
           </li>
@@ -54,6 +80,23 @@ export default function SiteNav({ active = "", ctaHref = "/#broker-partners", ct
           {open ? "✕" : "☰"}
         </button>
       </div>
+      {hasSections && (
+        <div className="hp-subnav">
+          <div className="container">
+            <span className="hp-subnav-label">On this page</span>
+            <ul>
+              {sections.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href}>{s.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </nav>
+    {/* Pushes the page down by the height of the desktop "On this page" row (the nav is fixed). */}
+    {hasSections && <div className="hp-subnav-spacer" aria-hidden="true" />}
+    </>
   );
 }

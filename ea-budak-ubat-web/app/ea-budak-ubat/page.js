@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
-import GridCalculator from "@/app/components/GridCalculator";
-import SetGenerator from "@/app/components/SetGenerator";
 import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5";
@@ -18,7 +18,7 @@ const FEATURES = [
   { icon: "📊", title: "Multi-Platform", desc: "Runs on both MetaTrader 4 and MetaTrader 5 with identical trading logic." },
   { icon: "🧠", title: "4 Analysis Methods", desc: "Classic Candle, SMA20, Alligator, and Ichimoku for entry signals." },
   { icon: "📈", title: "Grid Martingale", desc: "Automatic position layering with configurable multiplier and distance." },
-  { icon: "🤖", title: "AutoConfig AI", desc: "Dynamic parameter optimization based on Average Daily Range." },
+  { icon: "📊", title: "AutoConfig", desc: "Dynamic parameter optimization based on Average Daily Range." },
   { icon: "🔄", title: "Hedging Support", desc: "Trade both directions simultaneously or restrict to single-direction." },
   { icon: "⏰", title: "Time Filter", desc: "Schedule EA active hours with configurable Start/Stop times." },
   { icon: "🛑", title: "Close All Button", desc: "One-click close for all open positions directly on the chart." },
@@ -50,7 +50,7 @@ const PARAM_TABS = {
   time: [
     { name: "StartTime", def: "00:00", desc: "EA active start time (HH:MM, server time)" },
     { name: "StopTime", def: "23:59", desc: "EA active stop time (HH:MM, server time)" },
-    { name: "AutoConfig", def: "false", desc: "Enable AutoConfig AI for dynamic parameters" },
+    { name: "AutoConfig", def: "false", desc: "Rescale TakeProfit and grid distances from the symbol's daily range (ADR)" },
     { name: "MagicNumber", def: "123456", desc: "Unique magic number for trade identification" },
   ],
   filter: [
@@ -108,33 +108,14 @@ export default function EABudakUbatPage() {
   const [activeParamTab, setActiveParamTab] = useState("core");
   const [activeInstall, setActiveInstall] = useState("mt4");
   const [openFaq, setOpenFaq] = useState(null);
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">EA Budak Ubat</Link>
-          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← Home</Link></li>
-            <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
-            <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
-            <li><a href="#parameters" onClick={() => setMobileNavOpen(false)}>Parameters</a></li>
-            <li><a href="#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</a></li>
-            <li><a href="#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</a></li>
-            <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
-            <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>License</a></li>
-            <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-            <li><a href={MQL5_MARKET_LINK} className="nav-cta" target="_blank" rel="noopener noreferrer" style={{ background: "linear-gradient(135deg, #10b981, #059669)", marginRight: "6px" }}>Buy MT5</a></li>
-            <li><a href={PURCHASE_LINK} className="nav-cta" target="_blank" rel="noopener noreferrer">Buy MT4</a></li>
-          </ul>
-          <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-            {mobileNavOpen ? "✕" : "☰"}
-          </button>
-        </div>
-      </nav>
+      <SiteNav
+        active="/ea-budak-ubat"
+        sections={[{ href: "#features", label: "Features" }, { href: "#parameters", label: "Parameters" }, { href: "#preset-generator", label: "Tools" }, { href: "#installation", label: "Install" }, { href: "#authorization", label: "License" }, { href: "#faq", label: "FAQ" }]}
+      />
 
       {/* HERO */}
       <section className="hero" id="hero">
@@ -151,7 +132,7 @@ export default function EABudakUbatPage() {
           </h1>
           <p className="hero-subtitle">
             A powerful grid-based martingale Expert Advisor for MetaTrader 4 & MetaTrader 5.
-            Designed for ranging pairs on the M5 timeframe with 4 analysis methods and AutoConfig AI.
+            Designed for ranging pairs on the M5 timeframe with 4 analysis methods and volatility-based AutoConfig.
           </p>
           {/* DUAL-TRACK ACQUISITION MATRIX */}
           <div className="dual-track-container animate-in">
@@ -210,8 +191,8 @@ export default function EABudakUbatPage() {
                   <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4</a>
                 </div>
                 <div className="track-buttons-row" style={{ marginTop: "4px" }}>
-                  <a href="#preset-generator" className="btn btn-secondary btn-sm">⚙️ Presets (.set)</a>
-                  <a href="#risk-calculator" className="btn btn-secondary btn-sm">🧮 Risk Calculator</a>
+                  <Link href="/tools#presets" className="btn btn-secondary btn-sm">⚙️ Presets (.set)</Link>
+                  <Link href="/tools#calculator" className="btn btn-secondary btn-sm">🧮 Risk Calculator</Link>
                   <a href={PURCHASE_LINK} className="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">🛒 Buy MT4</a>
                 </div>
               </div>
@@ -221,7 +202,6 @@ export default function EABudakUbatPage() {
           {/* DYNAMIC PRICE TIER URGENCY PROGRESS */}
           <PriceTierUrgency
             currentPrice={149}
-            nextPrice={159}
             marketUrl={MQL5_MARKET_LINK}
           />
 
@@ -349,7 +329,7 @@ export default function EABudakUbatPage() {
         <div className="container">
           <div className="section-header animate-in">
             <span className="label">Intelligence</span>
-            <h2>AutoConfig AI System</h2>
+            <h2>AutoConfig: Volatility-Based Settings</h2>
             <p>Let the EA automatically optimize parameters based on real-time market volatility.</p>
           </div>
           <div className="features-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}>
@@ -368,17 +348,25 @@ export default function EABudakUbatPage() {
         </div>
       </section>
 
-      {/* PRESET GENERATOR */}
-      <section id="preset-generator" style={{ padding: "70px 0 30px" }}>
-        <div className="container">
-          <SetGenerator />
-        </div>
-      </section>
-
-      {/* GRID RISK & MARGIN CALCULATOR */}
-      <section id="risk-calculator" style={{ background: "var(--bg-secondary)", padding: "70px 0" }}>
-        <div className="container">
-          <GridCalculator />
+      {/* PRESETS & RISK CALCULATOR: the full tools live on /tools (the same components were embedded here twice,
+          which added about 6,000 px on phones). Both old anchors still land on this card. */}
+      <section id="preset-generator" style={{ padding: "60px 0" }}>
+        <span id="risk-calculator" aria-hidden="true" />
+        <div className="container hp">
+          <div className="hp-card hp-standalone">
+            <div>
+              <p className="hp-eyebrow">Trader tools</p>
+              <h3>Preset Studio and grid risk calculator</h3>
+              <p>
+                Generate a ready-made .set file for your pair and account type, and check the grid&rsquo;s lot
+                progression, margin and drawdown before you trade live.
+              </p>
+            </div>
+            <div className="hp-actions" style={{ marginTop: 0 }}>
+              <Link href="/tools#presets" className="hp-btn hp-btn-primary">Open Preset Studio</Link>
+              <Link href="/tools#calculator" className="hp-btn hp-btn-ghost">Open risk calculator</Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -516,50 +504,7 @@ export default function EABudakUbatPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 className="footer-brand">EA Budak Ubat</h3>
-              <p className="footer-desc">
-                A grid-based martingale Expert Advisor for MetaTrader 4 & 5. Designed for ranging currency pairs on the M5 timeframe.
-              </p>
-              <div className="social-links">
-                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-              </div>
-            </div>
-            <div>
-              <h4>Quick Links</h4>
-              <ul className="footer-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#parameters">Parameters</a></li>
-                <li><a href="#installation">Installation</a></li>
-                <li><a href="#authorization">Authorization</a></li>
-                <li><Link href="/changelog">Version Changelog</Link></li>
-                <li><a href="#faq">FAQ</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Contact</h4>
-              <ul className="footer-links">
-                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                <li><a href={MQL5_MARKET_LINK} target="_blank" rel="noopener noreferrer">🛒 Buy MT5 (MQL5 Market)</a></li>
-                <li><a href={SIGNAL_LINK} target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. Licensed under MIT.</p>
-            <p className="footer-disclaimer">
-              Risk warning: Products traded on margin carry a high level of risk. Martingale strategies can result in total loss of capital. Past performance is not indicative of future results. EA Budak Ubat does not provide investment advice. Use at your own risk. Not available in restricted jurisdictions including Malaysia, USA, EU, UK, North Korea, Myanmar, and Iran.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

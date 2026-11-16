@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const PRODUCTS = [
     {
         name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.67",
         strategy: "Grid Martingale", platforms: "MT4, MT5", bestFor: "Ranging pairs, M5",
         license: "MIT + MQL5 Market (MT5)", expiry: "2026-11-30",
-        description: "A grid-based martingale EA with 4 analysis methods (Classic Candle, SMA20, Alligator, Ichimoku), AutoConfig AI, hedging support, and configurable time filters. Designed for ranging currency pairs on the M5 timeframe.",
+        description: "A grid-based martingale EA with 4 analysis methods (Classic Candle, SMA20, Alligator, Ichimoku), volatility-based AutoConfig, hedging support, and configurable time filters. Designed for ranging currency pairs on the M5 timeframe.",
         howItWorks: [
             { title: "Tick Received", desc: "Updates chart display, checks time filter (StartTime–StopTime)." },
             { title: "Execution Mode", desc: "Every Tick = instant logic. Every New Bar = waits for candle close." },
@@ -32,7 +34,7 @@ const PRODUCTS = [
             { name: "MaxSpread_Pips", def: "0.0", desc: "Spread filter limit (0 = disabled)" },
             { name: "MaxDrawdownPct", def: "0.0", desc: "Hard equity protection cutoff %" },
             { name: "EnableBreakEven", def: "false", desc: "Trailing Break-Even profit lock" },
-            { name: "AutoConfig", def: "false", desc: "Enable AutoConfig AI for dynamic params" },
+            { name: "AutoConfig", def: "false", desc: "Rescale TakeProfit and grid distances from daily range (ADR)" },
             { name: "Hedging", def: "false", desc: "Allow simultaneous buy/sell baskets" },
             { name: "MagicNumber", def: "123456", desc: "Unique trade identifier" },
         ],
@@ -266,7 +268,6 @@ export default function GuidePage() {
     const [activeProduct, setActiveProduct] = useState(null);
     const [openFaqs, setOpenFaqs] = useState({});
     const [activeInstall, setActiveInstall] = useState("mt4");
-    const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
     const toggleFaq = (productIdx, faqIdx) => {
         const key = `${productIdx}-${faqIdx}`;
@@ -276,24 +277,10 @@ export default function GuidePage() {
     return (
         <>
             {/* NAVBAR */}
-            <nav className="navbar">
-                <div className="container">
-                    <Link href="/" className="nav-brand">EA Budak Ubat</Link>
-                    <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-                        <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
-                        <li><Link href="/learn" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>Forex Game 🎮</Link></li>
-                        <li><a href="#overview" onClick={() => setMobileNavOpen(false)}>Overview</a></li>
-                        <li><a href="#products" onClick={() => setMobileNavOpen(false)}>Products</a></li>
-                        <li><a href="#installation" onClick={() => setMobileNavOpen(false)}>Install</a></li>
-                        <li><a href="#brokers" onClick={() => setMobileNavOpen(false)}>Brokers</a></li>
-                        <li><a href="#risk" onClick={() => setMobileNavOpen(false)}>Risk</a></li>
-                        <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank" rel="noopener noreferrer">💬 Telegram</a></li>
-                    </ul>
-                    <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-                        {mobileNavOpen ? "✕" : "☰"}
-                    </button>
-                </div>
-            </nav>
+            <SiteNav
+              active="/guide"
+              sections={[{ href: "#overview", label: "Overview" }, { href: "#products", label: "Products" }, { href: "#installation", label: "Install" }, { href: "#brokers", label: "Brokers" }, { href: "#risk", label: "Risk" }]}
+            />
 
             {/* HERO */}
             <section className="hero catalog-hero" id="hero">
@@ -641,42 +628,7 @@ export default function GuidePage() {
             </section>
 
             {/* FOOTER */}
-            <footer className="footer">
-                <div className="container">
-                    <div className="footer-grid">
-                        <div>
-                            <h3 className="footer-brand">EA Budak Ubat</h3>
-                            <p className="footer-desc">
-                                Professional trading tools and Expert Advisors for MetaTrader platforms by Syarief Azman.
-                            </p>
-                        </div>
-                        <div>
-                            <h4>Products</h4>
-                            <ul className="footer-links">
-                                {PRODUCTS.map((p, i) => (
-                                    <li key={i}><Link href={`/${p.slug}`}>{p.name}</Link></li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Contact</h4>
-                            <ul className="footer-links">
-                                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                                <li><a href="https://www.mql5.com/en/market/product/195399" target="_blank" rel="noopener noreferrer">MQL5 Market (MT5)</a></li>
-                                <li><a href="https://www.mql5.com/en/channels/eabudakubat" target="_blank" rel="noopener noreferrer">MQL5 Signal Channel</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="footer-bottom">
-                        <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
-                        <p className="footer-disclaimer">
-                            Risk warning: Trading on margin carries a high level of risk. Automated trading systems can result in significant losses. Past performance is not indicative of future results. Not available in restricted jurisdictions.
-                        </p>
-                    </div>
-                </div>
-            </footer>
+            <SiteFooter />
         </>
     );
 }

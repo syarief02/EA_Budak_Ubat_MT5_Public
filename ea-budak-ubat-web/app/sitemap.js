@@ -1,6 +1,14 @@
-export default function sitemap() {
+import { getCatalog } from "@/lib/productCatalog";
+
+export const revalidate = 3600;
+
+export default async function sitemap() {
   const baseUrl = 'https://eabudakubat.com';
   const lastModified = new Date();
+
+  const products = (await getCatalog())
+    .filter((p) => p.slug && !p.has_page)
+    .map((p) => ({ url: `${baseUrl}/products/${p.slug}`, lastModified, changeFrequency: 'monthly', priority: 0.7 }));
 
   return [
     { url: `${baseUrl}/`, lastModified, changeFrequency: 'weekly', priority: 1.0 },
@@ -22,5 +30,6 @@ export default function sitemap() {
     { url: `${baseUrl}/bubat-ai`, lastModified, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/privacy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
+    ...products,
   ];
 }

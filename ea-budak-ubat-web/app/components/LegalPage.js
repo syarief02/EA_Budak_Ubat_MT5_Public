@@ -1,19 +1,12 @@
 import Link from "next/link";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
-// Shared layout for /privacy and /terms (server component: plain readable text, no client JS).
+// Shared layout for /privacy and /terms (server component; the shared nav is the only client part).
 export default function LegalPage({ title, updated, children }) {
   return (
     <>
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">👑 EA Budak Ubat</Link>
-          <ul className="nav-links">
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/privacy">Privacy</Link></li>
-            <li><Link href="/terms">Terms</Link></li>
-          </ul>
-        </div>
-      </nav>
+      <SiteNav />
 
       <main className="container" style={{ paddingTop: "130px", paddingBottom: "80px", maxWidth: "860px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.88rem", color: "var(--text-muted)", marginBottom: "20px" }}>
@@ -30,17 +23,7 @@ export default function LegalPage({ title, updated, children }) {
         </article>
       </main>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-bottom">
-            <p>
-              © {new Date().getFullYear()} EA Budak Ubat by Syarief Azman ·{" "}
-              <Link href="/privacy">Privacy Policy</Link> · <Link href="/terms">Terms of Use</Link> ·{" "}
-              <a href="mailto:support@eabudakubat.com">support@eabudakubat.com</a>
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

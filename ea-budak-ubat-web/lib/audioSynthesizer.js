@@ -4,6 +4,10 @@
 let audioCtx = null;
 let soundEnabled = false;
 
+// Interface click/hover sounds are off site-wide (professional style, 2026-11-16). Only the Forex Quest game
+// sounds (quiz, combo, level-up) still follow the player's own toggle on /learn.
+const UI_SOUNDS = false;
+
 // Initialize on client
 if (typeof window !== "undefined") {
   soundEnabled = localStorage.getItem("ea_sfx_enabled") === "true";
@@ -45,6 +49,7 @@ export function toggleSound() {
 
 // 1. Tactile UI Click (Crisp, modern micro-frequency blip)
 export function playTactileClick(volume = 0.08) {
+  if (!UI_SOUNDS) return;
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
@@ -74,6 +79,7 @@ export function playTactileClick(volume = 0.08) {
 // 2. Magnetic Reticle Lock-On (Futuristic harmonic chirp)
 let lastLockTime = 0;
 export function playReticleLock(volume = 0.05) {
+  if (!UI_SOUNDS) return;
   if (!soundEnabled) return;
   const nowMs = Date.now();
   if (nowMs - lastLockTime < 90) return; // Throttle rapid hover events
@@ -104,6 +110,7 @@ export function playReticleLock(volume = 0.05) {
 
 // 3. Take Profit Realization Chime (Ascending Major Triad C6 -> E6 -> G6)
 export function playProfitChime(volume = 0.12) {
+  if (!UI_SOUNDS) return;
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
@@ -139,6 +146,7 @@ export function playProfitChime(volume = 0.12) {
 
 // 4. Alert / Warning Ping
 export function playAlertPing(volume = 0.09) {
+  if (!UI_SOUNDS) return;
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();

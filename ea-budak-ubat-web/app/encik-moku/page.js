@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20-%20MT4%20-%2020261130.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA-Encik-Moku/raw/master/EA%20-%20Encik%20Moku%20v1.06%20-%20MT5%20-%2020261130.ex5";
@@ -60,28 +62,16 @@ const FAQS = [
 
 export default function EncikMokuPage() {
     const [openFaq, setOpenFaq] = useState(null);
-    const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
         <>
             {/* NAVBAR */}
-            <nav className="navbar">
-                <div className="container">
-                    <Link href="/" className="nav-brand">EA Budak Ubat</Link>
-                    <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-                        <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
-                        <li><a href="#strategy" onClick={() => setMobileNavOpen(false)}>Strategy</a></li>
-                        <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
-                        <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
-                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
-                        <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
-                    </ul>
-                    <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-                        {mobileNavOpen ? "✕" : "☰"}
-                    </button>
-                </div>
-            </nav>
+            <SiteNav
+              active="/products"
+              sections={[{ href: "#strategy", label: "Strategy" }, { href: "#features", label: "Features" }, { href: "#settings", label: "Settings" }, { href: "#authorization", label: "License" }, { href: "#faq", label: "FAQ" }]}
+              ctaHref={DOWNLOAD_MT5}
+              ctaLabel="Download MT5"
+            />
 
             {/* HERO */}
             <section className="hero moku-hero" id="hero">
@@ -330,46 +320,7 @@ export default function EncikMokuPage() {
             </section>
 
             {/* FOOTER */}
-            <footer className="footer">
-                <div className="container">
-                    <div className="footer-grid">
-                        <div>
-                            <h3 className="footer-brand moku-footer-brand">Encik Moku</h3>
-                            <p className="footer-desc">
-                                Multi-timeframe Ichimoku trend-following EA. Buy above the Kumo, sell below the Kumo. Open source strategy.
-                            </p>
-                            <div className="social-links">
-                                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Quick Links</h4>
-                            <ul className="footer-links">
-                                <li><a href="#strategy">Strategy</a></li>
-                                <li><a href="#features">Features</a></li>
-                                <li><a href="#installation">Setup</a></li>
-                                <li><a href="#settings">Settings</a></li>
-                                <li><a href="#faq">FAQ</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Contact</h4>
-                            <ul className="footer-links">
-                                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                                <li><Link href="/">← Back to All Products</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="footer-bottom">
-                        <p>© {new Date().getFullYear()} EA Encik Moku by Syarief Azman. Open Source.</p>
-                        <p className="footer-disclaimer">
-                            Risk warning: Trading involves significant risk. Trend-following and Martingale strategies can result in losses. Past performance is not indicative of future results. Always test on a demo account first. Use at your own risk.
-                        </p>
-                    </div>
-                </div>
-            </footer>
+            <SiteFooter />
         </>
     );
 }

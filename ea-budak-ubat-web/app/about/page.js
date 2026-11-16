@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import { playTactileClick } from "@/lib/audioSynthesizer";
 import { AUTHORIZED_ACCOUNTS_DISPLAY } from "@/lib/authorizedAccounts";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const MQL5_SELLER_LINK = "https://www.mql5.com/en/users/syarief.azman/seller";
@@ -14,43 +15,17 @@ const TELEGRAM_PERSONAL = "https://t.me/SyariefAzman";
 const TELEGRAM_CHANNEL = "https://t.me/EABudakUbat";
 
 export default function AboutPage() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">👑 EA Budak Ubat</Link>
-          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>Home</Link></li>
-            <li><Link href="/products" onClick={() => setMobileNavOpen(false)} style={{ color: "#38bdf8", fontWeight: 700 }}>🛒 MQL5 Store</Link></li>
-            <li><a href="#laboratory" onClick={() => setMobileNavOpen(false)}>Lab Science</a></li>
-            <li><a href="#architecture" onClick={() => setMobileNavOpen(false)}>Architecture</a></li>
-            <li><a href="#risk-math" onClick={() => setMobileNavOpen(false)}>Risk Mathematics</a></li>
-            <li><a href="#timeline" onClick={() => setMobileNavOpen(false)}>Timeline</a></li>
-            <li><a href="#ecosystem" onClick={() => setMobileNavOpen(false)}>Ecosystem</a></li>
-            <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li>
-              <Link
-                href="/#broker-partners"
-                className="nav-cta"
-                onClick={() => { playTactileClick(0.1); setMobileNavOpen(false); }}
-                style={{ background: "linear-gradient(135deg, #00f0ff, #3b82f6)", color: "#0a0e1a", fontWeight: 900 }}
-              >
-                🔥 Get EA Free
-              </Link>
-            </li>
-          </ul>
-          <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-            {mobileNavOpen ? "✕" : "☰"}
-          </button>
-        </div>
-      </nav>
+      <SiteNav
+        active="/about"
+        sections={[{ href: "#laboratory", label: "Lab science" }, { href: "#architecture", label: "Architecture" }, { href: "#risk-math", label: "Risk maths" }, { href: "#timeline", label: "Timeline" }, { href: "#ecosystem", label: "Ecosystem" }]}
+      />
 
       {/* HERO SECTION */}
       <section className="catalog-hero" style={{ paddingTop: "140px", paddingBottom: "70px", position: "relative" }}>
-        <div className="jp-kanji-watermark" aria-hidden="true">精密定量分析</div>
         <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -106,7 +81,7 @@ export default function AboutPage() {
             </div>
             <div className="about-stat-card">
               <span className="about-stat-number">1-Minute</span>
-              <div className="about-stat-label">AutoConfig AI</div>
+              <div className="about-stat-label">AutoConfig</div>
               <div className="about-stat-sub">Real-Time ADR Recalculation</div>
             </div>
             <div className="about-stat-card">
@@ -244,7 +219,7 @@ export default function AboutPage() {
               </p>
               <p className="about-pillar-desc" style={{ marginTop: "10px" }}>
                 In laboratory science, if a baseline expands, you re-calibrate. In <strong>EA Budak Ubat</strong>, if market volatility 
-                expands from a quiet Asian session into a volatile New York session, the <strong>AutoConfig AI</strong> engine 
+                expands from a quiet Asian session into a volatile New York session, the <strong>AutoConfig</strong> engine 
                 automatically recalibrates pip steps and take profits every single minute.
               </p>
             </div>
@@ -308,7 +283,7 @@ export default function AboutPage() {
           <div className="section-header" style={{ textAlign: "left", marginBottom: "28px" }}>
             <span className="label" style={{ margin: 0 }}>SECTION 03</span>
             <h2 style={{ fontSize: "1.9rem", marginTop: "8px" }}>
-              Technical Architecture: The AutoConfig AI Volatility Engine
+              Technical Architecture: The AutoConfig Volatility Engine
             </h2>
             <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: "900px" }}>
               Why traditional static grid bots blow accounts, and how mathematically derived dynamic volatility adaptation solves it.
@@ -330,7 +305,7 @@ export default function AboutPage() {
               <div className="about-pillar-icon">🧠</div>
               <h3 className="about-pillar-title">ADR Mathematical Anchoring</h3>
               <p className="about-pillar-desc">
-                EA Budak Ubat&rsquo;s <strong>AutoConfig AI</strong> module measures both macro volatility (rolling 365-day baseline) 
+                EA Budak Ubat&rsquo;s <strong>AutoConfig</strong> module measures both macro volatility (rolling 365-day baseline) 
                 and micro volatility (20-day Average Daily Range). Take-Profit is dynamically derived as <code>ADR ÷ 25</code>, and the 
                 minimum pip distance step is computed as <code>ADR ÷ 4</code>.
               </p>
@@ -495,7 +470,7 @@ export default function AboutPage() {
                   v1.67 Intra-Candle Tick Break-Even &amp; Web Platform
                 </div>
                 <div className="about-timeline-text" style={{ fontSize: "0.92rem", maxWidth: "880px" }}>
-                  Released the v1.67 architecture with real-time intra-candle tick break-even trailing, dynamic ADR AutoConfig AI, 
+                  Released the v1.67 architecture with real-time intra-candle tick break-even trailing, dynamic ADR-based AutoConfig, 
                   and automated broker whitelist authorization deployed at <strong>https://eabudakubat.com</strong>.
                 </div>
               </div>
@@ -521,7 +496,7 @@ export default function AboutPage() {
                 title: "EA Budak Ubat (Flagship)",
                 code: "SYS.01",
                 badge: "Adaptive Grid Martingale",
-                desc: "Flagship multi-method grid system featuring 4 analysis methods, dynamic ADR AutoConfig AI, and intra-candle tick basket break-even.",
+                desc: "Flagship multi-method grid system featuring 4 analysis methods, dynamic ADR-based AutoConfig, and intra-candle tick basket break-even.",
                 target: "EURUSD, GBPUSD, XAUUSD (M5 Cent/Standard)",
                 platforms: "MT4 / MT5",
                 url: "/ea-budak-ubat",
@@ -644,63 +619,7 @@ export default function AboutPage() {
       </main>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 className="footer-brand">👑 EA Budak Ubat</h3>
-              <p className="footer-desc">
-                Flagship automated quantitative grid trading system and specialized Expert Advisors for MetaTrader platforms by Syarief Azman. Built with laboratory precision and real-world algorithmic engineering.
-              </p>
-              <div className="social-links">
-                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href={TELEGRAM_PERSONAL} className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-                <a href={GITHUB_PROFILE} className="social-link" target="_blank" rel="noopener noreferrer" title="GitHub">💻</a>
-              </div>
-            </div>
-            <div>
-              <h4>Official Pages</h4>
-              <ul className="footer-links">
-                <li><Link href="/" style={{ color: "#00f0ff", fontWeight: 700 }}>Home</Link></li>
-                <li><Link href="/about">About the Architect</Link></li>
-                <li><Link href="/products">MQL5 Store Catalog</Link></li>
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat MT5/MT4</Link></li>
-                <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
-                <li><Link href="/changelog">Changelog &amp; Releases</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Authorized Brokers</h4>
-              <ul className="footer-links">
-                <li><a href="https://fbs.partners?ibl=154319&ibp=588292" target="_blank" rel="noopener noreferrer">FBS (1:3000 Leverage · #1 Choice)</a></li>
-                <li><a href="https://tickmill.link/46cOQ2h" target="_blank" rel="noopener noreferrer">Tickmill (Raw ECN · #2 Choice)</a></li>
-                <li><a href="https://rinfinity.com/en/welcome-bonus?a=mxyg" target="_blank" rel="noopener noreferrer">RoboForex (ProCent · #3 Choice)</a></li>
-                <li><a href="https://clicks.pipaffiliates.com/c?m=150422&c=862266" target="_blank" rel="noopener noreferrer">XM (100% Bonus)</a></li>
-                <li><a href="https://one.justmarkets.link/a/tjrtn60m2i/landing/trade-metals-like-professional?promo=4869" target="_blank" rel="noopener noreferrer">JustMarkets (Zero Spread)</a></li>
-                <li><a href="https://headway.partners/landings/en/bonus-150/?hwp=516d6b" target="_blank" rel="noopener noreferrer">Headway ($150 Bonus)</a></li>
-                <li><a href="https://banner-api.hfmmalaysia.com/link/e993b134?regulator=HFSV&refid=30572923" target="_blank" rel="noopener noreferrer">HF Markets (Cent Account)</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Contact &amp; Official Links</h4>
-              <ul className="footer-links">
-                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                <li><a href={TELEGRAM_PERSONAL} target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                <li><a href={TELEGRAM_CHANNEL} target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                <li><a href={MQL5_MARKET_LINK} target="_blank" rel="noopener noreferrer">MQL5 Market (Official MT5)</a></li>
-                <li><a href={GITHUB_PROFILE} target="_blank" rel="noopener noreferrer">GitHub: syarief02</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
-            <p className="footer-disclaimer">
-              Risk warning: Trading on margin carries a high level of risk. Automated grid and martingale systems can result in significant loss of capital. Past performance is not indicative of future results. Always test on a demo account first. Official domain: https://eabudakubat.com.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

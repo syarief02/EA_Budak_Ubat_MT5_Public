@@ -5,6 +5,8 @@ import Link from "next/link";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import { playTactileClick } from "@/lib/audioSynthesizer";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const POST_TYPES = [
   { key: "idea", label: "💡 Idea", color: "#8b5cf6" },
@@ -54,7 +56,6 @@ function timeAgo(dateStr) {
 //   feed:  loadState "loading" -> "ready" | "failed" (Retry goes back to "loading")
 //   form:  editing -> submitting -> posted | rejected; validatePost() blocks invalid sends
 export default function CommunityPage() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [comments, setComments] = useState([]);
   const [loadState, setLoadState] = useState("loading");
   const [submitting, setSubmitting] = useState(false);
@@ -205,36 +206,10 @@ export default function CommunityPage() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">👑 EA Budak Ubat</Link>
-          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>Home</Link></li>
-            <li><Link href="/products" onClick={() => setMobileNavOpen(false)}>MQL5 Store</Link></li>
-            <li><Link href="/tools" onClick={() => setMobileNavOpen(false)}>Tools ⚙️</Link></li>
-            <li><Link href="/about" onClick={() => setMobileNavOpen(false)}>About</Link></li>
-            <li><Link href="/community" onClick={() => setMobileNavOpen(false)} style={{ color: "#00f0ff", fontWeight: 700 }}>Community 💬</Link></li>
-            <li><Link href="/changelog" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li>
-              <Link
-                href="/#broker-partners"
-                className="nav-cta"
-                onClick={() => { playTactileClick(0.1); setMobileNavOpen(false); }}
-                style={{ background: "linear-gradient(135deg, #00f0ff, #3b82f6)", color: "#0a0e1a", fontWeight: 900 }}
-              >
-                🔥 Get EA Free
-              </Link>
-            </li>
-          </ul>
-          <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-            {mobileNavOpen ? "✕" : "☰"}
-          </button>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* COMMUNITY HERO */}
       <section className="catalog-hero" style={{ paddingTop: "140px", paddingBottom: "50px", position: "relative" }}>
-        <div className="jp-kanji-watermark" aria-hidden="true">共有広場</div>
         <div className="hero-bg-grid"></div>
         <div className="hero-glow hero-glow-1"></div>
         <div className="hero-glow hero-glow-2"></div>
@@ -513,56 +488,7 @@ export default function CommunityPage() {
       </main>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 className="footer-brand">👑 EA Budak Ubat</h3>
-              <p className="footer-desc">
-                Flagship automated quantitative grid trading system and specialized Expert Advisors for MetaTrader platforms by Syarief Azman.
-              </p>
-              <div className="social-links">
-                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-                <a href="https://github.com/syarief02" className="social-link" target="_blank" rel="noopener noreferrer" title="GitHub">💻</a>
-              </div>
-            </div>
-            <div>
-              <h4>Official Pages</h4>
-              <ul className="footer-links">
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About the Architect</Link></li>
-                <li><Link href="/tools">Trader Workbench</Link></li>
-                <li><Link href="/products">MQL5 Store Catalog</Link></li>
-                <li><Link href="/changelog">Version Changelog</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Community &amp; Support</h4>
-              <ul className="footer-links">
-                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Telegram Channel: t.me/EABudakUbat</a></li>
-                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">1-on-1 Support: @SyariefAzman</a></li>
-                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Free License</h4>
-              <ul className="footer-links">
-                <li><Link href="/#broker-partners">Get Free Lifetime License</Link></li>
-                <li><Link href="/#authorization">Check Whitelist Status</Link></li>
-                <li><Link href="/ea-budak-ubat">Installation Guide</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat by Syarief Azman. All rights reserved.</p>
-            <p className="footer-disclaimer">
-              Risk warning: Trading forex and CFDs on margin carries high risk. Past performance does not guarantee future results. Official domain: https://eabudakubat.com.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

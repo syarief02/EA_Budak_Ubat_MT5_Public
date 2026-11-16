@@ -12,6 +12,7 @@ import {
   getProductTypeKey,
   getProductTypeByKey,
   getProductSubcategory,
+  productPath,
 } from "@/lib/productTypes";
 
 const SELLER_URL = "https://www.mql5.com/en/users/syarief.azman/seller";
@@ -42,7 +43,9 @@ function ProductCard({ p }) {
       <div className="hp-product-head">
         {p.icon && <span className="hp-product-icon" aria-hidden="true">{p.icon}</span>}
         <div>
-          <h3>{p.name}</h3>
+          <h3>
+            <Link href={productPath(p)} className="hp-product-title-link">{p.name}</Link>
+          </h3>
           <p className="hp-product-sub">{[sub, p.version].filter(Boolean).join(" · ")}</p>
         </div>
       </div>
@@ -60,22 +63,10 @@ function ProductCard({ p }) {
           <strong>{p.price}</strong>
         </div>
         <div className="hp-product-actions">
-          {p.has_page ? (
-            <Link href={`/${p.slug}`} className="hp-btn hp-btn-sm hp-btn-primary">
-              View details
-            </Link>
-          ) : p.market_url ? (
-            <a
-              href={p.market_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hp-btn hp-btn-sm hp-btn-primary"
-              aria-label={`${p.name} on MQL5 Market (opens in a new tab)`}
-            >
-              MQL5 Market <Icon name="external" size={14} />
-            </a>
-          ) : null}
-          {p.has_page && p.market_url && (
+          <Link href={productPath(p)} className="hp-btn hp-btn-sm hp-btn-primary">
+            View details
+          </Link>
+          {p.market_url && (
             <a
               href={p.market_url}
               target="_blank"

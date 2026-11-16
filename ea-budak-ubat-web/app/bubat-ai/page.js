@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { BASE_OPEN_GRAPH } from "@/lib/siteMetadata";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 export const metadata = {
   metadataBase: new URL("https://eabudakubat.com"),
@@ -153,23 +155,12 @@ function Table({ head, rows }) {
 export default function BubatAIPage() {
   return (
     <>
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">👑 EA Budak Ubat</Link>
-          <ul className="nav-links">
-            <li><Link href="/">Home</Link></li>
-            <li><a href="#install">Install</a></li>
-            <li><a href="#license">Trial &amp; license</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li>
-              <a href={DOWNLOAD} className="nav-cta" target="_blank" rel="noopener noreferrer"
-                 style={{ background: "linear-gradient(135deg, #00f0ff, #3b82f6)", color: "#0a0e1a", fontWeight: 900 }}>
-                ⬇ Download
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <SiteNav
+        sections={[{ href: "#install", label: "Install" }, { href: "#license", label: "Trial & license" }, { href: "#faq", label: "FAQ" }]}
+        ctaHref={DOWNLOAD}
+        ctaLabel="Download"
+        ctaExternal
+      />
 
       <section className="catalog-hero" style={{ paddingTop: "140px", paddingBottom: "50px", position: "relative" }}>
         <div className="hero-bg-grid"></div>
@@ -678,20 +669,7 @@ export default function BubatAIPage() {
         </article>
       </main>
 
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-bottom">
-            <p>
-              © {new Date().getFullYear()} EA Budak Ubat by Syarief Azman · <Link href="/privacy">Privacy Policy</Link> ·{" "}
-              <Link href="/terms">Terms of Use</Link> · <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            </p>
-            <p className="footer-disclaimer">
-              Risk warning: Trading on margin carries a high level of risk. Bubat AI has lost money in testing. Past
-              performance is not indicative of future results. Test on a demo account first; real-money trading is at your own risk.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

@@ -9235,3 +9235,38 @@ section {
 .guide-shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; margin-top: 8px; }
 .guide-shots .guide-shot { margin: 10px 0 18px; }
 @media (max-width: 640px) { .guide-toc ol { columns: 1; } .guide-table td:first-child { white-space: normal; } .guide-shots { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   TOUCH TARGETS (2026-11-16): small pills, copy buttons, tabs and arrows get a
+   44px minimum height on phones and touch screens.
+   ========================================================================== */
+@media (max-width: 768px), (pointer: coarse) {
+  .banner-broker-pill,
+  .card-broker-mini-pill,
+  .example-pill,
+  .hp-copy,
+  .btn-copy-code,
+  .comment-react-btn,
+  .platform-pill,
+  .banner-nav-arrow,
+  .card-arrow-btn,
+  .sim-timeframe-btn,
+  .sim-action-btn,
+  .sim-speed-btn,
+  .sim-chart-type-btn,
+  .sim-util-btn {
+    min-height: 44px;
+  }
+
+  .banner-nav-arrow,
+  .card-arrow-btn {
+    min-width: 44px;
+  }
+
+  .hp-link,
+  .hp-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

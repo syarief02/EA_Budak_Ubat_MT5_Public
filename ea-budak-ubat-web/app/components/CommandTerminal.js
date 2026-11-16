@@ -21,8 +21,8 @@ const COMMANDS = [
   { id: "encik-moku", title: "Encik Moku", subtitle: "Multi-Timeframe Ichimoku Cloud EA", icon: "🏯", action: "/encik-moku", cat: "Products" },
 
   // Tools & Generators
-  { id: "presets", title: "Preset Generator (.set)", subtitle: "Generate custom configuration files for MT4/MT5", icon: "⚙️", action: "/ea-budak-ubat#preset-generator", cat: "Tools" },
-  { id: "calculator", title: "Risk & Grid Calculator", subtitle: "Simulate lot progression, margin, and drawdown", icon: "🧮", action: "/ea-budak-ubat#risk-calculator", cat: "Tools" },
+  { id: "presets", title: "Preset Generator (.set)", subtitle: "Generate custom configuration files for MT4/MT5", icon: "⚙️", action: "/tools#presets", cat: "Tools" },
+  { id: "calculator", title: "Risk & Grid Calculator", subtitle: "Simulate lot progression, margin, and drawdown", icon: "🧮", action: "/tools#calculator", cat: "Tools" },
   { id: "brokers", title: "Partner Brokers", subtitle: "Compare the 14 partner brokers for a free license", icon: "🏦", action: "/brokers", cat: "Tools" },
   { id: "license", title: "License & Account Checker", subtitle: "Verify trading account authorization across all EAs", icon: "🔐", action: "/#authorization", cat: "Tools" },
 
@@ -33,8 +33,6 @@ const COMMANDS = [
   { id: "telegram", title: "Official Telegram Channel", subtitle: "Join @EABudakUbat for updates & releases", icon: "📢", action: "https://t.me/EABudakUbat", external: true, cat: "Social" },
   { id: "creator", title: "Message Creator (Syarief Azman)", subtitle: "Telegram direct inquiry: @SyariefAzman", icon: "✉️", action: "https://t.me/SyariefAzman", external: true, cat: "Social" },
 
-  // System Toggles
-  { id: "toggle-sound", title: "Toggle Procedural Sound FX", subtitle: "Enable or mute browser audio synthesis", icon: "🔊", action: "TOGGLE_SOUND", cat: "Preferences" },
 ];
 
 export default function CommandTerminal() {
@@ -139,17 +137,6 @@ export default function CommandTerminal() {
     <>
       {/* FLOATING HUD COMMAND DOCK (BOTTOM-RIGHT) */}
       <div className="floating-hud-dock" aria-label="HUD Actions">
-        {/* Sound SFX Pill */}
-        <button
-          type="button"
-          className={`hud-dock-btn ${soundActive ? "sound-on" : "sound-off"}`}
-          data-cursor-label="AUDIO"
-          onClick={handleSoundBtnClick}
-          title={soundActive ? "Procedural Audio Synthesizer: ACTIVE" : "Procedural Audio Synthesizer: MUTED"}
-        >
-          <span className="hud-dock-icon">{soundActive ? "🔊" : "🔇"}</span>
-          <span className="hud-dock-text">SFX {soundActive ? "ON" : "OFF"}</span>
-        </button>
 
         {/* Command Palette Pill */}
         <button
@@ -157,11 +144,11 @@ export default function CommandTerminal() {
           className="hud-dock-btn terminal-trigger-btn"
           data-cursor-label="TERMINAL"
           onClick={() => setIsOpen(true)}
-          title="Open Command Terminal (Ctrl + K)"
+          title="Search the site (Ctrl + K)"
         >
-          <span className="hud-dock-icon">⚡</span>
-          <span className="hud-dock-text">TERMINAL</span>
-          <span className="hud-dock-kbd">⌘K</span>
+          <span className="hud-dock-icon">🔍</span>
+          <span className="hud-dock-text">Search</span>
+          <span className="hud-dock-kbd">Ctrl K</span>
         </button>
       </div>
 

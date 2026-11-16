@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { FEATURED_BROKERS, PARTNER_BROKERS } from "@/lib/partnerBrokers";
 
+// The footer brings its own styles, so any page can use it without importing home.css itself.
+import "@/app/home.css";
+
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
 
-// Footer for the home and /brokers pages; uses the shared .footer styles from globals.css.
+// Site-wide footer (every page uses it); uses the shared .footer styles from globals.css plus hp- styles.
 export default function SiteFooter() {
   return (
-    <footer className="footer hp-footer">
+    <footer className="footer hp-footer hp">
       <div className="container">
         <div className="footer-grid">
           <div>

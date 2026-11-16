@@ -6,8 +6,14 @@ import { checkAccount, getEa, EA_DATABASE, BROKERS, MT4_AUTHORIZED_ACCOUNTS, MT5
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import { copyText } from "@/lib/clipboard";
 import { useFlash } from "@/lib/useFlash";
+import { FEATURED_BROKERS } from "@/lib/partnerBrokers";
 
 const FLAGSHIP = getEa("ea-budak-ubat");
+
+// The full card shows only the featured brokers; the complete list lives on /brokers. Listing all of them here
+// made every EA page about 4,000 px longer on phones.
+const FEATURED_NAMES = FEATURED_BROKERS.map((b) => b.name);
+const SHOWN_BROKERS = BROKERS.filter((b) => FEATURED_NAMES.includes(b.name));
 
 // States (see docs/state-flows.md, section 2):
 //   idle      - nothing submitted yet (submittedAccount === "")
@@ -560,9 +566,9 @@ export default function AccountChecker({
           {/* ROTATING SPONSOR PROMO BANNER */}
           <RotatingAdBanner variant="card" />
 
-          <h5 className="brokers-title">Partner Broker Registration Links</h5>
+          <h5 className="brokers-title">Recommended partner brokers</h5>
           <div className="broker-interactive-grid">
-            {BROKERS.map((b, i) => (
+            {SHOWN_BROKERS.map((b, i) => (
               <div key={i} className="broker-card-interactive">
                 <div className="broker-card-top">
                   <div className="broker-title-group">
@@ -600,6 +606,9 @@ export default function AccountChecker({
               </div>
             ))}
           </div>
+          <p className="brokers-more">
+            <Link href="/brokers">Compare all {BROKERS.length} partner brokers →</Link>
+          </p>
         </div>
 
         <div className="contact-callout">

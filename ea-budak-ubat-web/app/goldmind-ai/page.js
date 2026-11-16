@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const DOWNLOAD_EX5 = "https://github.com/syarief02/goldmind-ai/raw/master/mt5/Experts/GoldMind%20AI%20v1.01%20-%20MT5%20-%2020261130.ex5";
 const DOWNLOAD_ZIP = "https://github.com/syarief02/goldmind-ai/archive/refs/heads/master.zip";
@@ -48,29 +50,16 @@ const FAQS = [
 
 export default function GoldMindAIPage() {
     const [openFaq, setOpenFaq] = useState(null);
-    const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
         <>
             {/* NAVBAR */}
-            <nav className="navbar">
-                <div className="container">
-                    <Link href="/" className="nav-brand">EA Budak Ubat</Link>
-                    <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-                        <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
-                        <li><a href="#how-it-works" onClick={() => setMobileNavOpen(false)}>How It Works</a></li>
-                        <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
-                        <li><a href="#requirements" onClick={() => setMobileNavOpen(false)}>Requirements</a></li>
-                        <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
-                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
-                        <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={DOWNLOAD_EX5} target="_blank" rel="noopener noreferrer" className="nav-cta">⬇️ Download MT5</a></li>
-                    </ul>
-                    <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-                        {mobileNavOpen ? "✕" : "☰"}
-                    </button>
-                </div>
-            </nav>
+            <SiteNav
+              active="/products"
+              sections={[{ href: "#how-it-works", label: "How it works" }, { href: "#features", label: "Features" }, { href: "#requirements", label: "Requirements" }, { href: "#settings", label: "Settings" }, { href: "#authorization", label: "License" }, { href: "#faq", label: "FAQ" }]}
+              ctaHref={DOWNLOAD_EX5}
+              ctaLabel="Download MT5"
+            />
 
             {/* HERO */}
             <section className="hero goldmind-hero" id="hero">
@@ -419,47 +408,7 @@ export default function GoldMindAIPage() {
             </section>
 
             {/* FOOTER */}
-            <footer className="footer">
-                <div className="container">
-                    <div className="footer-grid">
-                        <div>
-                            <h3 className="footer-brand goldmind-footer-brand">GoldMind AI</h3>
-                            <p className="footer-desc">
-                                AI-powered XAUUSD trading system using OpenAI GPT, FastAPI, and MetaTrader 5. Open source and free to use.
-                            </p>
-                            <div className="social-links">
-                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Quick Links</h4>
-                            <ul className="footer-links">
-                                <li><a href="#how-it-works">How It Works</a></li>
-                                <li><a href="#features">Features</a></li>
-                                <li><a href="#requirements">Requirements</a></li>
-                                <li><a href="#settings">Settings</a></li>
-                                <li><a href="#faq">FAQ</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Contact</h4>
-                            <ul className="footer-links">
-                                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank" rel="noopener noreferrer">Twitter: @SyariefAzman</a></li>
-                                <li><Link href="/">← Back to All Products</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="footer-bottom">
-                        <p>© {new Date().getFullYear()} GoldMind AI by Syarief Azman. Open Source.</p>
-                        <p className="footer-disclaimer">
-                            Risk warning: AI-assisted trading carries inherent risks. Past performance does not guarantee future results. Never trade with money you cannot afford to lose. Always test on a demo account first.
-                        </p>
-                    </div>
-                </div>
-            </footer>
+            <SiteFooter />
         </>
     );
 }

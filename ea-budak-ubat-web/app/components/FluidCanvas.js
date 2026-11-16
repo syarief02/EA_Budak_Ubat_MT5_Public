@@ -50,13 +50,12 @@ export default function FluidCanvas() {
     // Anime Speedlines Array (kinetic action streaks)
     const speedlines = [];
 
-    // Floating Cybernetic Kanji & Forex Candlestick Wick Particles
-    const KANJI_TOKENS = ["波動", "瞬", "創", "撃", "龍", "極", "光", "超"];
+    // Floating glow particles (the kanji glyph particles were removed on 2026-11-16 for a cleaner look)
     const particles = [];
     const PARTICLE_COUNT = 32;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const isKanji = i % 4 === 0;
+      const isKanji = false;
       particles.push({
         x: Math.random() * (width / dpr),
         y: Math.random() * (height / dpr),
@@ -64,7 +63,7 @@ export default function FluidCanvas() {
         vy: (Math.random() - 0.5) * 0.4,
         size: isKanji ? 13 : Math.random() * 2.5 + 1,
         isKanji,
-        token: isKanji ? KANJI_TOKENS[i % KANJI_TOKENS.length] : null,
+        token: null,
         hue: isKanji ? (Math.random() > 0.5 ? 190 : 280) : 200 + Math.random() * 60,
         alpha: isKanji ? 0.25 : 0.4 + Math.random() * 0.4,
         angle: Math.random() * Math.PI * 2,

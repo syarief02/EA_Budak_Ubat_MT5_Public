@@ -59,6 +59,125 @@
   box-shadow: none;
 }
 
+/* Anchor jumps land below the fixed header (taller when the "On this page" row shows). */
+html {
+  scroll-padding-top: 88px;
+}
+
+@media (min-width: 1081px) {
+  html:has(.hp-nav-has-sub) {
+    scroll-padding-top: 128px;
+  }
+}
+
+/* "On this page" row (desktop) */
+.hp-subnav-spacer {
+  height: 47px;
+}
+
+.hp-subnav {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--hp-border);
+}
+
+.navbar .hp-subnav .container {
+  justify-content: flex-start;
+  gap: 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hp-subnav-label {
+  color: var(--hp-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hp-subnav ul {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hp-subnav a {
+  color: var(--hp-body);
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hp-subnav a:hover {
+  color: var(--hp-text);
+  text-decoration: underline;
+}
+
+/* "On this page" group inside the menu (phones and tablets only) */
+.hp-nav .hp-nav-sec-head,
+.hp-nav .hp-nav-sec {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .hp-subnav,
+  .hp-subnav-spacer {
+    display: none;
+  }
+
+  .hp-nav .nav-links.open {
+    gap: 0;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+
+  .hp-nav .nav-links.open a {
+    min-height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .hp-nav .nav-links.open a.nav-cta.hp-nav-cta {
+    margin-top: 12px;
+    justify-content: center;
+  }
+
+  .hp-nav .nav-links.open .hp-nav-sec {
+    display: list-item;
+  }
+
+  .hp-nav .nav-links.open .hp-nav-sec a {
+    padding-left: 14px;
+    color: var(--hp-body);
+  }
+
+  .hp-nav .nav-links.open .hp-nav-sec-head {
+    display: block;
+    margin-top: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--hp-border);
+    color: var(--hp-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+/* Footer links get finger-sized targets on phones. */
+@media (max-width: 768px) {
+  .hp-footer .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+}
+
 /* ---------- Shared building blocks ---------- */
 .hp-eyebrow {
   font-size: 0.78rem;
@@ -1281,4 +1400,195 @@ a.hp-card:hover {
   .hp-feature {
     padding: 20px;
   }
+}
+
+/* /learn: toolbar under the shared nav (the page's own header was removed) */
+.learn-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 88px;
+}
+
+/* AccountChecker (full card): link from the featured brokers to the complete list on /brokers */
+.brokers-more {
+  margin: 16px 0 0;
+  text-align: center;
+}
+
+.brokers-more a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #38bdf8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brokers-more a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Product detail pages (/products/<slug>) ---------- */
+.hp-pd-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.hp-pd-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  font-size: 2rem;
+}
+
+.hp-pd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 0 0 8px;
+  color: var(--hp-muted);
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.8rem;
+}
+
+.hp-pd-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.hp-pd-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hp-pd-side {
+  position: sticky;
+  top: 96px;
+}
+
+.hp .hp-pd-h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+.hp-pd-text {
+  margin: 0;
+  color: var(--hp-body);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.hp-pd-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.hp-pd-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--hp-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.hp-pd-features li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--hp-ok);
+}
+
+.hp-pd-details {
+  margin: 0 0 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.hp-pd-details div {
+  display: grid;
+  gap: 2px;
+}
+
+.hp-pd-details dt {
+  color: var(--hp-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hp-pd-details dd {
+  margin: 0;
+  color: var(--hp-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.hp-pd-small {
+  margin: 14px 0 0;
+  color: var(--hp-muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.hp-pd-video {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hp-pd-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #05080f;
+}
+
+.hp-pd-video figcaption {
+  padding: 10px 16px;
+  color: var(--hp-muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 960px) {
+  .hp-pd-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hp-pd-side {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .hp-pd-head {
+    align-items: flex-start;
+  }
+
+  .hp-pd-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.6rem;
+  }
+}
+
+.hp-product-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hp-product-title-link:hover {
+  text-decoration: underline;
 }

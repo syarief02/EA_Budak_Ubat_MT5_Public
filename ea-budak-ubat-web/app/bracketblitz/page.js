@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/BracketBlitz-EA/raw/master/BracketBlitz%20-%20MT4%20-%2020261130.ex4";
@@ -46,28 +48,16 @@ const FAQS = [
 
 export default function BracketBlitzPage() {
     const [openFaq, setOpenFaq] = useState(null);
-    const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
         <>
             {/* NAVBAR */}
-            <nav className="navbar">
-                <div className="container">
-                    <Link href="/" className="nav-brand">EA Budak Ubat</Link>
-                    <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-                        <li><Link href="/" onClick={() => setMobileNavOpen(false)}>← All Products</Link></li>
-                        <li><a href="#strategy" onClick={() => setMobileNavOpen(false)}>Strategy</a></li>
-                        <li><a href="#features" onClick={() => setMobileNavOpen(false)}>Features</a></li>
-                        <li><a href="#settings" onClick={() => setMobileNavOpen(false)}>Settings</a></li>
-                        <li><a href="#authorization" onClick={() => setMobileNavOpen(false)}>🔐 Authorization</a></li>
-                        <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-                        <li><a href={DOWNLOAD_MT4} download className="nav-cta">⬇️ Download</a></li>
-                    </ul>
-                    <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-                        {mobileNavOpen ? "✕" : "☰"}
-                    </button>
-                </div>
-            </nav>
+            <SiteNav
+              active="/products"
+              sections={[{ href: "#strategy", label: "Strategy" }, { href: "#features", label: "Features" }, { href: "#settings", label: "Settings" }, { href: "#authorization", label: "License" }, { href: "#faq", label: "FAQ" }]}
+              ctaHref={DOWNLOAD_MT5}
+              ctaLabel="Download MT5"
+            />
 
             {/* HERO */}
             <section className="hero blitz-hero" id="hero">
@@ -345,47 +335,7 @@ export default function BracketBlitzPage() {
             </section>
 
             {/* FOOTER */}
-            <footer className="footer">
-                <div className="container">
-                    <div className="footer-grid">
-                        <div>
-                            <h3 className="footer-brand blitz-footer-brand">BracketBlitz EA</h3>
-                            <p className="footer-desc">
-                                Rapid-fire OCO bracket order EA for MetaTrader 4 & 5. Open source breakout-capture strategy.
-                            </p>
-                            <div className="social-links">
-                                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Quick Links</h4>
-                            <ul className="footer-links">
-                                <li><a href="#strategy">Strategy</a></li>
-                                <li><a href="#features">Features</a></li>
-                                <li><a href="#settings">Settings</a></li>
-                                <li><a href="#presets">Presets</a></li>
-                                <li><a href="#faq">FAQ</a></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Contact</h4>
-                            <ul className="footer-links">
-                                <li><a href="mailto:support@eabudakubat.com">Email: support@eabudakubat.com</a></li>
-                                <li><a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                                <li><a href="https://www.twitter.com/SyariefAzman" target="_blank" rel="noopener noreferrer">Twitter: @SyariefAzman</a></li>
-                                <li><Link href="/">← Back to All Products</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="footer-bottom">
-                        <p>© {new Date().getFullYear()} BracketBlitz EA by Syarief Azman. Open Source — MIT License.</p>
-                        <p className="footer-disclaimer">
-                            Risk warning: Trading involves significant risk. Breakout strategies can result in losses. Past performance is not indicative of future results. Always test on a demo account first. Use at your own risk.
-                        </p>
-                    </div>
-                </div>
-            </footer>
+            <SiteFooter />
         </>
     );
 }

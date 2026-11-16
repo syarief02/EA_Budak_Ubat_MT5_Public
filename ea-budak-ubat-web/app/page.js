@@ -11,7 +11,7 @@ import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
 import { AUTHORIZED_ACCOUNTS_DISPLAY, getEa } from "@/lib/authorizedAccounts";
 import { FEATURED_BROKERS, PARTNER_BROKERS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
-import { PRODUCT_TYPES, getProductType } from "@/lib/productTypes";
+import { PRODUCT_TYPES, getProductType, productPath } from "@/lib/productTypes";
 
 // Built from TRIAL.expiryDate in lib/authorizedAccounts.js, so the monthly expiry update moves these too.
 const { downloadMt4: DOWNLOAD_MT4, downloadMt5: DOWNLOAD_MT5 } = getEa("ea-budak-ubat");
@@ -408,11 +408,9 @@ export default function Home() {
                     const platforms = Array.isArray(p.platforms) ? p.platforms.join(" · ") : "";
                     const price = String(p.price || "").replace(/\s*USD$/i, "");
                     return (
-                      <a
+                      <Link
                         key={p.slug}
-                        href={p.market_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={productPath(p)}
                         className="hp-card hp-ea"
                         style={{ "--accent": type.color }}
                       >
@@ -427,9 +425,9 @@ export default function Home() {
                         </div>
                         <p>{p.tagline}</p>
                         <span className="hp-ea-more">
-                          View on MQL5 <Icon name="external" size={14} />
+                          View details <Icon name="arrowRight" size={16} />
                         </span>
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>

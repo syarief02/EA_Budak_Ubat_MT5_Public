@@ -5,6 +5,8 @@ import Link from "next/link";
 import AccountChecker from "@/app/components/AccountChecker";
 import { copyText } from "@/lib/clipboard";
 import { useFlash } from "@/lib/useFlash";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const HEADWAY_SIGNUP_URL = "https://headway.partners/user/signup?hwp=516d6b";
 const HEADWAY_BONUS_150_URL = "https://headway.partners/landings/en/bonus-150/?hwp=516d6b";
@@ -20,7 +22,7 @@ const UNLOCKED_EAS = [
     icon: "📊",
     name: "EA Budak Ubat v1.67",
     platforms: ["MT4", "MT5"],
-    desc: "Robot grid martingale terunggul dengan 4 kaedah analisis (Ichimoku, Alligator, Candle & SMA20) serta AutoConfig AI.",
+    desc: "Robot grid martingale terunggul dengan 4 kaedah analisis (Ichimoku, Alligator, Candle & SMA20) serta AutoConfig berasaskan volatiliti.",
     badge: "Most Popular",
   },
   {
@@ -122,7 +124,6 @@ const HEADWAY_FAQS = [
 
 export default function HeadwayLandingPage() {
   const [openFaq, setOpenFaq] = useState(null);
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   // { ok, text } while the toast shows. In-app browsers without the Clipboard API used to get no feedback at all.
   const [copyResult, flashCopyResult] = useFlash(3000);
   const copied = copyResult?.ok === true;
@@ -149,46 +150,13 @@ export default function HeadwayLandingPage() {
       )}
 
       {/* STICKY TOP NAVBAR */}
-      <nav className="navbar">
-        <div className="container">
-          <div className="nav-brand-wrapper">
-            <Link href="/" className="nav-brand">
-              EA Budak Ubat
-            </Link>
-            <span className="nav-partner-tag">
-              Headway Partner
-            </span>
-          </div>
-
-          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>Utama</Link></li>
-            <li><a href="#perks" onClick={() => setMobileNavOpen(false)}>Kelebihan Broker</a></li>
-            <li><a href="#unlocked-eas" onClick={() => setMobileNavOpen(false)}>Koleksi EA Percuma</a></li>
-            <li><a href="#steps" onClick={() => setMobileNavOpen(false)}>Cara Daftar</a></li>
-            <li><a href="#checker" onClick={() => setMobileNavOpen(false)}>Semak Whitelist</a></li>
-            <li><a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a></li>
-            <li>
-              <a
-                href={HEADWAY_SIGNUP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-headway-nav"
-                onClick={() => setMobileNavOpen(false)}
-              >
-                Daftar Headway ➜
-              </a>
-            </li>
-          </ul>
-
-          <button
-            className="nav-toggle"
-            onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileNavOpen ? "✕" : "☰"}
-          </button>
-        </div>
-      </nav>
+      <SiteNav
+        active="/brokers"
+        sections={[{ href: "#perks", label: "Kelebihan" }, { href: "#unlocked-eas", label: "EA percuma" }, { href: "#steps", label: "Cara daftar" }, { href: "#checker", label: "Semak whitelist" }, { href: "#faq", label: "FAQ" }]}
+        ctaHref={HEADWAY_SIGNUP_URL}
+        ctaLabel="Daftar Headway"
+        ctaExternal
+      />
 
       {/* HERO SECTION */}
       <section className="hero headway-hero" id="hero">
@@ -548,51 +516,7 @@ export default function HeadwayLandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 className="footer-brand headway-footer-brand">EA Budak Ubat × Headway</h3>
-              <p className="footer-desc">
-                Rakan kongsi rasmi penyedia sistem dagangan automatik (Expert Advisor) profesional untuk platform MetaTrader 4 & MetaTrader 5.
-              </p>
-              <div className="social-links">
-                <a href="mailto:support@eabudakubat.com" className="social-link" title="Emel Sokongan">✉️</a>
-                <a href={TELEGRAM_ADMIN} className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram Admin">💬</a>
-                <a href={TELEGRAM_CHANNEL} className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram Channel">📢</a>
-              </div>
-            </div>
-
-            <div>
-              <h4>Pautan Pantas</h4>
-              <ul className="footer-links">
-                <li><a href="#perks">Kelebihan Broker</a></li>
-                <li><a href="#unlocked-eas">Koleksi EA Percuma</a></li>
-                <li><a href="#steps">Cara Pendaftaran</a></li>
-                <li><a href="#checker">Semak Status Whitelist</a></li>
-                <li><a href="#faq">Soalan Lazim (FAQ)</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4>Bantuan & Sokongan</h4>
-              <ul className="footer-links">
-                <li><a href="mailto:support@eabudakubat.com">Emel EA: support@eabudakubat.com</a></li>
-                <li><a href={TELEGRAM_ADMIN} target="_blank" rel="noopener noreferrer">Telegram: @SyariefAzman</a></li>
-                <li><a href={TELEGRAM_CHANNEL} target="_blank" rel="noopener noreferrer">Channel: t.me/EABudakUbat</a></li>
-                <li><a href="mailto:care@hw.site">Emel Broker: care@hw.site</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat & Headway Official Partner. Hak Cipta Terpelihara.</p>
-            <p className="footer-disclaimer">
-              Amaran Risiko: Perdagangan Forex, Komoditi dan CFD dengan leveraj membawa risiko kerugian modal yang tinggi. Prestasi masa lalu bukan jaminan kejayaan masa hadapan. EA Budak Ubat tidak menyediakan nasihat pelaburan secara langsung. Sila pastikan anda memahami risiko yang terlibat sebelum memulakan dagangan.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* FLOATING MOBILE CTA BAR */}
       <div className="floating-mobile-bar">

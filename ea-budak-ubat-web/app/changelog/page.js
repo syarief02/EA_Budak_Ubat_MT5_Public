@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import SiteNav from "@/app/components/SiteNav";
+import SiteFooter from "@/app/components/SiteFooter";
 
 const CHANGELOG_DATA = [
   {
@@ -296,12 +298,12 @@ const CHANGELOG_DATA = [
     date: "July 2026",
     badge: "AI Volatility Engine",
     badgeType: "feature",
-    summary: "Introduced AutoConfig AI dynamic parameter adaptation and on-chart emergency Close All button.",
+    summary: "Introduced AutoConfig dynamic parameter adaptation and on-chart emergency Close All button.",
     highlights: [
       {
         type: "feature",
         tag: "Algorithm",
-        title: "AutoConfig AI Dynamic Volatility Derivation",
+        title: "AutoConfig Dynamic Volatility Derivation",
         desc: "Calculates EURUSD 365-day Average Daily Range (ADR) on D1 and derives optimal TakeProfit, minDistance, distanceIncrement, and maxDistance ratios adapted dynamically to the current symbol's 20-day ADR.",
       },
       {
@@ -460,7 +462,6 @@ const PRODUCTS_FILTER = [
 
 export default function ChangelogPage() {
   const [selectedProduct, setSelectedProduct] = useState("all");
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const filteredLogs = selectedProduct === "all"
     ? CHANGELOG_DATA
@@ -469,24 +470,9 @@ export default function ChangelogPage() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="container">
-          <Link href="/" className="nav-brand">EA Budak Ubat</Link>
-          <ul className={`nav-links ${mobileNavOpen ? "open" : ""}`}>
-            <li><Link href="/" onClick={() => setMobileNavOpen(false)}>Home</Link></li>
-            <li><Link href="/guide" onClick={() => setMobileNavOpen(false)}>Guide</Link></li>
-            <li><Link href="/ea-budak-ubat" onClick={() => setMobileNavOpen(false)}>EA Budak Ubat</Link></li>
-            <li><Link href="/ea-budak-ubat#preset-generator" onClick={() => setMobileNavOpen(false)}>Presets</Link></li>
-            <li><Link href="/ea-budak-ubat#risk-calculator" onClick={() => setMobileNavOpen(false)}>Calculator</Link></li>
-            <li><Link href="/#authorization" onClick={() => setMobileNavOpen(false)}>License</Link></li>
-            <li><Link href="/changelog" className="nav-link-active" onClick={() => setMobileNavOpen(false)}>Changelog</Link></li>
-            <li><a href="https://t.me/SyariefAzman" className="nav-cta" target="_blank" rel="noopener noreferrer">Telegram</a></li>
-          </ul>
-          <button className="nav-toggle" onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-            {mobileNavOpen ? "✕" : "☰"}
-          </button>
-        </div>
-      </nav>
+      <SiteNav
+        active="/changelog"
+      />
 
       {/* HERO */}
       <section className="hero catalog-hero" style={{ minHeight: "45vh", paddingTop: "110px", paddingBottom: "30px" }}>
@@ -592,48 +578,7 @@ export default function ChangelogPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div>
-              <h3 className="footer-brand">EA Budak Ubat</h3>
-              <p className="footer-desc">
-                Automated Expert Advisors and trading tool systems for MetaTrader 4 & MetaTrader 5.
-              </p>
-              <div className="social-links" style={{ marginTop: 16 }}>
-                <a href="mailto:support@eabudakubat.com" className="social-link" title="Email">✉️</a>
-                <a href="https://t.me/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Telegram">💬</a>
-                <a href="https://www.twitter.com/SyariefAzman" className="social-link" target="_blank" rel="noopener noreferrer" title="Twitter/X">🐦</a>
-              </div>
-            </div>
-            <div>
-              <h4 className="footer-title">Products</h4>
-              <ul className="footer-links">
-                <li><Link href="/ea-budak-ubat">EA Budak Ubat (v1.67)</Link></li>
-                <li><Link href="/goldmind-ai">GoldMind AI</Link></li>
-                <li><Link href="/bracketblitz">BracketBlitz EA</Link></li>
-                <li><Link href="/mathedge-pro">MathEdge Pro</Link></li>
-                <li><Link href="/aligator-gozaimasu">Aligator Gozaimasu</Link></li>
-                <li><Link href="/encik-moku">Encik Moku</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="footer-title">Resources</h4>
-              <ul className="footer-links">
-                <li><Link href="/guide">System Guide</Link></li>
-                <li><Link href="/ea-budak-ubat#preset-generator">Presets (.set)</Link></li>
-                <li><Link href="/ea-budak-ubat#risk-calculator">Margin Calculator</Link></li>
-                <li><Link href="/changelog">Version Changelog</Link></li>
-                <li><Link href="/#authorization">License Checker</Link></li>
-                <li><a href="https://t.me/EABudakUbat" target="_blank" rel="noopener noreferrer">Telegram Channel</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© {new Date().getFullYear()} EA Budak Ubat. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
