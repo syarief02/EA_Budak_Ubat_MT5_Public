@@ -8,7 +8,7 @@ import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT4%20-%2020261130.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
@@ -41,11 +41,11 @@ const PARAM_TABS = {
     { name: "MaxTrade", def: "99999", desc: "Maximum grid layers per direction" },
   ],
   distance: [
-    { name: "TakeProfit", def: "25.0", desc: "Take profit in pips from weighted average" },
-    { name: "StopLoss", def: "0", desc: "Stop loss in pips from first entry (0 = disabled)" },
-    { name: "minDistance", def: "4", desc: "Minimum pip distance between grid orders" },
-    { name: "distanceIncrement", def: "2.0", desc: "Extra pips added per successive layer" },
-    { name: "maxDistance", def: "100.0", desc: "Maximum distance cap between grid orders" },
+    { name: "TakeProfit_Inp", def: "25.0", desc: "Take profit in pips from weighted average" },
+    { name: "StopLoss_Inp", def: "0", desc: "Stop loss in pips from first entry (0 = disabled)" },
+    { name: "minDistance_Inp", def: "4", desc: "Minimum pip distance between grid orders" },
+    { name: "distanceIncrement_Inp", def: "2.0", desc: "Extra pips added per successive layer" },
+    { name: "maxDistance_Inp", def: "100.0", desc: "Maximum distance cap between grid orders" },
   ],
   time: [
     { name: "StartTime", def: "00:00", desc: "EA active start time (HH:MM, server time)" },
@@ -62,10 +62,10 @@ const PARAM_TABS = {
   ],
   risk: [
     { name: "MaxSpread_Pips", def: "0.0", desc: "Spread filter in pips. EA pauses entries if spread exceeds this (0 = disabled)" },
-    { name: "MaxDrawdownPct", def: "0.0", desc: "Hard equity protection cutoff %. Closes all positions if drawdown reaches this % (0 = disabled)" },
+    { name: "MaxDrawdownPct", def: "0.0", desc: "Drawdown guard %. While account drawdown is at or above this %, the EA opens no new entries or grid layers; open positions are not closed (0 = disabled)" },
     { name: "EnableBreakEven", def: "false", desc: "Automatically lock profits by moving SL once basket exceeds trigger pips" },
     { name: "BreakEven_Trigger", def: "15.0", desc: "Floating profit in pips required to activate Break-Even" },
-    { name: "BreakEven_Lock", def: "2.0", desc: "Pips of profit locked above/below the average entry price once break-even triggers (price gaps and slippage can still fill worse)" },
+    { name: "BreakEven_Lock", def: "1.0", desc: "Pips of profit locked above/below the average entry price once break-even triggers (price gaps and slippage can still fill worse)" },
     { name: "MinMarginLevelToTrade", def: "0.0", desc: "Pauses adding new grid orders if margin level drops below this % (0 = off, 200% in Market Edition)" },
     { name: "EmergencyMarginLevel", def: "0.0", desc: "Emergency basket stop-out protection %. Closes trades cleanly if margin level drops below this % (0 = off, 60% in Market Edition)" },
   ],
@@ -73,7 +73,7 @@ const PARAM_TABS = {
 
 const FAQS = [
   { q: "Can I use this on multiple charts?", a: "Yes, but use a different MagicNumber for each chart to avoid conflicts between EA instances." },
-  { q: "Does the MT5 version trade the same as MT4?", a: "Yes. The core trading logic, grid math, and analysis methods are identical. MT5 v1.63 adds dedicated RSI filter toggling, dynamic order filling mode negotiation, spread guard, and equity protection." },
+  { q: "Does the MT5 version trade the same as MT4?", a: "Yes. Since v1.67 the MT4 and MT5 builds have the same inputs, entry rules, grid maths and protections (RSI filter, spread and drawdown guards, basket break-even, margin safeguards). Only the platform's trading functions differ." },
   { q: "What pairs work best?", a: "Ranging pairs with low spread work best. Avoid highly trending or exotic pairs to minimize drawdown risk." },
   { q: "Can I use this on XAUUSD (Gold)?", a: "Yes! In v1.63 you can now disable the RSI filter specifically for Gold (UseRSIFilter = false). In macro bull trends, gold often stays overbought—disabling RSI allows the bot to continue opening buys without being blocked. Always use a cent account and conservative lot sizing." },
   { q: "What is the minimum capital needed?", a: "A minimum of $100 on a Cent account (or larger capital for Standard) with 0.01 starting lots is recommended. Higher leverage reduces margin requirements per position." },
@@ -81,7 +81,7 @@ const FAQS = [
 ];
 
 const INSTALL_MT4 = [
-  <>Download <code>EA - Budak Ubat v1.62 - MT4 - 20261130.ex4</code></>,
+  <>Download <code>EA - Budak Ubat v1.67 - MT4 - 20261130.ex4</code></>,
   <>Open MT4 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL4/Experts/</code></>,
   "Copy the .ex4 file into this folder",
@@ -188,7 +188,7 @@ export default function EABudakUbatPage() {
               <div className="track-actions">
                 <div className="track-buttons-row">
                   <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.67)</a>
-                  <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4</a>
+                  <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4 (v1.67)</a>
                 </div>
                 <div className="track-buttons-row" style={{ marginTop: "4px" }}>
                   <Link href="/tools#presets" className="btn btn-secondary btn-sm">⚙️ Presets (.set)</Link>

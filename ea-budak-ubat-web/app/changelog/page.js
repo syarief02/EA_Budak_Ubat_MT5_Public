@@ -8,6 +8,45 @@ import SiteFooter from "@/app/components/SiteFooter";
 const CHANGELOG_DATA = [
   {
     version: "v1.67",
+    product: "EA Budak Ubat (MT4)",
+    productSlug: "ea-budak-ubat",
+    date: "November 16, 2026",
+    badge: "MT4 Now Matches MT5 v1.67",
+    badgeType: "major",
+    summary: "The MT4 build is now a line-by-line port of MT5 v1.67: the same inputs, defaults, entry rules, grid maths, take-profit handling and protections. Only the platform's trading functions differ. Released for direct download and as the MT4 Market Edition on MQL5.",
+    highlights: [
+      {
+        type: "feature",
+        tag: "Filters",
+        title: "RSI Filter, Spread Filter and Drawdown Guard on MT4",
+        desc: "UseRSIFilter (H1 RSI ceiling/floor for first entries), MaxSpread_Pips and MaxDrawdownPct now work on MT4 exactly as on MT5. Set UseRSIFilter = false for gold.",
+      },
+      {
+        type: "feature",
+        tag: "Risk",
+        title: "Basket Break-Even and Margin Safeguards",
+        desc: "EnableBreakEven, BreakEven_Trigger and BreakEven_Lock lock the basket above its average price on every tick. EmergencyMarginLevel closes the chart symbol's positions before a broker stop-out (Market Edition: no new layers below 200% margin level, emergency close at 60%).",
+      },
+      {
+        type: "fix",
+        tag: "Inputs",
+        title: "Same Input Names as MT5",
+        desc: "Pip inputs now carry the _Inp suffix (TakeProfit_Inp, minDistance_Inp, ...), so one .set file layout serves both platforms. Re-check your settings after replacing a v1.62 file.",
+      },
+      {
+        type: "feature",
+        tag: "Verification",
+        title: "Indicator Values Checked Against MT5",
+        desc: "Ichimoku and Alligator lines are read at the bar as drawn, matching MT5 values exactly in a bar-by-bar check; backtests on EURUSD and XAUUSD ran with no trade errors.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT4%20-%2020261130.ex4",
+    downloadLabel: "Download MT4 v1.67 .ex4",
+    marketUrl: "https://www.mql5.com/en/market/product/105318",
+    marketLabel: "MT4 on MQL5 Market",
+  },
+  {
+    version: "v1.67",
     product: "EA Budak Ubat (MT5)",
     productSlug: "ea-budak-ubat",
     date: "September 16, 2026",

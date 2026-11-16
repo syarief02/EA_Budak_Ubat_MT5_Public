@@ -65,7 +65,7 @@ $EANames    = @("EA Budak Ubat",     "GoldMind AI",       "BracketBlitz",       
 $EAVersions = @("v1.67",             "v1.00",             "v1.00",              "v1.1",               "v1.06",                     "v1.06")
 
 $MQ4Sources = @(
-    "$MQL4_BASE\EA - Budak Ubat v1.62 - .mq4",
+    "$MQL4_BASE\EA - Budak Ubat v1.67 - .mq4",
     "",
     "$DESKTOP\BracketBlitz-EA\BracketBlitz.mq4",
     "$DESKTOP\MathEdge Pro\MathEdge Pro.mq4",
@@ -97,7 +97,7 @@ $OutputRepos = @(
 $MQ5OutputSubs = @("", "mt5\Experts", "", "MT5", "", "")
 
 $MT4OutNames = @(
-    "EA - Budak Ubat v1.62 - MT4 - $dateCompact.ex4",
+    "EA - Budak Ubat v1.67 - MT4 - $dateCompact.ex4",
     "",
     "BracketBlitz v1.00 - MT4 - $dateCompact.ex4",
     "MathEdge Pro v1.1 - MT4 - $dateCompact.ex4",

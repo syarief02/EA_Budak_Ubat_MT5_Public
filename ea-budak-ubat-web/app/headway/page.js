@@ -7,6 +7,7 @@ import { copyText } from "@/lib/clipboard";
 import { useFlash } from "@/lib/useFlash";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
+import { getEa } from "@/lib/authorizedAccounts";
 
 const HEADWAY_SIGNUP_URL = "https://headway.partners/user/signup?hwp=516d6b";
 const HEADWAY_BONUS_150_URL = "https://headway.partners/landings/en/bonus-150/?hwp=516d6b";
@@ -14,8 +15,7 @@ const PARTNER_CODE = "516d6b";
 const TELEGRAM_ADMIN = "https://t.me/SyariefAzman";
 const TELEGRAM_CHANNEL = "https://t.me/EABudakUbat";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5";
+const { downloadMt4: DOWNLOAD_MT4, downloadMt5: DOWNLOAD_MT5 } = getEa("ea-budak-ubat");
 
 const UNLOCKED_EAS = [
   {

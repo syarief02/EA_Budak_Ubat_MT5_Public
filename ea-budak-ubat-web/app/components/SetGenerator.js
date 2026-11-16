@@ -13,16 +13,15 @@ const EDITABLE_NUMBERS = {
   TakeProfit: { label: "Take Profit" },
   minDistance: { label: "Min Distance" },
   distanceIncrement: { label: "Distance Incr" },
-  MaxDrawdownPct: { label: "Max Drawdown %", max: 100, mt5Only: true },
-  MinMarginLevelToTrade: { label: "Min Margin Level %", mt5Only: true },
-  EmergencyMarginLevel: { label: "Emergency Margin Stop %", mt5Only: true },
+  MaxDrawdownPct: { label: "Max Drawdown %", max: 100 },
+  MinMarginLevelToTrade: { label: "Min Margin Level %" },
+  EmergencyMarginLevel: { label: "Emergency Margin Stop %" },
 };
 const PLAIN_NUMBER = /^\d+(\.\d+)?$/;
 
 // First visible field that would write a bad value, as a message; "" when the file is safe to write.
-function findInvalidField(params, isMt5) {
+function findInvalidField(params) {
   for (const [key, rule] of Object.entries(EDITABLE_NUMBERS)) {
-    if (rule.mt5Only && !isMt5) continue;
     const raw = String(params[key] ?? "").trim();
     if (!PLAIN_NUMBER.test(raw)) return `${rule.label} must be a number like 0.01 (use a dot for decimals).`;
     const n = Number(raw);
@@ -32,65 +31,52 @@ function findInvalidField(params, isMt5) {
   return "";
 }
 
-// Input names exactly as declared in each EA, in declaration order: [preset key, EA input name].
+// Input names exactly as declared in the EA, in declaration order: [preset key, EA input name].
 // MetaTrader silently ignores .set keys that don't match an input, so these must stay in sync with the EA sources.
-// The MT5 EA suffixes its pip inputs with _Inp; MT4 v1.62 has no RSI, risk or margin inputs.
+// Since v1.67 the MT4 and MT5 builds declare the same inputs (pip inputs carry the _Inp suffix on both).
+const V167_INPUTS = [
+  ["Lots", "Lots"],
+  ["GridTrading", "GridTrading"],
+  ["MartingaleMultiplier", "MartingaleMultiplier"],
+  ["MaxLot", "MaxLot"],
+  ["TakeProfit", "TakeProfit_Inp"],
+  ["StopLoss", "StopLoss_Inp"],
+  ["minDistance", "minDistance_Inp"],
+  ["distanceIncrement", "distanceIncrement_Inp"],
+  ["maxDistance", "maxDistance_Inp"],
+  ["MaxTrade", "MaxTrade"],
+  ["StartTime", "StartTime"],
+  ["StopTime", "StopTime"],
+  ["UseRSIFilter", "UseRSIFilter"],
+  ["RSI_TF", "RSI_TF"],
+  ["RSI_Period", "RSI_Period"],
+  ["RSI_BuyCeiling", "RSI_BuyCeiling"],
+  ["RSI_SellFloor", "RSI_SellFloor"],
+  ["MaxSpread_Pips", "MaxSpread_Pips"],
+  ["MaxDrawdownPct", "MaxDrawdownPct"],
+  ["EnableBreakEven", "EnableBreakEven"],
+  ["BreakEven_Trigger", "BreakEven_Trigger"],
+  ["BreakEven_Lock", "BreakEven_Lock"],
+  ["MinMarginLevelToTrade", "MinMarginLevelToTrade"],
+  ["EmergencyMarginLevel", "EmergencyMarginLevel"],
+  ["AutoConfig", "AutoConfig"],
+  ["MagicNumber", "MagicNumber"],
+];
+
 const PLATFORMS = {
   mt5: {
     label: "⚡ MetaTrader 5 (v1.67)",
     ea: "EA Budak Ubat v1.67 (MT5)",
     fileTag: "v1.67_MT5",
     boolValues: ["false", "true"],
-    inputs: [
-      ["Lots", "Lots"],
-      ["GridTrading", "GridTrading"],
-      ["MartingaleMultiplier", "MartingaleMultiplier"],
-      ["MaxLot", "MaxLot"],
-      ["TakeProfit", "TakeProfit_Inp"],
-      ["StopLoss", "StopLoss_Inp"],
-      ["minDistance", "minDistance_Inp"],
-      ["distanceIncrement", "distanceIncrement_Inp"],
-      ["maxDistance", "maxDistance_Inp"],
-      ["MaxTrade", "MaxTrade"],
-      ["StartTime", "StartTime"],
-      ["StopTime", "StopTime"],
-      ["UseRSIFilter", "UseRSIFilter"],
-      ["RSI_TF", "RSI_TF"],
-      ["RSI_Period", "RSI_Period"],
-      ["RSI_BuyCeiling", "RSI_BuyCeiling"],
-      ["RSI_SellFloor", "RSI_SellFloor"],
-      ["MaxSpread_Pips", "MaxSpread_Pips"],
-      ["MaxDrawdownPct", "MaxDrawdownPct"],
-      ["EnableBreakEven", "EnableBreakEven"],
-      ["BreakEven_Trigger", "BreakEven_Trigger"],
-      ["BreakEven_Lock", "BreakEven_Lock"],
-      ["MinMarginLevelToTrade", "MinMarginLevelToTrade"],
-      ["EmergencyMarginLevel", "EmergencyMarginLevel"],
-      ["AutoConfig", "AutoConfig"],
-      ["MagicNumber", "MagicNumber"],
-    ],
+    inputs: V167_INPUTS,
   },
   mt4: {
-    label: "💻 MetaTrader 4 (v1.62)",
-    ea: "EA Budak Ubat v1.62 (MT4)",
-    fileTag: "v1.62_MT4",
+    label: "💻 MetaTrader 4 (v1.67)",
+    ea: "EA Budak Ubat v1.67 (MT4)",
+    fileTag: "v1.67_MT4",
     boolValues: ["0", "1"],
-    inputs: [
-      ["Lots", "Lots"],
-      ["GridTrading", "GridTrading"],
-      ["MartingaleMultiplier", "MartingaleMultiplier"],
-      ["MaxLot", "MaxLot"],
-      ["TakeProfit", "TakeProfit"],
-      ["StopLoss", "StopLoss"],
-      ["minDistance", "minDistance"],
-      ["distanceIncrement", "distanceIncrement"],
-      ["maxDistance", "maxDistance"],
-      ["MaxTrade", "MaxTrade"],
-      ["StartTime", "StartTime"],
-      ["StopTime", "StopTime"],
-      ["AutoConfig", "AutoConfig"],
-      ["MagicNumber", "MagicNumber"],
-    ],
+    inputs: V167_INPUTS,
   },
 };
 
@@ -255,7 +241,7 @@ export default function SetGenerator() {
   const platform = PLATFORMS[platformId];
   const isMt5 = platformId === "mt5";
   const selectedPreset = PRESETS.find((p) => p.id === selectedPresetId) || PRESETS[1];
-  const invalidMessage = findInvalidField(customParams, isMt5);
+  const invalidMessage = findInvalidField(customParams);
   const changedKeys = platform.inputs
     .map(([key]) => key)
     .filter((key) => String(customParams[key]) !== String(selectedPreset.params[key]));
@@ -433,7 +419,7 @@ export default function SetGenerator() {
               className="param-field-input"
             />
           </div>
-          {isMt5 && (
+          {(
             <>
               <div className="param-field">
                 <label>RSI Filter Toggle</label>
@@ -487,15 +473,6 @@ export default function SetGenerator() {
             </>
           )}
         </div>
-
-        {!isMt5 && (
-          <div className="how-to-load-box" style={{ marginBottom: 12 }}>
-            <span className="load-icon">ℹ️</span>
-            <div>
-              <strong>MT4 v1.62 note:</strong> the RSI filter, Break-Even lock, drawdown guard and margin safeguards are MT5-only features, so the MT4 file contains only the grid, lot, time and magic number inputs.
-            </div>
-          </div>
-        )}
 
         {/* HOW TO LOAD IN METATRADER */}
         <div className="how-to-load-box">

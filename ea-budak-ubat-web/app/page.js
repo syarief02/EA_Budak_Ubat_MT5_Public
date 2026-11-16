@@ -19,7 +19,7 @@ const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const TELEGRAM_DEV = "https://t.me/SyariefAzman";
 
 const SPEC_ROWS = [
-  ["Platforms", "MT5 v1.67 · MT4 v1.62"],
+  ["Platforms", "MT5 v1.67 · MT4 v1.67"],
   ["Reference setup", "EURUSD · M5"],
   ["Entry engines", "Candle · SMA20 · Alligator · Ichimoku"],
   ["Grid defaults", "0.01 lots · martingale ×1.3"],
@@ -223,7 +223,7 @@ export default function Home() {
                   <Icon name="download" size={16} /> MT5 v1.67
                 </a>
                 <a href={DOWNLOAD_MT4} className="hp-btn hp-btn-sm hp-btn-ghost">
-                  <Icon name="download" size={16} /> MT4 v1.62
+                  <Icon name="download" size={16} /> MT4 v1.67
                 </a>
                 <a href="#authorization" className="hp-btn hp-btn-sm hp-btn-ghost">
                   <Icon name="key" size={16} /> Check account

@@ -124,6 +124,7 @@ if ($Platform -eq "ALL" -or $Platform -eq "MT5") {
 
 # 2. Update MQ source files across all EAs
 if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
+    Prepend-To-MQSource "$MQL4_BASE\EA - Budak Ubat v1.67 - .mq4"
     Prepend-To-MQSource "$MQL4_BASE\EA - Budak Ubat v1.62 - .mq4"
     Prepend-To-MQSource "$ALIGATOR_REPO\EA - Aligator Gozaimasu v1.06 - .mq4"
     Prepend-To-MQSource "$MQL4_BASE\EA - Aligator Gozaimasu v1.06 (by Budak Ubat) -.mq4"
@@ -198,17 +199,17 @@ Write-Host "--- STEP 2: Compiling EAs ---" -ForegroundColor Cyan
 $dateSuffix = "20261130"
 
 if ($Platform -eq "ALL" -or $Platform -eq "MT4") {
-    # 1. EA Budak Ubat MT4
-    $mq4Path = "$MQL4_BASE\EA - Budak Ubat v1.62 - .mq4"
+    # 1. EA Budak Ubat MT4 v1.67 (same logic as MT5 v1.67; MT4's own whitelist)
+    $mq4Path = "$MQL4_BASE\EA - Budak Ubat v1.67 - .mq4"
     $logPath = "$MQL4_BASE\compile_mql4.log"
-    Write-Host "  Compiling MT4: EA Budak Ubat..." -ForegroundColor DarkCyan
+    Write-Host "  Compiling MT4: EA Budak Ubat v1.67..." -ForegroundColor DarkCyan
     Start-Process -FilePath $MT4_COMPILER -ArgumentList "/compile:`"$mq4Path`" /log:`"$logPath`"" -PassThru -Wait -NoNewWindow
-    $compiledEx4 = "$MQL4_BASE\EA - Budak Ubat v1.62 - .ex4"
+    $compiledEx4 = "$MQL4_BASE\EA - Budak Ubat v1.67 - .ex4"
     if (Test-Path $compiledEx4) {
-        Copy-Item $compiledEx4 "$MQL4_BASE\EA - Budak Ubat v1.62 - MT4 - $dateSuffix.ex4" -Force
-        Copy-Item $compiledEx4 "$PUBLIC_REPO\EA - Budak Ubat v1.62 - MT4 - $dateSuffix.ex4" -Force
-        Copy-Item $compiledEx4 "$DESKTOP_MT4_REPO\EA - Budak Ubat v1.62 - $dateSuffix.ex4" -Force
-        Write-Host "  [OK] EA Budak Ubat MT4 compiled!" -ForegroundColor Green
+        Copy-Item $compiledEx4 "$MQL4_BASE\EA - Budak Ubat v1.67 - MT4 - $dateSuffix.ex4" -Force
+        Copy-Item $compiledEx4 "$PUBLIC_REPO\EA - Budak Ubat v1.67 - MT4 - $dateSuffix.ex4" -Force
+        Copy-Item $compiledEx4 "$DESKTOP_MT4_REPO\EA - Budak Ubat v1.67 - $dateSuffix.ex4" -Force
+        Write-Host "  [OK] EA Budak Ubat MT4 v1.67 compiled!" -ForegroundColor Green
     }
 
     # 2. Aligator MT4

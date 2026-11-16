@@ -54,11 +54,11 @@ export const EA_DATABASE = [
     isOpenSource: false,
     marketUrl: "https://www.mql5.com/en/market/product/195399",
     downloadMt5: `https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%20${TRIAL_FILE_DATE}.ex5`,
-    downloadMt4: `https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
+    downloadMt4: `https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT4%20-%20${TRIAL_FILE_DATE}.ex4`,
     mt4Accounts: MT4_AUTHORIZED_ACCOUNTS,
     mt5Accounts: MT5_AUTHORIZED_ACCOUNTS,
     accounts: ALL_AUTHORIZED_ACCOUNTS,
-    description: `Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until ${TRIAL.expiryDate}. Demo accounts are 100% free and unlimited. The official MT5 Market Edition is also available on MQL5 Market with native MetaQuotes activation.`,
+    description: `Whitelisted live accounts never expire. Unauthorized live accounts run in Trial Mode until ${TRIAL.expiryDate}. Demo accounts are 100% free and unlimited. Official MT4 and MT5 Market Editions (v1.67) are also available on the MQL5 Market with native MetaQuotes activation.`,
   },
   {
     slug: "aligator-gozaimasu",

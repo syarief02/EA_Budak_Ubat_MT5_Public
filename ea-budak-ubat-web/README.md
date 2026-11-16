@@ -78,7 +78,7 @@ Are you trading trending pairs?
 
 ### Downloads
 
-- [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.62%20-%20MT4%20-%2020261130.ex4)
+- [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT4%20-%2020261130.ex4)
 - [⬇️ Download MT5](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5)
 - [🛒 Buy on MQL5 Market (MT5)](https://www.mql5.com/en/market/product/195399)
 - [🛒 Purchase Full Version (MT4 Only)](https://tinyurl.com/eabubuy)
@@ -219,7 +219,7 @@ Visit the [EA Budak Ubat page](https://eabudakubat.com/ea-budak-ubat) on the web
 ### Installation
 
 **MT4:**
-1. Download `EA - Budak Ubat v1.62 - MT4 - 20261130.ex4`
+1. Download `EA - Budak Ubat v1.67 - MT4 - 20261130.ex4`
 2. Open MT4 → `File` → `Open Data Folder`
 3. Navigate to `MQL4/Experts/`
 4. Copy the `.ex4` file into this folder

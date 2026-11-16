@@ -118,7 +118,7 @@ export default function AccountChecker({
               Already Whitelisted by Syarief? Download Your Updated Files:
             </div>
             <div style={{ color: "#94a3b8", fontSize: "0.82rem" }}>
-              Permanent authorization active · Latest v1.67 (MT5) &amp; v1.62 (MT4) builds
+              Permanent authorization active · Latest v1.67 builds for MT5 &amp; MT4
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function AccountChecker({
             className="btn btn-secondary btn-sm"
             style={{ fontWeight: 700, padding: "8px 16px" }}
           >
-            ⬇️ MT4 (.ex4 v1.62)
+            ⬇️ MT4 (.ex4 v1.67)
           </a>
         </div>
       </div>
