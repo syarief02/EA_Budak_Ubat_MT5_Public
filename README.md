@@ -1,6 +1,6 @@
-# EA Budak Ubat v1.67
+# EA Budak Ubat v1.68
 
-### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT4%20-%2020261130.ex4) · [⬇️ Download MT5 (v1.67)](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5) · [🌐 Official Website](https://eabudakubat.com) · [⚙️ Tools Workbench](https://eabudakubat.com/tools) · [💬 Community Hub](https://eabudakubat.com/community) · [🛒 Buy MT5 on MQL5 Market](https://www.mql5.com/en/market/product/195399) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
+### [⬇️ Download MT4](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT4%20-%2020261130.ex4) · [⬇️ Download MT5 (v1.68)](https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT5%20-%2020261130.ex5) · [🌐 Official Website](https://eabudakubat.com) · [⚙️ Tools Workbench](https://eabudakubat.com/tools) · [💬 Community Hub](https://eabudakubat.com/community) · [🛒 Buy MT5 on MQL5 Market](https://www.mql5.com/en/market/product/195399) · [📡 Signal Channel](https://www.mql5.com/en/channels/eabudakubat)
 
 > **Limited Time Price!** The price increases by 10 USD after every 10 purchases.
 
@@ -58,11 +58,11 @@ The EA automatically enters trades based on technical analysis, manages a grid o
 
 ## Platform Support (MT4 & MT5)
 
-EA Budak Ubat is available for **both MetaTrader 4 and MetaTrader 5**. Since v1.67 (16 Nov 2026) the MT4 build is a line-by-line port of MT5 v1.67: the same inputs, defaults, entry rules, grid maths, protections and authorization. Only the platform API calls differ.
+EA Budak Ubat is available for **both MetaTrader 4 and MetaTrader 5**. Since v1.67 (16 Nov 2026) the MT4 build is a line-by-line port of the MT5 build, and every release ships both (now v1.68): the same inputs, defaults, entry rules, grid maths, protections and authorization. Only the platform API calls differ.
 
 | Aspect | MT4 Version | MT5 Version |
 |---|---|---|
-| **File** | `EA - Budak Ubat v1.67 - MT4 - 20261130.ex4` | `EA - Budak Ubat v1.67 - MT5 - 20261130.ex5` |
+| **File** | `EA - Budak Ubat v1.68 - MT4 - 20261130.ex4` | `EA - Budak Ubat v1.68 - MT5 - 20261130.ex5` |
 | **Order System** | `OrderSend()`, `OrderSelect()`, `OrderModify()` | `CTrade` class (`trade.Buy()`, `trade.Sell()`, `trade.PositionModify()`) |
 | **Position Counting** | `OrdersTotal()` with `OrderSelect()` loop | `PositionsTotal()` with `PositionGetTicket()` loop |
 | **Indicators** | Direct `iRSI()`, `iMA()`, `iAlligator()`, `iIchimoku()` calls | Indicator handles + `CopyBuffer()` via `GetIndicatorBuffer()` helper |
@@ -264,7 +264,7 @@ Register through one of the author's broker partner links below. After registeri
 
 [![Watch the video](https://img.youtube.com/vi/leH9PGkLc6Q/hqdefault.jpg)](https://youtu.be/leH9PGkLc6Q)
 
-1. Download `EA - Budak Ubat v1.67 - MT4 - 20261130.ex4`
+1. Download `EA - Budak Ubat v1.68 - MT4 - 20261130.ex4`
 2. Open MT4 → `File` → `Open Data Folder`
 3. Navigate to `MQL4/Experts/`
 4. Copy the `.ex4` file into this folder
@@ -276,7 +276,7 @@ Register through one of the author's broker partner links below. After registeri
 
 ### MT5 Installation
 
-1. Download `EA - Budak Ubat v1.67 - MT5 - 20261130.ex5`
+1. Download `EA - Budak Ubat v1.68 - MT5 - 20261130.ex5`
 2. Open MT5 → `File` → `Open Data Folder`
 3. Navigate to `MQL5/Experts/`
 4. Copy the `.ex5` file into this folder
@@ -371,6 +371,19 @@ A: Technically yes, but gold is very volatile. Use extreme caution, a cent accou
 ---
 
 ## Update Logs
+
+### EA Budak Ubat v1.68
+
+```
+What's new (MT5 and MT4, 16 Nov 2026):
+1. Min Margin Level guard fixed:
+   - MinMarginLevelToTrade was ignored in the downloadable builds, and the Market Editions always used 200%.
+   - Every build now reads the input: a new entry or grid layer is skipped when the margin level after
+     opening it would fall below the setting (0 = off; 200% in the Market Editions).
+2. Emergency margin close follows its input in the Market Editions (was a fixed 60%; default stays 60%).
+3. The MT5 Market Edition start-up log now prints the running version (it printed v1.65).
+With both margin inputs at 0 (the downloadable default), trading is identical to v1.67.
+```
 
 ### EA Budak Ubat v1.67
 
@@ -508,12 +521,15 @@ Initial grid martingale EA with:
 
 | File | Description |
 |---|---|
-| `EA - Budak Ubat v1.67 - MT4 - 20261130.ex4` | MT4 compiled EA |
-| `EA - Budak Ubat v1.67 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.67 Flagship) |
+| `EA - Budak Ubat v1.68 - MT4 - 20261130.ex4` | MT4 compiled EA (v1.68) |
+| `EA - Budak Ubat v1.68 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.68 Flagship) |
+| `EA - Budak Ubat v1.67 - MT4 - 20261130.ex4` | MT4 compiled EA (v1.67) |
+| `EA - Budak Ubat v1.67 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.67 Stable) |
 | `EA - Budak Ubat v1.66 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.66 Stable) |
 | `EA - Budak Ubat v1.65 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.65 Stable) |
 | `EA - Budak Ubat v1.64 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.64 Stable) |
 | `EA - Budak Ubat v1.63 - MT5 - 20261130.ex5` | MT5 compiled EA (v1.63 Stable) |
+| `v1.68 Authorized Account List.txt` | Full authorized account list (v1.68) |
 | `v1.67 Authorized Account List.txt` | Full authorized account list (v1.67) |
 | `v1.66 Authorized Account List.txt` | Full authorized account list (v1.66) |
 | `v1.65 Authorized Account List.txt` | Full authorized account list (v1.65) |

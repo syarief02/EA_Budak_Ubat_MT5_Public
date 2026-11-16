@@ -8,7 +8,7 @@ import SiteFooter from "@/app/components/SiteFooter";
 
 const PRODUCTS = [
     {
-        name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.67",
+        name: "EA Budak Ubat", slug: "ea-budak-ubat", icon: "📊", version: "v1.68",
         strategy: "Grid Martingale", platforms: "MT4, MT5", bestFor: "Ranging pairs, M5",
         license: "MIT + MQL5 Market (MT5)", expiry: "2026-11-30",
         description: "A grid-based martingale EA with 4 analysis methods (Classic Candle, SMA20, Alligator, Ichimoku), volatility-based AutoConfig, hedging support, and configurable time filters. Designed for ranging currency pairs on the M5 timeframe.",

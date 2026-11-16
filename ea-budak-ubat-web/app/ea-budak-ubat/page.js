@@ -8,8 +8,8 @@ import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
 
-const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT4%20-%2020261130.ex4";
-const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.67%20-%20MT5%20-%2020261130.ex5";
+const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT4%20-%2020261130.ex4";
+const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT5%20-%2020261130.ex5";
 const PURCHASE_LINK = "https://tinyurl.com/eabubuy";
 const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const SIGNAL_LINK = "https://www.mql5.com/en/channels/eabudakubat";
@@ -66,8 +66,8 @@ const PARAM_TABS = {
     { name: "EnableBreakEven", def: "false", desc: "Automatically lock profits by moving SL once basket exceeds trigger pips" },
     { name: "BreakEven_Trigger", def: "15.0", desc: "Floating profit in pips required to activate Break-Even" },
     { name: "BreakEven_Lock", def: "1.0", desc: "Pips of profit locked above/below the average entry price once break-even triggers (price gaps and slippage can still fill worse)" },
-    { name: "MinMarginLevelToTrade", def: "0.0", desc: "Pauses adding new grid orders if margin level drops below this % (0 = off, 200% in Market Edition)" },
-    { name: "EmergencyMarginLevel", def: "0.0", desc: "Emergency basket stop-out protection %. Closes trades cleanly if margin level drops below this % (0 = off, 60% in Market Edition)" },
+    { name: "MinMarginLevelToTrade", def: "0.0", desc: "Skips a new entry or grid layer when the margin level after opening it would fall below this %. Fewer layers also means the basket needs a bigger reversal to reach its take profit (0 = off, 200% in Market Edition)" },
+    { name: "EmergencyMarginLevel", def: "0.0", desc: "Closes all positions on the chart's symbol when the account margin level falls to this %, before the broker's stop-out (0 = off, 60% in Market Edition)" },
   ],
 };
 
@@ -81,7 +81,7 @@ const FAQS = [
 ];
 
 const INSTALL_MT4 = [
-  <>Download <code>EA - Budak Ubat v1.67 - MT4 - 20261130.ex4</code></>,
+  <>Download <code>EA - Budak Ubat v1.68 - MT4 - 20261130.ex4</code></>,
   <>Open MT4 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL4/Experts/</code></>,
   "Copy the .ex4 file into this folder",
@@ -93,7 +93,7 @@ const INSTALL_MT4 = [
 ];
 
 const INSTALL_MT5 = [
-  <>Download <code>EA - Budak Ubat v1.67 - MT5 - 20261130.ex5</code></>,
+  <>Download <code>EA - Budak Ubat v1.68 - MT5 - 20261130.ex5</code></>,
   <>Open MT5 → <code>File</code> → <code>Open Data Folder</code></>,
   <>Navigate to <code>MQL5/Experts/</code></>,
   "Copy the .ex5 file into this folder",
@@ -125,7 +125,7 @@ export default function EABudakUbatPage() {
         <div className="hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot"></span>
-            v1.67 — MT4 & MT5
+            v1.68 — MT4 & MT5
           </div>
           <h1>
             <span className="gradient-text">EA Budak Ubat</span>
@@ -187,8 +187,8 @@ export default function EABudakUbatPage() {
 
               <div className="track-actions">
                 <div className="track-buttons-row">
-                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.67)</a>
-                  <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4 (v1.67)</a>
+                  <a href={DOWNLOAD_MT5} className="btn btn-primary">⬇️ Download MT5 (v1.68)</a>
+                  <a href={DOWNLOAD_MT4} className="btn btn-secondary">⬇️ Download MT4 (v1.68)</a>
                 </div>
                 <div className="track-buttons-row" style={{ marginTop: "4px" }}>
                   <Link href="/tools#presets" className="btn btn-secondary btn-sm">⚙️ Presets (.set)</Link>
@@ -210,15 +210,15 @@ export default function EABudakUbatPage() {
         </div>
       </section>
 
-      {/* WHAT'S NEW IN V1.67 BANNER */}
+      {/* WHAT'S NEW IN V1.68 BANNER */}
       <div className="container" style={{ marginTop: "-20px", marginBottom: "30px", position: "relative", zIndex: 10 }}>
         <div className="v163-banner-card animate-in">
           <div className="v163-banner-left">
             <span className="v163-banner-icon">🚀</span>
             <div>
-              <h4 className="v163-banner-title">What's New in v1.67 Release</h4>
+              <h4 className="v163-banner-title">What's New in v1.68</h4>
               <p className="v163-banner-desc">
-                Basket Break-Even StopLoss Conflict Fix, Real-Time Intra-Candle Tick Guard in OnTick(), Parameter Clamp Guard & Core Latency Optimization.
+                Margin safeguards fixed on MT4 and MT5: Min Margin Level now pauses new orders in every build, and the Market Editions follow both margin inputs.
               </p>
             </div>
           </div>

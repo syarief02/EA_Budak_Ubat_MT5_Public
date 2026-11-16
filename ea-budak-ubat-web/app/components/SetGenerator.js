@@ -65,16 +65,16 @@ const V167_INPUTS = [
 
 const PLATFORMS = {
   mt5: {
-    label: "⚡ MetaTrader 5 (v1.67)",
-    ea: "EA Budak Ubat v1.67 (MT5)",
-    fileTag: "v1.67_MT5",
+    label: "⚡ MetaTrader 5 (v1.68)",
+    ea: "EA Budak Ubat v1.68 (MT5)",
+    fileTag: "v1.68_MT5",
     boolValues: ["false", "true"],
     inputs: V167_INPUTS,
   },
   mt4: {
-    label: "💻 MetaTrader 4 (v1.67)",
-    ea: "EA Budak Ubat v1.67 (MT4)",
-    fileTag: "v1.67_MT4",
+    label: "💻 MetaTrader 4 (v1.68)",
+    ea: "EA Budak Ubat v1.68 (MT4)",
+    fileTag: "v1.68_MT4",
     boolValues: ["0", "1"],
     inputs: V167_INPUTS,
   },

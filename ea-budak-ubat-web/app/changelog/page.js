@@ -7,6 +7,66 @@ import SiteFooter from "@/app/components/SiteFooter";
 
 const CHANGELOG_DATA = [
   {
+    version: "v1.68",
+    product: "EA Budak Ubat (MT5)",
+    productSlug: "ea-budak-ubat",
+    date: "November 16, 2026",
+    badge: "Margin Safeguard Fix",
+    badgeType: "minor",
+    summary: "Bug-fix release for MT5 and MT4 together. The two margin safeguard inputs now work as described in every build. With both safeguards off (the default in the downloadable builds), trading is unchanged from v1.67.",
+    highlights: [
+      {
+        type: "fix",
+        tag: "Margin",
+        title: "Min Margin Level to Add Orders Now Works",
+        desc: "MinMarginLevelToTrade was ignored in the downloadable builds, and the Market Editions always used 200%. Every build now reads the input: a new entry or grid layer is skipped when the margin level after opening it would fall below the setting. 0 = off (downloadable default); 200% in the Market Editions.",
+      },
+      {
+        type: "fix",
+        tag: "Margin",
+        title: "Emergency Margin Close Follows Its Input",
+        desc: "The Market Editions closed positions at a fixed 60% margin level. They now use EmergencyMarginLevel (default 60%), the same input the downloadable builds use (default 0 = off).",
+      },
+      {
+        type: "fix",
+        tag: "Logging",
+        title: "Correct Version in the Market Edition Log",
+        desc: "The MT5 Market Edition printed v1.65 at start-up. It now prints the version that is running.",
+      },
+      {
+        type: "feature",
+        tag: "Verification",
+        title: "Backtested Before Release",
+        desc: "MT4 Strategy Tester runs on EURUSD and XAUUSD. With both margin inputs off, v1.68 repeats v1.67 trade for trade. With a 300% minimum, no order took the margin level below 300%, and the emergency close fired at the level set (250%, 150% and 60% in separate runs). No order, modify or close errors in any run.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT5%20-%2020261130.ex5",
+    downloadLabel: "Download MT5 v1.68 .ex5",
+    marketUrl: "https://www.mql5.com/en/market/product/195399",
+    marketLabel: "Buy on MQL5 Market",
+  },
+  {
+    version: "v1.68",
+    product: "EA Budak Ubat (MT4)",
+    productSlug: "ea-budak-ubat",
+    date: "November 16, 2026",
+    badge: "Same Fix as MT5 v1.68",
+    badgeType: "minor",
+    summary: "The MT4 build gets the same margin safeguard fix as MT5 v1.68, so both platforms stay identical: MinMarginLevelToTrade now pauses new orders, and the MT4 Market Edition follows both margin inputs instead of a fixed 200% / 60%.",
+    highlights: [
+      {
+        type: "fix",
+        tag: "Margin",
+        title: "Margin Safeguards Match MT5",
+        desc: "Same rule as MT5: a new entry or grid layer is skipped when the margin level after opening it would fall below MinMarginLevelToTrade, and EmergencyMarginLevel sets the emergency close level.",
+      },
+    ],
+    downloadUrl: "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT4%20-%2020261130.ex4",
+    downloadLabel: "Download MT4 v1.68 .ex4",
+    marketUrl: "https://www.mql5.com/en/market/product/105318",
+    marketLabel: "MT4 on MQL5 Market",
+  },
+  {
     version: "v1.67",
     product: "EA Budak Ubat (MT4)",
     productSlug: "ea-budak-ubat",

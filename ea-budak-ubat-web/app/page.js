@@ -19,7 +19,7 @@ const MQL5_MARKET_LINK = "https://www.mql5.com/en/market/product/195399";
 const TELEGRAM_DEV = "https://t.me/SyariefAzman";
 
 const SPEC_ROWS = [
-  ["Platforms", "MT5 v1.67 · MT4 v1.67"],
+  ["Platforms", "MT5 v1.68 · MT4 v1.68"],
   ["Reference setup", "EURUSD · M5"],
   ["Entry engines", "Candle · SMA20 · Alligator · Ichimoku"],
   ["Grid defaults", "0.01 lots · martingale ×1.3"],
@@ -174,7 +174,7 @@ export default function Home() {
                 <span className="hp-hero-accent"> licensed free through our partner brokers.</span>
               </h1>
               <p className="hp-lead">
-                EA Budak Ubat v1.67 combines four entry engines, volatility-based auto-configuration and tick-level
+                EA Budak Ubat v1.68 combines four entry engines, volatility-based auto-configuration and tick-level
                 basket break-even. Open and fund a live account with a partner broker and your account is whitelisted
                 permanently, with no license fee.
               </p>
@@ -195,7 +195,7 @@ export default function Home() {
             <aside className="hp-spec" aria-label="EA Budak Ubat at a glance">
               <div className="hp-spec-head">
                 <span>EA Budak Ubat</span>
-                <span className="hp-pill">v1.67</span>
+                <span className="hp-pill">v1.68</span>
               </div>
               <dl>
                 {SPEC_ROWS.map(([k, v]) => (
@@ -220,10 +220,10 @@ export default function Home() {
               </div>
               <div className="hp-client-actions">
                 <a href={DOWNLOAD_MT5} className="hp-btn hp-btn-sm hp-btn-primary">
-                  <Icon name="download" size={16} /> MT5 v1.67
+                  <Icon name="download" size={16} /> MT5 v1.68
                 </a>
                 <a href={DOWNLOAD_MT4} className="hp-btn hp-btn-sm hp-btn-ghost">
-                  <Icon name="download" size={16} /> MT4 v1.67
+                  <Icon name="download" size={16} /> MT4 v1.68
                 </a>
                 <a href="#authorization" className="hp-btn hp-btn-sm hp-btn-ghost">
                   <Icon name="key" size={16} /> Check account
@@ -339,7 +339,7 @@ export default function Home() {
               <Link href="/ea-budak-ubat" className="hp-btn hp-btn-ghost">
                 Full specification and parameters <Icon name="arrowRight" size={18} />
               </Link>
-              <Link href="/changelog" className="hp-link">What&rsquo;s new in v1.67</Link>
+              <Link href="/changelog" className="hp-link">What&rsquo;s new in v1.68</Link>
             </div>
           </div>
         </section>
@@ -477,7 +477,7 @@ export default function Home() {
               <p>
                 Syarief comes from analytical chemistry and laboratory quality control, and brought that discipline
                 to MQL development. He released EA Budak Ubat v1.27 on MT4 in 2014 and has maintained it ever since, through
-                the v1.51 forum era, the pure-MQL5 rewrite for MQL5 Market in 2023 and today&rsquo;s v1.67.
+                the v1.51 forum era, the pure-MQL5 rewrite for MQL5 Market in 2023 and today&rsquo;s v1.68.
               </p>
               <p>
                 In practice that means calibrating parameters, validating them against data, and stating the risks

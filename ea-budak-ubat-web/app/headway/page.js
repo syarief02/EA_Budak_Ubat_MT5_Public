@@ -20,7 +20,7 @@ const { downloadMt4: DOWNLOAD_MT4, downloadMt5: DOWNLOAD_MT5 } = getEa("ea-budak
 const UNLOCKED_EAS = [
   {
     icon: "📊",
-    name: "EA Budak Ubat v1.67",
+    name: "EA Budak Ubat v1.68",
     platforms: ["MT4", "MT5"],
     desc: "Robot grid martingale terunggul dengan 4 kaedah analisis (Ichimoku, Alligator, Candle & SMA20) serta AutoConfig berasaskan volatiliti.",
     badge: "Most Popular",
@@ -331,7 +331,7 @@ export default function HeadwayLandingPage() {
               textAlign: "center",
             }}
           >
-            <h4 style={{ marginBottom: "12px", fontSize: "1.1rem" }}>Muat Turun Fail EA Budak Ubat v1.67:</h4>
+            <h4 style={{ marginBottom: "12px", fontSize: "1.1rem" }}>Muat Turun Fail EA Budak Ubat v1.68:</h4>
             <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
               <a href={DOWNLOAD_MT4} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                 📥 Download MT4 (.ex4)

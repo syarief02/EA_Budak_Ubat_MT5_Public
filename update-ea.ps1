@@ -62,10 +62,10 @@ $WEB_APP   = "$DESKTOP\ea bu mt5 public\ea-budak-ubat-web\app"
 #          output repo, MQ5 sub-dir, MT4 output name, MT5 output name, web slug
 
 $EANames    = @("EA Budak Ubat",     "GoldMind AI",       "BracketBlitz",       "MathEdge Pro",       "Aligator Gozaimasu",       "Encik Moku")
-$EAVersions = @("v1.67",             "v1.00",             "v1.00",              "v1.1",               "v1.06",                     "v1.06")
+$EAVersions = @("v1.68",             "v1.00",             "v1.00",              "v1.1",               "v1.06",                     "v1.06")
 
 $MQ4Sources = @(
-    "$MQL4_BASE\EA - Budak Ubat v1.67 - .mq4",
+    "$MQL4_BASE\EA - Budak Ubat v1.68 - .mq4",
     "",
     "$DESKTOP\BracketBlitz-EA\BracketBlitz.mq4",
     "$DESKTOP\MathEdge Pro\MathEdge Pro.mq4",
@@ -74,7 +74,7 @@ $MQ4Sources = @(
 )
 
 $MQ5Sources = @(
-    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.67 - MT5 - .mq5",
+    "$MQL5_BASE\EA Budak Ubat\EA - Budak Ubat v1.68 - MT5 - .mq5",
     "$MQL5_BASE\GoldMind_AI.mq5",
     "$DESKTOP\BracketBlitz-EA\BracketBlitz.mq5",
     "$DESKTOP\MathEdge Pro\MT5\MathEdge Pro.mq5",
@@ -97,7 +97,7 @@ $OutputRepos = @(
 $MQ5OutputSubs = @("", "mt5\Experts", "", "MT5", "", "")
 
 $MT4OutNames = @(
-    "EA - Budak Ubat v1.67 - MT4 - $dateCompact.ex4",
+    "EA - Budak Ubat v1.68 - MT4 - $dateCompact.ex4",
     "",
     "BracketBlitz v1.00 - MT4 - $dateCompact.ex4",
     "MathEdge Pro v1.1 - MT4 - $dateCompact.ex4",
@@ -106,7 +106,7 @@ $MT4OutNames = @(
 )
 
 $MT5OutNames = @(
-    "EA - Budak Ubat v1.67 - MT5 - $dateCompact.ex5",
+    "EA - Budak Ubat v1.68 - MT5 - $dateCompact.ex5",
     "GoldMind AI v1.01 - MT5 - $dateCompact.ex5",
     "BracketBlitz v1.00 - MT5 - $dateCompact.ex5",
     "MathEdge Pro v1.1 - MT5 - $dateCompact.ex5",

@@ -54,7 +54,7 @@ This document guides AI coding assistants to execute repetitive tasks (authorizi
 > - **NEVER tell a customer they can reuse / keep using a file you sent them earlier.** Any binary built before their account was whitelisted will reject it and show:
 >   `EXPIRED. Account <number> is Unauthorized. Use Demo account to access Trials Mode.` — even though the account IS authorized. (This exact mistake happened once: a customer was told "boleh guna fail yang saya hantar sebelum ni" and the old build kept showing Unauthorized/Expired.)
 > - **After authorizing, you MUST give the customer the freshly compiled binary**, by EITHER:
->   1. **Attaching the latest `.ex5` / `.ex4` directly in the chat** — from the public distribution folder, e.g. `EA - Budak Ubat v1.67 - MT5 - .ex5` in the repo root (this is the surest method), **OR**
+>   1. **Attaching the latest `.ex5` / `.ex4` directly in the chat** — from the public distribution folder, e.g. `EA - Budak Ubat v1.68 - MT5 - .ex5` in the repo root (this is the surest method), **OR**
 >   2. Telling them to **re-download the latest** from `https://eabudakubat.com` — valid ONLY after the script's Vercel deploy has finished.
 > - Always tell them to **delete/replace the old file** (`Buang fail lama dulu`) and restart MT4/MT5, otherwise the stale binary stays loaded.
 > - The permanent-license wording from the License & Expiry rule still applies: the fresh file gives them a permanent, no-expiry license on their authorized accounts.
