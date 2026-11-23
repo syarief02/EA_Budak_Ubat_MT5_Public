@@ -51,7 +51,7 @@ const PRODUCTS = [
             { q: "Can I use on multiple charts?", a: "Yes — use a different MagicNumber per chart." },
             { q: "MT4 vs MT5 difference?", a: "Identical trading logic, only underlying API differs. MT5 v1.63 includes dedicated RSI filter toggle, dynamic filling mode negotiation, spread guard, and break-even." },
             { q: "Best pairs?", a: "Ranging pairs with low spread. Avoid trending/exotic pairs." },
-            { q: "Can I use on XAUUSD (Gold)?", a: "Yes! In v1.63 you can now disable the RSI filter specifically for Gold (UseRSIFilter = false) to prevent blocking buy entries in macro bull trends. Always use conservative lot sizing on a Cent account." },
+            { q: "Can I use on XAUUSD (Gold)?", a: "Yes, with care: gold trends further and faster than EURUSD, so the risk is much higher. Use the Gold preset in the Set Generator at eabudakubat.com/tools (RSI filter off, distances scaled for gold, MaxTrade 6, drawdown and margin guards on). On gold one pip in the EA's inputs is 0.01 in price, so a StopLoss of 50 is only $0.50; scale TP, StopLoss and grid distances to match. Use a Cent account with 0.01 lots and test on demo first." },
             { q: "How to get authorized?", a: "Register through a broker partner link, then send the broker, the platform (MT4 or MT5) and the account number to @SyariefAzman on Telegram, or use the license request form at eabudakubat.com/brokers." },
         ],
     },
