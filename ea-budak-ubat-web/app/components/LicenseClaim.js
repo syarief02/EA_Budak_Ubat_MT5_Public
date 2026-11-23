@@ -20,9 +20,12 @@ export default function LicenseClaim() {
   const [platform, setPlatform] = useState("");
   const [account, setAccount] = useState("");
   const [copied, flashCopied] = useFlash(2500);
+  const [transferCopied, flashTransferCopied] = useFlash(2500); // { ok } while the button label shows
 
   const accountOk = /^\d{5,15}$/.test(account);
   const ready = Boolean(broker && platform && accountOk);
+  const partnerCode = PARTNER_BROKERS.find((b) => b.name === broker)?.id;
+  const transferReady = Boolean(partnerCode && accountOk);
 
   const message = [
     "Hello, I would like to request the free EA Budak Ubat license.",
@@ -40,6 +43,17 @@ export default function LicenseClaim() {
 
   const copyOnly = async () => {
     flashCopied({ ok: await copyText(message), telegram: false });
+  };
+
+  // For accounts opened before (or without) the partner link: the broker has to move the account under our
+  // partner code before it qualifies, so this is the message the client sends to the broker's support.
+  const transferMessage = [
+    `Hello, please move my trading account ${account || "-"}${platform ? ` (${platform})` : ""} under the partner (IB) code ${partnerCode || "-"}.`,
+    "Please let me know once it is done. Thank you.",
+  ].join("\n");
+
+  const copyTransfer = async () => {
+    flashTransferCopied({ ok: await copyText(transferMessage) });
   };
 
   const mailHref =
@@ -119,6 +133,21 @@ export default function LicenseClaim() {
               : "Copying is blocked in this browser. Please select the message above and copy it by hand."
             : "We reply with your licensed file once the account is confirmed under our partner link."}
       </p>
+
+      <details className="hp-claim-transfer">
+        <summary>Opened this account without our link?</summary>
+        <p>
+          Only accounts under our partner code qualify. Ask {broker ? `${broker}'s` : "your broker's"} support (live
+          chat, or the support email in your client area) to move the account under our code. Copy the request below
+          and send it to them. The broker decides; once they confirm the move, send the license request above.
+        </p>
+        <pre className="hp-claim-preview" aria-label="Transfer request preview">{transferMessage}</pre>
+        <div className="hp-actions hp-actions-left">
+          <button type="button" className="hp-btn hp-btn-ghost" disabled={!transferReady} onClick={copyTransfer}>
+            {transferCopied ? (transferCopied.ok ? "Request copied" : "Copy blocked, select it by hand") : "Copy transfer request"}
+          </button>
+        </div>
+      </details>
     </div>
   );
 }

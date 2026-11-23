@@ -1690,6 +1690,59 @@ a.hp-card:hover {
   font-size: 0.88rem;
 }
 
+.hp-claim-transfer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hp-border);
+}
+
+.hp-claim-transfer summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  color: var(--hp-text);
+  font-weight: 600;
+  list-style: none;
+}
+
+.hp-claim-transfer summary::-webkit-details-marker {
+  display: none;
+}
+
+.hp-claim-transfer summary::after {
+  content: "+";
+  margin-left: auto;
+  padding-left: 12px;
+  color: var(--hp-muted);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.hp-claim-transfer[open] summary::after {
+  content: "\2212";
+}
+
+.hp-claim-transfer summary:focus-visible {
+  outline: 2px solid var(--hp-accent);
+  outline-offset: 2px;
+}
+
+.hp-claim-transfer p {
+  margin: 4px 0 0;
+  color: var(--hp-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.hp-claim-transfer .hp-claim-preview {
+  margin-top: 14px;
+}
+
+.hp-claim-transfer .hp-actions {
+  margin-top: 14px;
+}
+
 .hp-claim-faq {
   margin-top: 20px;
 }

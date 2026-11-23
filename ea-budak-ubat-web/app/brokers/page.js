@@ -124,7 +124,8 @@ export default function BrokersPage() {
               <p>
                 Only accounts registered under our partner link qualify. If yours was opened another way, ask the
                 broker&rsquo;s support to move it to our partner code (shown on the broker&rsquo;s card above; the
-                broker decides), or open a new account through the link. Once it is under our code, request your
+                broker decides), or open a new account through the link. &ldquo;Opened this account without our
+                link?&rdquo; in the form above writes that request for you. Once it is under our code, request your
                 license here.
               </p>
               <Link href="/#authorization" className="hp-link">
