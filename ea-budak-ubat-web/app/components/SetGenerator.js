@@ -343,6 +343,18 @@ export default function SetGenerator() {
         ))}
       </div>
 
+      {/* CAPITAL GUIDE: the question clients ask most after "which preset?" */}
+      <div className="how-to-load-box set-capital-note">
+        <div>
+          <strong>Capital guide (starting lot 0.01):</strong> about USD 100 per pair on a Cent account.
+          On a Standard account the same lot carries 100 times the risk, so the like-for-like figure is
+          about USD 10,000 per pair. With less capital on Standard, set a StopLoss, MaxTrade and
+          EmergencyMarginLevel and run one pair only. The Gold and Cent Scalper presets are meant for
+          Cent accounts. Test on demo first and check your own numbers in the{" "}
+          <a href="#calculator">risk calculator</a>.
+        </div>
+      </div>
+
       {/* PRESET PARAMETERS PREVIEW & CUSTOMIZER */}
       <div className="preset-preview-section">
         <div className="preset-preview-header">

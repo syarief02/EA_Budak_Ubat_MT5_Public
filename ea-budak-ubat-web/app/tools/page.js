@@ -15,13 +15,17 @@ export default function ToolsPage() {
   const [activeTab, setActiveTab] = useState("simulator");
 
   useEffect(() => {
-    // Check URL hash if specified (e.g. #calculator, #presets, #simulator)
-    if (typeof window !== "undefined") {
+    // Open the tab named in the URL hash (e.g. #calculator, #presets, #simulator),
+    // on load and when an in-page link changes the hash (the Set Generator links to #calculator).
+    const applyHash = () => {
       const hash = window.location.hash.replace("#", "");
       if (hash === "calculator" || hash === "presets" || hash === "simulator") {
         setActiveTab(hash);
       }
-    }
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
   const handleTabChange = (tab) => {

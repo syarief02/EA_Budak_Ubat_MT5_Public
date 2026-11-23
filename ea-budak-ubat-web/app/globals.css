@@ -4889,6 +4889,16 @@ section {
   font-size: 1.4rem;
 }
 
+.set-capital-note {
+  margin: -10px 0 24px;
+  line-height: 1.6;
+}
+
+.set-capital-note a {
+  color: #38bdf8;
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .grid-calc-card,
   .set-generator-card {
