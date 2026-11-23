@@ -546,9 +546,9 @@ export default function AccountChecker({
           </div>
           <div className="step-box">
             <span className="step-number">3</span>
-            <h5>Send Account Number</h5>
+            <h5>Request Your License</h5>
             <p>
-              PM your account number to{" "}
+              Send the broker, the platform (MT4 or MT5) and your account number to{" "}
               <a
                 href="https://t.me/SyariefAzman"
                 target="_blank"
@@ -557,7 +557,7 @@ export default function AccountChecker({
               >
                 @SyariefAzman on Telegram
               </a>{" "}
-              for instant whitelist update.
+              or use the <a href="/brokers#claim" className="tg-link-highlight">license request form</a>.
             </p>
           </div>
         </div>

@@ -77,7 +77,7 @@ const FAQS = [
   { q: "What pairs work best?", a: "Ranging pairs with low spread work best. Avoid highly trending or exotic pairs to minimize drawdown risk." },
   { q: "Can I use this on XAUUSD (Gold)?", a: "Yes! In v1.63 you can now disable the RSI filter specifically for Gold (UseRSIFilter = false). In macro bull trends, gold often stays overbought—disabling RSI allows the bot to continue opening buys without being blocked. Always use a cent account and conservative lot sizing." },
   { q: "What is the minimum capital needed?", a: "A minimum of $100 on a Cent account (or larger capital for Standard) with 0.01 starting lots is recommended. Higher leverage reduces margin requirements per position." },
-  { q: "How do I get authorized?", a: "Register through one of the broker partner links on this page, then send your trading account number to @SyariefAzman on Telegram." },
+  { q: "How do I get authorized?", a: "Register through one of the broker partner links on this page, then send the broker, the platform (MT4 or MT5) and your trading account number to @SyariefAzman on Telegram, or use the license request form at eabudakubat.com/brokers." },
 ];
 
 const INSTALL_MT4 = [

@@ -35,7 +35,7 @@ const STEPS = [
   },
   {
     title: `Deposit ${FREE_LICENSE_MIN_DEPOSIT} and send your account number`,
-    desc: "Fund at least $100 USD on any account type (Cent is recommended under $1,000), then send the account number to @SyariefAzman on Telegram.",
+    desc: "Fund at least $100 USD on any account type (Cent is recommended under $1,000), then send the broker, the platform (MT4 or MT5) and the account number to @SyariefAzman on Telegram.",
   },
   {
     title: "Download and run",
@@ -98,7 +98,11 @@ const HOME_FAQS = [
   },
   {
     q: "How do I get my account whitelisted?",
-    a: "Register with a partner broker using the links on this page, deposit at least $100 USD (any account type), then send your trading account number to @SyariefAzman on Telegram. Once it is added, the license checker on this page will show your account as authorized.",
+    a: "Register with a partner broker using the links on this page, deposit at least $100 USD (any account type), then send the broker name, the platform (MT4 or MT5) and your trading account number to @SyariefAzman on Telegram, or use the license request form on the Partner brokers page. Once it is added, the license checker on this page will show your account as authorized.",
+  },
+  {
+    q: "I already have an account with one of your partner brokers. Does it qualify?",
+    a: "Only accounts registered under our partner link qualify. If your account was opened another way, ask the broker's support to move it to our partner code (listed on the Partner brokers page; the broker decides), or open a new account through our link. Once it is under our code, send us the details and we will whitelist it.",
   },
   {
     q: "How much capital do I need?",

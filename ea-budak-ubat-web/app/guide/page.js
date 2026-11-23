@@ -52,7 +52,7 @@ const PRODUCTS = [
             { q: "MT4 vs MT5 difference?", a: "Identical trading logic, only underlying API differs. MT5 v1.63 includes dedicated RSI filter toggle, dynamic filling mode negotiation, spread guard, and break-even." },
             { q: "Best pairs?", a: "Ranging pairs with low spread. Avoid trending/exotic pairs." },
             { q: "Can I use on XAUUSD (Gold)?", a: "Yes! In v1.63 you can now disable the RSI filter specifically for Gold (UseRSIFilter = false) to prevent blocking buy entries in macro bull trends. Always use conservative lot sizing on a Cent account." },
-            { q: "How to get authorized?", a: "Register through a broker partner link, send account number to @SyariefAzman on Telegram." },
+            { q: "How to get authorized?", a: "Register through a broker partner link, then send the broker, the platform (MT4 or MT5) and the account number to @SyariefAzman on Telegram, or use the license request form at eabudakubat.com/brokers." },
         ],
     },
     {

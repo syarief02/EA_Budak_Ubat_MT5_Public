@@ -9,6 +9,7 @@ import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
 import Icon from "@/app/components/Icon";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
+import LicenseClaim from "@/app/components/LicenseClaim";
 import { PARTNER_BROKERS, CLIENT_PERKS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
 
 export default function BrokersPage() {
@@ -31,9 +32,8 @@ export default function BrokersPage() {
             <h1>Partner brokers</h1>
             <p className="hp-lead">
               Open a live MT4 or MT5 account with any broker below, deposit at least {FREE_LICENSE_MIN_DEPOSIT} USD
-              (any account type) and send the account number to{" "}
-              <a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer">@SyariefAzman</a>. Your
-              account is then whitelisted for EA Budak Ubat permanently.
+              (any account type), then <a href="#claim">request your license</a> with the broker name, the platform
+              (MT4 or MT5) and the account number. Your account is then whitelisted for EA Budak Ubat permanently.
             </p>
             <p className="hp-disclosure hp-disclosure-left">
               Disclosure: these are partner (IB/affiliate) links. The broker pays us a commission based on your trading,
@@ -107,24 +107,29 @@ export default function BrokersPage() {
           </div>
         </section>
 
-        <section className="hp-section hp-section-tight">
-          <div className="container">
-            <div className="hp-cta">
-              <div>
-                <h2>Already opened your account?</h2>
-                <p>
-                  Send your account number on Telegram. Once it is whitelisted, download the current build: files from
-                  before your approval will not recognise the account.
-                </p>
-              </div>
-              <div className="hp-actions">
-                <a href="https://t.me/SyariefAzman" target="_blank" rel="noopener noreferrer" className="hp-btn hp-btn-primary">
-                  <Icon name="message" size={18} /> Message @SyariefAzman
-                </a>
-                <Link href="/#authorization" className="hp-btn hp-btn-ghost">
-                  <Icon name="key" size={18} /> Check my license
-                </Link>
-              </div>
+        <section className="hp-section hp-section-tight" id="claim">
+          <div className="container hp-narrow">
+            <div className="hp-head hp-head-center">
+              <p className="hp-eyebrow">Already opened your account?</p>
+              <h2>Request your free license</h2>
+              <p className="hp-head-sub">
+                Tell us the broker, the platform and the account number in one message, so we can whitelist the right
+                build straight away. Use the file we send you (or the current download) and delete any older copy:
+                files from before your approval will not recognise the account.
+              </p>
+            </div>
+            <LicenseClaim />
+            <div className="hp-card hp-claim-faq">
+              <h3>Already have an account with one of these brokers?</h3>
+              <p>
+                Only accounts registered under our partner link qualify. If yours was opened another way, ask the
+                broker&rsquo;s support to move it to our partner code (shown on the broker&rsquo;s card above; the
+                broker decides), or open a new account through the link. Once it is under our code, request your
+                license here.
+              </p>
+              <Link href="/#authorization" className="hp-link">
+                Check whether your account is already whitelisted <Icon name="arrowRight" size={16} />
+              </Link>
             </div>
           </div>
         </section>
