@@ -9,7 +9,7 @@ import SiteFooter from "@/app/components/SiteFooter";
 import Icon from "@/app/components/Icon";
 import AccountChecker from "@/app/components/AccountChecker";
 import RotatingAdBanner from "@/app/components/RotatingAdBanner";
-import { AUTHORIZED_ACCOUNTS_DISPLAY, getEa } from "@/lib/authorizedAccounts";
+import { AUTHORIZED_ACCOUNTS_DISPLAY, getEa, TRIAL_FILE_DATE } from "@/lib/authorizedAccounts";
 import { FEATURED_BROKERS, PARTNER_BROKERS, FREE_LICENSE_MIN_DEPOSIT } from "@/lib/partnerBrokers";
 import { PRODUCT_TYPES, getProductType, productPath } from "@/lib/productTypes";
 
@@ -115,6 +115,10 @@ const HOME_FAQS = [
   {
     q: "Do I need to download a new file after I am whitelisted?",
     a: "Yes, once. The whitelist is built into the EA file, so a file you downloaded before your account was approved will still show it as unauthorized. Delete the old file, download the current MT5 or MT4 build from this page and restart MetaTrader. After that your license is permanent with no expiry; later builds are optional updates with the newest fixes.",
+  },
+  {
+    q: "Why does the download file name have a date?",
+    a: `The date in the file name (currently ${TRIAL_FILE_DATE}) is only the trial cutoff for live accounts that are not whitelisted yet. Demo accounts and whitelisted accounts never expire, whatever date the file shows. The trial date moves forward with each monthly build, so an unregistered live account can keep testing by downloading the current file.`,
   },
   {
     q: "I can't switch brokers. Can I still use it?",

@@ -7,6 +7,7 @@ import PriceTierUrgency from "@/app/components/PriceTierUrgency";
 import MQL5TrustBadge from "@/app/components/MQL5TrustBadge";
 import SiteNav from "@/app/components/SiteNav";
 import SiteFooter from "@/app/components/SiteFooter";
+import { TRIAL_FILE_DATE } from "@/lib/authorizedAccounts";
 
 const DOWNLOAD_MT4 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT4%20-%2020261130.ex4";
 const DOWNLOAD_MT5 = "https://github.com/syarief02/EA_Budak_Ubat_MT5_Public/raw/main/EA%20-%20Budak%20Ubat%20v1.68%20-%20MT5%20-%2020261130.ex5";
@@ -78,6 +79,7 @@ const FAQS = [
   { q: "Can I use this on XAUUSD (Gold)?", a: "Yes! In v1.63 you can now disable the RSI filter specifically for Gold (UseRSIFilter = false). In macro bull trends, gold often stays overbought—disabling RSI allows the bot to continue opening buys without being blocked. Always use a cent account and conservative lot sizing." },
   { q: "What is the minimum capital needed?", a: "A minimum of $100 on a Cent account (or larger capital for Standard) with 0.01 starting lots is recommended. Higher leverage reduces margin requirements per position." },
   { q: "How do I get authorized?", a: "Register through one of the broker partner links on this page, then send the broker, the platform (MT4 or MT5) and your trading account number to @SyariefAzman on Telegram, or use the license request form at eabudakubat.com/brokers." },
+  { q: "Why is there a date in the file name?", a: `The date (currently ${TRIAL_FILE_DATE}) is only the trial cutoff for live accounts that are not whitelisted yet. Demo accounts and whitelisted accounts never expire. The trial date moves forward with each monthly build, so unregistered live accounts can keep testing by downloading the current file.` },
 ];
 
 const INSTALL_MT4 = [
