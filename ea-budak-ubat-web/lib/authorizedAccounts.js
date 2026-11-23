@@ -264,7 +264,7 @@ export function checkAccount(accountNumber, filterSlug = "all", platformFilter =
         message: detailMsg,
       };
     } else {
-      // The site's cutoff can lag the calendar if the monthly build is late; say so instead of "active".
+      // The trial is extended irregularly, so the cutoff can lag the calendar; say so instead of "active".
       const trialEnded = today > ea.expiryDate;
       return {
         slug: ea.slug,
@@ -288,7 +288,7 @@ export function checkAccount(accountNumber, filterSlug = "all", platformFilter =
           : "Trial Mode (Expires " + ea.expiryDate + ")",
         badgeClass: "status-trial",
         message: trialEnded
-          ? "The trial in the current build ended on " + ea.expiryDate + ". A new monthly build with a fresh trial is published soon; register under a partner broker for permanent whitelist authorization, or use a demo account meanwhile."
+          ? "The trial in the current build ended on " + ea.expiryDate + ". New builds with a later trial date are published from time to time, not on a fixed schedule. For uninterrupted use, register under a partner broker for a permanent license, or use a demo account meanwhile."
           : "Your account is running in Trial Mode (active until " + ea.expiryDate + "). Register under a partner broker for permanent whitelist authorization.",
       };
     }

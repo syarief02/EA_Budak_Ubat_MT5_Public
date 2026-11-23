@@ -118,7 +118,7 @@ const HOME_FAQS = [
   },
   {
     q: "Why does the download file name have a date?",
-    a: `The date in the file name (currently ${TRIAL_FILE_DATE}) is only the trial cutoff for live accounts that are not whitelisted yet. Demo accounts and whitelisted accounts never expire, whatever date the file shows. The trial date moves forward with each monthly build, so an unregistered live account can keep testing by downloading the current file.`,
+    a: `The date in the file name (currently ${TRIAL_FILE_DATE}) is only the trial cutoff for live accounts that are not whitelisted yet. Demo accounts and whitelisted accounts never expire, whatever date the file shows. New builds with a later trial date are published from time to time, not on a fixed schedule, so the trial can lapse for a while between builds. For uninterrupted use on a live account, get the free permanent license through a partner broker, or use the MQL5 Market version.`,
   },
   {
     q: "I can't switch brokers. Can I still use it?",
