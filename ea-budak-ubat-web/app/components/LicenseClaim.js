@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Icon from "@/app/components/Icon";
 import { copyText } from "@/lib/clipboard";
+import { event } from "@/lib/fpixel";
 import { useFlash } from "@/lib/useFlash";
 import { PARTNER_BROKERS } from "@/lib/partnerBrokers";
 
@@ -38,6 +39,9 @@ export default function LicenseClaim() {
   const copyAndOpenTelegram = async () => {
     const ok = await copyText(message);
     flashCopied({ ok, telegram: true });
+    // A button, not a t.me link, so the pixel's global link tracking doesn't see it: report the Contact here.
+    // ("Send by email" is a mailto link and is already counted there.)
+    event("Contact", { contact_channel: "telegram" });
     window.open(TELEGRAM_URL, "_blank", "noopener,noreferrer");
   };
 
