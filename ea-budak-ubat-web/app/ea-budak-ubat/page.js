@@ -93,6 +93,7 @@ const INSTALL_MT4 = [
   <>In the EA properties, go to <code>Common</code> tab → check <strong>Allow live trading</strong></>,
   <>Configure parameters in the <code>Inputs</code> tab</>,
   "Click OK — the EA will display its status on the chart",
+  <>Make sure the <strong>AutoTrading</strong> button in the top toolbar is green. Messages and errors appear in the <code>Experts</code> tab (Ctrl+T)</>,
 ];
 
 const INSTALL_MT5 = [
@@ -105,6 +106,7 @@ const INSTALL_MT5 = [
   <>In the EA properties, go to <code>Common</code> tab → check <strong>Allow Algo Trading</strong></>,
   <>Configure parameters in the <code>Inputs</code> tab</>,
   "Click OK — the EA will display its status on the chart",
+  <>Make sure the <strong>Algo Trading</strong> button in the top toolbar is green. Messages and errors appear in the <code>Experts</code> tab of the Toolbox (Ctrl+T). An MT4 account cannot log in to MT5, so use an MT5 demo or live account</>,
 ];
 
 export default function EABudakUbatPage() {
