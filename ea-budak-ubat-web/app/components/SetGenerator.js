@@ -160,7 +160,7 @@ const PRESETS = [
     name: "Gold (XAUUSD) Trend & Swing",
     icon: "🪙",
     badge: "Gold Engine",
-    desc: "Calibrated for Gold price scaling (1 pip = $0.01): 3,500 TP ($35.00 trend capture), 350 minDistance ($3.50 spacing), RSI filter disabled, Break-Even profit lock and margin guards enabled.",
+    desc: "Calibrated for Gold price scaling (1 pip = $0.01): 3,500 TP ($35.00 trend capture), 350 minDistance ($3.50 spacing), RSI filter disabled, spread guard 60 ($0.60; raise it if your broker's normal gold spread is wider, see the Spread line on the EA panel), Break-Even profit lock and margin guards enabled.",
     symbol: "XAUUSD (Gold)",
     timeframe: "M5 / M15",
     params: {
@@ -179,7 +179,7 @@ const PRESETS = [
       RSI_Period: "14",
       RSI_BuyCeiling: "75.0",
       RSI_SellFloor: "25.0",
-      MaxSpread_Pips: "40.0",
+      MaxSpread_Pips: "60.0", // $0.60; many retail gold spreads sit at $0.40-0.55, so 40 blocked every entry
       MaxDrawdownPct: "25.0",
       EnableBreakEven: "1",
       BreakEven_Trigger: "1200.0",
