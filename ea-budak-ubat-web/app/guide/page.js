@@ -48,6 +48,7 @@ const PRODUCTS = [
             "Use a VPS for 24/7 operation",
         ],
         faqs: [
+            { q: "New to trading, where to start?", a: "Without real money. Learn the basics in the free Forex Quest lessons at eabudakubat.com/learn, open a free MT4 or MT5 demo account, install the demo version and follow the installation steps on this page. Run it on demo for a few weeks before going live, then start small (Cent account, 0.01 lots, one pair)." },
             { q: "Can I use on multiple charts?", a: "Yes — use a different MagicNumber per chart." },
             { q: "MT4 vs MT5 difference?", a: "Identical trading logic, only underlying API differs. MT5 v1.63 includes dedicated RSI filter toggle, dynamic filling mode negotiation, spread guard, and break-even." },
             { q: "Best pairs?", a: "Ranging pairs with low spread. Avoid trending/exotic pairs." },

@@ -73,6 +73,7 @@ const PARAM_TABS = {
 };
 
 const FAQS = [
+  { q: "I am new to trading. Where should I start?", a: "Start without real money. The free Forex Quest lessons at eabudakubat.com/learn cover the basics (currency pairs, spreads, indicators, risk management and how grid systems work). Then open a free demo account on MT4 or MT5, install the demo version of EA Budak Ubat from this page and follow the setup steps in the guide at eabudakubat.com/guide. Run it on the demo for a few weeks so you see how the grid behaves in both quiet and trending markets before you consider a live account, and start small (a Cent account, 0.01 lots, one pair). If you get stuck, message @SyariefAzman on Telegram." },
   { q: "Can I use this on multiple charts?", a: "Yes, but use a different MagicNumber for each chart to avoid conflicts between EA instances." },
   { q: "Does the MT5 version trade the same as MT4?", a: "Yes. Since v1.67 the MT4 and MT5 builds have the same inputs, entry rules, grid maths and protections (RSI filter, spread and drawdown guards, basket break-even, margin safeguards). Only the platform's trading functions differ." },
   { q: "What pairs work best?", a: "Ranging pairs with low spread work best. Avoid highly trending or exotic pairs to minimize drawdown risk." },
