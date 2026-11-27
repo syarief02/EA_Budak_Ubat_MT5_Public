@@ -132,6 +132,18 @@ export default function BrokersPage() {
                 Check whether your account is already whitelisted <Icon name="arrowRight" size={16} />
               </Link>
             </div>
+            <div className="hp-card hp-claim-faq" id="partnerships">
+              <h3>Representing a broker or prop firm?</h3>
+              <p>
+                Please send partnership offers in writing from your official company email to
+                support@eabudakubat.com. Include the regulated entity and its licence number, the rebate per lot on
+                FX and gold, the account types (including cent), your rules for Expert Advisors and how referred
+                accounts are reported. We review every written offer and reply by email.
+              </p>
+              <a href="mailto:support@eabudakubat.com?subject=Broker%20partnership%20enquiry" className="hp-link">
+                Email support@eabudakubat.com <Icon name="arrowRight" size={16} />
+              </a>
+            </div>
           </div>
         </section>
       </main>
